@@ -1,8 +1,6 @@
 
 Street Ninja is an SMS-based app designed to help homeless individuals in vulnerable situations access critical resources like food, shelter, drinking fountains, toilets, and free WiFi. Built with simplicity and practicality in mind, it provides real-time, location-based assistance to users via text messages.
 
----
-
 ## How It Works
 
 1. **User Interaction**:
@@ -17,7 +15,6 @@ Street Ninja is an SMS-based app designed to help homeless individuals in vulner
    - Street Ninja sends a formatted SMS with the requested information.
    - Example: `"Closest meal: UGM, 601 Hastings, free lunch 11:30-1:30."`
 
----
 
 ## Goals
 
@@ -25,7 +22,6 @@ Street Ninja is an SMS-based app designed to help homeless individuals in vulner
 - **Local Impact**: Focus on serving Vancouver’s Downtown Eastside community initially.
 - **Scalability**: Build a framework that can expand to other cities over time.
 
----
 
 ## Philosophy
 
@@ -33,7 +29,6 @@ Street Ninja is an SMS-based app designed to help homeless individuals in vulner
 
 - Our guiding principle is **immediate usefulness**. Street Ninja focuses on providing quick, actionable information that users can rely on in the moment. There’s no judgment, no lectures—just practical help. Whether it’s finding a meal, a bed, or something else that helps them get through the day, Street Ninja is their tool.
 
----
 
 ## Current Challenges
 
@@ -44,7 +39,6 @@ Street Ninja is an SMS-based app designed to help homeless individuals in vulner
 3. **Technical Setup**:
    - Scaling APIs and handling concurrent user requests.
 
----
 
 ## Roadmap
 
@@ -53,7 +47,6 @@ Street Ninja is an SMS-based app designed to help homeless individuals in vulner
 3. Expand features to include hygiene access and job listings.
 4. Test and refine SMS workflows based on user feedback.
 
----
 
 ## How to Contribute
 
@@ -61,13 +54,11 @@ Street Ninja is an SMS-based app designed to help homeless individuals in vulner
 - **Nonprofits**: Partner with us to provide up-to-date resource information.
 - **Supporters**: Help cover SMS costs by sponsoring or donating.
 
----
 
 ## License
 
 Street Ninja is licensed under the MIT License. See `LICENSE` for more information.
 
----
 
 ## Contact
 
