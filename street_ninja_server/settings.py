@@ -27,6 +27,14 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
+
+GEOCODER_CONFIG = {
+    "NOMINATIM": {"user_agent": config("NOMINATIM_USER_AGENT")},
+    "GOOGLE": {"api_key": config("GOOGLE_API_KEY")},
+    "MAPBOX": {"api_key": config("MAPBOX_API_KEY")},
+}
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -35,6 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+    'django_extensions',
+    'rest_framework',
+    'common',
+    'geo',
+    'sms',
 ]
 
 MIDDLEWARE = [
