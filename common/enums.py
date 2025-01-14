@@ -29,7 +29,7 @@ class InquiryStatus(StreetNinjaEnum):
     ERROR = 'error'
 
 
-class GeoCoder(StreetNinjaEnum):
+class GeocoderEnum(StreetNinjaEnum):
     NOMINATIM = "Nominatim"
-    GOOGLE = "Google"
-    MAPBOX = "Mapbox"
+    OPENCAGE = "OpenCage"
+    # POSITIONSTACK = "positionstack"

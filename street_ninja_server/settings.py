@@ -27,12 +27,17 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
+APPEND_SLASH = False
 
+
+
+# Geocoding
+# =======================================
 GEOCODER_CONFIG = {
     "NOMINATIM": {"user_agent": config("NOMINATIM_USER_AGENT")},
-    "GOOGLE": {"api_key": config("GOOGLE_API_KEY")},
-    "MAPBOX": {"api_key": config("MAPBOX_API_KEY")},
+    "OPENCAGE": {"api_key": config("OPENCAGE_API_KEY")},
 }
+PRIMARY_GEOCODER = "Nominatim"  # Nominatim, OpenCage, positionstack
 
 
 INSTALLED_APPS = [
