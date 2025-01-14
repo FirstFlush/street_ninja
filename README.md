@@ -1,5 +1,5 @@
 
-Street Ninja is an SMS-based app designed to help homeless individuals in vulnerable situations access critical resources like food, shelter, drinking fountains, toilets, and free WiFi. Built with simplicity and practicality in mind, it provides real-time, location-based assistance to users via text messages.
+Street Ninja is an SMS-based app designed to help homeless individuals in the city of Vancouver access critical resources like food, shelter, drinking fountains, toilets, and free WiFi. Built with simplicity and practicality in mind, it provides real-time, location-based assistance to users via text messages.
 
 ## How It Works
 
@@ -25,7 +25,7 @@ Street Ninja is an SMS-based app designed to help homeless individuals in vulner
 
 ## Philosophy
 
-- Street Ninja belongs to the street people. It is built with the understanding that being homeless is like having a full-time job—always on the go, always needing to navigate immediate challenges. This app isn’t about deciding what’s “best” for its users; it’s about meeting them where they are and giving them the tools they need, on their terms.
+- Street Ninja belongs to the street people. It is built with the understanding that being homeless is like having a full-time job—always on the go, always needing to navigate immediate challenges. This app isn’t about deciding what’s “best” for its users; it’s about meeting them where they are and giving them the tools they need.
 
 - Our guiding principle is **immediate usefulness**. Street Ninja focuses on providing quick, actionable information that users can rely on in the moment. There’s no judgment, no lectures—just practical help. Whether it’s finding a meal, a bed, or something else that helps them get through the day, Street Ninja is their tool.
 

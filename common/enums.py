@@ -22,6 +22,14 @@ class SMSKeyword(StreetNinjaEnum):
     WIFI = "WIFI"
 
 
+class RedisStoreEnum(StreetNinjaEnum):
+    DEFAULT = 0
+    SESSION = 1
+    INQUIRY = 2
+    GEODATA = 3
+    CELERY = 4
+    
+
 class InquiryStatus(StreetNinjaEnum):
     """Status of a SMS message inquiry"""
     PENDING = 'pending'

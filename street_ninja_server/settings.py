@@ -30,6 +30,11 @@ ALLOWED_HOSTS = ['*']
 APPEND_SLASH = False
 
 
+# Celery
+# =======================================
+CELERY_BROKER_URL = 'redis://localhost:6379/4'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
 
 # Geocoding
 # =======================================
@@ -48,10 +53,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+    'django_celery_beat',
     'django_extensions',
     'rest_framework',
     'common',
     'geo',
+    'integrations',
     'sms',
 ]
 
@@ -130,9 +137,6 @@ CACHES = {
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 SESSION_CACHE_ALIAS = 'session'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
