@@ -1,8 +1,6 @@
-
 from geopy.geocoders import Nominatim, OpenCage
 from geopy.location import Location
 from .base_geocoder import BaseGeocoder
-
 
 
 class NominatimGeocoder(BaseGeocoder):
