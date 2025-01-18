@@ -17,7 +17,7 @@ class BaseAPIClient(ABC):
     BASE_URL = ""
 
     @property
-    def api_header(self) -> str:
+    def api_header(self) -> dict[str, str]:
         return {"Authorization": f"Bearer {self.api_key}"}
     
     def __init__(self, api_key:str|None=None):
