@@ -30,6 +30,11 @@ ALLOWED_HOSTS = ['*']
 APPEND_SLASH = False
 
 
+# API Keys
+# =======================================
+VANCOUVER_OPEN_DATA_API_KEY = config('VANCOUVER_OPEN_DATA_API_KEY')
+WIGLE_API_KEY = config('WIGLE_API_KEY')
+
 # Celery
 # =======================================
 CELERY_BROKER_URL = 'redis://localhost:6379/4'
@@ -59,6 +64,7 @@ INSTALLED_APPS = [
     'common',
     'geo',
     'integrations',
+    'resources',
     'sms',
 ]
 

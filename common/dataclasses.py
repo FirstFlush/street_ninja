@@ -13,4 +13,4 @@ class RequestData:
         """Used to pass RequestData attributes to requests.request() as kwargs."""
         d = asdict(self)
         d.pop('endpoint')
-        return d
+        return {key: value for key, value in d.items() if value is not None}
