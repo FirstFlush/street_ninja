@@ -1,3 +1,6 @@
+# Street Ninja [![In Development](https://img.shields.io/badge/status-IN%20DEVELOPMENT-yellow)](https://github.com/your-repo-link)
+
+**⚠️ This project is currently in active development. Features and documentation are subject to change as we work towards the first MVP release.**
 
 Street Ninja is an SMS-based app designed to help homeless individuals in the city of Vancouver access critical resources like food, shelter, drinking fountains, toilets, and free WiFi. Built with simplicity and practicality in mind, it provides real-time, location-based assistance to users via text messages.
 
