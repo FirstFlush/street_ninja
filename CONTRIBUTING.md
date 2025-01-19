@@ -27,7 +27,6 @@ Thank you for your interest in contributing to **Street Ninja**! This project is
 
 2. **Coding Standards**  
    - Use **Python 3.10+** and follow [PEP 8](https://peps.python.org/pep-0008/) for style guidelines.
-   - Write clear, readable, and professional code.
 
 3. **Testing**  
    - Street Ninja does not yet have a full test suite, but testing will be added in the future using pytest-django.
@@ -36,17 +35,17 @@ Thank you for your interest in contributing to **Street Ninja**! This project is
 ## Submitting a Pull Request
 
 1. Fork the repository and create your branch:
-   '''
+   ```
    git checkout -b feature/your-feature-name
-   '''
+   ```
 2. Make your changes and commit them:
-   '''
+   ```
    git commit -m "Add: Description of your feature"
-   '''
+   ```
 3. Push your branch and submit a pull request:
-   '''
+   ```
    git push origin feature/your-feature-name
-   '''
+   ```
 4. Clearly describe:
    - The problem being solved.
    - How your solution aligns with Street Ninja's goals.
