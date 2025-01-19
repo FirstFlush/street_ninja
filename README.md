@@ -8,7 +8,7 @@ Street Ninja is an SMS-based app designed to help homeless individuals in the ci
 
 1. **User Interaction**:
    - A user sends an SMS to the Street Ninja number (powered by Twilio).
-   - Example: `"FOOD pender"` or `"SHELTER Main St."`
+   - Example: `"FOOD pender st"` or `"SHELTER Main & Hastings"` or `"WIFI oppenheimer park"` 
 
 2. **Processing Requests**:
    - The system parses the message and determines the requested resource.
@@ -53,7 +53,7 @@ Street Ninja is an SMS-based app designed to help homeless individuals in the ci
 
 ## How to Contribute
 
-- **Developers**: Fork the repository and submit pull requests for new features.
+- **Developers**: Check out [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines and information.
 - **Nonprofits**: Partner with us to provide up-to-date resource information.
 - **Supporters**: Help cover SMS costs by sponsoring or donating.
 
