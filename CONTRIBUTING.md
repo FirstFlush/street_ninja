@@ -2,7 +2,6 @@
 
 Thank you for your interest in contributing to **Street Ninja**! This project is currently in **active development**, and while contributions are welcome, it's important to note that the app's direction and architecture are still evolving. Below are some guidelines to help you get started and align your contributions with the project's goals.
 
----
 
 ## How to Get Involved
 
@@ -20,7 +19,6 @@ Thank you for your interest in contributing to **Street Ninja**! This project is
      - The pull request focuses on a single, clearly defined feature or fix.
    - If you're unsure whether your idea fits, feel free to open a draft pull request or reach out for feedback.
 
----
 
 ## Development Guidelines
 
@@ -34,7 +32,6 @@ Thank you for your interest in contributing to **Street Ninja**! This project is
 3. **Testing**  
    - Street Ninja does not yet have a full test suite, but testing will be added in the future using pytest-django.
 
----
 
 ## Submitting a Pull Request
 
@@ -55,7 +52,6 @@ Thank you for your interest in contributing to **Street Ninja**! This project is
    - How your solution aligns with Street Ninja's goals.
    - Any potential limitations or areas for improvement.
 
----
 
 ## Things to Keep in Mind
 
@@ -63,7 +59,6 @@ Thank you for your interest in contributing to **Street Ninja**! This project is
 - **Collaboration First**: Major changes or new features should always be discussed before implementation. This prevents misalignment and wasted effort.
 - **Respect the Process**: Contributions that don't fit the current scope may be deferred or rejected—this isn't personal! It's about keeping the project on track.
 
----
 
 ## Questions?
 
