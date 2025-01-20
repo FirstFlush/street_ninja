@@ -1,11 +1,11 @@
-from ..base_api_client import BaseAPIClient
-from ..enums import BaseURLEnum, VancouverEndpointsEnum
+from .base_api_client import BaseAPIClient
+from ..enums import APIClientEnum, VancouverEndpointsEnum
 
 
 class VancouverAPIClient(BaseAPIClient):
 
     endpoints = VancouverEndpointsEnum
-    BASE_URL = BaseURLEnum.CITY_OF_VANCOUVER.value
+    BASE_URL = APIClientEnum.CITY_OF_VANCOUVER.value
 
     @property
     def api_header(self) -> dict[str, str]:

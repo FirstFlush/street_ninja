@@ -41,3 +41,17 @@ class GeocoderEnum(StreetNinjaEnum):
     NOMINATIM = "Nominatim"
     OPENCAGE = "OpenCage"
     # POSITIONSTACK = "positionstack"
+
+
+class HttpMethodEnum(StreetNinjaEnum):
+    """
+    Enum representing HTTP methods.
+    """
+    GET = "GET"
+    POST = "POST"
+    PUT = "PUT"
+    PATCH = "PATCH"
+    DELETE = "DELETE"
+    HEAD = "HEAD"
+    OPTIONS = "OPTIONS"
+    TRACE = "TRACE"

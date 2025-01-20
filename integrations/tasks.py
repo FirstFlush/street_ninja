@@ -1,7 +1,6 @@
 from celery import shared_task
 
 
-
 @shared_task
 def fetch_data_from_city_api():
     # Placeholder task

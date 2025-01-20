@@ -22,7 +22,7 @@ class ResourceModel(gis_models.Model):
 
 
     def get_point(self, lon:float, lat:float) -> Point:
-        return Point(lon, lat)
+        return Point(lon, lat, srid=4326)
     
     def save(self, **kwargs):
         super().save(**kwargs)

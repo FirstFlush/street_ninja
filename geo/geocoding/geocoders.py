@@ -23,7 +23,6 @@ class OpenCageGeocoder(BaseGeocoder):
     def geocode(self, query:str) -> Location: 
         geocoder = self.geopy_geocoder(api_key=self.config['api_key'])
         return geocoder.geocode(query)
-        
 
     def reverse(self, latitude:float, longitude:float) -> Location:
         geocoder = self.geopy_geocoder(api_key=self.config['api_key'])
