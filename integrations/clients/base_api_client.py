@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 import logging
 import requests
 from requests.exceptions import RequestException
@@ -22,6 +22,28 @@ class BaseAPIClient(ABC):
     
     def __init__(self, api_key:str|None=None):
         self.api_key = api_key
+
+    @abstractmethod
+    def normalize_data(self, data:dict[str, Any]) -> list[dict[str, Any]]:
+        """
+        Normalizes the raw API response into a consistent format.
+
+        This method should be implemented by subclasses to handle the specific 
+        structure of the API response they interact with. It takes the raw data 
+        returned from the API and extracts or transforms it into a list of dictionaries 
+        that can be passed to serializers or further processing.
+
+        Args:
+            data (dict[str, Any]): The raw JSON response from the API.
+
+        Returns:
+            list[dict[str, Any]]: A normalized list of dictionaries representing the 
+            relevant data extracted from the API response.
+        
+        Raises:
+            ValueError: If the data structure is unexpected or cannot be normalized.
+        """
+        pass
 
     def url(self, endpoint: str) -> str:
         if isinstance(endpoint, StreetNinjaEnum):

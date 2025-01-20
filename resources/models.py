@@ -4,7 +4,7 @@ from .base_model import ResourceModel
 from .enums import ShelterCategoryEnum
 
 
-class Shelters(ResourceModel):
+class Shelter(ResourceModel):
 
     name = models.CharField(max_length=256, unique=True)
     address = models.CharField(max_length=256, unique=True)

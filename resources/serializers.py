@@ -22,10 +22,8 @@ class GeoPointSerializer(ResourceSerializer):
         return value
 
 class ShelterSerializer(ResourceSerializer):
-    facility = serializers.CharField(max_length=256)  # Maps to 'facility'
+    facility = serializers.CharField(max_length=256)
     geo_point_2d = GeoPointSerializer()
-    # lon = serializers.FloatField(source="geo_point_2d.lon")  # Maps to 'geo_point_2d.lon'
-    # lat = serializers.FloatField(source="geo_point_2d.lat")  # Maps to 'geo_point_2d.lat'
     category = serializers.CharField(max_length=24)
     phone = serializers.CharField(max_length=20)
     meals = YesNoBooleanField()
