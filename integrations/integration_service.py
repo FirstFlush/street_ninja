@@ -1,10 +1,14 @@
 import logging
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from typing import Any, Optional, Type
+
+from django.db import transaction
+
 from common.dataclasses import RequestData
 from common.enums import HttpMethodEnum
 from resources.serializers import ResourceSerializer
-from resources.base_model import ResourceModel
+from resources.abstract_models.base_model import ResourceModel
 from .clients import BaseAPIClient
 from .enums import EndpointsEnum
 from .exc import IntegrationServiceError
@@ -34,6 +38,7 @@ class IntegrationService:
     - Validating and deserializing the fetched data using a specified deserializer.
     - Persisting the validated data into the database using a specified model.
     """
+
     def __init__(
             self, 
             params:IntegrationServiceParams,
@@ -52,7 +57,11 @@ class IntegrationService:
         self.serializer_class = params.serializer_class
         self.model_class = params.model_class
 
-    def _build_api_client(self, api_client_class:Type[BaseAPIClient], api_key:str) -> BaseAPIClient:
+    def _build_api_client(
+            self, 
+            api_client_class:Type[BaseAPIClient], 
+            api_key:str
+    ) -> BaseAPIClient:
         return api_client_class(api_key=api_key)
 
     def _build_request_data(
@@ -69,6 +78,7 @@ class IntegrationService:
             http_data=http_data,
         )
 
+
     def fetch_and_save(self):
         """
         Orchestrates the process of fetching data from the API, 
@@ -83,22 +93,22 @@ class IntegrationService:
         except Exception as e:
             msg = f"Failed to fetch data from {self.api_client.__class__.__name__} endpoint `{self.endpoint_enum.value}`"
             raise IntegrationServiceError(msg) from e
-        
+
         # Deserialize
         deserializer = self._serialize_data(data=data)
         if not deserializer.is_valid():
             msg = f"Deserialization for `{self.serializer_class.__name__}` failed"
             logger.error(msg, exc_info=True)
             raise IntegrationServiceError(msg)
-        
+
         # Save to DB
+        data_to_save = self._normalize_data(data=deserializer.validated_data)
         try:
-            self.saved_data = self._save_data(data=deserializer.validated_data)
+            self.saved_data = self._save_data(data=data_to_save)
         except Exception as e:
             msg = f"Failed to save data to DB from `{self.api_client.__class__.__name__}` endpoint `{self.endpoint_enum.value}`"
             logger.error(msg, exc_info=True)
             raise IntegrationServiceError(msg) from e
-        
 
     def _fetch_data(self) -> list[dict[str, Any]]:
         data = self.api_client.make_request(request_data=self.request_data)
@@ -107,8 +117,57 @@ class IntegrationService:
     def _serialize_data(self, data:list[dict[str, Any]]) -> ResourceSerializer:
         return self.serializer_class(data=data, many=True)
 
-    def _save_data(self, data):
-        raise ValueError()
-        print(data)
-        print(type(data))
-        print(len(data))
+    def _normalize_data(self, data:list[dict[str, Any]]) -> dict[str, Any]:
+        return [self.model_class.normalize_data(data=record) for record in data]        
+
+
+    def _save_data(self, data: list[dict[str, Any]]):
+        """
+        Saves data to the database, performing inserts for new records and updates for existing ones.
+        """
+        # Identify unique keys in the incoming data
+        unique_keys = [item[self.model_class.unique_key] for item in data]
+        filter_kwarg = {f"{self.model_class.unique_key}__in": unique_keys}
+
+        # Fetch existing records
+        existing_records = self.model_class.objects.filter(**filter_kwarg)
+        existing_lookup = {getattr(record, self.model_class.unique_key): record for record in existing_records}
+
+        # Prepare bulk insert and update lists
+        to_insert = []
+        to_update = []
+
+        time_fetched = datetime.now(timezone.utc)
+
+        for record in data:
+            record['last_fetched'] = time_fetched
+            unique_field = record[self.model_class.unique_key]
+            if unique_field in existing_lookup:
+                # Check for changes and update if necessary
+                existing_record = existing_lookup[unique_field]
+                updated = False
+                for key, value in record.items():
+                    if getattr(existing_record, key, None) != value:
+                        setattr(existing_record, key, value)
+                        updated = True
+                if updated:
+                    to_update.append(existing_record)
+            else:
+                # New record
+                to_insert.append(self.model_class(**record))
+
+
+        with transaction.atomic():
+            if to_insert:
+                self.model_class.objects.bulk_create(to_insert)
+            if to_update:
+                update_fields = list(data[0].keys())  # Explicitly track fields to update
+                self.model_class.objects.bulk_update(to_update, fields=update_fields)
+
+        logger.info(f"Inserted {len(to_insert)} new records and updated {len(to_update)} existing records.")
+        return to_insert + to_update
+
+        # except Exception as e:
+        #     logger.error(f"Error saving data: {e}", exc_info=True)
+        #     raise
+

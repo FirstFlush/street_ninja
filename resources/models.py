@@ -1,24 +1,26 @@
 from django.db import models
 from django.contrib.gis.db import models as gis_models
-from .base_model import ResourceModel
 from .enums import ShelterCategoryEnum
+from .abstract_models import CityOfVancouverModel, WigleModel
 
 
-class Shelter(ResourceModel):
+class Shelter(CityOfVancouverModel):
 
-    name = models.CharField(max_length=256, unique=True)
-    address = models.CharField(max_length=256, unique=True)
+    facility = models.CharField(max_length=256, unique=True)
+    address = models.CharField(max_length=256)
     location = gis_models.PointField(srid=4326)
     category = models.CharField(max_length=24, choices=ShelterCategoryEnum.choices)
     phone = models.CharField(max_length=20, unique=True)
     meals = models.BooleanField()
     pets = models.BooleanField()
     carts = models.BooleanField()
-    last_updated = models.DateTimeField()
+    last_fetched = models.DateTimeField(null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self) -> str:
+        return self.facility
 
-class FoodProgram(ResourceModel):
+class FoodProgram(CityOfVancouverModel):
     
     program_name = models.CharField(max_length=255, unique=True)
     address = models.CharField(max_length=256, unique=True)
@@ -42,16 +44,16 @@ class FoodProgram(ResourceModel):
     last_updated = models.DateTimeField()
     date_created = models.DateTimeField(auto_now_add=True)
 
-# class Toilets(ResourceModel):
+# class Toilets(CityOfVancouverModel):
 #     address = models.CharField(max_length=256, unique=True)
 #     location = gis_models.PointField(srid=4326)
 
 
-# class DrinkingFountain(ResourceModel):
+# class DrinkingFountain(CityOfVancouverModel):
 #     address = models.CharField(max_length=256, unique=True)
 #     location = gis_models.PointField(srid=4326)
 
 
-# class PublicWifi(ResourceModel):    
+# class PublicWifi(WigleModel):    
 #     address = models.CharField(max_length=256, unique=True)
 #     location = gis_models.PointField(srid=4326)
