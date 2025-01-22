@@ -3,7 +3,7 @@ from street_ninja_server.base_admin import BaseGISAdmin
 from .models import Shelter
 
 
-@admin.register(Shelter)
+admin.register(Shelter)
 class ShelterAdmin(BaseGISAdmin):
 
     list_display = (

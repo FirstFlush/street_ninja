@@ -35,11 +35,13 @@ APPEND_SLASH = False
 VANCOUVER_OPEN_DATA_API_KEY = config('VANCOUVER_OPEN_DATA_API_KEY')
 WIGLE_API_KEY = config('WIGLE_API_KEY')
 
+
 # Celery
 # =======================================
 CELERY_BROKER_URL = 'redis://localhost:6379/4'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
+
 
 # Geocoding
 # =======================================
@@ -48,6 +50,12 @@ GEOCODER_CONFIG = {
     "OPENCAGE": {"api_key": config("OPENCAGE_API_KEY")},
 }
 PRIMARY_GEOCODER = "Nominatim"  # Nominatim, OpenCage, positionstack
+
+
+# Routes
+# =======================================
+ROUTE_ADMIN = config("ROUTE_ADMIN")
+
 
 
 INSTALLED_APPS = [
