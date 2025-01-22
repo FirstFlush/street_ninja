@@ -42,6 +42,18 @@ class ResourceModel(gis_models.Model):
         logger.error(msg, exc_info=True)
         raise NotImplementedError(msg)  
 
+    @classmethod
+    def validate_unique_key(cls):
+        """
+        Ensures the model defines a valid `unique_key` attribute.
+
+        This method is typically used before dynamically constructing 
+        database filter queries to ensure that any errors occur at the 
+        application level, rather than causing database-level errors.
+        """
+        if not hasattr(cls, cls.unique_key):
+            raise AttributeError(f"Model {cls.__name__} must define a valid unique_key.")
+
 
     # def save(self, **kwargs):
     #     super().save(**kwargs)
