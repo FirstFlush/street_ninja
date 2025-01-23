@@ -9,8 +9,23 @@ from resources.models import Shelter
 from resources.serializers import ShelterSerializer
 from integrations.integration_service import IntegrationService, IntegrationServiceParams
 
+from sms.resolvers import KeywordLanguageResolver, KeywordParamResolver
+from common.enums import SMSKeywordEnum
 
 logger = logging.getLogger(__name__)
+
+
+class KeywordTestView(APIView):
+
+    def get(self, request:Request, *args, **kwargs):
+        """
+        For testing the SMS keyword mapping data structures
+        """
+        msg = "shelter womens 1140 Hastings St pet"
+        params = KeywordParamResolver.resolve_params(msg=msg, sms_keyword_enum=SMSKeywordEnum.SHELTER)
+        print(params)
+
+        return Response({"hihi":"hoho"})
 
 
 class HomeView(APIView):

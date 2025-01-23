@@ -7,3 +7,14 @@ class ShelterCategoryEnum(StreetNinjaEnum):
     ADULTS = "Adults (all genders)"
     WOMEN = "Women"
     YOUTH = "Youth (all genders)"
+
+
+class ParamEnum(StreetNinjaEnum):
+    """"""
+    pass
+
+class ShelterParamEnum(ParamEnum):
+
+    CATEGORY = "category"
+    PETS = "pets"
+    CARTS = "carts"

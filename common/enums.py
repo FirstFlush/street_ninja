@@ -21,6 +21,7 @@ class SMSKeywordEnum(StreetNinjaEnum):
     TOILET = "TOILET"
     WIFI = "WIFI"
     HELP = "HELP"
+    MORE = "MORE"
 
 
 class RedisStoreEnum(StreetNinjaEnum):
@@ -41,7 +42,7 @@ class LanguageEnum(StreetNinjaEnum):
     YORUBA = "yo"
 
 
-class InquiryStatus(StreetNinjaEnum):
+class InquiryStatusEnum(StreetNinjaEnum):
     """Status of a SMS message inquiry"""
     PENDING = 'pending'
     PROCESSED = 'processed'
