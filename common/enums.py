@@ -1,7 +1,7 @@
 from .base_enum import StreetNinjaEnum
 
 
-class SMSKeyword(StreetNinjaEnum):
+class SMSKeywordEnum(StreetNinjaEnum):
     """
     Enum representing the SMS keywords users can text to the Street Ninja app 
     to locate specific resources.
@@ -20,6 +20,7 @@ class SMSKeyword(StreetNinjaEnum):
     WATER = "WATER"
     TOILET = "TOILET"
     WIFI = "WIFI"
+    HELP = "HELP"
 
 
 class RedisStoreEnum(StreetNinjaEnum):
@@ -28,7 +29,17 @@ class RedisStoreEnum(StreetNinjaEnum):
     INQUIRY = 2
     GEODATA = 3
     CELERY = 4
-    
+
+
+class LanguageEnum(StreetNinjaEnum):
+    ENGLISH = "en"
+    FRENCH = "fr"
+    PUNJABI = "pa"
+    CHINESE = "zh"
+    # MANDARIN = "zh"
+    # CANTONESE = "yue"
+    YORUBA = "yo"
+
 
 class InquiryStatus(StreetNinjaEnum):
     """Status of a SMS message inquiry"""

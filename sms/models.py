@@ -1,5 +1,5 @@
 from django.db import models
-from common.enums import SMSKeyword
+from common.enums import SMSKeywordEnum
 
 
 class PhoneNumber(models.Model):
@@ -14,7 +14,7 @@ class Inquiry(models.Model):
     phone_number = models.ForeignKey(to=PhoneNumber, on_delete=models.CASCADE)
     status = models.CharField(max_length=16)
     message = models.CharField(max_length=256)
-    keyword = models.CharField(max_length=20, choices=SMSKeyword.choices)
+    keyword = models.CharField(max_length=20, choices=SMSKeywordEnum.choices)
     date_created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
