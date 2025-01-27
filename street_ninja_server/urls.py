@@ -10,6 +10,7 @@ admin.site.index_title = "Street Ninja"
 urlpatterns = [
     path(settings.ROUTE_ADMIN, admin.site.urls),
     path('', HomeView.as_view(), name='home'),
-    path('keywords/', KeywordTestView.as_view(), name='keyword'),
+    path('keywords/', KeywordTestView.as_view(), name='keyword_test'),
+    path('redis/', RedisTestView.as_view(), name='redis_test'),
     path('sms/', include('sms.urls')),
 ]

@@ -15,6 +15,13 @@ from common.enums import SMSKeywordEnum
 logger = logging.getLogger(__name__)
 
 
+class RedisTestView(APIView):
+
+    def get(self, request:Request, *args, **kwargs):
+
+        return Response({"ok":"ok"})
+
+
 class KeywordTestView(APIView):
 
     def get(self, request:Request, *args, **kwargs):

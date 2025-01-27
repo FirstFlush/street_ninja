@@ -14,6 +14,7 @@ class Shelter(CityOfVancouverModel):
     meals = models.BooleanField()
     pets = models.BooleanField()
     carts = models.BooleanField()
+    is_active = models.BooleanField(default=True)
     last_fetched = models.DateTimeField(null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
@@ -41,19 +42,21 @@ class FoodProgram(CityOfVancouverModel):
     referral_agency_name = models.CharField(max_length=256, null=True) 
     referral_phone_number = models.CharField(max_length=20, null=True)
     referral_email = models.CharField(max_length=256, null=True)
+    is_active = models.BooleanField(default=True)
     last_updated = models.DateTimeField()
     date_created = models.DateTimeField(auto_now_add=True)
 
 # class Toilets(CityOfVancouverModel):
 #     address = models.CharField(max_length=256, unique=True)
 #     location = gis_models.PointField(srid=4326)
-
+    # is_active = models.BooleanField(default=True)
 
 # class DrinkingFountain(CityOfVancouverModel):
 #     address = models.CharField(max_length=256, unique=True)
 #     location = gis_models.PointField(srid=4326)
-
+    # is_active = models.BooleanField(default=True)
 
 # class PublicWifi(WigleModel):    
 #     address = models.CharField(max_length=256, unique=True)
 #     location = gis_models.PointField(srid=4326)
+    # is_active = models.BooleanField(default=True)

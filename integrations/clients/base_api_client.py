@@ -70,13 +70,3 @@ class BaseAPIClient(ABC):
             msg = f"Request failed: `{request_data.method}` `{url}` | Error: `{e}`",
             logger.error(msg, exc_info=True)
             raise
-
-
-
-
-
-    # @property
-    # @abstractmethod
-    # def BASE_URL(self) -> str:
-    #     """Base URL for the API. Must be defined in subclasses."""
-    #     pass

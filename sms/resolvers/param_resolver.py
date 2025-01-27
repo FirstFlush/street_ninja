@@ -32,7 +32,7 @@ class KeywordParamResolver(BaseKeywordResolver):
                 "youth": ShelterCategoryEnum.YOUTH,
                 "youths": ShelterCategoryEnum.YOUTH,
                 "kid": ShelterCategoryEnum.YOUTH,
-                "kids": ShelterCategoryEnum.YOUTH,                
+                "kids": ShelterCategoryEnum.YOUTH,
                 "teen": ShelterCategoryEnum.YOUTH,
                 "teens": ShelterCategoryEnum.YOUTH,
                 "teenager": ShelterCategoryEnum.YOUTH,
