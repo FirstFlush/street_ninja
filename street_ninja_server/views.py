@@ -19,6 +19,13 @@ class RedisTestView(APIView):
 
     def get(self, request:Request, *args, **kwargs):
 
+        from common.redis import RedisClient, ShelterAccessPattern
+
+        data = RedisClient.get_or_set_db(access_pattern=ShelterAccessPattern)
+        print(data)
+        print(type(data))
+
+
         return Response({"ok":"ok"})
 
 

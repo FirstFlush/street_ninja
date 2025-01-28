@@ -1,4 +1,4 @@
-from base_enum import StreetNinjaEnum
+from common.base_enum import StreetNinjaEnum
 
 
 class RedisStoreEnum(StreetNinjaEnum):
@@ -24,7 +24,7 @@ class ResourceKeyEnum(RedisKeyEnum):
 
 class RedisKeyTTL(StreetNinjaEnum):
     """TTL for resource data in redis cache"""
-    SHELTER = 60                # 1 minute
+    SHELTER = 600                # 1 minute
     FOOD = 3600                 # 1 hours
     TOILET = 14400              # 4 hours
     WATER = 14400               # 4 hours
