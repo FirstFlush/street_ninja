@@ -77,8 +77,6 @@ class RedisClient:
             logger.error(f"Error unpickling data: {e}", exc_info=True)
             raise RedisClientException(f"Error unpickling binary data of size `{len(data)}` bytes.") from e
 
-
-
     @classmethod
     def get_or_set_kv(cls, access_pattern: AccessPatternKV) -> Any:
         """
