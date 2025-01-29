@@ -9,7 +9,7 @@ from resources.models import Shelter
 from resources.serializers import ShelterSerializer
 from integrations.integration_service import IntegrationService, IntegrationServiceParams
 
-from sms.resolvers import KeywordLanguageResolver, KeywordParamResolver
+from sms.resolvers import SMSResolver
 from common.enums import SMSKeywordEnum
 
 logger = logging.getLogger(__name__)
@@ -20,8 +20,9 @@ class RedisTestView(APIView):
     def get(self, request:Request, *args, **kwargs):
 
         from common.redis import RedisClient, ShelterAccessPattern
+        from resources.abstract_models import ResourceQuerySet
 
-        data = RedisClient.get_or_set_db(access_pattern=ShelterAccessPattern)
+        data:ResourceQuerySet = RedisClient.get_or_set_db(access_pattern=ShelterAccessPattern)
         print(data)
         print(type(data))
 
@@ -36,7 +37,8 @@ class KeywordTestView(APIView):
         For testing the SMS keyword mapping data structures
         """
         msg = "shelter womens 1140 Hastings St pet"
-        params = KeywordParamResolver.resolve_params(msg=msg, sms_keyword_enum=SMSKeywordEnum.SHELTER)
+        sms_resolver = SMSResolver(inquiry=msg)
+        params = sms_resolver._param_resolver.resolve_params(msg=msg, sms_keyword_enum=SMSKeywordEnum.SHELTER)
         print(params)
 
         return Response({"hihi":"hoho"})

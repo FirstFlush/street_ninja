@@ -1,5 +1,11 @@
 from django.db import models
-from common.enums import SMSKeywordEnum, LanguageEnum, InquiryStatusEnum
+from django.contrib.gis.db import models as gis_models
+from common.enums import (
+    SMSKeywordEnum, 
+    LanguageEnum, 
+    InquiryStatusEnum, 
+    LocationType
+)
 
 
 class PhoneNumber(models.Model):
@@ -13,6 +19,9 @@ class Inquiry(models.Model):
 
     phone_number = models.ForeignKey(to=PhoneNumber, on_delete=models.CASCADE)
     keyword = models.CharField(max_length=20, choices=SMSKeywordEnum.choices)
+    location = gis_models.PointField(srid=4326)
+    location_text = models.CharField(max_length=256)
+    location_type = models.CharField(max_length=20, choices=LocationType.choices)
     status = models.CharField(max_length=16, choices=InquiryStatusEnum.choices)
     language = models.CharField(max_length=3, choices=LanguageEnum.choices)
     message = models.CharField(max_length=256)

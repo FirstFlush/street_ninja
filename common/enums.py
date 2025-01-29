@@ -24,6 +24,11 @@ class SMSKeywordEnum(StreetNinjaEnum):
     MORE = "MORE"
 
 
+class LocationType(StreetNinjaEnum):
+    ADDRESS = "address"
+    INTERSECTION = "intersection"
+    LANDMARK = "landmark"
+
 
 class LanguageEnum(StreetNinjaEnum):
     ENGLISH = "en"
@@ -31,19 +36,6 @@ class LanguageEnum(StreetNinjaEnum):
     PUNJABI = "pa"
     CHINESE = "zh" # includes both Mandarin and Cantonese
     YORUBA = "yo"
-
-
-class StreetSuffixEnum(StreetNinjaEnum):
-    STREET = "st"
-    ROAD = "rd"
-    AVENUE = "ave"
-    LANE = "lane"
-    COURT = "crt"
-    DRIVE = "dr"
-    BOULEVARD = "blvd"
-    WAY = "way"
-    PLACE = "pl"
-    HIGHWAY = "hwy"
 
 
 class InquiryStatusEnum(StreetNinjaEnum):

@@ -92,7 +92,7 @@ class KeywordParamResolver(BaseKeywordResolver):
     def resolve_params(cls, msg:str, sms_keyword_enum:SMSKeywordEnum) -> dict[str, Any]:
         params = {}
         param_mappings = cls.get_param_mappings(sms_keyword_enum=sms_keyword_enum)
-        word_list = cls._prepare_words(msg=msg)
+        word_list = cls._tokenize_words(msg=msg)
         for word in word_list:
             for param_enum, param_keyword_mapping in param_mappings.items():
                 if param_keyword_mapping.get(word) is not None:

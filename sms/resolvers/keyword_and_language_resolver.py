@@ -32,7 +32,7 @@ class KeywordLanguageResolver(BaseKeywordResolver):
             LanguageEnum.YORUBA: {"abẹ", "ilé"},  # Yoruba
         },
         SMSKeywordEnum.FOOD: {
-            LanguageEnum.ENGLISH: {"food", "meal", "meals", "hunger", "hungry", "dinner", "eat", "lunch", "breakfast"},
+            LanguageEnum.ENGLISH: {"food", "meal", "meals", "hunger", "hungry", "dinner", "eat", "lunch", "breakfast", "brunch"},
             LanguageEnum.FRENCH: {"nourriture", "repas", "manger", "faim", "affamé"},
             LanguageEnum.PUNJABI: {"khana", "roti", "bhuk", "bhukh", "khaan"},  # Punjabi
             LanguageEnum.CHINESE: {"食物", "饭", "吃", "饥饿", "饿了"},  # Combined as "Chinese"
@@ -70,7 +70,7 @@ class KeywordLanguageResolver(BaseKeywordResolver):
 
     @classmethod
     def get_keyword_and_language(cls, msg:str) -> tuple[SMSKeywordEnum, LanguageEnum]:
-        word_list = cls._prepare_words(msg)
+        word_list = cls._tokenize_msg(msg)
         for word in word_list:
             # result = cls._try_word(word)
             result = cls.get_reverse_mapping().get(word)
