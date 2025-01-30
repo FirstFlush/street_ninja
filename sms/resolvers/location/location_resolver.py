@@ -1,21 +1,28 @@
-
+from dataclasses import dataclass
 import logging
-from typing import Any, Callable
 from common.enums import LocationType
-from .location_rulesets import (
+from .rulesets import (
     AddressRuleset, 
     IntersectionRuleset, 
     LandmarkRuleset,
     PriorityRuleset
 )
+from .expanders import BaseExpander, AddressExpander, IntersectionExpander, LandmarkExpander
+from .token_navigator import TokenNavigator
 from ..base_resolver import BaseKeywordResolver
 
 logger = logging.getLogger(__name__)
 
 
+@dataclass
+class ResolvedLocation:
+    location: str
+    location_type: LocationType
+
+
 class LocationResolver(BaseKeywordResolver):
 
-    RULES = [
+    RULES_COMMON = [
         AddressRuleset.has_preceding_number,
         AddressRuleset.has_proceeding_suffix,
         AddressRuleset.has_proceeding_direction,
@@ -23,22 +30,82 @@ class LocationResolver(BaseKeywordResolver):
     ]
     RULES_PRIORITY = [
         PriorityRuleset.detect_full_address,
+        PriorityRuleset.detect_full_intersection,
         PriorityRuleset.detect_landmark,
     ]
+    LOCATION_TYPE_TO_EXPANDER: dict[LocationType, BaseExpander] = {
+        LocationType.ADDRESS : AddressExpander,
+        LocationType.INTERSECTION : IntersectionExpander,
+        LocationType.LANDMARK : LandmarkExpander,
+    }
 
+    def __init__(self, msg:str):
+        self.msg = msg
+        self.tokens = self._tokenize_msg(msg, keep_ampersand=True)
+        self.scoreboard = self._build_scoreboard()
+        self.token_navigator = TokenNavigator(tokens=self.tokens)
 
-    def try_rules(self):
-        for i, token in enumerate(self.tokens):
-            for rule in self.RULES:
+    def _get_expander(
+            self, 
+            location_type_enum: LocationType,
+            token_navigator: TokenNavigator,
+    ) -> BaseExpander:
+        """Factory method for building the Expander object"""
+        expander = self.LOCATION_TYPE_TO_EXPANDER[location_type_enum]
+        return expander(token_navigator=token_navigator)
+
+    def resolve_location(self) -> ResolvedLocation:
+        resolved_location = self._try_rules_priority()
+        if resolved_location:
+            return resolved_location
+        
+        self._try_rules_common()
+        hot_token, location_type_enum = self._analyze_scoreboard()
+        expander = self._get_expander(
+            location_type_enum=location_type_enum,
+            token_navigator=self.token_navigator,
+        )
+        location = expander.expand_outward(token_index=hot_token)
+        return ResolvedLocation(
+            location=location,
+            location_type=location_type_enum
+        )
+
+    def _analyze_scoreboard(self) -> tuple[int, LocationType]:
+        """
+        Determines the 'hot token' (most confident location word)
+        and the dominant LocationType (Address, Intersection, or Landmark).
+        """
+        best_token_index = None
+        best_location_type = None
+        best_score = 0.0  # Keep track of the highest confidence score
+
+        for token_index, scores in self.scoreboard.items():
+            for location_type, score in scores.items():
+                if score > best_score:  # Found a new best
+                    best_score = score
+                    best_token_index = token_index
+                    best_location_type = location_type
+                elif score == best_score:
+                    # Tie-breaking logic: Address > Intersection > Landmark
+                    if best_location_type in {LocationType.LANDMARK, LocationType.INTERSECTION} and location_type == LocationType.ADDRESS:
+                        best_token_index = token_index
+                        best_location_type = location_type
+
+        return best_token_index, best_location_type
+
+    def _try_rules_common(self):
+        for i, _ in enumerate(self.tokens):
+            for rule in self.RULES_COMMON:
                 score = rule(token_index=i, tokens=self.tokens)
-                if score > 0:
-                    ...
+                location_type_enum = rule.__self__.location_type_enum
+                self.scoreboard[i][location_type_enum] += score
 
-    def try_rules_priority(self) -> tuple[str, LocationType] | None:
+    def _try_rules_priority(self) -> ResolvedLocation | None:
         for rule in self.RULES_PRIORITY:
             result = rule(msg=self.msg)
-            if isinstance(result, tuple):
-                return result
+            if isinstance(result, tuple) and len(result) == 2:
+                return ResolvedLocation(result[0], result[1])
 
     def _build_scoreboard(self) -> dict[int, dict[LocationType, float]]:
         """
@@ -68,8 +135,3 @@ class LocationResolver(BaseKeywordResolver):
             }
             for token_index in range(len(self.tokens))
         }
-
-    def __init__(self, msg:str):
-        self.msg = msg
-        self.tokens = self._tokenize_msg(msg, keep_ampersand=True)
-        self.scoreboard = self._build_scoreboard()

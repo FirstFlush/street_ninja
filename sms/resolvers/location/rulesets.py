@@ -18,7 +18,7 @@ from .enums import StreetSuffixEnum, StreetDirectionEnum
 #         (token_index: int, tokens: list[str]) -> float
 #         """
 #         for name, method in inspect.getmembers(cls, predicate=inspect.isfunction):
-#             if not name.startswith("_") and isinstance(getattr(cls, name, None), staticmethod):
+#             if not name.startswith("_") and isinstance(getattr(cls, name, None), classmethod):
 #                 sig = inspect.signature(method)
 #                 params = list(sig.parameters.values())
 
@@ -41,6 +41,9 @@ class BaseLocationRuleset(ABC):
     Subclasses should implement rule methods that return a confidence score (float) 
     based on token evaluation.
     """
+    location_type_enum: LocationType | None = None
+
+
 class PriorityRuleset(BaseLocationRuleset):
 
     @staticmethod
@@ -50,33 +53,56 @@ class PriorityRuleset(BaseLocationRuleset):
         if matches:
             return next(iter(matches)), LocationType.LANDMARK
         
-    @staticmethod    
+    @staticmethod   
     def detect_full_address(msg: str) -> tuple[str, LocationType] | None:
         compiled_regex = re.compile(RegexLibrary.full_address)
         match = compiled_regex.search(msg)
         if match:
             return match.group(0), LocationType.ADDRESS
     
+    @staticmethod
+    def detect_full_intersection(msg:str) -> tuple[str, LocationType] | None:
+        if "and" not in msg and "&" not in msg:
+            return None
+
+        tokens = msg.split()
+        for i, token in enumerate(tokens):
+            if token in {"&", "and"} and 0 < i < len(tokens) - 1:
+                before = tokens[i - 1]
+                after = tokens[i + 1]
+                after_after = tokens[i + 2] if i + 2 < len(tokens) else None
+                after_after_after = tokens[i + 3] if i + 3 < len(tokens) else None
+
+                if (
+                    after_after in STREET_SUFFIXES or after_after in STREET_DIRECTIONS or
+                    after_after_after in STREET_SUFFIXES or after_after_after in STREET_DIRECTIONS
+                ):
+                    return f"{before} {token} {after}", LocationType.INTERSECTION
+
+        return None
+
 
 class AddressRuleset(BaseLocationRuleset):
     
-    @staticmethod
-    def has_preceding_number(token_index:int, tokens:list[str]) -> float:
+    location_type_enum = LocationType.ADDRESS
+
+    @classmethod
+    def has_preceding_number(cls, token_index:int, tokens:list[str]) -> float:
         """
         Checks if the token immediately before the current one is a number.
         """
         return 1.0 if token_index > 0 and tokens[token_index - 1].isdecimal() else 0.0
 
-    @staticmethod
-    def has_proceeding_suffix(token_index:int, tokens:list[str]) -> float:
+    @classmethod
+    def has_proceeding_suffix(cls, token_index:int, tokens:list[str]) -> float:
         """
         Checks if the token immediately after the current one is a street suffix.
         st/rd/ave/blvd/street/avenue/...etc
         """
         return 1.0 if token_index < len(tokens) - 1 and tokens[token_index + 1] in STREET_SUFFIXES else 0.0
 
-    @staticmethod
-    def has_proceeding_direction(token_index:int, tokens:list[str]) -> float:
+    @classmethod
+    def has_proceeding_direction(cls, token_index:int, tokens:list[str]) -> float:
         """
         Checks if the token immediately after the current one is a street direction.
         n/e/w/s/nw/ne/sw/se/north/northeast/...etc
@@ -84,10 +110,12 @@ class AddressRuleset(BaseLocationRuleset):
         return 1.0 if token_index < len(tokens) - 1 and tokens[token_index + 1] in STREET_DIRECTIONS else 0.0
 
 
-
 class IntersectionRuleset(BaseLocationRuleset):
     
-    def is_potential_intersection(token_index: int, tokens: list[str]) -> float:
+    location_type_enum = LocationType.INTERSECTION
+
+    @classmethod
+    def is_potential_intersection(cls, token_index: int, tokens: list[str]) -> float:
         if tokens[token_index] not in {"&", "and"}:
             return 0.0
         
@@ -98,14 +126,15 @@ class IntersectionRuleset(BaseLocationRuleset):
             after_after_after = tokens[token_index + 3] if token_index + 3 < len(tokens) else None
             if before in STREET_SUFFIXES or before in STREET_DIRECTIONS:
                 return 1.0
-            if after_after in STREET_SUFFIXES or after_after in STREET_DIRECTIONS:
+            elif after_after in STREET_SUFFIXES or after_after in STREET_DIRECTIONS:
                 return 1.0
-            if after_after_after in STREET_SUFFIXES or after_after_after in STREET_DIRECTIONS:
+            elif after_after_after in STREET_SUFFIXES or after_after_after in STREET_DIRECTIONS:
                 return 1.0
-            elif before.isalpha() and after.isalpha():
-                if before not in JUNK_WORDS and after not in JUNK_WORDS:
-                    return 0.5
+            elif before not in JUNK_WORDS and after not in JUNK_WORDS:
+                return 0.5
         return 0.0
 
+
 class LandmarkRuleset(BaseLocationRuleset):
-    ...
+
+    location_type_enum = LocationType.LANDMARK
