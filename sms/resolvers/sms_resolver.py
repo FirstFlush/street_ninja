@@ -3,7 +3,7 @@ from typing import Any
 from dataclasses import dataclass
 from common.enums import SMSKeywordEnum, LanguageEnum
 from .location.location_resolver import LocationResolver, ResolvedLocation
-from .keyword_and_language_resolver import KeywordLanguageResolver
+from .keyword_and_language_resolver import KeywordLanguageResolver, KeywordLanguageData
 from .param_resolver import KeywordParamResolver
 
 
@@ -12,10 +12,12 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class ResolvedSMS:
-    location: ResolvedLocation
+    msg: str
+    keyword_language_data: KeywordLanguageData
+    location_data: ResolvedLocation
     params: dict[str, Any]
-    keyword_enum: SMSKeywordEnum
-    language: LanguageEnum
+    # keyword_enum: SMSKeywordEnum
+    # language: LanguageEnum
 
 
 class SMSResolver:

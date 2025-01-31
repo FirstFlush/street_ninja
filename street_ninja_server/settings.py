@@ -55,7 +55,14 @@ PRIMARY_GEOCODER = "Nominatim"  # Nominatim, OpenCage, positionstack
 # Routes
 # =======================================
 ROUTE_ADMIN = config("ROUTE_ADMIN")
+ROUTE_SMS_GATEWAY = config("ROUTE_SMS_GATEWAY")
 
+
+# Twilio
+# =======================================
+TWILIO_AUTH_TOKEN = config("TWILIO_AUTH_TOKEN")
+TWILIO_ACCOUNT_SID = config("TWILIO_ACCOUNT_SID")
+TWILIO_PHONE_NUMBER = config("TWILIO_PHONE_NUMBER")
 
 
 INSTALLED_APPS = [

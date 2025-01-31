@@ -1,9 +1,16 @@
+from dataclasses import dataclass
 import logging
 from common.enums import SMSKeywordEnum, LanguageEnum
 from ..exc import KeywordResolverError
 from .base_resolver import BaseKeywordResolver
 
 logger = logging.getLogger(__name__)
+
+
+@dataclass
+class KeywordLanguageData:
+    sms_keyword_enum: SMSKeywordEnum
+    language_enum: LanguageEnum
 
 
 class KeywordLanguageResolver(BaseKeywordResolver):
@@ -74,8 +81,11 @@ class KeywordLanguageResolver(BaseKeywordResolver):
         for word in word_list:
             # result = cls._try_word(word)
             result = cls.get_reverse_mapping().get(word)
-            if result:
-                return result
+            if result and isinstance(result, tuple) and len(result) == 2:
+                return KeywordLanguageData(
+                    sms_keyword_enum=result[0],
+                    language_enum=result[1],
+                )
         msg = f"Failed to extract SMSKeywordEnum and/or LanguageEnum from msg `{msg}`."
         logger.error(msg)
         raise KeywordResolverError(msg)
