@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.gis.db import models as gis_models
-from .enums import ShelterCategoryEnum
+from .enums import ShelterCategoryParamValue
 from .abstract_models import CityOfVancouverModel, WigleModel
 
 
@@ -9,7 +9,7 @@ class Shelter(CityOfVancouverModel):
     facility = models.CharField(max_length=256, unique=True)
     address = models.CharField(max_length=256)
     location = gis_models.PointField(srid=4326)
-    category = models.CharField(max_length=24, choices=ShelterCategoryEnum.choices)
+    category = models.CharField(max_length=24, choices=ShelterCategoryParamValue.choices)
     phone = models.CharField(max_length=20, unique=True)
     meals = models.BooleanField()
     pets = models.BooleanField()

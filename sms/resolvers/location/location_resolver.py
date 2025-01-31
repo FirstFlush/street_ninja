@@ -7,6 +7,7 @@ from .rulesets import (
     LandmarkRuleset,
     PriorityRuleset
 )
+from ..exc import LocationResolutionError
 from .expanders import BaseExpander, AddressExpander, IntersectionExpander, LandmarkExpander
 from .token_navigator import TokenNavigator
 from ..base_resolver import BaseKeywordResolver
@@ -39,6 +40,15 @@ class LocationResolver(BaseKeywordResolver):
         LocationType.LANDMARK : LandmarkExpander,
     }
 
+    @classmethod
+    def resolve_location(cls, msg:str) -> ResolvedLocation:
+        instance = cls(msg=msg)
+        try:
+            return instance._resolve_location()
+        except Exception as e:
+            logger.error(f"LocationResolutionError for msg: `{msg}` from: {e}")
+            raise LocationResolutionError(f"Could not resolve location for msg: `{msg}`") from e
+
     def __init__(self, msg:str):
         self.msg = msg
         self.tokens = self._tokenize_msg(msg, keep_ampersand=True)
@@ -54,7 +64,7 @@ class LocationResolver(BaseKeywordResolver):
         expander = self.LOCATION_TYPE_TO_EXPANDER[location_type_enum]
         return expander(token_navigator=token_navigator)
 
-    def resolve_location(self) -> ResolvedLocation:
+    def _resolve_location(self) -> ResolvedLocation:
         resolved_location = self._try_rules_priority()
         if resolved_location:
             return resolved_location

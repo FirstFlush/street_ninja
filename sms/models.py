@@ -6,6 +6,7 @@ from common.enums import (
     InquiryStatusEnum, 
     LocationType
 )
+from sms.enums import ConversationStatus, SMSFollowUpKeywordEnum
 
 
 class PhoneNumber(models.Model):
@@ -15,9 +16,19 @@ class PhoneNumber(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
 
-class Inquiry(models.Model):
-
+class Conversation(models.Model):
     phone_number = models.ForeignKey(to=PhoneNumber, on_delete=models.CASCADE)
+    phone_session_key = models.CharField(unique=True)
+    status = models.CharField(choices=ConversationStatus.choices)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+
+    # @staticmethod
+    # get_phone_session_key
+
+
+class SMSInquiry(models.Model):
+    conversation = models.ForeignKey(to=Conversation, on_delete=models.CASCADE)
     keyword = models.CharField(max_length=20, choices=SMSKeywordEnum.choices)
     location = gis_models.PointField(srid=4326)
     location_text = models.CharField(max_length=256)
@@ -25,26 +36,39 @@ class Inquiry(models.Model):
     status = models.CharField(max_length=16, choices=InquiryStatusEnum.choices)
     language = models.CharField(max_length=3, choices=LanguageEnum.choices)
     message = models.CharField(max_length=256)
+    params = models.JSONField(default=dict)
     date_created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name_plural = "Inquiries"
 
 
-class RejectedInquiry(models.Model):
-
-    phone_number = models.ForeignKey(to=PhoneNumber, on_delete=models.CASCADE)
+class SMSFollowUpInquiry(models.Model):
+    conversation = models.ForeignKey(to=Conversation, on_delete=models.CASCADE)
+    keyword = models.CharField(max_length=20, choices=SMSFollowUpKeywordEnum.choices)
     message = models.CharField(max_length=256)
     date_created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        verbose_name_plural = "Rejected inquiries"
+        verbose_name_plural = "Follow-up inquiries"
 
 
-class InquiryResponse(models.Model):
+class SMSMessageOverflow(models.Model):
+    sms_inquiry = models.ForeignKey(to=SMSInquiry, on_delete=models.CASCADE)
+    sms_followup = models.ForeignKey(to=SMSFollowUpInquiry, on_delete=models.CASCADE)
+    message = models.TextField()
 
-    phone_number = models.ForeignKey(to=PhoneNumber, on_delete=models.CASCADE)
-    inquiry = models.ForeignKey(to=Inquiry, on_delete=models.CASCADE)
+class UnresolvedSMSInquiry(models.Model):
+    conversation = models.ForeignKey(to=Conversation, on_delete=models.CASCADE)
+    message = models.CharField(max_length=256)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = "Unresolved SMS inquiries"
+
+
+class SMSResponse(models.Model):
+    conversation = models.ForeignKey(to=Conversation, on_delete=models.CASCADE)
     message = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
 

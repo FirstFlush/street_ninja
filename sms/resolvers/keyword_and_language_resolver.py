@@ -1,14 +1,14 @@
 from dataclasses import dataclass
 import logging
 from common.enums import SMSKeywordEnum, LanguageEnum
-from ..exc import KeywordResolverError
+from .exc import KeywordResolverError
 from .base_resolver import BaseKeywordResolver
 
 logger = logging.getLogger(__name__)
 
 
 @dataclass
-class KeywordLanguageData:
+class ResolvedKeywordAndLanguage:
     sms_keyword_enum: SMSKeywordEnum
     language_enum: LanguageEnum
 
@@ -76,13 +76,13 @@ class KeywordLanguageResolver(BaseKeywordResolver):
     }
 
     @classmethod
-    def get_keyword_and_language(cls, msg:str) -> tuple[SMSKeywordEnum, LanguageEnum]:
+    def get_keyword_and_language(cls, msg:str) -> ResolvedKeywordAndLanguage:
         word_list = cls._tokenize_msg(msg)
         for word in word_list:
             # result = cls._try_word(word)
-            result = cls.get_reverse_mapping().get(word)
+            result = cls._get_reverse_mapping().get(word)
             if result and isinstance(result, tuple) and len(result) == 2:
-                return KeywordLanguageData(
+                return ResolvedKeywordAndLanguage(
                     sms_keyword_enum=result[0],
                     language_enum=result[1],
                 )
@@ -101,7 +101,7 @@ class KeywordLanguageResolver(BaseKeywordResolver):
         }
 
     @classmethod
-    def get_reverse_mapping(cls) -> dict[str, tuple[SMSKeywordEnum, LanguageEnum]]:
+    def _get_reverse_mapping(cls) -> dict[str, tuple[SMSKeywordEnum, LanguageEnum]]:
         """
         Lazily builds and returns the reverse mapping of keywords to their corresponding
         SMSKeywordEnum and LanguageEnum.

@@ -7,6 +7,8 @@ from geo.geocoding import GeocodingService
 from twilio.twiml.messaging_response import MessagingResponse
 from auth.authentication import TwilioSignatureAuthentication
 from .serializers import TwilioSMSSerializer
+from .sms_service import SMSService
+from .resolvers import SMSResolver
 
 
 class SMSWebhookView(APIView):
@@ -17,19 +19,13 @@ class SMSWebhookView(APIView):
 
     def post(self, request:Request, *args, **kwargs):
 
-        # geocoding_service = GeocodingService()
-        # location = geocoding_service.geocode(query="688 Abbott St, Vancouver, BC, Canada")
-        # print(location)
-        # res = MessagingResponse()
-        # print(res.message("this is a test text kakaka \nheloooo"))
-        # print("data: ") 
-        # print(request.data)
-        # print("-"*50)
         print(request.data)
         print()
         deserializer = TwilioSMSSerializer(data=request.data)
         if deserializer.is_valid():
-            print(deserializer.validated_data)
+            SMSService(
+                resolver=SMSResolver(deserializer.validated_data['Body'])
+            )
         else:
             print(deserializer.errors)
 
