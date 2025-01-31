@@ -24,7 +24,9 @@ class SMSWebhookView(APIView):
         deserializer = TwilioSMSSerializer(data=request.data)
         if deserializer.is_valid():
             SMSService(
-                resolver=SMSResolver(deserializer.validated_data['Body'])
+                msg=deserializer.validated_data["Body"],
+                phone_number=deserializer.validated_data["From"],
+                message_sid=deserializer.validated_data["MessageSid"],
             )
         else:
             print(deserializer.errors)
