@@ -10,7 +10,7 @@
 #     ordering = ('-date_created',)
 
 
-# @admin.register(Inquiry)
+# @admin.register(SMSInquiry)
 # class InquiryAdmin(admin.ModelAdmin):
 #     list_display = ('phone_number', 'status', 'keyword', 'message', 'date_created')
 #     search_fields = ('phone_number__number', 'message', 'keyword')
@@ -18,15 +18,15 @@
 #     ordering = ('-date_created',)
 
 
-# @admin.register(RejectedInquiry)
+# @admin.register(UnresolvedSMSInquiry)
 # class RejectedInquiryAdmin(admin.ModelAdmin):
 #     list_display = ('phone_number', 'message', 'date_created')
 #     search_fields = ('phone_number__number', 'message')
 #     ordering = ('-date_created',)
 
 
-# @admin.register(InquiryResponse)
+# @admin.register(SMSResponse)
 # class InquiryResponseAdmin(admin.ModelAdmin):
-#     list_display = ('phone_number', 'inquiry', 'message', 'date_created')
-#     search_fields = ('phone_number__number', 'inquiry__message', 'message')
+#     list_display = ('conversation', 'inquiry', 'message', 'date_created')
+#     search_fields = ('conversation__phone_number__number', 'message')
 #     ordering = ('-date_created',)

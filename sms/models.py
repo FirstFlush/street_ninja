@@ -54,9 +54,11 @@ class SMSFollowUpInquiry(models.Model):
 
 
 class SMSMessageOverflow(models.Model):
-    sms_inquiry = models.ForeignKey(to=SMSInquiry, on_delete=models.CASCADE)
-    sms_followup = models.ForeignKey(to=SMSFollowUpInquiry, on_delete=models.CASCADE)
+    sms_inquiry = models.ForeignKey(to=SMSInquiry, on_delete=models.CASCADE, null=True)
+    sms_followup = models.ForeignKey(to=SMSFollowUpInquiry, on_delete=models.CASCADE, null=True)
     message = models.TextField()
+    date_created = models.DateTimeField(auto_now_add=True)
+
 
 class UnresolvedSMSInquiry(models.Model):
     conversation = models.ForeignKey(to=Conversation, on_delete=models.CASCADE)
@@ -64,7 +66,7 @@ class UnresolvedSMSInquiry(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        verbose_name_plural = "Unresolved SMS inquiries"
+        verbose_name_plural = "Unresolved SMS Inquiries"
 
 
 class SMSResponse(models.Model):

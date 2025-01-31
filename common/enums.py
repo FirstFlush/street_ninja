@@ -21,7 +21,7 @@ class SMSKeywordEnum(StreetNinjaEnum):
     TOILET = "TOILET"
     WIFI = "WIFI"
     HELP = "HELP"
-    MORE = "MORE"
+    # MORE = "MORE"
 
 
 class LocationType(StreetNinjaEnum):

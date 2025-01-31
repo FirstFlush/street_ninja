@@ -14,9 +14,14 @@ logger = logging.getLogger(__name__)
 @dataclass
 class ResolvedSMS:
     msg: str
+    fully_resolved: bool = False
     keyword_language_data: Optional[ResolvedKeywordAndLanguage] = None
     location_data: Optional[ResolvedLocation] = None
     params: Optional[ParamDict] = None
+
+    def __post_init__(self):
+        self.fully_resolved = self.keyword_language_data is not None and self.location_data is not None
+
 
 
 class SMSResolver:
@@ -28,7 +33,6 @@ class SMSResolver:
     def __init__(self, msg:str):
         self.msg = msg
 
-
     def resolve_sms(self) -> ResolvedSMS:
         resolved_keyword_and_language = self._resolve_keyword_and_language()
         resolved_location = self._location_resolver(msg=self.msg)
@@ -37,6 +41,7 @@ class SMSResolver:
                 sms_keyword_enum=resolved_keyword_and_language.sms_keyword_enum
             )
         return ResolvedSMS(
+            msg=self.msg,
             resolved_keyword_and_language=resolved_keyword_and_language,
             resolved_location=resolved_location,
             resolved_params=resolved_params,
