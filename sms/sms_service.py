@@ -1,22 +1,16 @@
 from sms.resolvers import (
     SMSResolver, 
     ResolvedSMS, 
-    ResolvedKeywordAndLanguage, 
-    ResolvedLocation
 )
-from sms.resolvers.exc import SMSResoltuionError
-# from .models import Inqu
-
+from sms.resolvers.exc import SMSResolutionError
+from sms.serializers import TwilioSMSSerializer
 
 class SMSService:
 
-    def __init__(self, resolver: SMSResolver):
-        self.resolver = resolver
+    def __init__(self, msg: str, phone_number: str, message_sid: str):
 
-
-    def _resolve_sms(self) -> ResolvedSMS:
-        try:
-            resolved_sms = self.resolver.resolve_sms()
-        except SMSResoltuionError:
-            ...
-            # create unresolved sms model
+        self.resolver = SMSResolver(msg=msg)
+        self.sms_data = self.resolver.resolve_sms(
+            message_sid=message_sid,
+            phone_number=phone_number,
+        )

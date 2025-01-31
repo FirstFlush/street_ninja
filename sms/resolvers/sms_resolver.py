@@ -1,27 +1,44 @@
 import logging
 from typing import Any, Optional
 from dataclasses import dataclass
-from common.enums import SMSKeywordEnum, LanguageEnum
-from .exc import KeywordResolverError, LocationResolutionError, ParamResolutionError
+from .enums import ResolvedSMSType
+from .exc import (
+    KeywordResolverError, 
+    LocationResolutionError, 
+    ParamResolutionError, 
+    SMSResolutionError, 
+    FollowUpSMSResolutionError,
+)
 from .location.location_resolver import LocationResolver, ResolvedLocation
 from .keyword_and_language_resolver import KeywordLanguageResolver, ResolvedKeywordAndLanguage
 from .param_resolver import KeywordParamResolver, ParamDict
+from .follow_up_resolver import ResolvedSMSFollowUp, FollowUpResolver
 
 
 logger = logging.getLogger(__name__)
 
 
 @dataclass
-class ResolvedSMS:
+class ResolvedSMSInquiry:
     msg: str
-    fully_resolved: bool = False
     keyword_language_data: Optional[ResolvedKeywordAndLanguage] = None
     location_data: Optional[ResolvedLocation] = None
     params: Optional[ParamDict] = None
 
-    def __post_init__(self):
-        self.fully_resolved = self.keyword_language_data is not None and self.location_data is not None
+    @property
+    def full_resolved(self) -> bool:
+        return self.keyword_language_data is not None and self.location_data is not None
 
+@dataclass
+class UnresolvedSMS:
+    msg: str
+
+@dataclass
+class ResolvedSMS:
+    resolved_sms_type: ResolvedSMSType
+    phone_number: str
+    message_sid: str
+    data: ResolvedSMSInquiry | ResolvedSMSFollowUp | UnresolvedSMS
 
 
 class SMSResolver:
@@ -29,22 +46,61 @@ class SMSResolver:
     _location_resolver = LocationResolver
     _keyword_lang_resolver = KeywordLanguageResolver
     _param_resolver = KeywordParamResolver
+    _follow_up_resolver = FollowUpResolver
 
     def __init__(self, msg:str):
         self.msg = msg
 
-    def resolve_sms(self) -> ResolvedSMS:
+    def resolve_sms(self, message_sid: str, phone_number: str) -> ResolvedSMS:
+        try:
+            resolved_sms_data = self._resolve_sms()
+        except Exception as e:
+            logger.error(f"SMS Resolver failed for message: `{self.msg}`", exc_info=True)
+            raise SMSResolutionError("SMS Resolver failed") from e
+        else:
+            resolved_sms_type = self._get_sms_type_enum(resolved_sms_data)
+            return ResolvedSMS(
+                resolved_sms_type=resolved_sms_type,
+                message_sid=message_sid,
+                phone_number=phone_number,
+                data=resolved_sms_data,
+            )
+
+    def _get_sms_type_enum(self, resolved_sms_data: Any) -> ResolvedSMSType:
+        if isinstance(resolved_sms_data, ResolvedSMSInquiry):
+            return ResolvedSMSType.INQUIRY
+        elif isinstance(resolved_sms_data, ResolvedSMSFollowUp):
+            return ResolvedSMSType.FOLLOW_UP
+        elif isinstance(resolved_sms_data, UnresolvedSMS):
+            return ResolvedSMSType.UNRESOLVED
+        else:
+            logger.error(f"Unexpected data type for resolved_sms_data: `{resolved_sms_data}` from SMS message: `{self.msg}`", exc_info=True)
+            raise SMSResolutionError(f"Unexpected data type for resolved_sms_data: `{type(resolved_sms_data)}`")
+        
+
+    def _resolve_sms(self) -> ResolvedSMSInquiry | ResolvedSMSFollowUp | UnresolvedSMS:
         resolved_keyword_and_language = self._resolve_keyword_and_language()
-        resolved_location = self._location_resolver(msg=self.msg)
-        if resolved_keyword_and_language is not None:
+        if resolved_keyword_and_language is None:
+            resolved_sms = self._resolve_follow_up_sms()
+            if resolved_sms is None:
+                resolved_sms = self._unresolved_sms()
+
+        else:
+            resolved_location = self._location_resolver(msg=self.msg)
             resolved_params = self._resolve_params(
                 sms_keyword_enum=resolved_keyword_and_language.sms_keyword_enum
             )
-        return ResolvedSMS(
+            resolved_sms = ResolvedSMSInquiry(
+                msg=self.msg,
+                keyword_language_data=resolved_keyword_and_language,
+                location_data=resolved_location,
+                params=resolved_params,
+            )
+        return resolved_sms
+
+    def _unresolved_sms(self) -> UnresolvedSMS:
+        return UnresolvedSMS(
             msg=self.msg,
-            resolved_keyword_and_language=resolved_keyword_and_language,
-            resolved_location=resolved_location,
-            resolved_params=resolved_params,
         )
 
     def _resolve_location(self) -> ResolvedLocation | None:
@@ -54,12 +110,17 @@ class SMSResolver:
         except LocationResolutionError:
             return None
 
+    def _resolve_follow_up_sms(self) -> ResolvedSMSFollowUp | None:
+        try:
+            return self._follow_up_resolver(self.msg).resolve_follow_up_sms()
+        except FollowUpSMSResolutionError:
+            return None
 
     def _resolve_keyword_and_language(self) -> ResolvedKeywordAndLanguage | None:
         try:
-            KeywordLanguageResolver.get_keyword_and_language(msg=self.msg)
+            return KeywordLanguageResolver.get_keyword_and_language(msg=self.msg)
         except KeywordResolverError:
-            ...
+            return None
 
     def _resolve_params(self, sms_keyword_enum) -> ParamDict:
         try:

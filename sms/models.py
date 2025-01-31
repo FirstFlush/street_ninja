@@ -1,3 +1,6 @@
+from datetime import datetime, timedelta, timezone
+import uuid
+from django.conf import settings
 from django.db import models
 from django.contrib.gis.db import models as gis_models
 from common.enums import (
@@ -21,10 +24,40 @@ class Conversation(models.Model):
     phone_session_key = models.CharField(unique=True)
     status = models.CharField(choices=ConversationStatus.choices)
     date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
 
 
-    # @staticmethod
-    # get_phone_session_key
+    @staticmethod
+    def generate_phone_session_key() -> str:
+        """Generates a unique session key for a new conversation."""
+        return str(uuid.uuid4())
+
+    @staticmethod
+    def get_or_create_conversation(phone_number: str) -> "Conversation":
+        """
+        Retrieves an active conversation for the given phone number, or creates a new one if none exist.
+        A conversation is considered 'active' if it was updated within the PHONE_SESSION_LENGTH period.
+        """
+        from sms.models import PhoneNumber  # Avoid circular import
+
+        phone, _ = PhoneNumber.objects.get_or_create(number=phone_number, defaults={"last_active": datetime.now()})
+        session_expiry = datetime.now() - timedelta(minutes=settings.PHONE_SESSION_LENGTH)
+
+        conversation = Conversation.objects.filter(
+            phone_number=phone,
+            date_updated__gte=session_expiry  # Only get conversations updated within session limit
+        ).first()
+
+        if conversation:
+            return conversation  # Reuse active session
+
+        # No active session found, create a new one
+        return Conversation.objects.create(
+            phone_number=phone,
+            phone_session_key=Conversation.generate_session_key(),
+            date_created=datetime.now(),
+            date_updated=datetime.now(),
+        )
 
 
 class SMSInquiry(models.Model):

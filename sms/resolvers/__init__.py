@@ -1,3 +1,4 @@
 from .sms_resolver import SMSResolver, ResolvedSMS
 from .keyword_and_language_resolver import ResolvedKeywordAndLanguage
 from .location.location_resolver import ResolvedLocation
+from .follow_up_resolver import ResolvedSMSFollowUp, FollowUpResolver
