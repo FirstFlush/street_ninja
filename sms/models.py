@@ -21,6 +21,9 @@ class PhoneNumber(models.Model):
     last_active = models.DateTimeField(null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self) -> str:
+        return self.number
+
 
 class ConversationManager(models.Manager):
 
@@ -47,7 +50,6 @@ class ConversationManager(models.Manager):
         )
 
 
-
 class Conversation(models.Model):
     phone_number = models.ForeignKey(to=PhoneNumber, on_delete=models.CASCADE)
     phone_session_key = models.CharField(unique=True)
@@ -57,11 +59,13 @@ class Conversation(models.Model):
 
     objects:ConversationManager = ConversationManager()
 
+    def __str__(self) -> str:
+        return self.phone_session_key
+
     @staticmethod
     def generate_phone_session_key() -> str:
         """Generates a unique session key for a new conversation."""
         return str(uuid.uuid4())
-
 
 
 class SMSInquiryManager(models.Manager):
@@ -108,7 +112,7 @@ class SMSFollowUpInquiryManager(models.Manager):
         return SMSFollowUpInquiry.objects.create(
             conversation=conversation,
             message=sms_data.msg,
-            keyword=sms_data.follow_up_keyword_enum,
+            keyword=sms_data.follow_up_keyword_enum.value,
             params=sms_data.follow_up_params,
         )
 

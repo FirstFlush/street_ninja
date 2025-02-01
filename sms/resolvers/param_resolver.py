@@ -21,7 +21,7 @@ class ParamDict:
     params: dict[ParamKeyEnum, ParamValueEnum] = None
 
     def to_dict(self) -> dict[str, Any]:
-        return { k.value: v.value for k, v in self.params.items()} if self.params else {}
+        return { k.value: v for k, v in self.params.items()} if self.params else {}
 
 
 class KeywordParamResolver(BaseKeywordResolver):
@@ -114,8 +114,8 @@ class KeywordParamResolver(BaseKeywordResolver):
                         logger.error(msg)
                         raise ParamResolutionError(msg)
                     else:
-                        params[param_enum.value] = resolved_value if not isinstance(resolved_value, StreetNinjaEnum) else resolved_value.value
+                        params[param_enum] = resolved_value if not isinstance(resolved_value, StreetNinjaEnum) else resolved_value.value
                         continue
-        return ParamDict(**params)
+        return ParamDict(params={**params})
 
 
