@@ -24,7 +24,7 @@ class AddressExpander(BaseExpander):
 
     def expand_outward(self, token_index:int) -> str:
         backwards = self._backwards(token_index)
-        forwards = self._forewards(token_index)
+        forwards = self._forwards(token_index)
         return f"{backwards} {self._token_value(token_index)} {forwards}"
 
     def _backwards(self, token_index: int) -> str:
@@ -68,7 +68,7 @@ class IntersectionExpander(BaseExpander):
 
     def expand_outward(self, token_index:int) -> str:
         backwards = self._backwards(token_index)
-        forwards = self._forewards(token_index)
+        forwards = self._forwards(token_index)
         return f"{backwards} {self._token_value(token_index)} {forwards}"
 
     def _backwards(self, token_index:int) ->str:

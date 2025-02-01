@@ -34,7 +34,7 @@ class ResourceModel(gis_models.Model):
 
     @staticmethod
     def get_point(lon:float, lat:float) -> Point:
-        return Point(lon, lat, srid=4326)
+        return Point(x=lon, y=lat, srid=4326)
 
     @classmethod
     def normalize_data(cls, data:dict[str, Any]):

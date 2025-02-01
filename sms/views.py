@@ -1,4 +1,4 @@
-from django.shortcuts import render
+import logging
 from rest_framework.parsers import FormParser, JSONParser
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView, Request, Response, status
@@ -11,6 +11,8 @@ from .sms_service import SMSService
 from .resolvers import SMSResolver
 
 
+logger = logging.getLogger(__name__)
+
 class SMSWebhookView(APIView):
 
     # authentication_classes = [TwilioSignatureAuthentication]
@@ -19,17 +21,15 @@ class SMSWebhookView(APIView):
 
     def post(self, request:Request, *args, **kwargs):
 
-        print(request.data)
-        print()
         deserializer = TwilioSMSSerializer(data=request.data)
         if deserializer.is_valid():
-            SMSService(
+            sms_service = SMSService(
                 msg=deserializer.validated_data["Body"],
                 phone_number=deserializer.validated_data["From"],
                 message_sid=deserializer.validated_data["MessageSid"],
             )
         else:
-            print(deserializer.errors)
-
+            logger.error(f"Failed to deserialize: {deserializer.errors}")
+            return Response("Could not parse message", status=status.HTTP_400_BAD_REQUEST)
 
         return Response("fasdfasd", status=status.HTTP_200_OK)

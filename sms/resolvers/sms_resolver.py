@@ -26,7 +26,7 @@ class ResolvedSMSInquiry:
     params: Optional[ParamDict] = None
 
     @property
-    def full_resolved(self) -> bool:
+    def is_resolved(self) -> bool:
         return self.keyword_language_data is not None and self.location_data is not None
 
 @dataclass
@@ -86,9 +86,9 @@ class SMSResolver:
                 resolved_sms = self._unresolved_sms()
 
         else:
-            resolved_location = self._location_resolver(msg=self.msg)
+            resolved_location = self._resolve_location()
             resolved_params = self._resolve_params(
-                sms_keyword_enum=resolved_keyword_and_language.sms_keyword_enum
+                sms_keyword_enum=resolved_keyword_and_language.sms_keyword_enum,
             )
             resolved_sms = ResolvedSMSInquiry(
                 msg=self.msg,
@@ -97,6 +97,7 @@ class SMSResolver:
                 params=resolved_params,
             )
         return resolved_sms
+        
 
     def _unresolved_sms(self) -> UnresolvedSMS:
         return UnresolvedSMS(
@@ -104,10 +105,11 @@ class SMSResolver:
         )
 
     def _resolve_location(self) -> ResolvedLocation | None:
-        location_resolver = self._location_resolver(msg=self.msg)
         try:
-            return location_resolver.resolve_location()
-        except LocationResolutionError:
+            return self._location_resolver.resolve_location(msg=self.msg)
+        except LocationResolutionError as e:
+            logger.error(e, exc_info=True)
+            raise
             return None
 
     def _resolve_follow_up_sms(self) -> ResolvedSMSFollowUp | None:

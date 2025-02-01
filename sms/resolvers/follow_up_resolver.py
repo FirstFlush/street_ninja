@@ -13,8 +13,8 @@ logger = logging.getLogger(__name__)
 @dataclass
 class ResolvedSMSFollowUp:
     msg: str
-    keyword_enum: Optional[SMSFollowUpKeywordEnum] = None
-    params: Optional[dict[str, Any]] = None
+    follow_up_keyword_enum: Optional[SMSFollowUpKeywordEnum] = None
+    follow_up_params: Optional[dict[str, Any]] = None
 
 
 class FollowUpResolver(BaseKeywordResolver):
@@ -29,8 +29,8 @@ class FollowUpResolver(BaseKeywordResolver):
         params = self._resolve_params()
         return ResolvedSMSFollowUp(
             msg=self.msg,
-            keyword_enum=keyword_enum,
-            params=params,
+            follow_up_keyword_enum=keyword_enum,
+            follow_up_params=params,
         )
 
     def _resolve_keyword(self) -> SMSFollowUpKeywordEnum | None:

@@ -38,7 +38,7 @@ WIGLE_API_KEY = config('WIGLE_API_KEY')
 
 # Celery
 # =======================================
-CELERY_BROKER_URL = 'redis://localhost:6379/4'
+CELERY_BROKER_URL = config('CELERY_BROKER_URL')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
