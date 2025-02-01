@@ -17,13 +17,11 @@ logger = logging.getLogger(__name__)
 class SMSService:
 
     def __init__(self, msg: str, phone_number: str, message_sid: str):
-
         self.resolver = SMSResolver(msg=msg)
         self.sms_data = self.resolver.resolve_sms(
             message_sid=message_sid,
             phone_number=phone_number,
         )
-        print(self.sms_data.data.location_data)
         match self.sms_data.resolved_sms_type:
             case ResolvedSMSType.INQUIRY:
                 self.location = self._get_location()
