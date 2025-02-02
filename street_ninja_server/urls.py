@@ -12,5 +12,6 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('keywords/', KeywordTestView.as_view(), name='keyword_test'),
     path('redis/', RedisTestView.as_view(), name='redis_test'),
+    path('api/resources/', include('resources.urls')),
     path('api/sms/', include('sms.urls')),
 ]

@@ -36,6 +36,14 @@ VANCOUVER_OPEN_DATA_API_KEY = config('VANCOUVER_OPEN_DATA_API_KEY')
 WIGLE_API_KEY = config('WIGLE_API_KEY')
 
 
+# CORS 
+# =======================================
+# CORS_ALLOWED_ORIGINS = [
+#     "http://192.168.1.169:3000",
+#     "http://localhost:3000",
+# ]
+CORS_ALLOW_ALL_ORIGINS = True
+
 # Celery
 # =======================================
 CELERY_BROKER_URL = config('CELERY_BROKER_URL')
@@ -79,6 +87,7 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'django_extensions',
     'rest_framework',
+    'corsheaders',
     'common',
     'geo',
     'integrations',
@@ -89,6 +98,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
