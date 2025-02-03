@@ -21,17 +21,21 @@ class Shelter(CityOfVancouverModel):
     def __str__(self) -> str:
         return self.facility
 
+
 class FoodProgram(CityOfVancouverModel):
-    
-    program_name = models.CharField(max_length=255, unique=True)
-    address = models.CharField(max_length=256, unique=True)
-    address_extra_info = models.CharField(max_length=256)
-    description = models.TextField()
+
+    program_name = models.CharField(max_length=256, unique=True)
+    program_status = models.CharField(max_length=20)
+    program_population_served = models.TextField(null=True)
+    organization_name = models.CharField(max_length=256)
+    location_address = models.CharField(max_length=256, null=True)
+    address_extra_info = models.CharField(max_length=256, null=True)
+    description = models.TextField(null=True)
     location = gis_models.PointField(srid=4326)
     provides_meals = models.BooleanField()
     provides_hampers = models.BooleanField()
-    meal_cost = models.DecimalField(decimal_places=2, max_digits=7, null=True)
-    hamper_cost = models.DecimalField(decimal_places=2, max_digits=7, null=True)
+    meal_cost = models.CharField(max_length=20, null=True)
+    hamper_cost = models.CharField(max_length=20, null=True)
     delivery_available = models.BooleanField()
     takeout_available = models.BooleanField()
     wheelchair_accessible = models.BooleanField()
@@ -43,7 +47,7 @@ class FoodProgram(CityOfVancouverModel):
     referral_phone_number = models.CharField(max_length=20, null=True)
     referral_email = models.CharField(max_length=256, null=True)
     is_active = models.BooleanField(default=True)
-    last_updated = models.DateTimeField()
+    last_fetched = models.DateTimeField(null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
 # class Toilets(CityOfVancouverModel):

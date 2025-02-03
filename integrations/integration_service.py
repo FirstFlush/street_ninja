@@ -78,7 +78,7 @@ class IntegrationService:
             http_data=http_data,
         )
 
-    def fetch_and_save(self):
+    def fetch_and_save(self, no_save:bool=False):
         """
         Orchestrates the process of fetching data from the API, 
         deserializing it, and saving it to the DB.
@@ -96,19 +96,22 @@ class IntegrationService:
         # Deserialize
         deserializer = self._serialize_data(data=data)
         if not deserializer.is_valid():
-            msg = f"Deserialization for `{self.serializer_class.__name__}` failed"
+            msg = f"Deserialization for `{self.serializer_class.__name__}` failed. deserializer.errors: `{deserializer.errors}`"
             logger.error(msg, exc_info=True)
             raise IntegrationServiceError(msg)
 
-        # Save to DB
         self.model_class.validate_unique_key()
         data_to_save = self._normalize_data(data=deserializer.validated_data)
-        try:
-            self.saved_data = self._save_data(data=data_to_save)
-        except Exception as e:
-            msg = f"Failed to save data to DB from `{self.api_client.__class__.__name__}` endpoint `{self.endpoint_enum.value}`"
-            logger.error(msg, exc_info=True)
-            raise IntegrationServiceError(msg) from e
+        if no_save:
+            logger.info(f"Data to save: {data_to_save}")
+            logger.info("Skipping save...")
+        else:
+            try:
+                self.saved_data = self._save_data(data=data_to_save)
+            except Exception as e:
+                msg = f"Failed to save data to DB from `{self.api_client.__class__.__name__}` endpoint `{self.endpoint_enum.value}`"
+                logger.error(msg, exc_info=True)
+                raise IntegrationServiceError(msg) from e
 
     def _fetch_data(self) -> list[dict[str, Any]]:
         data = self.api_client.make_request(request_data=self.request_data)

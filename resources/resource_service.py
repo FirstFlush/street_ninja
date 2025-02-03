@@ -21,6 +21,13 @@ class ResourceService:
     }
 
     def build_map_data(self) -> MapData | None:
+        """  
+        Constructs a MapData object containing categorized geospatial resource points.
+
+        This method retrieves active resource records from the database, extracts their 
+        geographical locations, and organizes them into a structured format suitable 
+        for API responses and map rendering.        
+        """
         map_data = defaultdict(list)
 
         count = 0

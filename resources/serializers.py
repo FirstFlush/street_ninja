@@ -1,15 +1,18 @@
 from dataclasses import asdict
+from typing import Any
 from rest_framework import serializers
 from common.enums import SMSKeywordEnum
 from common.serializer_fields import YesNoBooleanField
+from geo.geocoding import GeocodingService
 from .dataclasses import MapPoint, MapData
+
 
 
 class MapPointSerializer(serializers.Serializer):
     # type = serializers.ChoiceField(choices=["shelter", "food", "water", "toilet", "wifi"])
     longitude = serializers.FloatField()
     latitude = serializers.FloatField()
-    # name = serializers.CharField(allow_null=True, required=False)
+    # name = serializers.CharField(allow_null=True, required=False, required=False)
 
     def to_representation(self, instance: MapPoint):
         """Convert MapPoint dataclass to JSON"""
@@ -66,3 +69,48 @@ class ShelterSerializer(ResourceSerializer):
     carts = YesNoBooleanField()
 
 
+class FoodProgramSerializer(ResourceSerializer):
+    
+    program_name = serializers.CharField(max_length=256)
+    description = serializers.CharField(allow_null=True, required=False)
+    program_status = serializers.CharField(max_length=256)
+    organization_name = serializers.CharField(max_length=256)
+    geom = GeoPointSerializer()
+    location_address = serializers.CharField(max_length=256, allow_null=True, required=False)
+    address_extra_info = serializers.CharField(max_length=256, allow_null=True, required=False)
+    program_population_served = serializers.CharField(max_length=256, allow_null=True, required=False)
+    provides_meals = YesNoBooleanField()
+    provides_hampers = YesNoBooleanField()
+    delivery_available = YesNoBooleanField()
+    takeout_available = YesNoBooleanField()
+    wheelchair_accessible = YesNoBooleanField()
+    meal_cost = serializers.CharField(allow_null=True, required=False)
+    hamper_cost = serializers.CharField(allow_null=True, required=False)
+    signup_required = YesNoBooleanField()
+    signup_phone_number = serializers.CharField(max_length=20, allow_null=True, required=False)
+    signup_email = serializers.CharField(max_length=256, allow_null=True, required=False)
+    referral_agency_name = serializers.CharField(max_length=256, allow_null=True, required=False)
+    referral_phone_number = serializers.CharField(max_length=20, allow_null=True, required=False)
+    referral_email  = serializers.CharField(max_length=256, allow_null=True, required=False)
+    requires_referral = YesNoBooleanField()
+
+    def __new__(cls, *args, **kwargs):
+        """Filter out invalid records before DRF processes them"""
+        data = kwargs.get("data", None)
+        if isinstance(data, list):  
+            kwargs["data"] = [record for record in data if "geom" in record and record["geom"] is not None]
+        return super().__new__(cls, *args, **kwargs)
+
+
+    # def run_validation(self, data:dict[str, Any]):
+    #     print(type(data))
+
+
+    #     return super().run_validation(data)
+
+    # def to_internal_value(self, data: dict[str, Any]):
+        
+    #     if 'geom' not in data or not data.get('geom'):
+    #         print('asdfasdfdsafdsfdsfadsfds')
+
+        # return super().to_internal_value(data=data)

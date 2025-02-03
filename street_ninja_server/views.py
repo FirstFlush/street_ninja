@@ -5,8 +5,8 @@ from integrations.clients import VancouverAPIClient, WigleAPIClient
 from integrations.enums import VancouverEndpointsEnum
 from django.conf import settings 
 import json
-from resources.models import Shelter
-from resources.serializers import ShelterSerializer
+from resources.models import Shelter, FoodProgram
+from resources.serializers import ShelterSerializer, FoodProgramSerializer
 from integrations.integration_service import IntegrationService, IntegrationServiceParams
 
 from sms.resolvers import SMSResolver
@@ -53,10 +53,10 @@ class HomeView(APIView):
         """
         params = IntegrationServiceParams(
             api_client_class=VancouverAPIClient,
-            endpoint_enum=VancouverEndpointsEnum.SHELTERS,
+            endpoint_enum=VancouverEndpointsEnum.FOOD_PROGRAMS,
             http_method_enum=HttpMethodEnum.GET,
-            serializer_class=ShelterSerializer,
-            model_class=Shelter,
+            serializer_class=FoodProgramSerializer,
+            model_class=FoodProgram,
             api_key=settings.VANCOUVER_OPEN_DATA_API_KEY,
         )
 
