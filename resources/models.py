@@ -55,10 +55,14 @@ class FoodProgram(CityOfVancouverModel):
 #     location = gis_models.PointField(srid=4326)
     # is_active = models.BooleanField(default=True)
 
-# class DrinkingFountain(CityOfVancouverModel):
-#     address = models.CharField(max_length=256, unique=True)
-#     location = gis_models.PointField(srid=4326)
-    # is_active = models.BooleanField(default=True)
+class DrinkingFountain(CityOfVancouverModel):
+    name = models.CharField(max_length=256)
+    location = gis_models.PointField(srid=4326)
+    is_active = models.BooleanField(default=True)
+    in_operation = models.CharField(max_length=64, default="year-round")
+    pet_friendly = models.BooleanField(null=True)
+    last_fetched = models.DateTimeField(null=True)
+    date_created = models.DateTimeField(auto_now_add=True)
 
 # class PublicWifi(WigleModel):    
 #     address = models.CharField(max_length=256, unique=True)

@@ -2,11 +2,15 @@ import logging
 from rest_framework.views import APIView, Request, Response
 from common.enums import HttpMethodEnum
 from integrations.clients import VancouverAPIClient, WigleAPIClient
-from integrations.enums import VancouverEndpointsEnum
+from integrations.clients.enums import VancouverEndpointsEnum
 from django.conf import settings 
 import json
-from resources.models import Shelter, FoodProgram
-from resources.serializers import ShelterSerializer, FoodProgramSerializer
+from resources.models import Shelter, FoodProgram, DrinkingFountain
+from resources.serializers import (
+    ShelterSerializer, 
+    FoodProgramSerializer,
+    DrinkingFountainSerializer,
+)
 from integrations.integration_service import IntegrationService, IntegrationServiceParams
 
 from sms.resolvers import SMSResolver
@@ -23,9 +27,6 @@ class RedisTestView(APIView):
         from resources.abstract_models import ResourceQuerySet
 
         data:ResourceQuerySet = RedisClient.get_or_set_db(access_pattern=ShelterAccessPattern)
-        print(data)
-        print(type(data))
-
 
         return Response({"ok":"ok"})
 
@@ -39,7 +40,7 @@ class KeywordTestView(APIView):
         msg = "shelter womens 1140 Hastings St pet"
         sms_resolver = SMSResolver(inquiry=msg)
         params = sms_resolver._param_resolver.resolve_params(msg=msg, sms_keyword_enum=SMSKeywordEnum.SHELTER)
-        print(params)
+
 
         return Response({"hihi":"hoho"})
 
@@ -53,10 +54,10 @@ class HomeView(APIView):
         """
         params = IntegrationServiceParams(
             api_client_class=VancouverAPIClient,
-            endpoint_enum=VancouverEndpointsEnum.FOOD_PROGRAMS,
+            endpoint_enum=VancouverEndpointsEnum.DRINKING_FOUNTAINS,
             http_method_enum=HttpMethodEnum.GET,
-            serializer_class=FoodProgramSerializer,
-            model_class=FoodProgram,
+            serializer_class=DrinkingFountainSerializer,
+            model_class=DrinkingFountain,
             api_key=settings.VANCOUVER_OPEN_DATA_API_KEY,
         )
 
@@ -80,9 +81,7 @@ class HomeView(APIView):
         # )
 
         # data = api_client.make_request(request_data=request_data)
-        # # print(data)
 
-        # print(json.dumps(data))
 
 
         # api_client = VancouverAPIClient(
@@ -97,11 +96,5 @@ class HomeView(APIView):
 
         # data = api_client.make_request(request_data=request_data)
         # serializer = ResourceSerializer(data=data['results'], many=True)
-
-        # # print(serializer.initial_data)
-        # if serializer.is_valid():
-        #     print(serializer.validated_data)
-        # else:
-        #     print(serializer.errors)
 
         return Response({"ok":"good"})

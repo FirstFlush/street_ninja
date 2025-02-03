@@ -47,7 +47,6 @@ class SMSDataManager:
             if self.sms_data.resolved_sms_type == ResolvedSMSType.INQUIRY:
                 return self._save_inquiry_sms()
             elif self.sms_data.resolved_sms_type == ResolvedSMSType.FOLLOW_UP:
-                print(self.sms_data.data)
                 return self._save_follow_up_sms()
             elif self.sms_data.resolved_sms_type == ResolvedSMSType.UNRESOLVED:
                 return self._save_unresolved_sms()

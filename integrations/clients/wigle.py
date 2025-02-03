@@ -1,6 +1,6 @@
 from typing import Any
 from .base_api_client import BaseAPIClient
-from ..enums import APIClientEnum, WigleEndpointsEnum
+from .enums import APIClientEnum, WigleEndpointsEnum
 
 
 class WigleAPIClient(BaseAPIClient):

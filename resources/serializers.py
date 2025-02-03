@@ -102,15 +102,15 @@ class FoodProgramSerializer(ResourceSerializer):
         return super().__new__(cls, *args, **kwargs)
 
 
-    # def run_validation(self, data:dict[str, Any]):
-    #     print(type(data))
+class DrinkingFountainSerializer(serializers.Serializer):
 
+    name = serializers.CharField(max_length=256)
+    in_operation = serializers.CharField(max_length=64, allow_null=True, required=False)
+    pet_friendly = YesNoBooleanField(allow_null=True, required=False)
+    geo_point_2d = GeoPointSerializer()
 
-    #     return super().run_validation(data)
-
-    # def to_internal_value(self, data: dict[str, Any]):
-        
-    #     if 'geom' not in data or not data.get('geom'):
-    #         print('asdfasdfdsafdsfdsfadsfds')
-
-        # return super().to_internal_value(data=data)
+    def validate_in_operation(self, value):
+        if value is None:
+            print(value)
+            print()
+        return "Year Round" if value is None else value

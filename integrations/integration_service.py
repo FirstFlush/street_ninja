@@ -10,7 +10,7 @@ from common.enums import HttpMethodEnum
 from resources.serializers import ResourceSerializer
 from resources.abstract_models.base_model import ResourceModel
 from .clients import BaseAPIClient
-from .enums import EndpointsEnum
+from .clients.enums import EndpointsEnum
 from .exc import IntegrationServiceError
 
 

@@ -27,13 +27,13 @@ class CityOfVancouverModel(ResourceModel):
         keys_to_check = {"geo_point_2d", "geom"}
         for key in keys_to_check & data.keys():
             if key == "geo_point_2d":
-                geo_key = "geo_point_2d"
+                return "geo_point_2d"
             elif key == "geom":
-                geo_key = "geom"
+                return "geom"
             else:
                 logger.error(f"Can not find geometry key from data: `{data}`")
                 raise KeyError("Geometry key not found in incoming JSON data. Can not find longitude/latitude.")
-        return geo_key
+
 
     @classmethod
     def get_location(cls, data:dict[str, Any], geo_key:str) -> Point:

@@ -1,6 +1,6 @@
 from typing import Any
 from .base_api_client import BaseAPIClient
-from ..enums import APIClientEnum, VancouverEndpointsEnum
+from .enums import APIClientEnum, VancouverEndpointsEnum
 
 
 class VancouverAPIClient(BaseAPIClient):

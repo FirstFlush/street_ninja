@@ -16,22 +16,29 @@ from decimal import Decimal
 
 #         normalized_str = 
 
-
 class YesNoBooleanField(serializers.Field):
     """
     Custom field to transform 'yes'/'no' to True/False
-    Also transforms '?' and None/null to False
+    Also transforms '?' and None/null to False unless allow_null = True
     """
-    def to_internal_value(self, data: Any) -> bool:
+    def __init__(self, allow_null: bool = False, required: bool = True, **kwargs):
+        # This is crucial - need to pass allow_null to the parent class
+        kwargs['allow_null'] = allow_null
+        kwargs['required'] = required
+        super().__init__(**kwargs)
+        self.allow_null = allow_null
+        self.required = required
+
+    def to_internal_value(self, data: Any) -> bool | None:
         if data is None:
-            return False
+            return None if self.allow_null else False
         elif data is True:
             return True
         elif data is False:
             return False
         elif not isinstance(data, str):
             raise serializers.ValidationError("Input must be a string.")
-        
+
         data = data.strip().lower()
         match data:
             case "yes" | "y" | "true":
@@ -42,6 +49,8 @@ class YesNoBooleanField(serializers.Field):
                 raise serializers.ValidationError("Must be 'yes/y', 'no/n/?', or empty.")
 
     def to_representation(self, value: bool) -> str:
+        if value is None and self.allow_null:
+            return None
         if not isinstance(value, bool):
             raise TypeError("Expected a boolean value for representation.")
         return "yes" if value else "no"

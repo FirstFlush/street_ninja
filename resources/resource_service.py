@@ -4,8 +4,7 @@ from collections import defaultdict
 from .abstract_models import ResourceModel
 from .dataclasses import MapData, MapPoint
 from common.enums import SMSKeywordEnum
-from .models import Shelter, FoodProgram  # Add more as needed
-from .serializers import MapDataSerializer, MapPointSerializer
+from .models import Shelter, FoodProgram, DrinkingFountain
 
 
 logger = logging.getLogger(__name__)
@@ -15,7 +14,7 @@ class ResourceService:
     RESOURCE_MODELS: dict[SMSKeywordEnum, ResourceModel] = {
         SMSKeywordEnum.FOOD: FoodProgram,
         SMSKeywordEnum.SHELTER: Shelter,
-        # SMSKeywordEnum.WATER: Water,
+        SMSKeywordEnum.WATER: DrinkingFountain,
         # SMSKeywordEnum.WIFI: Wifi,
         # SMSKeywordEnum.TOILET: Toilet,
     }
