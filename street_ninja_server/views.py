@@ -5,11 +5,18 @@ from integrations.clients import VancouverAPIClient, WigleAPIClient
 from integrations.clients.enums import VancouverEndpointsEnum
 from django.conf import settings 
 import json
-from resources.models import Shelter, FoodProgram, DrinkingFountain
+from resources.models import (
+    Shelter, 
+    FoodProgram, 
+    DrinkingFountain,
+    Toilet,
+)
 from resources.serializers import (
     ShelterSerializer, 
     FoodProgramSerializer,
     DrinkingFountainSerializer,
+    ParkToiletSerializer,
+    PublicToiletSerializer
 )
 from integrations.integration_service import IntegrationService, IntegrationServiceParams
 
@@ -54,10 +61,10 @@ class HomeView(APIView):
         """
         params = IntegrationServiceParams(
             api_client_class=VancouverAPIClient,
-            endpoint_enum=VancouverEndpointsEnum.DRINKING_FOUNTAINS,
+            endpoint_enum=VancouverEndpointsEnum.PUBLIC_WASHROOM,
             http_method_enum=HttpMethodEnum.GET,
-            serializer_class=DrinkingFountainSerializer,
-            model_class=DrinkingFountain,
+            serializer_class=PublicToiletSerializer,
+            model_class=Toilet,
             api_key=settings.VANCOUVER_OPEN_DATA_API_KEY,
         )
 

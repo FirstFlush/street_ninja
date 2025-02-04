@@ -44,6 +44,10 @@ class ResourceSerializer(serializers.Serializer):
     """Base class for all Resource model serializers. Primarly for type-hinting."""
     ...
 
+class CityOfVancouverSerializer(ResourceSerializer):
+    ...
+
+
 
 class GeoPointSerializer(ResourceSerializer):
     lon = serializers.FloatField()
@@ -59,7 +63,7 @@ class GeoPointSerializer(ResourceSerializer):
             raise serializers.ValidationError("Latitude must be between -90 and 90.")
         return value
 
-class ShelterSerializer(ResourceSerializer):
+class ShelterSerializer(CityOfVancouverSerializer):
     facility = serializers.CharField(max_length=256)
     geo_point_2d = GeoPointSerializer()
     category = serializers.CharField(max_length=24)
@@ -69,7 +73,7 @@ class ShelterSerializer(ResourceSerializer):
     carts = YesNoBooleanField()
 
 
-class FoodProgramSerializer(ResourceSerializer):
+class FoodProgramSerializer(CityOfVancouverSerializer):
     
     program_name = serializers.CharField(max_length=256)
     description = serializers.CharField(allow_null=True, required=False)
@@ -97,12 +101,13 @@ class FoodProgramSerializer(ResourceSerializer):
     def __new__(cls, *args, **kwargs):
         """Filter out invalid records before DRF processes them"""
         data = kwargs.get("data", None)
+        print()
         if isinstance(data, list):  
             kwargs["data"] = [record for record in data if "geom" in record and record["geom"] is not None]
         return super().__new__(cls, *args, **kwargs)
 
 
-class DrinkingFountainSerializer(serializers.Serializer):
+class DrinkingFountainSerializer(CityOfVancouverSerializer):
 
     name = serializers.CharField(max_length=256)
     in_operation = serializers.CharField(max_length=64, allow_null=True, required=False)
@@ -110,7 +115,30 @@ class DrinkingFountainSerializer(serializers.Serializer):
     geo_point_2d = GeoPointSerializer()
 
     def validate_in_operation(self, value):
-        if value is None:
-            print(value)
-            print()
         return "Year Round" if value is None else value
+
+
+class PublicToiletSerializer(CityOfVancouverSerializer):
+
+    name = serializers.CharField(max_length=256)
+    address = serializers.CharField(max_length=256)
+    location = serializers.CharField(max_length=256, allow_null=True, required=False)
+    summer_hours = serializers.CharField()
+    winter_hours = serializers.CharField()
+    wheel_access = YesNoBooleanField()
+    geo_point_2d = GeoPointSerializer()
+
+
+    def validate(self, attrs):
+        attrs['dataset'] = 'public'
+        attrs['notes'] = attrs.pop('location')
+        attrs['is_wheelchair'] = attrs.pop('wheel_access')
+        return attrs
+
+
+    def run_validation(self, data):
+        """Preprocess the raw data list before field validation"""
+        if isinstance(data.get("wheel_access"), str) and data["wheel_access"].strip().lower() == "yes, entered from parking lot level":
+            data["wheel_access"] = "yes" 
+        return super().run_validation(data)
+

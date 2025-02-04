@@ -50,10 +50,28 @@ class FoodProgram(CityOfVancouverModel):
     last_fetched = models.DateTimeField(null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
-# class Toilets(CityOfVancouverModel):
-#     address = models.CharField(max_length=256, unique=True)
-#     location = gis_models.PointField(srid=4326)
-    # is_active = models.BooleanField(default=True)
+
+class Toilet(CityOfVancouverModel):
+
+    DATASET_CHOICES = (
+        ('public', 'Public'),
+        ('parks', 'Parks'),
+    )
+
+    name = models.CharField(max_length=256)
+    address = models.CharField(max_length=256, null=True)
+    dataset = models.CharField(max_length=256, choices=DATASET_CHOICES)
+    description = models.CharField(max_length=256, null=True)
+    location = gis_models.PointField(srid=4326)
+    notes = models.TextField(null=True)
+    summer_hours = models.CharField(max_length=64, null=True)
+    winter_hours = models.CharField(max_length=64, null=True)
+    is_wheelchair = models.BooleanField()
+    is_active = models.BooleanField(default=True)
+    last_fetched = models.DateTimeField(null=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+
 
 class DrinkingFountain(CityOfVancouverModel):
     name = models.CharField(max_length=256)
@@ -64,7 +82,11 @@ class DrinkingFountain(CityOfVancouverModel):
     last_fetched = models.DateTimeField(null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
-# class PublicWifi(WigleModel):    
-#     address = models.CharField(max_length=256, unique=True)
-#     location = gis_models.PointField(srid=4326)
-    # is_active = models.BooleanField(default=True)
+
+
+class PublicWifi(WigleModel):
+    ssid = models.CharField(max_length=256)
+    location = gis_models.PointField(srid=4326)
+    is_active = models.BooleanField(default=True)
+    last_fetched = models.DateTimeField(null=True)
+    date_created = models.DateTimeField(auto_now_add=True)

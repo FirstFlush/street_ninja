@@ -1,3 +1,4 @@
+import json
 import logging
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -103,7 +104,7 @@ class IntegrationService:
         self.model_class.validate_unique_key()
         data_to_save = self._normalize_data(data=deserializer.validated_data)
         if no_save:
-            logger.info(f"Data to save: {data_to_save}")
+            logger.info(json.dumps(data, indent=2))
             logger.info("Skipping save...")
         else:
             try:

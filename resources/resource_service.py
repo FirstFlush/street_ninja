@@ -4,7 +4,7 @@ from collections import defaultdict
 from .abstract_models import ResourceModel
 from .dataclasses import MapData, MapPoint
 from common.enums import SMSKeywordEnum
-from .models import Shelter, FoodProgram, DrinkingFountain
+from .models import Shelter, FoodProgram, DrinkingFountain, Toilet, PublicWifi
 
 
 logger = logging.getLogger(__name__)
@@ -15,8 +15,8 @@ class ResourceService:
         SMSKeywordEnum.FOOD: FoodProgram,
         SMSKeywordEnum.SHELTER: Shelter,
         SMSKeywordEnum.WATER: DrinkingFountain,
-        # SMSKeywordEnum.WIFI: Wifi,
-        # SMSKeywordEnum.TOILET: Toilet,
+        SMSKeywordEnum.WIFI: PublicWifi,
+        SMSKeywordEnum.TOILET: Toilet,
     }
 
     def build_map_data(self) -> MapData | None:
