@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 import logging
+import random
 import requests
+import time
 from requests.exceptions import RequestException
 from typing import Any
 from common.base_enum import StreetNinjaEnum
@@ -45,7 +47,7 @@ class BaseAPIClient(ABC):
         """
         pass
 
-    def url(self, endpoint: str) -> str:
+    def _build_url(self, endpoint: str) -> str:
         if isinstance(endpoint, StreetNinjaEnum):
             endpoint = endpoint.value
         elif not isinstance(endpoint, str):
@@ -57,16 +59,21 @@ class BaseAPIClient(ABC):
         return f"{self.BASE_URL}{endpoint}"
 
     def make_request(self, request_data:RequestData, **kwargs) -> dict[str, Any]:
-        url = self.url(request_data.endpoint)
+        url = self._build_url(request_data.endpoint)
         try:
             response = requests.request(url=url, **request_data.to_request_dict(), **kwargs)
             response.raise_for_status()
             try:
                 return response.json()
-            except ValueError:
-                logger.warning(f"Non-JSON response received from `{url}`")
-                return {"data": response.text}
+            except ValueError as e:
+                logger.warning(f"Non-JSON response received from `{url}`", exc_info=True)
+                raise
+                # return {"data": response.text}
         except RequestException as e:
             msg = f"Request failed: `{request_data.method}` `{url}` | Error: `{e}`",
             logger.error(msg, exc_info=True)
             raise
+
+
+    def jitter(self, low:float=0.2, high:float=1.0) -> float:
+        time.sleep(random.uniform(low, high))

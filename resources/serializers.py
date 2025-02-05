@@ -9,10 +9,8 @@ from .dataclasses import MapPoint, MapData
 
 
 class MapPointSerializer(serializers.Serializer):
-    # type = serializers.ChoiceField(choices=["shelter", "food", "water", "toilet", "wifi"])
     longitude = serializers.FloatField()
     latitude = serializers.FloatField()
-    # name = serializers.CharField(allow_null=True, required=False, required=False)
 
     def to_representation(self, instance: MapPoint):
         """Convert MapPoint dataclass to JSON"""
@@ -30,7 +28,6 @@ class MapDataSerializer(serializers.Serializer):
         invalid_keys = set(value.keys()) - allowed_keys
         if invalid_keys:
             raise serializers.ValidationError(f"Invalid resource types: {', '.join(invalid_keys)}")
-
         return value
 
     def to_representation(self, instance: MapData):
@@ -44,9 +41,17 @@ class ResourceSerializer(serializers.Serializer):
     """Base class for all Resource model serializers. Primarly for type-hinting."""
     ...
 
+
 class CityOfVancouverSerializer(ResourceSerializer):
     ...
 
+
+class WigleSerializer(ResourceSerializer):
+    
+    ssid = serializers.CharField(max_length=256)
+    trilat = serializers.FloatField()
+    trilong = serializers.FloatField()
+    type = serializers.CharField(max_length=20)
 
 
 class GeoPointSerializer(ResourceSerializer):

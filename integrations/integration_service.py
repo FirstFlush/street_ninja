@@ -75,8 +75,8 @@ class IntegrationService:
             method=http_method_enum.value,
             endpoint=self.endpoint_enum.value,
             headers=self.api_client.api_header,
-            http_params=http_params,
-            http_data=http_data,
+            params=http_params,
+            data=http_data,
         )
 
     def fetch_and_save(self, no_save:bool=False):

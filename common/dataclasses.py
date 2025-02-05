@@ -6,8 +6,8 @@ class RequestData:
     method: str
     endpoint: str
     headers: Optional[dict[str, str] | None] = None
-    http_params: Optional[dict[str, str] | None] = None
-    http_data: Optional[dict[str, str] | None] = None
+    params: Optional[dict[str, str] | None] = None
+    data: Optional[dict[str, str] | None] = None
 
     def to_request_dict(self) -> dict[str, str]:
         """Used to pass RequestData attributes to requests.request() as kwargs."""

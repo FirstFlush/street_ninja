@@ -15,7 +15,6 @@ from resources.serializers import (
     ShelterSerializer, 
     FoodProgramSerializer,
     DrinkingFountainSerializer,
-    ParkToiletSerializer,
     PublicToiletSerializer
 )
 from integrations.integration_service import IntegrationService, IntegrationServiceParams
@@ -66,6 +65,10 @@ class HomeView(APIView):
             serializer_class=PublicToiletSerializer,
             model_class=Toilet,
             api_key=settings.VANCOUVER_OPEN_DATA_API_KEY,
+            http_params = {
+                'limit': 100,
+                'offset': 0,
+            }
         )
 
         integration_service = IntegrationService(params=params)
