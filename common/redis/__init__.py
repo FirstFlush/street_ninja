@@ -1,2 +1,2 @@
-from .redis_client import ResourceCacheClient, PhoneSessionCacheClient
+from .clients import ResourceCacheClient, PhoneSessionCacheClient, BaseRedisClient
 from .exc import *
