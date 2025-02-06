@@ -1,7 +1,7 @@
 from abc import ABC
 from dataclasses import dataclass
 from typing import Callable, Any, Optional
-from .enums import RedisKeyEnum, RedisStoreEnum, RedisKeyTTL
+from ..enums import RedisKeyEnum, RedisStoreEnum, RedisKeyTTL
 
 
 @dataclass

@@ -86,7 +86,7 @@ class KeywordLanguageResolver(BaseKeywordResolver):
                     sms_keyword_enum=result[0],
                     language_enum=result[1],
                 )
-        msg = f"Failed to extract SMSKeywordEnum and/or LanguageEnum from msg `{msg}`."
+        msg = f"Failed to resolve SMSKeywordEnum and/or LanguageEnum from msg `{msg}`."
         logger.warning(msg)
         raise KeywordResolverError(msg)
 

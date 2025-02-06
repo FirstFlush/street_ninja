@@ -14,7 +14,7 @@ class RedisKeyEnum(StreetNinjaEnum):
 
 
 class ResourceKeyEnum(RedisKeyEnum):
-    """Redis key for Resource.objects.all() querysets cached in redis resources cache."""
+    """Redis key for querysets cached in redis resources cache."""
     SHELTER = "shelter:all"
     FOOD = "food:all"
     WATER = "water:all"

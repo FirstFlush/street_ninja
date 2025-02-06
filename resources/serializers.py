@@ -69,7 +69,7 @@ class GeoPointSerializer(ResourceSerializer):
         return value
 
 class ShelterSerializer(CityOfVancouverSerializer):
-    facility = serializers.CharField(max_length=256)
+    facility    = serializers.CharField(max_length=256)
     geo_point_2d = GeoPointSerializer()
     category = serializers.CharField(max_length=24)
     phone = serializers.CharField(max_length=20)

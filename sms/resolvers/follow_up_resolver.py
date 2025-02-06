@@ -36,6 +36,8 @@ class FollowUpResolver(BaseKeywordResolver):
     def _resolve_keyword(self) -> SMSFollowUpKeywordEnum | None:
         for token in self.tokens:
             if self._try_token(token):
+                keyword = SMSFollowUpKeywordEnum(token)
+                logger.info(f"Resolved follow-up keyword: `{keyword.value.upper()}`")
                 return SMSFollowUpKeywordEnum(token)
         return None
 

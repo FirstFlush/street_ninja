@@ -20,12 +20,17 @@ are centralized, consistent, and maintainable.
 
 You **cannot** interact with the Redis client directly; instead, you must 
 define or use an existing access pattern.
+
+*See ./registry.py for a registry mapping enums to access patterns.
 """
 from .base_access_patterns import AccessPatternDB, AccessPatternKV
-from .enums import RedisStoreEnum, RedisKeyTTL, ResourceKeyEnum
+from ..enums import RedisStoreEnum, RedisKeyTTL, ResourceKeyEnum
 from resources.models import (
     Shelter,
     FoodProgram,
+    DrinkingFountain,
+    Toilet,
+    PublicWifi,
 )
 
 
@@ -43,3 +48,27 @@ class FoodProgramAccessPattern(AccessPatternDB):
     redis_key_enum = ResourceKeyEnum.FOOD
     key_ttl_enum = RedisKeyTTL.FOOD
     query = FoodProgram.objects.filter
+
+
+class DrinkingFountainAccessPattern(AccessPatternDB):
+
+    redis_key_enum = RedisStoreEnum.RESOURCES
+    redis_key_enum = ResourceKeyEnum.WATER
+    key_tll__enum = RedisKeyTTL.WATER
+    query = DrinkingFountain.objects.filter
+
+
+class ToiletAccessPattern(AccessPatternDB):
+
+    redis_key_enum = RedisStoreEnum.RESOURCES
+    redis_key_enum = ResourceKeyEnum.TOILET
+    key_tll__enum = RedisKeyTTL.TOILET
+    query = Toilet.objects.filter
+
+
+class PublicWifiAccessPattern(AccessPatternDB):
+
+    redis_key_enum = RedisStoreEnum.RESOURCES
+    redis_key_enum = ResourceKeyEnum.WIFI
+    key_tll__enum = RedisKeyTTL.WIFI
+    query = PublicWifi.objects.filter

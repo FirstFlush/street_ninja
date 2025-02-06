@@ -73,7 +73,7 @@ class GeocodingService:
         
         result = self._try_primary(query=query)
         if result:
-            logger.info(f"Geocoding succeeded using primary geocoder `{self.config_data.primary_enum}`.")
+            logger.info(f"Geocoding succeeded using primary geocoder `{self.config_data.primary_enum}`. Coordinates: `{result.point.__str__()}`")
             return result
 
         result = self._try_fallbacks(query=query)

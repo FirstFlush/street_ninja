@@ -94,7 +94,6 @@ class SMSInquiry(IncomingSMSMessageModel):
     location = gis_models.PointField(srid=4326)
     location_text = models.CharField(max_length=256)
     location_type = models.CharField(max_length=20, choices=LocationType.choices)
-    # status = models.CharField(max_length=16, choices=InquiryStatusEnum.choices, default=InquiryStatusEnum.)
     language = models.CharField(max_length=3, choices=LanguageEnum.choices)
     message = models.CharField(max_length=256)
     params = models.JSONField(default=dict)
@@ -104,6 +103,11 @@ class SMSInquiry(IncomingSMSMessageModel):
 
     class Meta:
         verbose_name_plural = "Inquiries"
+
+    @property
+    def location_pretty(self) -> str:
+        self.location:Point
+        return f"[{round(self.location.x, 5)}, {round(self.location.y, 5)}]"
 
 
 class SMSFollowUpInquiryManager(models.Manager):

@@ -2,13 +2,23 @@ import logging
 from typing import Any
 from django.contrib.gis.db import models as gis_models
 from django.contrib.gis.geos import Point
+from django.contrib.gis.db.models.functions import Distance
 
 
 logger = logging.getLogger(__name__)
 
 
 class ResourceQuerySet(gis_models.QuerySet):
-    ...
+    """
+    Custom queryset for Resource model with geospatial filtering.
+    """
+
+    def closest_to(self, location:Point) -> "ResourceQuerySet":
+        """
+        Returns a queryset of resources ordered by distance from the given location.
+        """
+        return self.annotate(
+            distance=Distance("location", location)).order_by("distance")
 
 
 class ResourceManager(gis_models.Manager):

@@ -1,3 +1,2 @@
-from .redis_client import *
-from .access_patterns import *
+from .redis_client import RedisClient
 from .exc import *
