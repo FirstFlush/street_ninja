@@ -11,7 +11,7 @@ from .exc import (
 )
 from .location.location_resolver import LocationResolver, ResolvedLocation
 from .keyword_and_language_resolver import KeywordLanguageResolver, ResolvedKeywordAndLanguage
-from .param_resolver import KeywordParamResolver, ParamDict
+from .param_resolver import ParamResolver, ParamDict
 from .follow_up_resolver import ResolvedSMSFollowUp, FollowUpResolver
 
 
@@ -45,7 +45,7 @@ class SMSResolver:
     
     _location_resolver = LocationResolver
     _keyword_lang_resolver = KeywordLanguageResolver
-    _param_resolver = KeywordParamResolver
+    _param_resolver = ParamResolver
     _follow_up_resolver = FollowUpResolver
 
     def __init__(self, msg:str):
@@ -126,7 +126,7 @@ class SMSResolver:
 
     def _resolve_params(self, sms_keyword_enum) -> ParamDict:
         try:
-            return KeywordParamResolver.resolve_params(
+            return ParamResolver.resolve_params(
                 msg=self.msg, 
                 sms_keyword_enum=sms_keyword_enum
             )

@@ -138,7 +138,7 @@ class IntegrationService:
 
         for record in data:
             record['last_fetched'] = time_fetched
-            unique_field = record[self.model_class.unique_key]
+            unique_field = record[self.model_class._unique_key]
             if unique_field in key_to_record_map:
                 # Check for changes and update if necessary
                 existing_record = key_to_record_map[unique_field]
@@ -171,10 +171,10 @@ class IntegrationService:
         Returns:
             A dictionary mapping unique key values to database records.
         """
-        unique_keys = [item[self.model_class.unique_key] for item in data]
-        filter_kwarg = {f"{self.model_class.unique_key}__in": unique_keys}
+        unique_keys = [item[self.model_class._unique_key] for item in data]
+        filter_kwarg = {f"{self.model_class._unique_key}__in": unique_keys}
         existing_records = self.model_class.objects.filter(**filter_kwarg)
-        key_to_record_map = {getattr(record, self.model_class.unique_key): record for record in existing_records}
+        key_to_record_map = {getattr(record, self.model_class._unique_key): record for record in existing_records}
         return key_to_record_map
 
 

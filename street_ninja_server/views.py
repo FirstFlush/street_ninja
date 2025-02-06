@@ -18,6 +18,11 @@ from resources.serializers import (
     PublicToiletSerializer
 )
 from integrations.integration_service import IntegrationService, IntegrationServiceParams
+from common.redis import ResourceCacheClient
+from common.redis.access_patterns import ShelterAccessPattern
+from resources.abstract_models import ResourceQuerySet
+
+
 
 from sms.resolvers import SMSResolver
 from common.enums import SMSKeywordEnum
@@ -29,11 +34,9 @@ class RedisTestView(APIView):
 
     def get(self, request:Request, *args, **kwargs):
 
-        from common.redis import RedisClient, ShelterAccessPattern
-        from resources.abstract_models import ResourceQuerySet
-
-        data:ResourceQuerySet = RedisClient.get_or_set_db(access_pattern=ShelterAccessPattern)
-
+        cache_client = ResourceCacheClient(access_pattern=ShelterAccessPattern)
+        data:ResourceQuerySet = cache_client.get_or_set_db()
+        print(data)
         return Response({"ok":"ok"})
 
 

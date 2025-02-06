@@ -4,7 +4,7 @@ from common.base_enum import StreetNinjaEnum
 class RedisStoreEnum(StreetNinjaEnum):
     DEFAULT = "default"
     SESSION = "session"
-    PHONE_SESSIONR = "phone_session"
+    PHONE_SESSION = "phone_session"
     RESOURCES = "resources"
     CELERY = "celery"
 
@@ -21,12 +21,21 @@ class ResourceKeyEnum(RedisKeyEnum):
     TOILET = "toilet:all"
     WIFI = "wifi:all"
 
+class PhoneSessionFieldsEnum(StreetNinjaEnum):
+
+    CONVERSATION = "conversation"
+    KEYWORD = "keyword"
+    ORDER = "order"
+    OFFSET = "offset"
+
 
 class RedisKeyTTL(StreetNinjaEnum):
-    """TTL for resource data in redis cache"""
-    SHELTER = 60                # 1 minute
-    FOOD = 3600                 # 1 hours
-    TOILET = 14400              # 4 hours
-    WATER = 14400               # 4 hours
-    WIFI = 3600                 # 1 hour
-    PHONE_SESSION_RESULTS = 900 # 15 minutes
+    """TTL for resource data in redis cache in seconds"""
+    MINUTE = 60   
+    MINUTES_FIFTEEN = 900 
+    MINUTES_THIRTY = 1800           
+    HOUR = 3600                 
+    HOURS_FOUR = 14400            
+
+    
+    

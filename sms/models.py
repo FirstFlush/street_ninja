@@ -52,7 +52,7 @@ class ConversationManager(models.Manager):
 
 class Conversation(models.Model):
     phone_number = models.ForeignKey(to=PhoneNumber, on_delete=models.CASCADE)
-    phone_session_key = models.CharField(unique=True)
+    # phone_session_key = models.CharField(unique=True)
     status = models.CharField(choices=ConversationStatus.choices)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
@@ -60,12 +60,12 @@ class Conversation(models.Model):
     objects:ConversationManager = ConversationManager()
 
     def __str__(self) -> str:
-        return self.phone_session_key
+        return f"{self.phone_number} {self.date_updated.strftime('%Y-%m-%d %H:%M:%S')}"
 
-    @staticmethod
-    def generate_phone_session_key() -> str:
-        """Generates a unique session key for a new conversation."""
-        return str(uuid.uuid4())
+    # @staticmethod
+    # def generate_phone_session_key() -> str:
+    #     """Generates a unique session key for a new conversation."""
+    #     return str(uuid.uuid4())
 
 
 class SMSInquiryManager(models.Manager):
@@ -107,7 +107,11 @@ class SMSInquiry(IncomingSMSMessageModel):
     @property
     def location_pretty(self) -> str:
         self.location:Point
-        return f"[{round(self.location.x, 5)}, {round(self.location.y, 5)}]"
+        return f"{round(self.location.x, 5)}, {round(self.location.y, 5)}"
+
+    @property
+    def params_pretty(self) -> str:
+        return ", ".join([f"{k}: {v}" for k, v in self.params.items()])
 
 
 class SMSFollowUpInquiryManager(models.Manager):
@@ -141,7 +145,7 @@ class UnresolvedSMSInquiryManager(models.Manager):
             conversation=conversation,
             message=message,
         )
-    
+
 
 class UnresolvedSMSInquiry(IncomingSMSMessageModel):
     conversation = models.ForeignKey(to=Conversation, on_delete=models.CASCADE)
@@ -149,9 +153,16 @@ class UnresolvedSMSInquiry(IncomingSMSMessageModel):
     date_created = models.DateTimeField(auto_now_add=True)
 
     objects:UnresolvedSMSInquiryManager = UnresolvedSMSInquiryManager()
+    keyword = None
 
     class Meta:
         verbose_name_plural = "Unresolved SMS Inquiries"
+
+    @property
+    def keyword_enum(self) -> None:
+        return None
+
+    
 
 
 class SMSMessageOverflow(models.Model):

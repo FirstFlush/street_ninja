@@ -15,8 +15,8 @@ from sms.models import (
 class SMSInquiryInline(admin.TabularInline):
     model = SMSInquiry
     extra = 0
-    readonly_fields = ("keyword", "location_text", "language", "message", "location_pretty", "date_created")
-    fields = ("keyword", "location_text", "location_pretty", "language", "date_created")
+    readonly_fields = ("keyword", "location_text", "language", "message", "params_pretty", "location_pretty", "date_created")
+    fields = ("keyword", "location_text", "location_pretty", "params_pretty", "language", "date_created")
 
 # 🔹 Inline for Follow-Up Inquiries
 class SMSFollowUpInline(admin.TabularInline):
@@ -55,8 +55,8 @@ class PhoneNumberAdmin(BaseGISAdmin):
 
 @admin.register(Conversation)
 class ConversationAdmin(BaseGISAdmin):
-    list_display = ("phone_number", "phone_session_key", "status", "date_created", "date_updated")
-    search_fields = ("phone_number__number", "phone_session_key")
+    list_display = ("phone_number", "status", "date_created", "date_updated")
+    search_fields = ("phone_number__number",)
     list_filter = ("status",)
     ordering = ("-date_updated",)
     inlines = [SMSInquiryInline, SMSFollowUpInline, UnresolvedSMSInline, SMSResponseInline]

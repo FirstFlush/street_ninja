@@ -24,7 +24,7 @@ class ParamDict:
         return { k.value: v for k, v in self.params.items()} if self.params else {}
 
 
-class KeywordParamResolver(BaseKeywordResolver):
+class ParamResolver(BaseKeywordResolver):
     
     MAPPING = {
         SMSKeywordEnum.SHELTER: {

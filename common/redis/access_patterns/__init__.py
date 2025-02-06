@@ -1,5 +1,5 @@
 # from phone_session import *
-from .base_access_patterns import AccessPatternDB, AccessPatternKV
+from .base_access_patterns import AccessPatternDB
 from .resources import (
     ShelterAccessPattern,
     FoodProgramAccessPattern,
@@ -7,4 +7,5 @@ from .resources import (
     DrinkingFountainAccessPattern,
     PublicWifiAccessPattern,
 )
+from .phone_session import PhoneSessionAccessPattern
 from .pattern_registry import AccessPatternRegistry

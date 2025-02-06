@@ -6,9 +6,12 @@ from sms.resolvers import (
     ResolvedSMSType,
 )
 from geo.geocoding import GeocodingService
-from sms.persistence_service import PersistenceService
-from sms.resolvers.exc import SMSResolutionError
-from sms.serializers import TwilioSMSSerializer
+from .abstract_models import IncomingSMSMessageModel
+from .follow_up_service import FollowUpProcessingService
+from .inquiry_service import InquiryProcessingService
+from .persistence_service import PersistenceService
+from .resolvers.exc import SMSResolutionError
+from .serializers import TwilioSMSSerializer
 
 
 logger = logging.getLogger(__name__)
@@ -27,21 +30,29 @@ class SMSService:
                 self.location = self._get_location()
             case _:
                 self.location = None
-        self.save_sms()
+        self.sms_instance = self._save_sms()
 
 
-
-    def save_sms(self):
+    def _save_sms(self) -> IncomingSMSMessageModel:
         persistence_service = self._build_persistence_service()
         persistence_service.save_sms()
+        return persistence_service.instance
 
-    def handle_inquiry(self):
+
+    def process_sms(self):
+        match self.sms_data.resolved_sms_type:
+            case ResolvedSMSType.INQUIRY:
+                self._process_inquiry()
+
+    def _process_inquiry(self):
+        processing_service = InquiryProcessingService.init(inquiry=self.sms_instance)
+
+
+    def _process_follow_up(self):
         ...
 
 
-
-
-    def handle_follow_up(self):
+    def _process_unresolved(self):
         ...
 
 

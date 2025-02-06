@@ -1,10 +1,13 @@
 from django.db import models
 from django.contrib.gis.db import models as gis_models
+from common.enums import SMSKeywordEnum
 from .enums import ShelterCategoryParamValue
 from .abstract_models import CityOfVancouverModel, WigleModel
 
 
 class Shelter(CityOfVancouverModel):
+
+    _keyword_enum = SMSKeywordEnum.SHELTER
 
     facility = models.CharField(max_length=256, unique=True)
     address = models.CharField(max_length=256)
@@ -23,6 +26,8 @@ class Shelter(CityOfVancouverModel):
 
 
 class FoodProgram(CityOfVancouverModel):
+
+    _keyword_enum = SMSKeywordEnum.FOOD
 
     program_name = models.CharField(max_length=256, unique=True)
     program_status = models.CharField(max_length=20)
@@ -57,6 +62,7 @@ class Toilet(CityOfVancouverModel):
         ('public', 'Public'),
         ('parks', 'Parks'),
     )
+    _keyword_enum = SMSKeywordEnum.TOILET
 
     name = models.CharField(max_length=256)
     address = models.CharField(max_length=256, null=True)
@@ -74,6 +80,9 @@ class Toilet(CityOfVancouverModel):
 
 
 class DrinkingFountain(CityOfVancouverModel):
+
+    _keyword_enum = SMSKeywordEnum.WATER
+
     name = models.CharField(max_length=256)
     location = gis_models.PointField(srid=4326)
     is_active = models.BooleanField(default=True)
@@ -83,8 +92,10 @@ class DrinkingFountain(CityOfVancouverModel):
     date_created = models.DateTimeField(auto_now_add=True)
 
 
-
 class PublicWifi(WigleModel):
+
+    _keyword_enum = SMSKeywordEnum.WIFI
+
     ssid = models.CharField(max_length=256)
     location = gis_models.PointField(srid=4326)
     is_active = models.BooleanField(default=True)

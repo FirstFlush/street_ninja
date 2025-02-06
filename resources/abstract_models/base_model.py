@@ -3,6 +3,7 @@ from typing import Any
 from django.contrib.gis.db import models as gis_models
 from django.contrib.gis.geos import Point
 from django.contrib.gis.db.models.functions import Distance
+from common.enums import SMSKeywordEnum
 
 
 logger = logging.getLogger(__name__)
@@ -30,11 +31,20 @@ class ResourceManager(gis_models.Manager):
 class ResourceModel(gis_models.Model):
 
     objects = ResourceManager.from_queryset(ResourceQuerySet)()
-    unique_key = "location"
-
+    _unique_key = "location"
+    _keyword_enum = None
 
     class Meta:
         abstract = True
+
+    @property
+    def keyword_enum(self) -> SMSKeywordEnum:
+        try:
+            return SMSKeywordEnum(self._keyword_enum)
+        except ValueError as e:
+            msg = f"Invalid _keyword_enum `{self._keyword_enum}` for resource model `{self.__class__.__name__}`"
+            logger.error(msg, exc_info=True)
+            raise
 
     @classmethod
     def get_location(cls, data:Any) -> Point:
@@ -61,9 +71,5 @@ class ResourceModel(gis_models.Model):
         database filter queries to ensure that any errors occur at the 
         application level, rather than causing database-level errors.
         """
-        if not hasattr(cls, cls.unique_key):
-            raise AttributeError(f"Model {cls.__name__} must define a valid unique_key.")
-
-
-    # def save(self, **kwargs):
-    #     super().save(**kwargs)
+        if not hasattr(cls, cls._unique_key):
+            raise AttributeError(f"Model {cls.__name__} must define a valid _unique_key.")
