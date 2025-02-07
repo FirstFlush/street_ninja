@@ -43,9 +43,14 @@ class SMSService:
         match self.sms_data.resolved_sms_type:
             case ResolvedSMSType.INQUIRY:
                 self._process_inquiry()
+            case ResolvedSMSType.FOLLOW_UP:
+                self._process_follow_up()
+            case ResolvedSMSType.UNRESOLVED:
+                self._process_unresolved()
+            
 
     def _process_inquiry(self):
-        processing_service = InquiryProcessingService.init(inquiry=self.sms_instance)
+        processing_service = InquiryProcessingService.process_inquiry(inquiry=self.sms_instance)
 
 
     def _process_follow_up(self):

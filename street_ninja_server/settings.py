@@ -59,9 +59,11 @@ GEOCODER_CONFIG = {
 }
 PRIMARY_GEOCODER = "Nominatim"  # Nominatim, OpenCage, positionstack
 
+
 # PHONE SESSION
 # =======================================
-PHONE_SESSION_LENGTH = config("PHONE_SESSION_LENGTH", cast=int)
+TTL_PHONE_SESSION = config("TTL_PHONE_SESSION", cast=int)
+
 
 # Routes
 # =======================================

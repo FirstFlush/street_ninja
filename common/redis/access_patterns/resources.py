@@ -54,7 +54,7 @@ class DrinkingFountainAccessPattern(AccessPatternDB):
 
     redis_key_enum = RedisStoreEnum.RESOURCES
     redis_key_enum = ResourceKeyEnum.WATER
-    key_tll__enum = RedisKeyTTL.HOURS_FOUR
+    key_ttl_enum = RedisKeyTTL.HOURS_FOUR
     query = DrinkingFountain.objects.filter
 
 
@@ -62,7 +62,7 @@ class ToiletAccessPattern(AccessPatternDB):
 
     redis_key_enum = RedisStoreEnum.RESOURCES
     redis_key_enum = ResourceKeyEnum.TOILET
-    key_tll__enum = RedisKeyTTL.HOURS_FOUR
+    key_ttl_enum = RedisKeyTTL.HOURS_FOUR
     query = Toilet.objects.filter
 
 
@@ -70,5 +70,5 @@ class PublicWifiAccessPattern(AccessPatternDB):
 
     redis_key_enum = RedisStoreEnum.RESOURCES
     redis_key_enum = ResourceKeyEnum.WIFI
-    key_tll__enum = RedisKeyTTL.HOUR
+    key_ttl_enum = RedisKeyTTL.HOUR
     query = PublicWifi.objects.filter

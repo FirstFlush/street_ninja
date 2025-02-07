@@ -1,6 +1,11 @@
+from dataclasses import asdict
+from datetime import datetime
+import json
 import logging
-from typing import Type
+from typing import Any, Type
+from sms.models import SMSInquiry, Conversation
 from .base_redis_client import BaseRedisClient
+from ..dataclasses import PhoneSessionData
 from ..enums import RedisStoreEnum
 from ..access_patterns import PhoneSessionAccessPattern
 
@@ -13,36 +18,60 @@ class PhoneSessionCacheClient(BaseRedisClient):
     redis_store_enum = RedisStoreEnum.PHONE_SESSION
 
     def __init__(
-            self, 
-            phone_number: str, 
-            access_pattern: Type[PhoneSessionAccessPattern] = Type[PhoneSessionAccessPattern]
+            self,
+            inquiry: SMSInquiry,
+            access_pattern: Type[PhoneSessionAccessPattern] = PhoneSessionAccessPattern
     ):
-        super().__init__(
-            phone_number=phone_number,
-            access_pattern=access_pattern,
-        )
-        self.phone_number = phone_number
-        self._validate_access_pattern_type(expected_type=PhoneSessionAccessPattern)
+        super().__init__(access_pattern=access_pattern)
+        self.inquiry = inquiry
+        # self._validate_access_pattern_type(expected_type=PhoneSessionAccessPattern)
         self.redis_store = self._redis_store()
         self.redis_key = self._get_redis_key()
-        self.access_pattern:PhoneSessionAccessPattern
-
+        self.access_pattern: Type[PhoneSessionAccessPattern]
 
     def _get_redis_key(self):
         try:
-            return self.access_pattern.redis_key_format.format(self.phone_number)
+            return f"{self.access_pattern.redis_key_format}{self.inquiry.conversation.id}"
         except AttributeError as e:
             logger.error(e, exc_info=True)
             raise
 
+    def get_session(self) -> PhoneSessionData:
+        cached_data = self._get_cached_data(redis_key=self.redis_key)
+        if cached_data is None:
+            logger.warning(f"phone session not found for conversation id `{self.inquiry.conversation.id}`")
+            phone_session = self._set_session()
+        else:
+            phone_session = self._build_session_data(cached_data)
+            logger.info(f"phone session retrieved for conversation id `{self.inquiry.conversation.id}`")
+        return phone_session
 
-    def get_session(self) -> dict:
-        phone_session_data = self._get_cached_data(redis_key=self.redis_key)
-        if not isinstance(phone_session_data, dict):
-            msg = f"Wrong type `{type(phone_session_data)}` for cached_data: {phone_session_data} using redis key: `{self.redis_key}`"
-            logger.error(msg)
-            raise TypeError(msg)
-        return phone_session_data
+    def _build_session_data(self, cached_data: dict[str, Any]) -> PhoneSessionData:
+        cached_data["last_updated"] = datetime.fromisoformat(cached_data["last_updated"])
+        return PhoneSessionData(**cached_data)
+
+    def _default_session_data(self) -> PhoneSessionData:
+        return PhoneSessionData(
+            last_updated=self.inquiry.conversation.last_updated,
+            keyword=self.inquiry.keyword,
+            order=None,
+            offset=0,
+        )
+
+    def _set_session(self) -> PhoneSessionData:
+        session_data = self._default_session_data()
+        session_dict = asdict(session_data)
+        session_dict["last_updated"] = session_data.last_updated.isoformat()
+        try:
+            value = json.dumps(session_dict)
+            self.redis_store.set(key=self.redis_key, value=value, timeout=self.access_pattern.key_ttl_enum.value)
+            logger.info(f"phone session set for {self.redis_key}")
+        except Exception as e:
+            logger.error(f"Failed to set session in Redis for key `{self.redis_key}`: {e}", exc_info=True)
+            raise 
+
+        return session_data
+    
 
     # @classmethod
     # def get_or_set_phone_session(

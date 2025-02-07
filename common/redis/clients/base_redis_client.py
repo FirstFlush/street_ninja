@@ -9,6 +9,7 @@ from ..exc import RedisClientException, InvalidAccessPattern
 from ..access_patterns import *
 from ..access_patterns.base_access_patterns import BaseRedisAccessPattern
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -53,8 +54,8 @@ class BaseRedisClient(ABC):
                 logger.debug(f"Cache hit for key: {redis_key}")
                 return json.loads(cached_data) if isinstance(cached_data, str) else cached_data
         except Exception as e:
-            logger.error(f"Error fetching key `{redis_key}` from Redis: {e}", exc_info=True)
             if raise_error:
+                logger.error(f"Error fetching key `{redis_key}` from Redis: {e}", exc_info=True)
                 raise
         return None
 

@@ -21,12 +21,13 @@ class ResourceKeyEnum(RedisKeyEnum):
     TOILET = "toilet:all"
     WIFI = "wifi:all"
 
+
 class PhoneSessionFieldsEnum(StreetNinjaEnum):
 
-    CONVERSATION = "conversation"
     KEYWORD = "keyword"
     ORDER = "order"
     OFFSET = "offset"
+    LAST_UPDATED = "last_updated"
 
 
 class RedisKeyTTL(StreetNinjaEnum):

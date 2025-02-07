@@ -4,7 +4,6 @@ from common.enums import HttpMethodEnum
 from integrations.clients import VancouverAPIClient, WigleAPIClient
 from integrations.clients.enums import VancouverEndpointsEnum
 from django.conf import settings 
-import json
 from resources.models import (
     Shelter, 
     FoodProgram, 
@@ -17,13 +16,11 @@ from resources.serializers import (
     DrinkingFountainSerializer,
     PublicToiletSerializer
 )
+from sms.models import Conversation, PhoneNumber, SMSInquiry
 from integrations.integration_service import IntegrationService, IntegrationServiceParams
-from common.redis import ResourceCacheClient
+from common.redis.clients import ResourceCacheClient, PhoneSessionCacheClient
 from common.redis.access_patterns import ShelterAccessPattern
 from resources.abstract_models import ResourceQuerySet
-
-
-
 from sms.resolvers import SMSResolver
 from common.enums import SMSKeywordEnum
 
@@ -34,9 +31,18 @@ class RedisTestView(APIView):
 
     def get(self, request:Request, *args, **kwargs):
 
-        cache_client = ResourceCacheClient(access_pattern=ShelterAccessPattern)
-        data:ResourceQuerySet = cache_client.get_or_set_db()
-        print(data)
+        # cache_client = ResourceCacheClient(access_pattern=ShelterAccessPattern)
+        # phone_number = PhoneNumber.objects.get(number="+16043451792")
+        # conversation = Conversation.objects.filter(phone_number=phone_number).last()
+        inquiry = SMSInquiry.objects.last()
+        cache_client = PhoneSessionCacheClient(inquiry)
+        session = cache_client.get_session()
+        print()
+        print(session)
+        print()
+
+        # data:ResourceQuerySet = cache_client.get_or_set_db()
+        # print(data)
         return Response({"ok":"ok"})
 
 

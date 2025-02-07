@@ -1,6 +1,7 @@
 import logging
 import pickle
 from typing import Any, Type
+from resources.abstract_models import ResourceQuerySet
 from .base_redis_client import BaseRedisClient
 from ..enums import RedisStoreEnum
 from ..access_patterns import AccessPatternDB
@@ -39,7 +40,7 @@ class ResourceCacheClient(BaseRedisClient):
 
 
 
-    def get_or_set_db(self, query_params: dict = None) -> Any:
+    def get_or_set_db(self, query_params: dict = None) -> ResourceQuerySet:
         """
         Fetch data from Redis if available; otherwise, query the database and cache the result.
 

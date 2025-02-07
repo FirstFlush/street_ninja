@@ -22,14 +22,14 @@ class SMSInquiryInline(admin.TabularInline):
 class SMSFollowUpInline(admin.TabularInline):
     model = SMSFollowUpInquiry
     extra = 0
-    readonly_fields = ("keyword", "message", "date_created")
+    readonly_fields = ("id", "keyword", "message", "date_created")
 
 
 # 🔹 Inline for Unresolved SMS Inquiries
 class UnresolvedSMSInline(admin.TabularInline):
     model = UnresolvedSMSInquiry
     extra = 0
-    readonly_fields = ("message", "date_created")
+    readonly_fields = ("id", "message", "date_created")
 
 
 # 🔹 Inline for SMS Responses
@@ -55,10 +55,10 @@ class PhoneNumberAdmin(BaseGISAdmin):
 
 @admin.register(Conversation)
 class ConversationAdmin(BaseGISAdmin):
-    list_display = ("phone_number", "status", "date_created", "date_updated")
+    list_display = ("phone_number", "status", "date_created", "last_updated")
     search_fields = ("phone_number__number",)
     list_filter = ("status",)
-    ordering = ("-date_updated",)
+    ordering = ("-last_updated",)
     inlines = [SMSInquiryInline, SMSFollowUpInline, UnresolvedSMSInline, SMSResponseInline]
 
 

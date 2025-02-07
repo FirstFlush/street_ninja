@@ -30,11 +30,11 @@ class ConversationManager(models.Manager):
     def get_or_create_conversation(self, phone_number: str) -> "Conversation":
         """Retrieves an active conversation or creates a new one if none exist."""
         now = datetime.now(tz=timezone.utc)
-        session_expiry = now - timedelta(minutes=settings.PHONE_SESSION_LENGTH)
+        session_expiry = now - timedelta(minutes=settings.TTL_PHONE_SESSION)
         phone, _ = PhoneNumber.objects.get_or_create(number=phone_number, defaults={"last_active": now})
         conversation = self.filter(
             phone_number=phone, 
-            date_updated__gte=session_expiry
+            last_updated__gte=session_expiry
         ).prefetch_related(
             "smsinquiry_set", "smsfollowupinquiry_set", "unresolvedsmsinquiry_set", "smsresponse_set"
         ).first()
@@ -44,9 +44,9 @@ class ConversationManager(models.Manager):
 
         return self.create(
             phone_number=phone,
-            phone_session_key=Conversation.generate_phone_session_key(),
+            # phone_session_key=Conversation.generate_phone_session_key(),
             date_created=now,
-            date_updated=now,
+            last_updated=now,
         )
 
 
@@ -55,12 +55,12 @@ class Conversation(models.Model):
     # phone_session_key = models.CharField(unique=True)
     status = models.CharField(choices=ConversationStatus.choices)
     date_created = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now=True)
+    last_updated = models.DateTimeField(auto_now=True)
 
     objects:ConversationManager = ConversationManager()
 
     def __str__(self) -> str:
-        return f"{self.phone_number} {self.date_updated.strftime('%Y-%m-%d %H:%M:%S')}"
+        return f"{self.phone_number} {self.last_updated.strftime('%Y-%m-%d %H:%M:%S')}"
 
     # @staticmethod
     # def generate_phone_session_key() -> str:

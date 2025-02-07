@@ -28,6 +28,7 @@ class SMSWebhookView(APIView):
                 phone_number=deserializer.validated_data["From"],
                 message_sid=deserializer.validated_data["MessageSid"],
             )
+            sms_service.process_sms()
         else:
             logger.error(f"Failed to deserialize: {deserializer.errors}")
             return Response("Could not parse message", status=status.HTTP_400_BAD_REQUEST)
