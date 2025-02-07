@@ -63,3 +63,10 @@ class HttpMethodEnum(StreetNinjaEnum):
     HEAD = "HEAD"
     OPTIONS = "OPTIONS"
     TRACE = "TRACE"
+
+class TTLSecondsEnum(StreetNinjaEnum):
+    MINUTE = 60   
+    MINUTES_FIFTEEN = 900 
+    MINUTES_THIRTY = 1800           
+    HOUR = 3600                 
+    HOURS_FOUR = 14400            

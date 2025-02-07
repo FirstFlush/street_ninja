@@ -9,7 +9,7 @@ class PhoneSessionData:
     """Ensures phone session data is always structured correctly."""
 
     last_updated: datetime
-    keyword: Optional[str] = None
+    keyword: str
     order: Optional[List[int]] = None
     offset: Optional[int] = 0
 

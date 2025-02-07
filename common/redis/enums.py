@@ -32,11 +32,9 @@ class PhoneSessionFieldsEnum(StreetNinjaEnum):
 
 class RedisKeyTTL(StreetNinjaEnum):
     """TTL for resource data in redis cache in seconds"""
+    # TWENTY_SECONDS = 20 # for testing
     MINUTE = 60   
     MINUTES_FIFTEEN = 900 
     MINUTES_THIRTY = 1800           
     HOUR = 3600                 
     HOURS_FOUR = 14400            
-
-    
-    

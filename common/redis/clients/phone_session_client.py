@@ -36,42 +36,39 @@ class PhoneSessionCacheClient(BaseRedisClient):
             logger.error(e, exc_info=True)
             raise
 
-    def get_session(self) -> PhoneSessionData:
-        cached_data = self._get_cached_data(redis_key=self.redis_key)
-        if cached_data is None:
-            logger.warning(f"phone session not found for conversation id `{self.inquiry.conversation.id}`")
-            phone_session = self._set_session()
-        else:
+    def get_session(self) -> PhoneSessionData | None:
+        print('redis store: ', self.redis_store_enum)
+        print('redis key: ', self.redis_key)
+        cached_data = self._get_cached_data(redis_key=self.redis_key, raise_error=True)
+        print("cahced_data: ", cached_data)
+        if cached_data is not None:
             phone_session = self._build_session_data(cached_data)
             logger.info(f"phone session retrieved for conversation id `{self.inquiry.conversation.id}`")
-        return phone_session
+            
+            return phone_session
+        logger.warning(f"phone session not found for conversation id `{self.inquiry.conversation.id}`")
+        return None
 
     def _build_session_data(self, cached_data: dict[str, Any]) -> PhoneSessionData:
         cached_data["last_updated"] = datetime.fromisoformat(cached_data["last_updated"])
         return PhoneSessionData(**cached_data)
 
-    def _default_session_data(self) -> PhoneSessionData:
-        return PhoneSessionData(
-            last_updated=self.inquiry.conversation.last_updated,
-            keyword=self.inquiry.keyword,
-            order=None,
-            offset=0,
-        )
-
-    def _set_session(self) -> PhoneSessionData:
-        session_data = self._default_session_data()
+    def set_session(self, session_data: PhoneSessionData) -> PhoneSessionData:
         session_dict = asdict(session_data)
         session_dict["last_updated"] = session_data.last_updated.isoformat()
         try:
             value = json.dumps(session_dict)
             self.redis_store.set(key=self.redis_key, value=value, timeout=self.access_pattern.key_ttl_enum.value)
-            logger.info(f"phone session set for {self.redis_key}")
+            logger.info(f"phone session set for Redis key `{self.redis_key}`")
         except Exception as e:
-            logger.error(f"Failed to set session in Redis for key `{self.redis_key}`: {e}", exc_info=True)
+            logger.error(f"Failed to set session for Redis key `{self.redis_key}`: {e}", exc_info=True)
             raise 
 
         return session_data
     
+
+
+
 
     # @classmethod
     # def get_or_set_phone_session(

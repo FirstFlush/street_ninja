@@ -17,8 +17,8 @@ class BaseRedisClient(ABC):
 
     def __init__(self, access_pattern:BaseRedisAccessPattern):
         self.access_pattern = access_pattern
-        self.redis_store_enum: None | RedisStoreEnum = None
-        self.redis_store: None | BaseCache = None
+        self.redis_store_enum = self.access_pattern.redis_store_enum
+        self.redis_store = self._redis_store()
         # self.redis_store = self._redis_store()
 
 
@@ -33,7 +33,7 @@ class BaseRedisClient(ABC):
             raise RedisClientException(f"Invalid Redis store: `{self.redis_store_enum}`") from e
 
 
-    def _get_cached_data(self, redis_key: RedisKeyEnum, raise_error: bool= False) -> Any | None:
+    def _get_cached_data(self, redis_key: RedisKeyEnum | str, raise_error: bool= False) -> Any | None:
         """
         Retrieve cached data from Redis.
 
@@ -48,8 +48,11 @@ class BaseRedisClient(ABC):
             - Cache hit or miss.
             - Errors when fetching data from Redis.
         """
+        if isinstance(redis_key, RedisKeyEnum):
+            redis_key = redis_key.value
+
         try:
-            cached_data = self.redis_store.get(redis_key.value)
+            cached_data = self.redis_store.get(redis_key)
             if cached_data:
                 logger.debug(f"Cache hit for key: {redis_key}")
                 return json.loads(cached_data) if isinstance(cached_data, str) else cached_data

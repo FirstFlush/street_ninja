@@ -30,7 +30,7 @@ class ConversationManager(models.Manager):
     def get_or_create_conversation(self, phone_number: str) -> "Conversation":
         """Retrieves an active conversation or creates a new one if none exist."""
         now = datetime.now(tz=timezone.utc)
-        session_expiry = now - timedelta(minutes=settings.TTL_PHONE_SESSION)
+        session_expiry = now - timedelta(seconds=settings.TTL_PHONE_SESSION)
         phone, _ = PhoneNumber.objects.get_or_create(number=phone_number, defaults={"last_active": now})
         conversation = self.filter(
             phone_number=phone, 
