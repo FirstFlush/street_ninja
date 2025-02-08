@@ -36,6 +36,11 @@ VANCOUVER_OPEN_DATA_API_KEY = config('VANCOUVER_OPEN_DATA_API_KEY')
 WIGLE_API_KEY = config('WIGLE_API_KEY')
 
 
+# SMS
+# =======================================
+SMS_CHAR_LIMIT = config('SMS_CHAR_LIMIT')
+
+
 # CORS 
 # =======================================
 # CORS_ALLOWED_ORIGINS = [
@@ -63,6 +68,11 @@ PRIMARY_GEOCODER = "Nominatim"  # Nominatim, OpenCage, positionstack
 # PHONE SESSION
 # =======================================
 TTL_PHONE_SESSION = config("TTL_PHONE_SESSION", cast=int)
+SHELTER_OFFSET = config("SHELTER_OFFSET", cast=int)
+FOOD_OFFSET = config("FOOD_OFFSET", cast=int)
+WATER_OFFSET = config("WATER_OFFSET", cast=int)
+TOILET_OFFSET = config("TOILET_OFFSET", cast=int)
+WIFI_OFFSET = config("WIFI_OFFSET", cast=int)
 
 
 # Routes
@@ -90,6 +100,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'corsheaders',
+    'cache',
     'common',
     'geo',
     'integrations',

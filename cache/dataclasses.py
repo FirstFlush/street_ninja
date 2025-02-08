@@ -10,8 +10,8 @@ class PhoneSessionData:
 
     last_updated: datetime
     keyword: str
-    order: Optional[List[int]] = None
-    offset: Optional[int] = 0
+    batch_ids: List[int]
+    offset: int
 
     def __post_init__(self):
         """Validate that keyword is a valid SMSKeywordEnum value (or None)."""

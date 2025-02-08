@@ -7,8 +7,9 @@ from sms.resolvers import (
 )
 from geo.geocoding import GeocodingService
 from .abstract_models import IncomingSMSMessageModel
-from .follow_up_service import FollowUpProcessingService
-from .inquiry_service import InquiryProcessingService
+# from cache import InquiryCachingService, FollowUpCachingService
+from cache.follow_up_service import FollowUpCachingService
+from cache.inquiry_service import InquiryCachingService
 from .persistence_service import PersistenceService
 from .resolvers.exc import SMSResolutionError
 from .serializers import TwilioSMSSerializer
@@ -50,7 +51,9 @@ class SMSService:
             
 
     def _process_inquiry(self):
-        processing_service = InquiryProcessingService.process_inquiry(inquiry=self.sms_instance)
+
+        
+        processing_service = InquiryCachingService.process_inquiry(inquiry=self.sms_instance)
 
 
     def _process_follow_up(self):
