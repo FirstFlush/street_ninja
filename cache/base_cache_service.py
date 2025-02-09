@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 import logging
 from abc import ABC, abstractmethod
 from django.conf import settings
@@ -29,19 +29,24 @@ class BaseCacheService(ABC):
             access_pattern=self.session_access_pattern,
         )
 
-    def _create_phone_session_data(
-            self, 
-            batch_ids: list[int],
-            last_updated: datetime, 
-            offset: int, 
-    ) -> PhoneSessionData:
-        """Creates the default data for phone session"""
-        return PhoneSessionData(
-            keyword=self.inquiry.keyword,
-            batch_ids=batch_ids,
-            offset=offset,
-            last_updated=last_updated,
-        )
+    # def _create_phone_session_data(
+    #         self, 
+    #         ids: list[int],
+    #         last_updated: datetime, 
+    #         offset: int, 
+    # ) -> PhoneSessionData:
+    #     """Creates the default data for phone session"""
+    #     return PhoneSessionData(
+    #         keyword=self.inquiry.keyword,
+    #         ids=ids,
+    #         offset=offset,
+    #         last_updated=last_updated,
+        # )
+
+    @staticmethod
+    def _now() -> datetime:
+        return datetime.now(tz=timezone.utc)
+
 
     def _get_redis_key(self) -> str:
         try:
@@ -54,12 +59,9 @@ class BaseCacheService(ABC):
         inquiry_params = self.inquiry.params or {}
         return self.resource_cache_client.get_or_set_db(query_params=inquiry_params).closest_to(self.inquiry.location)
 
-    def get_ids_by_proximity(self, qs:ResourceQuerySet) -> list[int]:
-        return [instance.id for instance in qs]
-
     def get_phone_session(self) -> PhoneSessionData | None:
         return self.session_cache_client.get_session()
 
-    def set_phone_session(self, session_data: PhoneSessionData) -> PhoneSessionData:
+    def _set_phone_session(self, session_data: PhoneSessionData) -> PhoneSessionData:
         """Returns session_data just to be consistent with get_phone_session() flow."""
         return self.session_cache_client.set_session(session_data=session_data)

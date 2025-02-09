@@ -1,7 +1,7 @@
 import logging
 from sms.enums import SMSKeywordEnum
 from resources.abstract_models import ResourceQuerySet, ResourceModel
-from .respones_templates.resources import (
+from .respones_templates.resource_templates import (
     ShelterResponseTemplate,
     FoodResponseTemplate,
 )

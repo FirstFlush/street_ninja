@@ -38,7 +38,7 @@ WIGLE_API_KEY = config('WIGLE_API_KEY')
 
 # SMS
 # =======================================
-SMS_CHAR_LIMIT = config('SMS_CHAR_LIMIT')
+SMS_CHAR_LIMIT = config('SMS_CHAR_LIMIT', cast=int)
 
 
 # CORS 

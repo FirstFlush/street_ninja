@@ -55,7 +55,7 @@ class PhoneNumberAdmin(BaseGISAdmin):
 
 @admin.register(Conversation)
 class ConversationAdmin(BaseGISAdmin):
-    list_display = ("phone_number", "status", "date_created", "last_updated")
+    list_display = ("id", "phone_number", "status", "date_created", "last_updated")
     search_fields = ("phone_number__number",)
     list_filter = ("status",)
     ordering = ("-last_updated",)
