@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Optional, List
-from common.enums import SMSKeywordEnum
+from sms.enums import SMSKeywordEnum
 
 
 @dataclass
@@ -10,8 +10,8 @@ class PhoneSessionData:
 
     last_updated: datetime
     keyword: str
-    order: Optional[List[int]] = None
-    offset: Optional[int] = 0
+    batch_ids: List[int]
+    offset: int
 
     def __post_init__(self):
         """Validate that keyword is a valid SMSKeywordEnum value (or None)."""

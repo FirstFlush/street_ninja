@@ -1,9 +1,9 @@
 import logging
 from django.contrib.gis.geos import Point
 from collections import defaultdict
+from sms.enums import SMSKeywordEnum
 from .abstract_models import ResourceModel
 from .dataclasses import MapData, MapPoint
-from common.enums import SMSKeywordEnum
 from .models import Shelter, FoodProgram, DrinkingFountain, Toilet, PublicWifi
 
 

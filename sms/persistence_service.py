@@ -4,7 +4,7 @@ from django.db import transaction
 from sms.abstract_models import IncomingSMSMessageModel
 from sms.models import SMSInquiry, SMSFollowUpInquiry, UnresolvedSMSInquiry, Conversation
 from sms.resolvers import ResolvedSMS
-from sms.resolvers.enums import ResolvedSMSType
+from sms.enums import ResolvedSMSType
 
 
 logger = logging.getLogger(__name__)

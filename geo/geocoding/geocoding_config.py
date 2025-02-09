@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import logging
 from typing import Any
-from common.enums import GeocoderEnum
+from .enums import GeocoderEnum
 
 
 logger = logging.getLogger(__name__)

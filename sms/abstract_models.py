@@ -1,7 +1,6 @@
 import logging
 from django.db import models
-from common.enums import SMSKeywordEnum
-
+from sms.enums import SMSKeywordEnum, ResolvedSMSType
 
 logger = logging.getLogger(__name__)
 
@@ -17,16 +16,20 @@ class IncomingSMSMessageModel(BaseSMSMessageModel):
     class Meta:
         abstract = True
 
+
     @property
-    def keyword_enum(self) -> SMSKeywordEnum:
-        try:
-            return SMSKeywordEnum(self.keyword)
-        except ValueError as e:
-            msg = f"Invalid self.keyword `{self.keyword}` for sms model `{self.__class__.__name__}`"
-            logger.error(msg, exc_info=True)
-            raise            
-
-
+    def sms_type(self) -> ResolvedSMSType:
+        match self._meta.model_name:
+            case "smsinquiry":
+                return ResolvedSMSType.INQUIRY
+            case "smsfollowupinquiry":
+                return ResolvedSMSType.FOLLOW_UP
+            case "unresolvedsmsinquiry":
+                return ResolvedSMSType.UNRESOLVED
+            case _:
+                msg = f"Unknown SMS type for record `{self.id}` in model `{self.__class__.__name__}`"
+                logger.error(msg)
+                raise TypeError(msg)
 
     def __str__(self) -> str:
-       return self.message if len(self.message) <= 256 else f"{self.message}..." 
+       return self.message if len(self.message) <= 256 else f"{self.message[:253]}..." 

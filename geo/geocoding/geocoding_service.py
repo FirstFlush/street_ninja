@@ -3,7 +3,7 @@ from typing import Type
 
 from django.conf import settings
 from django.contrib.gis.geos import Point
-from common.enums import GeocoderEnum
+from .enums import GeocoderEnum
 from .geocoders import *
 from .geocoding_config import GeocoderConfig, GeocoderConfigData
 from geo.geocoding.exc import AllGeocodersFailed

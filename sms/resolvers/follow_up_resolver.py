@@ -3,7 +3,7 @@ import logging
 from typing import Any, Optional
 from .base_resolver import BaseKeywordResolver
 from .exc import FollowUpSMSResolutionError
-from .enums import ResolvedSMSType
+from ..enums import ResolvedSMSType
 from ..enums import SMSFollowUpKeywordEnum
 
 

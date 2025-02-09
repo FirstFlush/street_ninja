@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 import logging
-from common.enums import SMSKeywordEnum, LanguageEnum
+from common.enums import LanguageEnum
+from sms.enums import SMSKeywordEnum
 from .exc import KeywordResolverError
 from .base_resolver import BaseKeywordResolver
 

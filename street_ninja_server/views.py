@@ -18,11 +18,11 @@ from resources.serializers import (
 )
 from sms.models import Conversation, PhoneNumber, SMSInquiry
 from integrations.integration_service import IntegrationService, IntegrationServiceParams
-from common.redis.clients import ResourceCacheClient, PhoneSessionCacheClient
-from common.redis.access_patterns import ShelterAccessPattern
+from cache.redis.clients import ResourceCacheClient, PhoneSessionCacheClient
+from cache.redis.access_patterns import ShelterAccessPattern
 from resources.abstract_models import ResourceQuerySet
 from sms.resolvers import SMSResolver
-from common.enums import SMSKeywordEnum
+from sms.enums import SMSKeywordEnum
 
 logger = logging.getLogger(__name__)
 

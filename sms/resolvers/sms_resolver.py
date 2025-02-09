@@ -1,7 +1,7 @@
 import logging
 from typing import Any, Optional
 from dataclasses import dataclass
-from .enums import ResolvedSMSType
+from ..enums import ResolvedSMSType
 from .exc import (
     KeywordResolverError, 
     LocationResolutionError, 

@@ -3,7 +3,7 @@ from typing import Any
 from django.contrib.gis.db import models as gis_models
 from django.contrib.gis.geos import Point
 from django.contrib.gis.db.models.functions import Distance
-from common.enums import SMSKeywordEnum
+from sms.enums import SMSKeywordEnum
 
 
 logger = logging.getLogger(__name__)

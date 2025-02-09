@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 import logging
 from typing import Any
-from common.enums import SMSKeywordEnum, LanguageEnum, StreetNinjaEnum
+from common.base_enum import StreetNinjaEnum
+from sms.enums import SMSKeywordEnum
 from resources.enums import (
     ParamKeyEnum,
     ParamValueEnum,

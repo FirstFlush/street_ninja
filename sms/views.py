@@ -23,12 +23,11 @@ class SMSWebhookView(APIView):
 
         deserializer = TwilioSMSSerializer(data=request.data)
         if deserializer.is_valid():
-            sms_service = SMSService(
+            SMSService.process_sms(
                 msg=deserializer.validated_data["Body"],
                 phone_number=deserializer.validated_data["From"],
                 message_sid=deserializer.validated_data["MessageSid"],
             )
-            sms_service.process_sms()
         else:
             logger.error(f"Failed to deserialize: {deserializer.errors}")
             return Response("Could not parse message", status=status.HTTP_400_BAD_REQUEST)

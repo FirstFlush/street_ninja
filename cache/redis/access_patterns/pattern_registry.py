@@ -1,5 +1,5 @@
 import logging
-from common.enums import SMSKeywordEnum
+from sms.enums import SMSKeywordEnum
 from .base_access_patterns import AccessPatternDB
 from .resources import (
     ShelterAccessPattern,
@@ -23,7 +23,7 @@ class AccessPatternRegistry:
     }
 
     @classmethod
-    def get_resource(cls, sms_keyword_enum: SMSKeywordEnum)-> AccessPatternDB:
+    def get_pattern(cls, sms_keyword_enum: SMSKeywordEnum)-> AccessPatternDB:
         """Retrieves the correct access pattern for the given resource type."""
         try:
             return cls._resource_patterns[sms_keyword_enum]

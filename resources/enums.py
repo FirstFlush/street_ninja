@@ -8,8 +8,12 @@ class ParamEnum(StreetNinjaEnum):
 
 class ParamKeyEnum(ParamEnum):
     """Defines the keys used for filtering."""
-    pass
 
+    @classmethod
+    def values_response(cls, *exclude: str) -> list[str]:
+        """This method is to help format sms responses"""
+        return [value for value in cls.values if value not in exclude]
+        
 
 class ParamValueEnum(ParamEnum):
     """Defines the possible values for filtering parameters."""

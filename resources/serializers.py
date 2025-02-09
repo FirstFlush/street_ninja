@@ -1,9 +1,7 @@
 from dataclasses import asdict
-from typing import Any
 from rest_framework import serializers
-from common.enums import SMSKeywordEnum
+from sms.enums import SMSKeywordEnum
 from common.serializer_fields import YesNoBooleanField
-from geo.geocoding import GeocodingService
 from .dataclasses import MapPoint, MapData
 
 

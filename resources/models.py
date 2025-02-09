@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.gis.db import models as gis_models
-from common.enums import SMSKeywordEnum
+from sms.enums import SMSKeywordEnum
 from .enums import ShelterCategoryParamValue
 from .abstract_models import CityOfVancouverModel, WigleModel
 

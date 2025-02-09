@@ -1,18 +1,19 @@
 from datetime import datetime, timedelta, timezone
-import uuid
+import logging
 from django.conf import settings
 from django.db import models
 from django.contrib.gis.db import models as gis_models
 from django.contrib.gis.geos import Point
 from common.enums import (
-    SMSKeywordEnum, 
     LanguageEnum, 
-    InquiryStatusEnum, 
-    LocationType
+    LocationType,
 )
-from sms.enums import ConversationStatus, SMSFollowUpKeywordEnum
+from sms.enums import ConversationStatus, SMSFollowUpKeywordEnum, SMSKeywordEnum
 from sms.resolvers import ResolvedSMSFollowUp, ResolvedSMSInquiry
 from .abstract_models import IncomingSMSMessageModel, BaseSMSMessageModel
+
+
+logger = logging.getLogger(__name__)
 
 
 class PhoneNumber(models.Model):
@@ -105,6 +106,15 @@ class SMSInquiry(IncomingSMSMessageModel):
         verbose_name_plural = "Inquiries"
 
     @property
+    def keyword_enum(self) -> SMSKeywordEnum:
+        try:
+            return SMSKeywordEnum(self.keyword)
+        except ValueError as e:
+            msg = f"Invalid self.keyword `{self.keyword}` for record `{self.id}` in model `{self.__class__.__name__}`"
+            logger.error(msg, exc_info=True)
+            raise            
+
+    @property
     def location_pretty(self) -> str:
         self.location:Point
         return f"{round(self.location.x, 5)}, {round(self.location.y, 5)}"
@@ -137,6 +147,15 @@ class SMSFollowUpInquiry(IncomingSMSMessageModel):
     class Meta:
         verbose_name_plural = "Follow-up inquiries"
 
+    @property
+    def keyword_enum(self) -> SMSFollowUpKeywordEnum:
+        try:
+            return SMSFollowUpKeywordEnum(self.keyword)
+        except ValueError as e:
+            msg = f"Invalid self.keyword `{self.keyword}` for record `{self.id}` in model `{self.__class__.__name__}`"
+            logger.error(msg, exc_info=True)
+            raise         
+
 
 class UnresolvedSMSInquiryManager(models.Manager):
 
@@ -162,7 +181,7 @@ class UnresolvedSMSInquiry(IncomingSMSMessageModel):
     def keyword_enum(self) -> None:
         return None
 
-    
+
 
 
 class SMSMessageOverflow(models.Model):

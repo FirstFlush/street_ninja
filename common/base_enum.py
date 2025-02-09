@@ -7,7 +7,6 @@ class StreetNinjaEnumMeta(EnumMeta):
     @property
     def choices(cls) -> list[tuple[Any, str]]:
         """Returns a list of tuples that can be used in models.CharField's choices property.
-
         Example:
             [
                 ("red", "Red"),
