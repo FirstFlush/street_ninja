@@ -19,7 +19,6 @@ class PhoneSessionCacheClient(BaseRedisClient):
 
     def __init__(
             self,
-            # inquiry: SMSInquiry,
             redis_key: str,
             access_pattern: Type[PhoneSessionAccessPattern] = PhoneSessionAccessPattern
     ):
@@ -27,7 +26,6 @@ class PhoneSessionCacheClient(BaseRedisClient):
         self.redis_key = redis_key
         self.redis_store = self._redis_store()
         self.access_pattern: Type[PhoneSessionAccessPattern]
-
 
     def get_session(self) -> PhoneSessionData | None:
         cached_data = self._get_cached_data(redis_key=self.redis_key, raise_error=True)
@@ -42,7 +40,6 @@ class PhoneSessionCacheClient(BaseRedisClient):
     def _build_phone_session_from_cache(self, cached_data: dict[str, Any]) -> PhoneSessionData:
         cached_data["last_updated"] = datetime.fromisoformat(cached_data["last_updated"])
         return PhoneSessionData(**cached_data)
-
 
     def set_session(self, session_data: PhoneSessionData) -> PhoneSessionData:
         session_dict = asdict(session_data)
@@ -61,54 +58,3 @@ class PhoneSessionCacheClient(BaseRedisClient):
 
         return session_data
     
-
-
-
-
-    # @classmethod
-    # def get_or_set_phone_session(
-    #         cls, 
-    #         phone_number:str, 
-    #         access_pattern:PhoneSessionAccessPattern=PhoneSessionAccessPattern,
-    # ) -> Any:
-
-    #     # redis_store = cls._redis_store(access_pattern.redis_store_enum)
-    #     redis_key = cls._get_redis_key(
-    #         phone_number=phone_number, 
-    #         access_pattern=access_pattern
-    #     )
-    #     cached_data = cls._get_cached_data(redis_store=redis_store, redis_key=redis_key)
-    #     if not isinstance(cached_data, dict):
-    #         msg = f"Wrong type `{type(cached_data)}` for cached_data: {cached_data} using redis key: `{redis_key}`"
-    #         logger.error(msg)
-    #         raise TypeError(msg)
-
-
-        # if cached_data is not None:
-        #     return cached_data
-
-        # # If value is provided, set it in Redis
-        # if access_pattern.value is not None:
-        #     try:
-        #         serialized_value = (
-        #             json.dumps(access_pattern.value)
-        #             if isinstance(access_pattern.value, (dict, list))
-        #             else access_pattern.value
-        #         )
-        #         redis_store.set(
-        #             key=access_pattern.redis_key_enum.value,
-        #             value=serialized_value,
-        #             timeout=access_pattern.key_ttl_enum.value,
-        #         )
-        #         logger.debug(
-        #             f"Key `{access_pattern.redis_key_enum}` set in Redis with TTL=`{access_pattern.key_ttl_enum}`"
-        #         )
-        #         return access_pattern.value
-        #     except Exception as e:
-        #         logger.error(
-        #             f"Error setting key `{access_pattern.redis_key_enum}` in Redis: {e}",
-        #             exc_info=True,
-        #         )
-        #         raise RedisClientException("Failed to set key in Redis.") from e
-
-        # return None
