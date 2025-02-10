@@ -68,11 +68,6 @@ PRIMARY_GEOCODER = "Nominatim"  # Nominatim, OpenCage, positionstack
 # PHONE SESSION
 # =======================================
 TTL_PHONE_SESSION = config("TTL_PHONE_SESSION", cast=int)
-SHELTER_OFFSET = config("SHELTER_OFFSET", cast=int)
-FOOD_OFFSET = config("FOOD_OFFSET", cast=int)
-WATER_OFFSET = config("WATER_OFFSET", cast=int)
-TOILET_OFFSET = config("TOILET_OFFSET", cast=int)
-WIFI_OFFSET = config("WIFI_OFFSET", cast=int)
 
 
 # Routes

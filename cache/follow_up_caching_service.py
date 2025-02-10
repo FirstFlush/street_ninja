@@ -49,5 +49,5 @@ class FollowUpCachingService(BaseCacheService):
     def info(self):
         ...
 
-    def more(self):
+    def more(self, current_session: PhoneSessionData):
         ...

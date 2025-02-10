@@ -29,7 +29,7 @@ class QuerySetResponseBuilder(BaseResponseBuilder):
         if isinstance(self.queryset, ResourceQuerySet) and len(self.queryset) > 0:
             self.keyword_enum = self.queryset.first().keyword_enum
         else:
-            msg = f"QuerySetResponseService received invalid queryset upon instantiation. Type: `{type(self.queryset)}`, QuerySet: `{self.queryset}`"
+            msg = f"{self.__class__.__name__} received invalid queryset upon instantiation. Type: `{type(self.queryset)}`, QuerySet: `{self.queryset}`"
             logger.error(msg)
             raise TypeError(msg)
         self.template_class = self._get_template_class()
@@ -52,23 +52,23 @@ class QuerySetResponseBuilder(BaseResponseBuilder):
         return response_data
 
     def _create_response_data(self) -> SMSInquiryResponseData:
-        indexed_queryset = self.queryset
+        indexed_queryset = self.queryset[self.offset:]
         formatted_response = self._create_resource_response(indexed_queryset)
         truncated_response, count = self._truncate_response(formatted_response)
-
         return SMSInquiryResponseData(
             msg=truncated_response,
             ids=self._get_ids(indexed_queryset, count=count),
         )
 
     def _truncate_response(self, formatted_response: str) -> tuple[str, int]:
+        logger.info(f"SMS Character limit: `{settings.SMS_CHAR_LIMIT}`")
         if len(formatted_response) > settings.SMS_CHAR_LIMIT:
             truncated_results = formatted_response[:settings.SMS_CHAR_LIMIT].split('\n')[:-1]
             count = len(truncated_results)
             truncated_response = "\n".join(truncated_results)
         else:
             truncated_response = formatted_response
-            count = len(formatted_response.split("\n"))
+            count = len(truncated_response.split("\n"))
         return truncated_response, count
 
 
@@ -83,22 +83,3 @@ class QuerySetResponseBuilder(BaseResponseBuilder):
     def _get_ids(self, qs:ResourceQuerySet, count: int) -> list[int]:
         return [instance.id for instance in qs[:count]]
 
-
-    # def _create_resource_response(
-    #         self, 
-    #         instance: ResourceModel, 
-    #         template_class: Type[ResourceResponseTemplate],
-    #         include_optional_params: bool = True,
-    # ) -> str:
-    #     """Formats the SMS response based on the template rules."""
-    #     data = {field: getattr(instance, field, "-") for field in template_class.always_show}
-    #     extra_params = []
-        
-    #     if include_optional_params:
-    #         for param in template_class.optional_params:
-    #             value = getattr(instance, param, None)
-    #             if value:
-    #                 extra_params.append(f"{param}: {value}")
-
-    #     data["extra_params"] = ", ".join(extra_params) if extra_params else ""
-    #     return template_class.response_format.format(**data)
