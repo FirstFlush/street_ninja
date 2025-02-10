@@ -1,7 +1,6 @@
-from datetime import datetime, timezone
 import logging
 from abc import ABC, abstractmethod
-from django.conf import settings
+from django.contrib.gis.geos import Point
 from cache.dataclasses import PhoneSessionData
 from cache.redis.clients import ResourceCacheClient, PhoneSessionCacheClient
 from resources.abstract_models import ResourceQuerySet
@@ -16,48 +15,38 @@ class BaseCacheService(ABC):
 
     def __init__(
             self, 
-            inquiry: SMSInquiry, 
+            inquiry: SMSInquiry | SMSFollowUpInquiry,
+            session_cache_client: PhoneSessionCacheClient,
             resource_access_pattern: AccessPatternDB,
             session_access_pattern: PhoneSessionAccessPattern = PhoneSessionAccessPattern
     ):
         self.inquiry = inquiry
+        self.session_cache_client = session_cache_client
         self.resource_access_pattern = resource_access_pattern
         self.session_access_pattern = session_access_pattern
         self.resource_cache_client = ResourceCacheClient(access_pattern=self.resource_access_pattern)
-        self.session_cache_client = PhoneSessionCacheClient(
-            redis_key=self._get_redis_key(), 
-            access_pattern=self.session_access_pattern,
-        )
 
-    # def _create_phone_session_data(
-    #         self, 
-    #         ids: list[int],
-    #         last_updated: datetime, 
-    #         offset: int, 
-    # ) -> PhoneSessionData:
-    #     """Creates the default data for phone session"""
-    #     return PhoneSessionData(
-    #         keyword=self.inquiry.keyword,
-    #         ids=ids,
-    #         offset=offset,
-    #         last_updated=last_updated,
-        # )
 
     @staticmethod
-    def _now() -> datetime:
-        return datetime.now(tz=timezone.utc)
+    def _get_session_cache_client(
+            convo_id: int, 
+            phone_session_access_pattern: PhoneSessionAccessPattern = PhoneSessionAccessPattern
+    ) -> PhoneSessionCacheClient:
+        redis_key = PhoneSessionCacheClient.get_redis_key(
+            convo_id=convo_id,
+            phone_session_access_pattern=phone_session_access_pattern
+        )
+        return PhoneSessionCacheClient(
+            redis_key=redis_key, 
+            access_pattern=phone_session_access_pattern,
+        )
 
-
-    def _get_redis_key(self) -> str:
-        try:
-            return f"{self.session_access_pattern.redis_key_format}{self.inquiry.conversation.id}"
-        except AttributeError as e:
-            logger.error(e, exc_info=True)
-            raise
-
-    def get_resources_by_proximity(self) -> ResourceQuerySet:
+    def get_resources_by_proximity(self, location: Point) -> ResourceQuerySet:
+        """
+        SMS Inquiries will supply their own location
+        """
         inquiry_params = self.inquiry.params or {}
-        return self.resource_cache_client.get_or_set_db(query_params=inquiry_params).closest_to(self.inquiry.location)
+        return self.resource_cache_client.get_or_set_db(query_params=inquiry_params).closest_to(location)
 
     def get_phone_session(self) -> PhoneSessionData | None:
         return self.session_cache_client.get_session()

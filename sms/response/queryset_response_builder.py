@@ -4,7 +4,7 @@ from django.conf import settings
 from sms.enums import SMSKeywordEnum
 from resources.abstract_models import ResourceQuerySet, ResourceModel
 from cache.dataclasses import PhoneSessionData
-from .base_response_service import BaseResponseService
+from .base_response_builder import BaseResponseBuilder
 from .dataclasses import SMSInquiryResponseData
 from .respones_templates.base_response_templates import ResourceResponseTemplate
 from .respones_templates.resource_templates import (
@@ -16,7 +16,7 @@ from .respones_templates.resource_templates import (
 logger = logging.getLogger(__name__)
 
 
-class QuerySetResponseService(BaseResponseService):
+class QuerySetResponseBuilder(BaseResponseBuilder):
 
     MAPPING = {
         SMSKeywordEnum.SHELTER: ShelterResponseTemplate,

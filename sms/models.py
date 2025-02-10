@@ -115,10 +115,6 @@ class SMSInquiry(IncomingSMSMessageModel):
         self.location:Point
         return f"{round(self.location.x, 5)}, {round(self.location.y, 5)}"
 
-    @property
-    def params_pretty(self) -> str:
-        return ", ".join([f"{k}: {v}" for k, v in self.params.items()])
-
 
 class SMSFollowUpInquiryManager(models.Manager):
 

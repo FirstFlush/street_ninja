@@ -22,7 +22,8 @@ class SMSInquiryInline(admin.TabularInline):
 class SMSFollowUpInline(admin.TabularInline):
     model = SMSFollowUpInquiry
     extra = 0
-    readonly_fields = ("id", "keyword", "message", "date_created")
+    readonly_fields = ("id", "keyword", "params_pretty", "message", "date_created")
+    fields = ("id", "keyword", "params_pretty", "date_created")
 
 
 class UnresolvedSMSInline(admin.TabularInline):
@@ -34,13 +35,15 @@ class UnresolvedSMSInline(admin.TabularInline):
 class SMSInquiryResponseInline(admin.TabularInline):
     model = SMSInquiryResponse
     extra = 0
-    fields = ("conversation", "sms_inquiry", "resource_ids", "date_created")
+    readonly_fields = ("sms_inquiry", "resource_ids", "date_created")
+    fields = ("sms_inquiry", "resource_ids", "date_created")
 
 
 class SMSFollowUpResponseInline(admin.TabularInline):
-    model = SMSInquiryResponse
+    model = SMSFollowUpResponse
     extra = 0
-    fields = ("conversation", "sms_follow_up", "resource_ids_pretty", "date_created")
+    readonly_fields = ("sms_follow_up", "resource_ids_pretty", "date_created",)
+    fields = ("sms_follow_up", "resource_ids_pretty", "date_created",)
 
 
 class SMSMessageOverflowInline(admin.TabularInline):

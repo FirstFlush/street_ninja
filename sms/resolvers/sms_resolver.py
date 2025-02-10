@@ -42,7 +42,7 @@ class ResolvedSMS:
 
 
 class SMSResolver:
-    
+
     _location_resolver = LocationResolver
     _keyword_lang_resolver = KeywordLanguageResolver
     _param_resolver = ParamResolver

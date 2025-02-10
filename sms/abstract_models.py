@@ -26,6 +26,9 @@ class IncomingSMSMessageModel(BaseSMSMessageModel):
     class Meta:
         abstract = True
 
+    @property
+    def params_pretty(self) -> str:
+        return ", ".join([f"{k}: {v}" for k, v in self.params.items()]) if self.params else "-"
 
     @property
     def sms_type(self) -> ResolvedSMSType:

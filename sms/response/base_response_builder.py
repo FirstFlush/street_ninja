@@ -13,7 +13,7 @@ from .respones_templates import BaseSMSResponseTemplate
 logger = logging.getLogger(__name__)
 
 
-class BaseResponseService(ABC):
+class BaseResponseBuilder(ABC):
     
     MAPPING = None
     keyword_enum = None

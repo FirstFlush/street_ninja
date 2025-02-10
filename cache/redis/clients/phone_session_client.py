@@ -27,6 +27,16 @@ class PhoneSessionCacheClient(BaseRedisClient):
         self.redis_store = self._redis_store()
         self.access_pattern: Type[PhoneSessionAccessPattern]
 
+
+    @staticmethod
+    def get_redis_key(convo_id:int, phone_session_access_pattern:PhoneSessionAccessPattern) -> str:
+        try:
+            return f"{phone_session_access_pattern.redis_key_format}{convo_id}"
+        except AttributeError as e:
+            logger.error(e, exc_info=True)
+            raise
+
+
     def get_session(self) -> PhoneSessionData | None:
         cached_data = self._get_cached_data(redis_key=self.redis_key, raise_error=True)
         if cached_data is not None:

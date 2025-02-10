@@ -1,3 +1,4 @@
-from .queryset_response_service import QuerySetResponseService
-from .instance_response_service import InstanceResponseService
+from .response_service import ResponseService
+from .queryset_response_builder import QuerySetResponseBuilder
+from .instance_response_builder import InstanceResponseBuilder
 from .dataclasses import SMSInquiryResponseData, SMSFollowUpResponseData

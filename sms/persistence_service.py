@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 import logging
 from django.contrib.gis.geos import Point
 from django.db import transaction
+from common.utils import now
 from sms.abstract_models import IncomingSMSMessageModel
 from sms.models import (
     SMSInquiry, 
@@ -26,15 +27,12 @@ class PersistenceService:
     def __init__(self, sms_data: ResolvedSMS, location: Point|None = None):
         self.sms_data = sms_data
         self.location = location
-        self.now = self._now()
+        self.now = now()
+        logger.info(f"{self.__class__.__name__}.now stringified: `{self.now.strftime('%Y-%m-%d %H:%M:%S')}`")
         self.phone_number = self._phone_number(sms_data.phone_number)
         self.conversation = self._conversation()
         self.instance : None | SMSInquiry | SMSFollowUpInquiry | UnresolvedSMSInquiry = None
 
-    def _now(self) -> datetime:
-        now = datetime.now(tz=timezone.utc)
-        logger.info(f"{self.__class__.__name__}.now stringified: `{now.strftime('%Y-%m-%d %H:%M:%S')}`")
-        return now
 
     def _phone_number(self, phone_number: str) -> PhoneNumber:
         phone, created = PhoneNumber.objects.get_or_create(number=phone_number, defaults={"last_active": self.now})

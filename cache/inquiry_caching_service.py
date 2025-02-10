@@ -1,14 +1,10 @@
-from datetime import datetime, timezone
+
 import logging
 from typing import Any
 from .base_cache_service import BaseCacheService
 from .dataclasses import PhoneSessionData
-from .redis.access_patterns.base_access_patterns import AccessPatternDB
-from .redis.access_patterns.phone_session import PhoneSessionAccessPattern
 from .redis.access_patterns.pattern_registry import AccessPatternRegistry
-from .redis.clients.resource_client import ResourceCacheClient
-from .redis.clients.phone_session_client import PhoneSessionCacheClient
-from resources.abstract_models import ResourceQuerySet
+from common.utils import now
 from sms.models import SMSInquiry
 
 
@@ -23,9 +19,9 @@ class InquiryCachingService(BaseCacheService):
             ids: list[int], 
             params: dict[str, Any] | None = None
     ) -> PhoneSessionData:
-        now = self._now()
         session_data = PhoneSessionData(
-            last_updated=now,
+            last_updated=now(),
+            inquiry_id=self.inquiry.id,
             keyword=self.inquiry.keyword,
             ids=ids,
             resource_params=params
@@ -40,11 +36,11 @@ class InquiryCachingService(BaseCacheService):
     ) -> PhoneSessionData:
         session_data.ids = ids
         session_data.keyword = self.inquiry.keyword
-        session_data.last_updated = self._now()
+        session_data.inquiry_id = self.inquiry.id
+        session_data.last_updated = now()
         self._set_phone_session(session_data=session_data)
         return session_data
-
-
+        
 
     @classmethod
     def init(cls, inquiry: SMSInquiry) -> "InquiryCachingService":
@@ -52,6 +48,8 @@ class InquiryCachingService(BaseCacheService):
         Factory method for selecting instantiating InquiryProcessingService 
         with the inquiry's appropriate access pattern.
         """
+        session_cache_client = cls._get_session_cache_client(convo_id=inquiry.conversation.id)
+        logger.info("Initialized PhoneSessionCacheClient")
         resource_access_pattern = AccessPatternRegistry.get_pattern(
            sms_keyword_enum=inquiry.keyword_enum
         )
@@ -59,16 +57,5 @@ class InquiryCachingService(BaseCacheService):
         return cls(
             inquiry=inquiry,
             resource_access_pattern=resource_access_pattern,
+            session_cache_client = session_cache_client
         )
-        
-        # session_data = inquiry_service.get_phone_session()
-        # if session_data is None:
-        #     print("no session found!")
-            # inquiry_service.set_phone_session(session_data=inquiry_service._create_phone_session_data(
-            #     ids=...,
-            #     last_updated=inquiry_service.inquiry.conversation.last_updated,
-            #     offset=...,
-            # ))
-
-        # NOTE need to build Response service to get batch ids and offset. SMSService will pass it a queryset, fetched by this class,
-        # and ResponseService will determine how many items fit in the response, and truncate accordingly.
