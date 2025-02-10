@@ -7,39 +7,42 @@ from sms.models import (
     SMSFollowUpInquiry,
     UnresolvedSMSInquiry,
     SMSMessageOverflow,
-    SMSResponse,
+    SMSInquiryResponse,
+    SMSFollowUpResponse
 )
 
 
-# 🔹 Inline for SMS Inquiries
 class SMSInquiryInline(admin.TabularInline):
     model = SMSInquiry
     extra = 0
     readonly_fields = ("keyword", "location_text", "language", "message", "params_pretty", "location_pretty", "date_created")
     fields = ("keyword", "location_text", "location_pretty", "params_pretty", "language", "date_created")
 
-# 🔹 Inline for Follow-Up Inquiries
+
 class SMSFollowUpInline(admin.TabularInline):
     model = SMSFollowUpInquiry
     extra = 0
     readonly_fields = ("id", "keyword", "message", "date_created")
 
 
-# 🔹 Inline for Unresolved SMS Inquiries
 class UnresolvedSMSInline(admin.TabularInline):
     model = UnresolvedSMSInquiry
     extra = 0
     readonly_fields = ("id", "message", "date_created")
 
 
-# 🔹 Inline for SMS Responses
-class SMSResponseInline(admin.TabularInline):
-    model = SMSResponse
+class SMSInquiryResponseInline(admin.TabularInline):
+    model = SMSInquiryResponse
     extra = 0
-    readonly_fields = ("message", "date_created")
+    fields = ("conversation", "sms_inquiry", "resource_ids", "date_created")
 
 
-# 🔹 Inline for SMS Message Overflow
+class SMSFollowUpResponseInline(admin.TabularInline):
+    model = SMSInquiryResponse
+    extra = 0
+    fields = ("conversation", "sms_follow_up", "resource_ids_pretty", "date_created")
+
+
 class SMSMessageOverflowInline(admin.TabularInline):
     model = SMSMessageOverflow
     extra = 0
@@ -59,7 +62,7 @@ class ConversationAdmin(BaseGISAdmin):
     search_fields = ("phone_number__number",)
     list_filter = ("status",)
     ordering = ("-last_updated",)
-    inlines = [SMSInquiryInline, SMSFollowUpInline, UnresolvedSMSInline, SMSResponseInline]
+    inlines = [SMSInquiryInline, SMSFollowUpInline, UnresolvedSMSInline, SMSInquiryResponseInline, SMSFollowUpResponseInline]
 
 
 @admin.register(SMSInquiry)
@@ -93,8 +96,15 @@ class SMSMessageOverflowAdmin(BaseGISAdmin):
     ordering = ("-date_created",)
 
 
-@admin.register(SMSResponse)
-class SMSResponseAdmin(BaseGISAdmin):
-    list_display = ("conversation", "message", "date_created")
-    search_fields = ("conversation__phone_number__number", "message")
+@admin.register(SMSInquiryResponse)
+class SMSInquiryResponseAdmin(BaseGISAdmin):
+    list_display = ("conversation", "sms_inquiry", "resource_ids", "date_created")
+    search_fields = ("conversation__phone_number__number",)
+    ordering = ("-date_created",)
+
+
+@admin.register(SMSFollowUpResponse)
+class SMSFollowUpResponseAdmin(BaseGISAdmin):
+    list_display = ("conversation", "sms_follow_up", "resource_ids_pretty", "date_created")
+    search_fields = ("conversation__phone_number__number",)
     ordering = ("-date_created",)

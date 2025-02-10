@@ -1,8 +1,19 @@
+from datetime import datetime, timezone
 import logging
 from django.contrib.gis.geos import Point
 from django.db import transaction
 from sms.abstract_models import IncomingSMSMessageModel
-from sms.models import SMSInquiry, SMSFollowUpInquiry, UnresolvedSMSInquiry, Conversation
+from sms.models import (
+    SMSInquiry, 
+    SMSFollowUpInquiry, 
+    UnresolvedSMSInquiry, 
+    Conversation,
+    PhoneNumber,
+    SMSInquiryResponse,
+    SMSFollowUpResponse,
+    # SMSUnresolvedResponse
+)
+from sms.response import SMSInquiryResponseData, SMSFollowUpResponseData
 from sms.resolvers import ResolvedSMS
 from sms.enums import ResolvedSMSType
 
@@ -11,15 +22,33 @@ logger = logging.getLogger(__name__)
 
 
 class PersistenceService:
-    
+
     def __init__(self, sms_data: ResolvedSMS, location: Point|None = None):
         self.sms_data = sms_data
         self.location = location
-        self.conversation = self._conversation(sms_data.phone_number)
+        self.now = self._now()
+        self.phone_number = self._phone_number(sms_data.phone_number)
+        self.conversation = self._conversation()
         self.instance : None | SMSInquiry | SMSFollowUpInquiry | UnresolvedSMSInquiry = None
 
-    def _conversation(self, phone_number: str) -> Conversation:
-        return Conversation.objects.get_or_create_conversation(phone_number)
+    def _now(self) -> datetime:
+        now = datetime.now(tz=timezone.utc)
+        logger.info(f"{self.__class__.__name__}.now stringified: `{now.strftime('%Y-%m-%d %H:%M:%S')}`")
+        return now
+
+    def _phone_number(self, phone_number: str) -> PhoneNumber:
+        phone, created = PhoneNumber.objects.get_or_create(number=phone_number, defaults={"last_active": self.now})
+        logger.info(f"PhoneNumber `{phone.id}` found. Created: `{created}`")
+        return phone
+
+    def _conversation(self) -> Conversation:
+        convo, created =  Conversation.objects.get_or_create_conversation(phone_number=self.phone_number, now=self.now)
+        if created:
+            logger.info(f"new Conversation with id `{convo.id}` created")
+        else:
+            logger.info(f"found Conversation with id `{convo.id}`")
+        return convo
+
 
     def _save_inquiry_sms(self) -> SMSInquiry:
         return SMSInquiry.objects.save_inquiry_sms(
@@ -40,16 +69,19 @@ class PersistenceService:
             message=self.sms_data.data.msg,
         )
 
-    # def _get_resource_access_pattern(self) -> AccessPatternDB:
-    #     return AccessPatternRegistry.get_resource(
-    #         sms_keyword_enum=self.sms_data.data.keyword_language_data.sms_keyword_enum
-    #     )
+
+    def save_inquiry_response(self, response_data: SMSInquiryResponseData) -> SMSInquiryResponse:
+        response = SMSInquiryResponse.objects.create(
+            conversation=self.instance.conversation,
+            sms_inquiry=self.instance,
+            resource_ids=response_data.ids,
+        )
+        logger.info(f"Successfully created {response.__class__.__name__} `{response.id}`")
+        return response
 
 
-    # def fetch_resources(self) -> ResourceQuerySet[ResourceModel]:
-    #     access_pattern = self._get_resource_access_pattern()
-    #     qs:ResourceQuerySet = RedisClient.get_or_set_db(access_pattern=access_pattern)
-    #     qs.closest_to(location=self.location)
+    def save_follow_up_response(self, response_data: SMSFollowUpResponseData) -> SMSFollowUpResponse:
+        ...
 
 
     def save_sms(self):

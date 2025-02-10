@@ -1,4 +1,6 @@
+from abc import ABC, abstractmethod
 import logging
+from twilio.twiml.messaging_response import MessagingResponse
 from sms.enums import SMSKeywordEnum
 from resources.abstract_models import ResourceQuerySet, ResourceModel
 from .respones_templates.resource_templates import (
@@ -11,7 +13,7 @@ from .respones_templates import BaseSMSResponseTemplate
 logger = logging.getLogger(__name__)
 
 
-class BaseResponseService:
+class BaseResponseService(ABC):
     
     MAPPING = None
     keyword_enum = None
@@ -19,7 +21,6 @@ class BaseResponseService:
     def __init__(self):
         if self.MAPPING is None or self.keyword_enum is None:
             raise NotImplementedError(f"{self.__class__.__name__} must define self.MAPPING and self.keyword_enum")
-
 
     def _get_template(self) -> BaseSMSResponseTemplate:
         try:
@@ -29,4 +30,11 @@ class BaseResponseService:
             logger.error(msg, exc_info=True)
             raise
 
-
+    def to_twiml(self, msg: str) -> str:
+        """
+        Converts the response text to TwiML, a type of XML that Twilio Gateway requires.
+        """
+        mr = MessagingResponse()
+        mr.message(msg)
+        logger.info("Created TwiML response")
+        return str(mr)

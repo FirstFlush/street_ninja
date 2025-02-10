@@ -5,7 +5,12 @@ from sms.resolvers import (
     ResolvedSMS, 
 )
 # from sms.response.respones_templates import ResourceResponseTemplate
-from sms.response import QuerySetResponseService, InstanceResponseService
+from sms.response import (
+    QuerySetResponseService, 
+    InstanceResponseService, 
+    SMSInquiryResponseData, 
+    SMSFollowUpResponseData,
+)
 from sms.enums import ResolvedSMSType
 from geo.geocoding import GeocodingService
 from .abstract_models import IncomingSMSMessageModel
@@ -14,7 +19,13 @@ from cache.inquiry_caching_service import InquiryCachingService
 from .persistence_service import PersistenceService
 from .resolvers.exc import SMSResolutionError
 from .serializers import TwilioSMSSerializer
-from .models import SMSInquiry, SMSFollowUpInquiry, UnresolvedSMSInquiry
+from .models import (
+    SMSInquiry, 
+    SMSFollowUpInquiry, 
+    UnresolvedSMSInquiry,
+    SMSInquiryResponse,
+    SMSFollowUpResponse,
+)
 
 
 logger = logging.getLogger(__name__)
@@ -53,19 +64,30 @@ class SMSService:
         persistence_service.save_sms()
         return persistence_service.instance
 
-    def prepare_response(self, instance: SMSInquiry | SMSFollowUpInquiry | UnresolvedSMSInquiry):
+    def build_response_data(
+            self, 
+            instance: SMSInquiry | SMSFollowUpInquiry | UnresolvedSMSInquiry
+    ) -> SMSInquiryResponseData | SMSFollowUpResponseData:
+        """
+        Processes the inquiry and generates a response according to its type.
+
+        Each type will produce a datatype with the information required for
+        the persistence layer to create the SMS Response object, and the
+        caching layer to update and necessary ephemeral data.
+        """
         if isinstance(instance, SMSInquiry):
-            self._prepare_inquiry_response(instance)
+            response = self._build_inquiry_response_data(instance)
         elif isinstance(instance, SMSFollowUpInquiry):
-            self._prepare_follow_up_response(instance)
+            response = self._build_follow_up_response(instance)
         elif isinstance(instance, UnresolvedSMSInquiry):
-            self._prepare_unresolved_response(instance)
+            response = self._build_unresolved_response(instance)
         else:
             msg = f"Received invalid type for instance argument: `{type(instance)}`"
             logger.error(msg)
             raise TypeError(msg)
-
-    def _prepare_inquiry_response(self, instance: SMSInquiry):
+        return response 
+    
+    def _build_inquiry_response_data(self, instance: SMSInquiry) -> SMSInquiryResponseData:
         
         caching_service = InquiryCachingService.init(inquiry=instance)
         session_data = caching_service.get_phone_session()
@@ -75,7 +97,7 @@ class SMSService:
             queryset=qs,
             offset=offset,
         )
-        response_data = response_service.create_response()
+        response_data = response_service.create_response_data()
         if session_data:
             session_data = caching_service.update_phone_session(
                 session_data=session_data,
@@ -86,11 +108,14 @@ class SMSService:
                 ids=response_data.ids,
                 params=instance.params if instance.params else None,
             )
+        return response_data
 
-    def _prepare_follow_up_response(self, instance: SMSFollowUpInquiry):
+
+
+    def _build_follow_up_response(self, instance: SMSFollowUpInquiry):
         ...
 
-    def _prepare_unresolved_response(self, instance: UnresolvedSMSInquiry):
+    def _build_unresolved_response(self, instance: UnresolvedSMSInquiry):
         ...
 
     def _build_persistence_service(self, sms_data:ResolvedSMS, location: Point | None) -> PersistenceService:
@@ -109,4 +134,4 @@ class SMSService:
         sms_data = sms_service.resolve()
         sms_location = sms_service.geocode(sms_data=sms_data)
         sms_instance = sms_service.save_sms(sms_data=sms_data, location=sms_location)
-        sms_service.prepare_response(instance=sms_instance)
+        sms_service.build_response_data(instance=sms_instance)

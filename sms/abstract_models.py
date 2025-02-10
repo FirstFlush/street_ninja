@@ -11,6 +11,16 @@ class BaseSMSMessageModel(models.Model):
         abstract = True
 
 
+class ResponseSMSMessageModel(BaseSMSMessageModel):
+
+    class Meta:
+        abstract = True
+
+    @property
+    def resource_ids_pretty(self) -> list[str|int]:
+        return self.resource_ids if self.resource_ids is not None else "-"
+
+
 class IncomingSMSMessageModel(BaseSMSMessageModel):
 
     class Meta:

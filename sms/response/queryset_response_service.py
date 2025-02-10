@@ -5,7 +5,7 @@ from sms.enums import SMSKeywordEnum
 from resources.abstract_models import ResourceQuerySet, ResourceModel
 from cache.dataclasses import PhoneSessionData
 from .base_response_service import BaseResponseService
-from .dataclasses import SMSResponseData
+from .dataclasses import SMSInquiryResponseData
 from .respones_templates.base_response_templates import ResourceResponseTemplate
 from .respones_templates.resource_templates import (
     ShelterResponseTemplate,
@@ -44,12 +44,19 @@ class QuerySetResponseService(BaseResponseService):
             raise
 
 
-    def create_response(self) -> SMSResponseData:
+    def create_response_data(self, verbose: bool=True) -> SMSInquiryResponseData:
+        response_data = self._create_response_data()
+        logger.info(f"Successfully created `{response_data.__class__.__name__}`")
+        if verbose:
+            logger.info(f"{response_data}")
+        return response_data
+
+    def _create_response_data(self) -> SMSInquiryResponseData:
         indexed_queryset = self.queryset
         formatted_response = self._create_resource_response(indexed_queryset)
         truncated_response, count = self._truncate_response(formatted_response)
 
-        return SMSResponseData(
+        return SMSInquiryResponseData(
             msg=truncated_response,
             ids=self._get_ids(indexed_queryset, count=count),
         )

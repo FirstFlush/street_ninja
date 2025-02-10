@@ -4,13 +4,14 @@ from django.conf import settings
 from django.db import models
 from django.contrib.gis.db import models as gis_models
 from django.contrib.gis.geos import Point
+from django.contrib.postgres.fields import ArrayField
 from common.enums import (
     LanguageEnum, 
     LocationType,
 )
 from sms.enums import ConversationStatus, SMSFollowUpKeywordEnum, SMSKeywordEnum
 from sms.resolvers import ResolvedSMSFollowUp, ResolvedSMSInquiry
-from .abstract_models import IncomingSMSMessageModel, BaseSMSMessageModel
+from .abstract_models import IncomingSMSMessageModel, ResponseSMSMessageModel
 
 
 logger = logging.getLogger(__name__)
@@ -28,32 +29,32 @@ class PhoneNumber(models.Model):
 
 class ConversationManager(models.Manager):
 
-    def get_or_create_conversation(self, phone_number: str) -> "Conversation":
-        """Retrieves an active conversation or creates a new one if none exist."""
-        now = datetime.now(tz=timezone.utc)
+    def get_or_create_conversation(self, phone_number: PhoneNumber, now: datetime) -> tuple["Conversation", bool]:
+        """
+        Retrieves an active conversation for the given phone number. 
+        If no active session exists within the TTL, creates a new conversation.
+        """
         session_expiry = now - timedelta(seconds=settings.TTL_PHONE_SESSION)
-        phone, _ = PhoneNumber.objects.get_or_create(number=phone_number, defaults={"last_active": now})
+        logger.info(f"session_expiry stringified: {session_expiry.strftime('%Y-%m-%d %H:%M:%S')}")
         conversation = self.filter(
-            phone_number=phone, 
+            phone_number=phone_number, 
             last_updated__gte=session_expiry
         ).prefetch_related(
-            "smsinquiry_set", "smsfollowupinquiry_set", "unresolvedsmsinquiry_set", "smsresponse_set"
+            "smsinquiry_set", "smsfollowupinquiry_set", "unresolvedsmsinquiry_set",
         ).first()
 
         if conversation:
-            return conversation
+            return conversation, False
 
         return self.create(
-            phone_number=phone,
-            # phone_session_key=Conversation.generate_phone_session_key(),
+            phone_number=phone_number,
             date_created=now,
             last_updated=now,
-        )
+        ), True
 
 
 class Conversation(models.Model):
     phone_number = models.ForeignKey(to=PhoneNumber, on_delete=models.CASCADE)
-    # phone_session_key = models.CharField(unique=True)
     status = models.CharField(choices=ConversationStatus.choices)
     date_created = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
@@ -62,11 +63,6 @@ class Conversation(models.Model):
 
     def __str__(self) -> str:
         return f"{self.phone_number} {self.last_updated.strftime('%Y-%m-%d %H:%M:%S')}"
-
-    # @staticmethod
-    # def generate_phone_session_key() -> str:
-    #     """Generates a unique session key for a new conversation."""
-    #     return str(uuid.uuid4())
 
 
 class SMSInquiryManager(models.Manager):
@@ -110,7 +106,7 @@ class SMSInquiry(IncomingSMSMessageModel):
         try:
             return SMSKeywordEnum(self.keyword)
         except ValueError as e:
-            msg = f"Invalid self.keyword `{self.keyword}` for record `{self.id}` in model `{self.__class__.__name__}`"
+            msg = f"Invalid self.keyword `{self.keyword}` for record `{self.id}` in model `{self.__class__.__name__}` causing error: {e}"
             logger.error(msg, exc_info=True)
             raise            
 
@@ -139,6 +135,7 @@ class SMSFollowUpInquiry(IncomingSMSMessageModel):
     conversation = models.ForeignKey(to=Conversation, on_delete=models.CASCADE)
     keyword = models.CharField(max_length=20, choices=SMSFollowUpKeywordEnum.choices)
     message = models.CharField(max_length=256)
+    directions_text = models.TextField(null=True)
     params = models.JSONField(default=dict)
     date_created = models.DateTimeField(auto_now_add=True)
 
@@ -182,8 +179,6 @@ class UnresolvedSMSInquiry(IncomingSMSMessageModel):
         return None
 
 
-
-
 class SMSMessageOverflow(models.Model):
     sms_inquiry = models.ForeignKey(to=SMSInquiry, on_delete=models.CASCADE, null=True)
     sms_followup = models.ForeignKey(to=SMSFollowUpInquiry, on_delete=models.CASCADE, null=True)
@@ -191,10 +186,15 @@ class SMSMessageOverflow(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
 
-
-
-class SMSResponse(BaseSMSMessageModel):
+class SMSInquiryResponse(ResponseSMSMessageModel):
     conversation = models.ForeignKey(to=Conversation, on_delete=models.CASCADE)
-    message = models.TextField()
+    sms_inquiry = models.ForeignKey(to=SMSInquiry, on_delete=models.CASCADE)
+    resource_ids = ArrayField(models.IntegerField())
     date_created = models.DateTimeField(auto_now_add=True)
 
+
+class SMSFollowUpResponse(ResponseSMSMessageModel):
+    conversation = models.ForeignKey(to=Conversation, on_delete=models.CASCADE)
+    sms_follow_up = models.ForeignKey(to=SMSFollowUpInquiry, on_delete=models.CASCADE)
+    resource_ids = ArrayField(models.IntegerField(), null=True)
+    date_created = models.DateTimeField(auto_now_add=True)
