@@ -66,7 +66,7 @@ class SMSService:
         return persistence_service.instance
 
 
-    def build_response_data(self, instance) -> SMSInquiryResponseData | SMSFollowUpResponseData:
+    def respond(self, instance) -> SMSInquiryResponseData | SMSFollowUpResponseData:
         response_service = ResponseService(instance)
         return response_service.build_response_data()
 
@@ -86,4 +86,4 @@ class SMSService:
         sms_data = sms_service.resolve()
         sms_location = sms_service.geocode(sms_data=sms_data)
         sms_instance = sms_service.save_sms(sms_data=sms_data, location=sms_location)
-        sms_service.build_response_data(instance=sms_instance)
+        sms_service.respond(instance=sms_instance)

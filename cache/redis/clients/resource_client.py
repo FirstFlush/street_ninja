@@ -44,25 +44,21 @@ class ResourceCacheClient(BaseRedisClient):
         """
         Fetch data from Redis if available; otherwise, query the database and cache the result.
 
-        Args:
-            access_pattern (AccessPatternDB): The access pattern defining how Redis is used for this operation.
-            query_params (dict, optional): Parameters to pass to the DB query (e.g., filters).
-
-        Returns:
-            Any: Data retrieved from Redis or the query result cached in Redis.
-
         Raises:
             RedisClientException: If the DB query or Redis operation fails.
         """
-        # redis_store = self._redis_store(self.access_pattern.redis_store_enum)
         cached_data = self._get_cached_data(redis_key=self.access_pattern.redis_key_enum)
         if cached_data is not None:
             unpickled_data = self._unpickle(cached_data)
+            if isinstance(unpickled_data, ResourceQuerySet) and len(unpickled_data) > 0:
+                logger.info(f"Unpickled `{len(unpickled_data)}` resuts.")
+            else:
+                logger.warning(f"Problem unpickling! unpickled_data type: `{type(unpickled_data)}`, length: `{len(unpickled_data)}`")
             return unpickled_data
 
         # Cache miss, fetch from DB
         try:
-            logger.debug(f"Cache miss for key: `{self.access_pattern.redis_key_enum}`. Fetching from DB...")
+            logger.info(f"Cache miss for key: `{self.access_pattern.redis_key_enum}`. Fetching from DB...")
             db_data = self.access_pattern.query(**(query_params or {}))
             pickled_data = self._pickle(db_data)
             self.redis_store.set(
@@ -70,7 +66,7 @@ class ResourceCacheClient(BaseRedisClient):
                 value=pickled_data,
                 timeout=self.access_pattern.key_ttl_enum.value,
             )
-            logger.debug(
+            logger.info(
                 f"Key `{self.access_pattern.redis_key_enum}` updated in Redis with TTL=`{self.access_pattern.key_ttl_enum}`"
             )
             return db_data

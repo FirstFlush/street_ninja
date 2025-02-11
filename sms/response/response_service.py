@@ -1,9 +1,11 @@
 import logging
+from cache.dataclasses import PhoneSessionData
 from cache.follow_up_caching_service import FollowUpCachingService
 from cache.inquiry_caching_service import InquiryCachingService
 from sms.enums import SMSKeywordEnum, SMSFollowUpKeywordEnum
+from .follow_up import More, Directions, Info
 from sms.models import SMSInquiry, SMSFollowUpInquiry, UnresolvedSMSInquiry
-from .dataclasses import SMSInquiryResponseData, SMSFollowUpResponseData
+from .dataclasses import SMSInquiryResponseData, SMSFollowUpResponseData, FollowUpContext
 from .queryset_response_builder import QuerySetResponseBuilder
 from .instance_response_builder import InstanceResponseBuilder
 
@@ -38,16 +40,27 @@ class ResponseService:
         return response 
 
 
+    def _get_sms_inquiry_for_follow_up(self, id: int) -> SMSInquiry:
+        """
+        When a follow-up request comes in, it needs to be matched to an SMS inquiry.
+        """
+        sms_inquiry = self.instance.conversation.smsinquiry_set.filter(id=id).first()
+        if not sms_inquiry:
+            msg = f"No SMSInquiry found in session cache with ID of `{id}` when processing SMSFollowUpInquiry with ID of `{self.instance.id}`"
+            logger.error(msg)
+            raise ValueError(msg)
+        return sms_inquiry
+
     def _build_inquiry_response_data(self) -> SMSInquiryResponseData:
         
         caching_service = InquiryCachingService.init(inquiry=self.instance)
         session_data = caching_service.get_phone_session()
-        # offset = session_data.offset if session_data is not None else 0
         offset = 0
         qs = caching_service.get_resources_by_proximity(location=self.instance.location)
         response_builder = QuerySetResponseBuilder(
             queryset=qs,
             offset=offset,
+            params=self.instance.params if self.instance.params else None,
         )
         response_data = response_builder.create_response_data()
         if session_data:
@@ -62,6 +75,7 @@ class ResponseService:
             )
         return response_data
 
+
     def _get_sms_inquiry_for_follow_up(self, id: int) -> SMSInquiry:
         sms_inquiry = self.instance.conversation.smsinquiry_set.filter(id=id).first()
         if not sms_inquiry:
@@ -71,28 +85,38 @@ class ResponseService:
         return sms_inquiry
 
 
+    def _build_follow_up_context(
+            self,
+            sms_inquiry: SMSInquiry,
+            current_session: PhoneSessionData,
+            caching_service: FollowUpCachingService,
+    ) -> FollowUpContext:
+        return FollowUpContext(
+            sms_inquiry=sms_inquiry,
+            current_session=current_session,
+            caching_service=caching_service,
+        )
+
+
     def _build_follow_up_response(self):
         caching_service, current_session = FollowUpCachingService.init(follow_up_inquiry=self.instance)
         sms_inquiry = self._get_sms_inquiry_for_follow_up(current_session.inquiry_id)
+        context = self._build_follow_up_context(
+            sms_inquiry=sms_inquiry,
+            current_session=current_session,
+            caching_service=caching_service,
+        )
         match self.instance.keyword_enum:
             case SMSFollowUpKeywordEnum.DIRECTIONS:
                 ...
             case SMSFollowUpKeywordEnum.INFO:
                 ...
             case SMSFollowUpKeywordEnum.MORE:
-                qs = caching_service.get_resources_by_proximity(location=sms_inquiry.location)
-                response_service = QuerySetResponseBuilder(
-                    queryset=qs,
-                    offset=current_session.offset,
-                )
-                response_data = response_service.create_response_data()
-                print()
-                print(current_session)
-                print()
-                print(response_data)
-                print()
-                # TODO: update session!
-                # caching_service.more(current_session)
+                more_handler = More(context=context)
+                response_data = more_handler.build_response_data()
+                new_session = more_handler.update_session(ids=response_data.ids)
+
+
 
     def _build_unresolved_response(self):
         ...

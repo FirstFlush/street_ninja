@@ -1,5 +1,5 @@
 from .base_response_builder import BaseResponseBuilder
-from .respones_templates.base_response_templates import FollowUpResponseTemplate
+from .response_templates.base_response_templates import FollowUpResponseTemplate
 from sms.enums import SMSFollowUpKeywordEnum
 
 

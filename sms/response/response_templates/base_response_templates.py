@@ -1,5 +1,6 @@
+from abc import ABC, abstractmethod
 import logging
-from dataclasses import dataclass
+from typing import Any
 from sms.enums import SMSKeywordEnum
 from resources.abstract_models import ResourceModel
 
@@ -7,13 +8,7 @@ from resources.abstract_models import ResourceModel
 logger = logging.getLogger(__name__)
 
 
-class BaseSMSResponseTemplate():
-    
-    @classmethod
-    def format_response(cls, instance: ResourceModel):
-        msg = f"`{cls.__name__}` must implement format_response() method!"
-        logger.error(msg)
-        raise NotImplementedError(msg)
+class BaseSMSResponseTemplate(ABC):
 
     @classmethod
     def _convert_bool(cls, boolean: bool, abbreviated: bool = True) -> str:
@@ -30,9 +25,21 @@ class BaseSMSResponseTemplate():
 class ResourceResponseTemplate(BaseSMSResponseTemplate):
 
     keyword_enum: SMSKeywordEnum | None = None
-    always_show: list[str] | None = None
-    optional_params: list[str] | None = None
-    response_format: str | None = None
+
+    def __init__(self, params: dict[str, Any] | None = None):
+        self.params = params
+
+    def _params_string(self, sep: str = ", ") -> str:
+        return sep.join([f"{k.capitalize()} {self._convert_bool(v, abbreviated=False) if isinstance(v, bool) else v}" for k, v in self.params.items()])
+
+    def distance(self, km: float) -> str:
+        km = f"{round(km,1)}".rstrip("0").rstrip(".")
+        return f"{km}km"
+    
+    @abstractmethod
+    def format_result(self) -> str:
+        ...
+
 
 
 class FollowUpResponseTemplate(BaseSMSResponseTemplate):

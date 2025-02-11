@@ -34,13 +34,17 @@ class InquiryCachingService(BaseCacheService):
             session_data: PhoneSessionData,
             ids: list[int],
     ) -> PhoneSessionData:
+        """
+        Updates session when an sms inquiry comes in.
+        This is differet from create session, as one session can have multiple inquiries.
+        """
         session_data.ids = ids
         session_data.keyword = self.inquiry.keyword
         session_data.inquiry_id = self.inquiry.id
         session_data.last_updated = now()
         self._set_phone_session(session_data=session_data)
-        return session_data
-        
+        return session_data 
+    
 
     @classmethod
     def init(cls, inquiry: SMSInquiry) -> "InquiryCachingService":

@@ -1,5 +1,15 @@
 from dataclasses import dataclass
-from typing import Any, Optional
+from typing import Optional
+from sms.models import SMSInquiry
+from cache.dataclasses import PhoneSessionData
+from cache.follow_up_caching_service import FollowUpCachingService
+
+
+@dataclass
+class FollowUpContext:
+    sms_inquiry: SMSInquiry
+    current_session: PhoneSessionData
+    caching_service: FollowUpCachingService
 
 
 @dataclass

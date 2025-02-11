@@ -44,7 +44,7 @@ class PersistenceService:
         if created:
             logger.info(f"new Conversation with id `{convo.id}` created")
         else:
-            logger.info(f"found Conversation with id `{convo.id}`")
+            logger.info(f"found active Conversation with id `{convo.id}`")
         return convo
 
 

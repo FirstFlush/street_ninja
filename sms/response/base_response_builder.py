@@ -3,11 +3,11 @@ import logging
 from twilio.twiml.messaging_response import MessagingResponse
 from sms.enums import SMSKeywordEnum
 from resources.abstract_models import ResourceQuerySet, ResourceModel
-from .respones_templates.resource_templates import (
+from .response_templates.resource_templates import (
     ShelterResponseTemplate,
     FoodResponseTemplate,
 )
-from .respones_templates import BaseSMSResponseTemplate
+from .response_templates import BaseSMSResponseTemplate
 
 
 logger = logging.getLogger(__name__)

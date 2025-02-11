@@ -34,14 +34,19 @@ class FollowUpCachingService(BaseCacheService):
 
 
     def update_phone_session(
-            self, 
+            self,
             session_data: PhoneSessionData,
             ids: list[int],
     ) -> PhoneSessionData:
-        session_data.ids = ids
+        """
+        Updates session when a 'MORE' request comes in.
+        """
+        session_data.ids.extend(ids)
         session_data.last_updated = now()
         self._set_phone_session(session_data=session_data)
-        return session_data
+        return session_data  
+
+
 
     def directions(self):
         ...
