@@ -10,7 +10,7 @@ from sms.models import SMSInquiry, SMSFollowUpInquiry, UnresolvedSMSInquiry
 from .dataclasses import SMSInquiryResponseData, SMSFollowUpResponseData, FollowUpContext, InquiryResponseContext
 from .response_builders.queryset_result_builder import QuerySetResultBuilder
 from .inquiry_response_handler import InquiryResponseHandler
-
+from .response_templates.general_templates import HelpResponseTemplate
 
 logger = logging.getLogger(__name__)
 
@@ -31,9 +31,9 @@ class ResponseService:
         if isinstance(self.instance, SMSInquiry):
             response_data = self._build_inquiry_response_data()
         elif isinstance(self.instance, SMSFollowUpInquiry):
-            response_data = self._build_follow_up_response()
+            response_data = self._build_follow_up_response_data()
         elif isinstance(self.instance, UnresolvedSMSInquiry):
-            response_data = self._build_unresolved_response()
+            response_data = None
         else:
             msg = f"Received invalid type for instance argument: `{type(self.instance)}`"
             logger.error(msg)
@@ -97,7 +97,7 @@ class ResponseService:
         )
 
 
-    def _build_follow_up_response(self) -> SMSFollowUpResponseData:
+    def _build_follow_up_response_data(self) -> SMSFollowUpResponseData:
 
         caching_service, current_session = FollowUpCachingService.init(follow_up_inquiry=self.instance)
         sms_inquiry = self._get_sms_inquiry_for_follow_up(current_session.inquiry_id)
@@ -118,5 +118,5 @@ class ResponseService:
         return response_data
 
 
-    def _build_unresolved_response(self):
-        ...
+    def build_help_msg(self) -> str:
+        return HelpResponseTemplate.help_msg()

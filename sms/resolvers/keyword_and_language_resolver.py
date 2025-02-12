@@ -67,13 +67,13 @@ class KeywordLanguageResolver(BaseKeywordResolver):
             LanguageEnum.CHINESE: {"厕所", "卫生间", "洗手间", "大便", "小便"},  # Combined as "Chinese"
             LanguageEnum.YORUBA: {"igbonse", "igbẹ", "nik", "igbe"},  # Yoruba
         },
-        SMSKeywordEnum.HELP: {
-            LanguageEnum.ENGLISH: {"help",},
-            LanguageEnum.FRENCH: {"aide"},
-            LanguageEnum.PUNJABI: {"madad", "sahayata"},
-            LanguageEnum.CHINESE: {"幫助", "協助"},
-            LanguageEnum.YORUBA: {"Iranwọ"},
-        },
+        # SMSKeywordEnum.HELP: {
+        #     LanguageEnum.ENGLISH: {"help",},
+        #     LanguageEnum.FRENCH: {"aide"},
+        #     LanguageEnum.PUNJABI: {"madad", "sahayata"},
+        #     LanguageEnum.CHINESE: {"幫助", "協助"},
+        #     LanguageEnum.YORUBA: {"Iranwọ"},
+        # },
     }
 
     @classmethod

@@ -68,12 +68,8 @@ class SMSService:
         return persistence_service.instance
 
 
-    def build_response_data(
-            self, 
-            instance: IncomingSMSMessageModel, 
-    ) -> SMSInquiryResponseData | SMSFollowUpResponseData:
-        response_service = ResponseService(instance)
-        return response_service.build_response_data()
+    # def build_response_data(self, response_service: ResponseService) -> SMSInquiryResponseData | SMSFollowUpResponseData:
+    #     return response_service.build_response_data()
 
 
     def _build_persistence_service(self, sms_data:ResolvedSMS, location: Point | None) -> PersistenceService:
@@ -95,6 +91,8 @@ class SMSService:
             case ResolvedSMSType.UNRESOLVED:
                 pass
 
+    def _build_response_service(self, instance: IncomingSMSMessageModel) -> ResponseService:
+        return ResponseService(instance=instance)
 
     @classmethod
     def process_sms(cls, msg: str, phone_number: str, message_sid: str):
@@ -104,18 +102,24 @@ class SMSService:
 
         sms_service.persistence_service = sms_service._build_persistence_service(sms_data=sms_service.sms_data, location=sms_location)
         sms_service.persistence_service.save_sms()
-        response_data = sms_service.build_response_data(instance=sms_service.persistence_service.instance)
 
+        response_service = sms_service._build_response_service(instance=sms_service.persistence_service.instance)
+        response_data = response_service.build_response_data()
 
-
-        sms_service.save_response(response_data=response_data)
-        wrapped_response_message = response_data.template.wrap_response(
-            msg=response_data.msg,
-            new_session=sms_service.persistence_service.new_session
-        )
+        response_instance = sms_service.save_response(response_data=response_data)
+        if response_instance:
+            wrapped_response_message = response_data.template.wrap_response(
+                msg=response_data.msg,
+                new_session=sms_service.persistence_service.new_session
+            )
+        else:
+            wrapped_response_message = response_service.build_help_msg()
         print()
         print()
         print(wrapped_response_message)
         print()
         print()
-        twiml = ...
+        twiml = response_service.to_twiml(msg=wrapped_response_message)
+
+        print(twiml)
+        print()

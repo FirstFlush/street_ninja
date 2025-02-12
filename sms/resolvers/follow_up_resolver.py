@@ -24,14 +24,18 @@ class FollowUpResolver(BaseKeywordResolver):
         self.tokens = self._tokenize_msg(msg=self.msg)
         self.keyword_set = set(SMSFollowUpKeywordEnum.values)
 
-    def resolve_follow_up_sms(self) -> ResolvedSMSFollowUp:
+    def resolve_follow_up_sms(self) -> ResolvedSMSFollowUp | None:
         keyword_enum = self._resolve_keyword()
-        params = self._resolve_params()
-        return ResolvedSMSFollowUp(
-            msg=self.msg,
-            follow_up_keyword_enum=keyword_enum,
-            follow_up_params=params,
-        )
+        if keyword_enum:
+            params = self._resolve_params()
+            return ResolvedSMSFollowUp(
+                msg=self.msg,
+                follow_up_keyword_enum=keyword_enum,
+                follow_up_params=params,
+            )
+        else:
+            logger.warning("Failed to resolve FollowUp keyword...")
+            None
 
     def _resolve_keyword(self) -> SMSFollowUpKeywordEnum | None:
         for token in self.tokens:

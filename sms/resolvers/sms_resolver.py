@@ -97,9 +97,10 @@ class SMSResolver:
                 params=resolved_params,
             )
         return resolved_sms
-        
+
 
     def _unresolved_sms(self) -> UnresolvedSMS:
+        logger.warning(f"Unresolved SMS: `{self.msg}`")
         return UnresolvedSMS(
             msg=self.msg,
         )
@@ -114,9 +115,14 @@ class SMSResolver:
 
     def _resolve_follow_up_sms(self) -> ResolvedSMSFollowUp | None:
         try:
-            return self._follow_up_resolver(self.msg).resolve_follow_up_sms()
+            follow_up_resolver = self._follow_up_resolver(self.msg).resolve_follow_up_sms()
         except FollowUpSMSResolutionError:
             return None
+        else:
+            if follow_up_resolver is None:
+                return None
+            return follow_up_resolver
+
 
     def _resolve_keyword_and_language(self) -> ResolvedKeywordAndLanguage | None:
         try:
