@@ -6,8 +6,6 @@ from sms.resolvers import (
 )
 # from sms.response.respones_templates import ResourceResponseTemplate
 from sms.response import (
-    QuerySetResponseBuilder, 
-    InstanceResponseBuilder, 
     SMSInquiryResponseData, 
     SMSFollowUpResponseData,
     ResponseService,
@@ -66,8 +64,13 @@ class SMSService:
         return persistence_service.instance
 
 
-    def respond(self, instance) -> SMSInquiryResponseData | SMSFollowUpResponseData:
+    def build_response(self, instance: IncomingSMSMessageModel, new_session: bool = False) -> SMSInquiryResponseData | SMSFollowUpResponseData:
         response_service = ResponseService(instance)
+        response_data = response_service.build_response_data()
+        wrapped_response = response_service.wrap_response()
+        save_response = ...
+
+
         return response_service.build_response_data()
 
     def _build_persistence_service(self, sms_data:ResolvedSMS, location: Point | None) -> PersistenceService:
@@ -86,4 +89,4 @@ class SMSService:
         sms_data = sms_service.resolve()
         sms_location = sms_service.geocode(sms_data=sms_data)
         sms_instance = sms_service.save_sms(sms_data=sms_data, location=sms_location)
-        sms_service.respond(instance=sms_instance)
+        sms_service.build_response(instance=sms_instance)

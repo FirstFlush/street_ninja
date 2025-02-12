@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 import logging
 from typing import Any
 from sms.enums import SMSKeywordEnum
-from resources.abstract_models import ResourceModel
 
 
 logger = logging.getLogger(__name__)
@@ -22,9 +21,11 @@ class BaseSMSResponseTemplate(ABC):
         raise TypeError(msg)
 
 
-class ResourceResponseTemplate(BaseSMSResponseTemplate):
+class QuerySetResponseTemplate(BaseSMSResponseTemplate):
 
     keyword_enum: SMSKeywordEnum | None = None
+    FOOTER = "Reply 'MORE' for more results" 
+    TITLE = ""
 
     def __init__(self, params: dict[str, Any] | None = None):
         self.params = params
@@ -39,9 +40,4 @@ class ResourceResponseTemplate(BaseSMSResponseTemplate):
     @abstractmethod
     def format_result(self) -> str:
         ...
-
-
-
-class FollowUpResponseTemplate(BaseSMSResponseTemplate):
-    ...
 

@@ -30,7 +30,9 @@ class PersistenceService:
         self.now = now()
         logger.info(f"{self.__class__.__name__}.now stringified: `{self.now.strftime('%Y-%m-%d %H:%M:%S')}`")
         self.phone_number = self._phone_number(sms_data.phone_number)
-        self.conversation = self._conversation()
+        conversation, created = self._conversation()
+        self.conversation = conversation
+        self.new_session = created
         self.instance : None | SMSInquiry | SMSFollowUpInquiry | UnresolvedSMSInquiry = None
 
 
@@ -39,13 +41,13 @@ class PersistenceService:
         logger.info(f"PhoneNumber `{phone.id}` found. Created: `{created}`")
         return phone
 
-    def _conversation(self) -> Conversation:
+    def _conversation(self) -> tuple[Conversation, bool]:
         convo, created =  Conversation.objects.get_or_create_conversation(phone_number=self.phone_number, now=self.now)
         if created:
             logger.info(f"new Conversation with id `{convo.id}` created")
         else:
             logger.info(f"found active Conversation with id `{convo.id}`")
-        return convo
+        return convo, created
 
 
     def _save_inquiry_sms(self) -> SMSInquiry:

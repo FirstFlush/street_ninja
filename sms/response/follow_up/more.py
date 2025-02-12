@@ -1,7 +1,7 @@
 import logging
 from .base_handler import BaseFollowUpHandler
 from resources.abstract_models import ResourceQuerySet
-from sms.response.queryset_response_builder import QuerySetResponseBuilder
+from sms.response.response_builders.queryset_result_builder import QuerySetResultBuilder
 from sms.response.dataclasses import FollowUpContext, SMSFollowUpResponseData
 
 
@@ -25,8 +25,8 @@ class More(BaseFollowUpHandler):
             response_data.msg = self.END_OF_RESULTS
         return response_data
 
-    def _response_builder(self) -> QuerySetResponseBuilder:
-        return QuerySetResponseBuilder(
+    def _response_builder(self) -> QuerySetResultBuilder:
+        return QuerySetResultBuilder(
             queryset=self.queryset,
             offset=self.current_session.offset,
         )

@@ -1,7 +1,7 @@
 from typing import Any
 from resources.enums import ShelterCategoryParamValue
 from sms.enums import SMSKeywordEnum
-from .base_response_templates import ResourceResponseTemplate
+from .base_response_templates import QuerySetResponseTemplate
 from resources.enums import ShelterParamKey
 from resources.models import (
     Shelter,
@@ -11,7 +11,8 @@ from resources.models import (
     PublicWifi,
 )
 
-class ShelterResponseTemplate(ResourceResponseTemplate):
+
+class ShelterResponseTemplate(QuerySetResponseTemplate):
 
     TITLE = "🏠 SHELTERS"
 
@@ -31,7 +32,7 @@ class ShelterResponseTemplate(ResourceResponseTemplate):
         return s
 
 
-class FoodResponseTemplate(ResourceResponseTemplate):
+class FoodResponseTemplate(QuerySetResponseTemplate):
     
     TITLE = "🍽 FOOD PROGRAMS"
 
@@ -40,7 +41,7 @@ class FoodResponseTemplate(ResourceResponseTemplate):
 
 
 
-class ToiletResponseTemplate(ResourceResponseTemplate):
+class ToiletResponseTemplate(QuerySetResponseTemplate):
 
     keyword_enum = SMSKeywordEnum.TOILET
     TITLE = "🧻 PUBLIC TOILETS"
@@ -48,7 +49,7 @@ class ToiletResponseTemplate(ResourceResponseTemplate):
     def format_result(self, instance: Toilet) -> str:
         return instance.name
 
-class WaterResponseTemplate(ResourceResponseTemplate):
+class WaterResponseTemplate(QuerySetResponseTemplate):
 
     keyword_enum = SMSKeywordEnum.WATER
     TITLE = "💧 DRINKING FOUNTAINS"
@@ -56,7 +57,7 @@ class WaterResponseTemplate(ResourceResponseTemplate):
     def format_result(self, instance: DrinkingFountain) -> str:
         ...
 
-class WifiResponseTemplate(ResourceResponseTemplate):
+class WifiResponseTemplate(QuerySetResponseTemplate):
 
     keyword_enum = SMSKeywordEnum.WIFI
     TITLE = "📶 PUBLIC WIFI"

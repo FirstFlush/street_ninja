@@ -5,9 +5,9 @@ from cache.inquiry_caching_service import InquiryCachingService
 from sms.enums import SMSKeywordEnum, SMSFollowUpKeywordEnum
 from .follow_up import More, Directions, Info
 from sms.models import SMSInquiry, SMSFollowUpInquiry, UnresolvedSMSInquiry
-from .dataclasses import SMSInquiryResponseData, SMSFollowUpResponseData, FollowUpContext
-from .queryset_response_builder import QuerySetResponseBuilder
-from .instance_response_builder import InstanceResponseBuilder
+from .dataclasses import SMSInquiryResponseData, SMSFollowUpResponseData, FollowUpContext, InquiryResponseContext
+from .response_builders.queryset_result_builder import QuerySetResultBuilder
+from .inquiry_response_handler import InquiryResponseHandler
 
 
 logger = logging.getLogger(__name__)
@@ -28,16 +28,16 @@ class ResponseService:
         caching layer to update and necessary ephemeral data.
         """
         if isinstance(self.instance, SMSInquiry):
-            response = self._build_inquiry_response_data()
+            response_data = self._build_inquiry_response_data()
         elif isinstance(self.instance, SMSFollowUpInquiry):
-            response = self._build_follow_up_response()
+            response_data = self._build_follow_up_response()
         elif isinstance(self.instance, UnresolvedSMSInquiry):
-            response = self._build_unresolved_response()
+            response_data = self._build_unresolved_response()
         else:
             msg = f"Received invalid type for instance argument: `{type(self.instance)}`"
             logger.error(msg)
             raise TypeError(msg)
-        return response 
+        return response_data
 
 
     def _get_sms_inquiry_for_follow_up(self, id: int) -> SMSInquiry:
@@ -51,29 +51,20 @@ class ResponseService:
             raise ValueError(msg)
         return sms_inquiry
 
+
     def _build_inquiry_response_data(self) -> SMSInquiryResponseData:
         
         caching_service = InquiryCachingService.init(inquiry=self.instance)
-        session_data = caching_service.get_phone_session()
-        offset = 0
         qs = caching_service.get_resources_by_proximity(location=self.instance.location)
-        response_builder = QuerySetResponseBuilder(
+        context= InquiryResponseContext(
+            instance=self.instance,
+            caching_service=caching_service,
             queryset=qs,
-            offset=offset,
-            params=self.instance.params if self.instance.params else None,
         )
-        response_data = response_builder.create_response_data()
-        if session_data:
-            session_data = caching_service.update_phone_session(
-                session_data=session_data,
-                ids=response_data.ids,
-            )
-        else:
-            session_data =caching_service.create_phone_session(
-                ids=response_data.ids,
-                params=self.instance.params if self.instance.params else None,
-            )
-        return response_data
+        inquiry_response_handler = InquiryResponseHandler(context=context)
+        response_data = inquiry_response_handler.build_response_data()
+        print(response_data)
+        print(inquiry_response_handler.queryset_result_builder.template_class.__name__)
 
 
     def _get_sms_inquiry_for_follow_up(self, id: int) -> SMSInquiry:
@@ -114,7 +105,7 @@ class ResponseService:
             case SMSFollowUpKeywordEnum.MORE:
                 more_handler = More(context=context)
                 response_data = more_handler.build_response_data()
-                new_session = more_handler.update_session(ids=response_data.ids)
+                more_handler.update_session(ids=response_data.ids)
 
 
 

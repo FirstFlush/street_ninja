@@ -2,12 +2,10 @@ import logging
 from typing import Type, Any
 from django.conf import settings
 from sms.enums import SMSKeywordEnum
-from resources.abstract_models import ResourceQuerySet, ResourceModel
-from cache.dataclasses import PhoneSessionData
-from .base_response_builder import BaseResponseBuilder
-from .dataclasses import SMSInquiryResponseData
-from .response_templates.base_response_templates import ResourceResponseTemplate
-from .response_templates.resource_templates import (
+from resources.abstract_models import ResourceQuerySet
+from ..dataclasses import SMSInquiryResponseData
+from ..response_templates.base_response_templates import QuerySetResponseTemplate
+from ..response_templates.queryset_templates import (
     ShelterResponseTemplate,
     FoodResponseTemplate,
     WaterResponseTemplate,
@@ -19,7 +17,7 @@ from .response_templates.resource_templates import (
 logger = logging.getLogger(__name__)
 
 
-class QuerySetResponseBuilder(BaseResponseBuilder):
+class QuerySetResultBuilder:
 
     MAPPING = {
         SMSKeywordEnum.SHELTER: ShelterResponseTemplate,
@@ -42,7 +40,7 @@ class QuerySetResponseBuilder(BaseResponseBuilder):
         self.template_class = self._get_template_class()
 
 
-    def _get_template_class(self) -> Type[ResourceResponseTemplate]:
+    def _get_template_class(self) -> Type[QuerySetResponseTemplate]:
         try:
             return self.MAPPING[self.keyword_enum]
         except KeyError as e:
@@ -65,6 +63,7 @@ class QuerySetResponseBuilder(BaseResponseBuilder):
         return SMSInquiryResponseData(
             msg=truncated_response,
             ids=self._get_ids(indexed_queryset, count=count),
+            template_class=self.template_class,
         )
 
     def _truncate_response(self, formatted_response: str) -> tuple[str, int]:
@@ -85,7 +84,7 @@ class QuerySetResponseBuilder(BaseResponseBuilder):
         for instance in queryset:
             res = template.format_result(instance=instance)
             response_items.append(res)
-        print(template.TITLE + "\n" + "\n".join(response_items))
+        # print(template.TITLE + "\n" + "\n".join(response_items))
         return "\n".join(response_items)
 
 
