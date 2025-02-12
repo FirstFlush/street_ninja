@@ -18,7 +18,6 @@ class ResponseService:
     def __init__(self, instance: SMSInquiry | SMSFollowUpInquiry | UnresolvedSMSInquiry):
         self.instance = instance
 
-
     def build_response_data(self) -> SMSInquiryResponseData | SMSFollowUpResponseData:
         """
         Processes the inquiry and generates a response according to its type.
@@ -38,7 +37,6 @@ class ResponseService:
             logger.error(msg)
             raise TypeError(msg)
         return response_data
-
 
     def _get_sms_inquiry_for_follow_up(self, id: int) -> SMSInquiry:
         """

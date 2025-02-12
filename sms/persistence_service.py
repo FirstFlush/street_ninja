@@ -70,18 +70,15 @@ class PersistenceService:
         )
 
 
-    def save_inquiry_response(self, response_data: SMSInquiryResponseData) -> SMSInquiryResponse:
-        response = SMSInquiryResponse.objects.create(
-            conversation=self.instance.conversation,
-            sms_inquiry=self.instance,
-            resource_ids=response_data.ids,
-        )
-        logger.info(f"Successfully created {response.__class__.__name__} `{response.id}`")
-        return response
+    # def save_inquiry_response(self, response_data: SMSInquiryResponseData) -> SMSInquiryResponse:
+    #     response = SMSInquiryResponse.objects.create(
+    #         conversation=self.instance.conversation,
+    #         sms_inquiry=self.instance,
+    #         resource_ids=response_data.ids,
+    #     )
+    #     logger.info(f"Successfully created {response.__class__.__name__} `{response.id}`")
+    #     return response
 
-
-    def save_follow_up_response(self, response_data: SMSFollowUpResponseData) -> SMSFollowUpResponse:
-        ...
 
 
     def save_sms(self):
@@ -105,3 +102,34 @@ class PersistenceService:
         logger.info(f"Saved {self.instance.__class__.__name__} instance: `{self.instance}`")
 
 
+    def save_inquiry_response(self, response_data: SMSInquiryResponseData) -> SMSInquiryResponse:
+        try:
+            response = SMSInquiryResponse.objects.create(
+                sms_inquiry=self.instance,
+                conversation=self.instance.conversation,
+                resource_ids=response_data.ids,
+            )
+        except Exception as e:
+            msg = f"Error while trying to create SMSInquiryResponse for `{self.instance.__class__.__name__}` #`{self.instance.id}`: {e}"
+            logger.error(msg, exc_info=True)
+            raise
+        else:
+            logger.info(f"Create SMSInquiryResponse id `{response.id}`")
+            return response
+        
+
+    def save_follow_up_response(self, response_data: SMSFollowUpResponseData) -> SMSFollowUpResponse:
+        try:
+            response = SMSFollowUpResponse.objects.create(
+                sms_follow_up=self.instance,
+                conversation=self.instance.conversation,
+                resource_ids=response_data.ids,
+                directions=response_data.directions_text,
+            )
+        except Exception as e:
+            msg = f"Error while trying to create SMSFollowUpResponse for `{self.instance.__class__.__name__}` #`{self.instance.id}`: {e}"
+            logger.error(msg, exc_info=True)
+            raise
+        else:
+            logger.info(f"Create SMSFollowUpResponse id `{response.id}`")
+            return response

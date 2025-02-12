@@ -10,6 +10,7 @@ from sms.response import (
     SMSFollowUpResponseData,
     ResponseService,
 )
+from sms.persistence_service import PersistenceService
 from sms.enums import ResolvedSMSType, SMSKeywordEnum, SMSFollowUpKeywordEnum
 from geo.geocoding import GeocodingService
 from .abstract_models import IncomingSMSMessageModel
@@ -37,6 +38,9 @@ class SMSService:
         self.phone_number = phone_number
         self.message_sid = message_sid
         self.resolver = self._get_resolver()
+        self.sms_data: None | ResolvedSMS = None
+        self.persistence_service: None | PersistenceService = None
+
 
     def _get_resolver(self) -> SMSResolver:
         return SMSResolver(msg=self.msg)
@@ -47,10 +51,10 @@ class SMSService:
             phone_number=self.phone_number,
         )
 
-    def geocode(self, sms_data: ResolvedSMS) -> Point | None:
-        match sms_data.resolved_sms_type:
+    def geocode(self) -> Point | None:
+        match self.sms_data.resolved_sms_type:
             case ResolvedSMSType.INQUIRY:
-                location = self._get_location(location_str=sms_data.data.location_data.location)
+                location = self._get_location(location_str=self.sms_data.data.location_data.location)
             case ResolvedSMSType.FOLLOW_UP | ResolvedSMSType.UNRESOLVED | _:
                 location = None        
         return location
@@ -64,13 +68,15 @@ class SMSService:
         return persistence_service.instance
 
 
-    def build_response(self, instance: IncomingSMSMessageModel, new_session: bool = False) -> SMSInquiryResponseData | SMSFollowUpResponseData:
+    def build_response(
+            self, 
+            instance: IncomingSMSMessageModel, 
+            new_session: bool = False,
+    ) -> SMSInquiryResponseData | SMSFollowUpResponseData:
         response_service = ResponseService(instance)
         response_data = response_service.build_response_data()
         print(new_session)
         print(response_data)
-        # wrapped_response = response_service.wrap_response()
-        # save_response = ...
 
 
         return response_service.build_response_data()
@@ -85,16 +91,28 @@ class SMSService:
             logger.error(f"`{e.__class__.__name__}` occurred while attempting to geocode: {e}", exc_info=True)
             raise
 
+    def save_response(self, response_data: SMSInquiryResponseData | SMSFollowUpResponseData):
+        match self.sms_data.resolved_sms_type:
+            case ResolvedSMSType.INQUIRY:
+                self.persistence_service.save_inquiry_response(response_data=response_data)
+            case ResolvedSMSType.FOLLOW_UP:
+                self.persistence_service.save_follow_up_response(response_data=response_data)
+            case ResolvedSMSType.UNRESOLVED:
+                pass
+
+
     @classmethod
     def process_sms(cls, msg: str, phone_number: str, message_sid: str):
         sms_service = cls(msg=msg, phone_number=phone_number, message_sid=message_sid)
-        sms_data = sms_service.resolve()
-        sms_location = sms_service.geocode(sms_data=sms_data)
+        sms_service.sms_data = sms_service.resolve()
+        sms_location = sms_service.geocode()
 
-        persistence_layer = sms_service._build_persistence_service(sms_data=sms_data, location=sms_location)
-        persistence_layer.save_sms()
-        # sms_instance = sms_service.save_sms(sms_data=sms_data, location=sms_location)
-        sms_service.build_response(
-            instance=persistence_layer.instance,
-            new_session = persistence_layer.new_session,
+        sms_service.persistence_service = sms_service._build_persistence_service(sms_data=sms_service.sms_data, location=sms_location)
+        sms_service.persistence_service.save_sms()
+        response_data = sms_service.build_response(
+            instance=sms_service.persistence_service.instance,
+            new_session = sms_service.persistence_service.new_session,
         )
+        sms_service.save_response(response_data=response_data)
+        wrapped_response_message = ... # want to use the response_wrapper templates here..
+        twiml = ...

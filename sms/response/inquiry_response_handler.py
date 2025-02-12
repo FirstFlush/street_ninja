@@ -1,8 +1,12 @@
+import logging
 from cache.inquiry_caching_service import InquiryCachingService
 from resources.abstract_models import ResourceQuerySet
-from sms.models import SMSInquiry
+from sms.models import SMSInquiry, SMSInquiryResponse
 from .response_builders import QuerySetResultBuilder
 from .dataclasses import InquiryResponseContext, SMSInquiryResponseData
+
+
+logger = logging.getLogger(__name__)
 
 
 class InquiryResponseHandler:

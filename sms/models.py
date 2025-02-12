@@ -184,13 +184,14 @@ class SMSMessageOverflow(models.Model):
 
 class SMSInquiryResponse(ResponseSMSMessageModel):
     conversation = models.ForeignKey(to=Conversation, on_delete=models.CASCADE)
-    sms_inquiry = models.ForeignKey(to=SMSInquiry, on_delete=models.CASCADE)
+    sms_inquiry = models.OneToOneField(to=SMSInquiry, on_delete=models.CASCADE)
     resource_ids = ArrayField(models.IntegerField())
     date_created = models.DateTimeField(auto_now_add=True)
 
 
 class SMSFollowUpResponse(ResponseSMSMessageModel):
     conversation = models.ForeignKey(to=Conversation, on_delete=models.CASCADE)
-    sms_follow_up = models.ForeignKey(to=SMSFollowUpInquiry, on_delete=models.CASCADE)
+    sms_follow_up = models.OneToOneField(to=SMSFollowUpInquiry, on_delete=models.CASCADE)
     resource_ids = ArrayField(models.IntegerField(), null=True)
+    directions = models.TextField(null=True)
     date_created = models.DateTimeField(auto_now_add=True)
