@@ -20,7 +20,9 @@ class More(BaseFollowUpHandler):
         self.response_builder = self._response_builder()
 
     def build_response_data(self) -> SMSFollowUpResponseData:
-        response_data = self.response_builder.create_response_data()
+        print('buidling response data in MORE')
+        response_data = self.response_builder.create_response_data(more=True)
+        print('built response data!: ', response_data)
         if len(response_data.ids) == 0:
             response_data.msg = self.END_OF_RESULTS
         return response_data

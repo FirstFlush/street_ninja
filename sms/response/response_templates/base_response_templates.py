@@ -2,12 +2,15 @@ from abc import ABC, abstractmethod
 import logging
 from typing import Any
 from sms.enums import SMSKeywordEnum
-
+from .welcome_template import WelcomeTemplate
 
 logger = logging.getLogger(__name__)
 
 
 class BaseSMSResponseTemplate(ABC):
+
+    TITLE = ""
+    FOOTER = ""
 
     @classmethod
     def _convert_bool(cls, boolean: bool, abbreviated: bool = True) -> str:
@@ -21,14 +24,23 @@ class BaseSMSResponseTemplate(ABC):
         raise TypeError(msg)
 
 
+class GeneralResponseTemplate(BaseSMSResponseTemplate):
+
+    def wrap_response(self, msg:str, new_session: bool = False) -> str:
+        return msg
+
+
 class QuerySetResponseTemplate(BaseSMSResponseTemplate):
 
     keyword_enum: SMSKeywordEnum | None = None
     FOOTER = "Reply 'MORE' for more results" 
-    TITLE = ""
 
     def __init__(self, params: dict[str, Any] | None = None):
         self.params = params
+
+    @abstractmethod
+    def format_result(self) -> str:
+        ...
 
     def _params_string(self, sep: str = ", ") -> str:
         return sep.join([f"{k.capitalize()} {self._convert_bool(v, abbreviated=False) if isinstance(v, bool) else v}" for k, v in self.params.items()])
@@ -37,7 +49,13 @@ class QuerySetResponseTemplate(BaseSMSResponseTemplate):
         km = f"{round(km,1)}".rstrip("0").rstrip(".")
         return f"{km}km"
     
-    @abstractmethod
-    def format_result(self) -> str:
-        ...
+    def wrap_response(self, msg:str, new_session: bool = False) -> str:
+        if new_session:
+            top = f"{WelcomeTemplate.welcome_header()}\n\n{self.TITLE}"
+            bottom = WelcomeTemplate.WELCOME_FOOTER
+        else:
+            top = self.TITLE
+            bottom = f"\n{self.FOOTER}"
+
+        return f"{top}\n{msg}\n{bottom}"
 

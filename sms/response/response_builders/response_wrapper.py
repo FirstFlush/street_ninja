@@ -3,7 +3,6 @@ from ..response_templates import QuerySetResponseTemplate
 from ..dataclasses import SMSInquiryResponseData
 from ..response_templates import WelcomeResponseTemplate
 
-from twilio.twiml.messaging_response import MessagingResponse
 
 
 class BaseResponseWrapper(ABC):
@@ -13,14 +12,6 @@ class BaseResponseWrapper(ABC):
         self.new_session = new_session
 
 
-    # def to_twiml(self, msg: str) -> str:
-    #     """
-    #     Converts the response text to TwiML, a type of XML that Twilio Gateway requires.
-    #     """
-    #     mr = MessagingResponse()
-    #     mr.message(msg)
-    #     logger.info("Created TwiML response")
-    #     return str(mr)
 
 
 
@@ -63,9 +54,6 @@ class QuerySetResponseWrapper(BaseResponseWrapper):
     
     def _bottom(self) -> str:
         return self.template.FOOTER
-
-
-
 
 
 class GeneralResponseWrapper(BaseResponseWrapper):

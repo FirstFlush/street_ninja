@@ -1,4 +1,6 @@
 import logging
+from twilio.twiml.messaging_response import MessagingResponse
+
 from cache.dataclasses import PhoneSessionData
 from cache.follow_up_caching_service import FollowUpCachingService
 from cache.inquiry_caching_service import InquiryCachingService
@@ -50,6 +52,16 @@ class ResponseService:
         return sms_inquiry
 
 
+    def to_twiml(self, msg: str) -> str:
+        """
+        Converts the response text to TwiML, a type of XML that Twilio Gateway requires.
+        """
+        mr = MessagingResponse()
+        mr.message(msg)
+        logger.info("Created TwiML response")
+        return str(mr)
+
+
     def _build_inquiry_response_data(self) -> SMSInquiryResponseData:
         
         caching_service = InquiryCachingService.init(inquiry=self.instance)
@@ -85,7 +97,8 @@ class ResponseService:
         )
 
 
-    def _build_follow_up_response(self):
+    def _build_follow_up_response(self) -> SMSFollowUpResponseData:
+
         caching_service, current_session = FollowUpCachingService.init(follow_up_inquiry=self.instance)
         sms_inquiry = self._get_sms_inquiry_for_follow_up(current_session.inquiry_id)
         context = self._build_follow_up_context(
@@ -102,7 +115,7 @@ class ResponseService:
                 more_handler = More(context=context)
                 response_data = more_handler.build_response_data()
                 more_handler.update_session(ids=response_data.ids)
-
+        return response_data
 
 
     def _build_unresolved_response(self):

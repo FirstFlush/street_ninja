@@ -70,7 +70,7 @@ class ConversationAdmin(BaseGISAdmin):
 
 @admin.register(SMSInquiry)
 class SMSInquiryAdmin(BaseGISAdmin):
-    list_display = ("conversation", "keyword", "location_text", "language", "message", "date_created")
+    list_display = ("id", "conversation", "keyword", "location_text", "language", "message", "date_created")
     search_fields = ("conversation__phone_number__number", "keyword", "location_text", "message")
     list_filter = ("keyword", "language")
     ordering = ("-date_created",)
@@ -79,7 +79,7 @@ class SMSInquiryAdmin(BaseGISAdmin):
 
 @admin.register(SMSFollowUpInquiry)
 class SMSFollowUpInquiryAdmin(BaseGISAdmin):
-    list_display = ("conversation", "keyword", "message", "date_created")
+    list_display = ("id", "conversation", "keyword", "message", "date_created")
     search_fields = ("conversation__phone_number__number", "keyword", "message")
     list_filter = ("keyword",)
     ordering = ("-date_created",)

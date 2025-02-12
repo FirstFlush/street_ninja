@@ -98,7 +98,7 @@ class PersistenceService:
                     msg = f"Invalid ResolvedSMSType enum: `{self.sms_data.resolved_sms_type}`"
                     logger.error(msg)
                     raise TypeError(msg)
-        
+
         logger.info(f"Saved {self.instance.__class__.__name__} instance: `{self.instance}`")
 
 

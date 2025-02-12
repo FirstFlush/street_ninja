@@ -68,18 +68,13 @@ class SMSService:
         return persistence_service.instance
 
 
-    def build_response(
+    def build_response_data(
             self, 
             instance: IncomingSMSMessageModel, 
-            new_session: bool = False,
     ) -> SMSInquiryResponseData | SMSFollowUpResponseData:
         response_service = ResponseService(instance)
-        response_data = response_service.build_response_data()
-        print(new_session)
-        print(response_data)
-
-
         return response_service.build_response_data()
+
 
     def _build_persistence_service(self, sms_data:ResolvedSMS, location: Point | None) -> PersistenceService:
         return PersistenceService(sms_data=sms_data, location=location)
@@ -109,10 +104,18 @@ class SMSService:
 
         sms_service.persistence_service = sms_service._build_persistence_service(sms_data=sms_service.sms_data, location=sms_location)
         sms_service.persistence_service.save_sms()
-        response_data = sms_service.build_response(
-            instance=sms_service.persistence_service.instance,
-            new_session = sms_service.persistence_service.new_session,
-        )
+        response_data = sms_service.build_response_data(instance=sms_service.persistence_service.instance)
+
+
+
         sms_service.save_response(response_data=response_data)
-        wrapped_response_message = ... # want to use the response_wrapper templates here..
+        wrapped_response_message = response_data.template.wrap_response(
+            msg=response_data.msg,
+            new_session=sms_service.persistence_service.new_session
+        )
+        print()
+        print()
+        print(wrapped_response_message)
+        print()
+        print()
         twiml = ...

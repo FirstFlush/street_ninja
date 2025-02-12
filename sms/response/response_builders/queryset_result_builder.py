@@ -3,7 +3,7 @@ from typing import Type, Any
 from django.conf import settings
 from sms.enums import SMSKeywordEnum
 from resources.abstract_models import ResourceQuerySet
-from ..dataclasses import SMSInquiryResponseData
+from ..dataclasses import SMSInquiryResponseData, SMSFollowUpResponseData
 from ..response_templates.base_response_templates import QuerySetResponseTemplate
 from ..response_templates.queryset_templates import (
     ShelterResponseTemplate,
@@ -37,8 +37,8 @@ class QuerySetResultBuilder:
             msg = f"{self.__class__.__name__} received invalid queryset upon instantiation. Type: `{self.queryset.__class__.__name__}`, QuerySet: `{self.queryset}`"
             logger.error(msg)
             raise TypeError(msg)
-        self.template_class = self._get_template_class()
-
+        template_class = self._get_template_class()
+        self.template = template_class(params=params)
 
     def _get_template_class(self) -> Type[QuerySetResponseTemplate]:
         try:
@@ -49,12 +49,27 @@ class QuerySetResultBuilder:
             raise
 
 
-    def create_response_data(self, verbose: bool=True) -> SMSInquiryResponseData:
-        response_data = self._create_response_data()
+    def create_response_data(self, more: bool=False, verbose: bool=True) -> SMSInquiryResponseData:
+        if more:
+            response_data = self._create_response_data_more()
+        else:
+            response_data = self._create_response_data()
         logger.info(f"Successfully created `{response_data.__class__.__name__}`")
         if verbose:
             logger.info(f"{response_data}")
         return response_data
+
+
+    def _create_response_data_more(self) -> SMSFollowUpResponseData:
+        indexed_queryset = self.queryset[self.offset:]
+        formatted_response = self._create_queryset_response(indexed_queryset)
+        truncated_response, count = self._truncate_response(formatted_response)
+        return SMSFollowUpResponseData(
+            msg=truncated_response,
+            ids=self._get_ids(indexed_queryset, count=count),
+            template=self.template,
+        )
+
 
     def _create_response_data(self) -> SMSInquiryResponseData:
         indexed_queryset = self.queryset[self.offset:]
@@ -63,7 +78,7 @@ class QuerySetResultBuilder:
         return SMSInquiryResponseData(
             msg=truncated_response,
             ids=self._get_ids(indexed_queryset, count=count),
-            template_class=self.template_class,
+            template=self.template,
         )
 
     def _truncate_response(self, formatted_response: str) -> tuple[str, int]:
@@ -80,9 +95,8 @@ class QuerySetResultBuilder:
 
     def _create_queryset_response(self, queryset:ResourceQuerySet) -> str:
         response_items = []
-        template = self.template_class(params=self.params)
         for instance in queryset:
-            res = template.format_result(instance=instance)
+            res = self.template.format_result(instance=instance)
             response_items.append(res)
         # print(template.TITLE + "\n" + "\n".join(response_items))
         return "\n".join(response_items)

@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Optional, Type
 from resources.abstract_models import ResourceQuerySet
 from sms.models import SMSInquiry
-from sms.response.response_templates import QuerySetResponseTemplate
+from sms.response.response_templates import QuerySetResponseTemplate, GeneralResponseTemplate
 from cache.dataclasses import PhoneSessionData
 from cache.follow_up_caching_service import FollowUpCachingService
 from cache.inquiry_caching_service import InquiryCachingService
@@ -30,6 +30,7 @@ class FollowUpContext:
 
 @dataclass
 class BaseResponseData:
+    template: QuerySetResponseTemplate | GeneralResponseTemplate
     msg: str
     ids: list[int]
 
@@ -37,7 +38,7 @@ class BaseResponseData:
 @dataclass
 class SMSInquiryResponseData(BaseResponseData):
 
-    template_class: Type[QuerySetResponseTemplate]
+    template: QuerySetResponseTemplate
 
     @property
     def offset(self) -> int:
