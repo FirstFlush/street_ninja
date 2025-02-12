@@ -67,8 +67,10 @@ class SMSService:
     def build_response(self, instance: IncomingSMSMessageModel, new_session: bool = False) -> SMSInquiryResponseData | SMSFollowUpResponseData:
         response_service = ResponseService(instance)
         response_data = response_service.build_response_data()
-        wrapped_response = response_service.wrap_response()
-        save_response = ...
+        print(new_session)
+        print(response_data)
+        # wrapped_response = response_service.wrap_response()
+        # save_response = ...
 
 
         return response_service.build_response_data()
@@ -88,5 +90,11 @@ class SMSService:
         sms_service = cls(msg=msg, phone_number=phone_number, message_sid=message_sid)
         sms_data = sms_service.resolve()
         sms_location = sms_service.geocode(sms_data=sms_data)
-        sms_instance = sms_service.save_sms(sms_data=sms_data, location=sms_location)
-        sms_service.build_response(instance=sms_instance)
+
+        persistence_layer = sms_service._build_persistence_service(sms_data=sms_data, location=sms_location)
+        persistence_layer.save_sms()
+        # sms_instance = sms_service.save_sms(sms_data=sms_data, location=sms_location)
+        sms_service.build_response(
+            instance=persistence_layer.instance,
+            new_session = persistence_layer.new_session,
+        )

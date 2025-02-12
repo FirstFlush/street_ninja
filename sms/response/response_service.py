@@ -63,9 +63,7 @@ class ResponseService:
         )
         inquiry_response_handler = InquiryResponseHandler(context=context)
         response_data = inquiry_response_handler.build_response_data()
-        print(response_data)
-        print(inquiry_response_handler.queryset_result_builder.template_class.__name__)
-
+        return response_data
 
     def _get_sms_inquiry_for_follow_up(self, id: int) -> SMSInquiry:
         sms_inquiry = self.instance.conversation.smsinquiry_set.filter(id=id).first()
