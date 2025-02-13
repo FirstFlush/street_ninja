@@ -25,21 +25,15 @@ class ShelterResponseTemplate(QuerySetResponseTemplate):
             case _:
                 category = instance.category
         return category.capitalize()
-
-
         
 
     def format_result(self, instance: Shelter) -> str:
         distance = self.distance(km=instance.distance.km)
         s = f"{distance} {instance.facility} ({self._category(instance)})"
-        print('top', self.params)
         if self.params and self.params.get('category'):
             self.params.pop('category')
-        print('-------=======-------')
-        print(self.params)
         if self.params:
             params_string = self._params_string()
-            # print(params_string)
             s = f"{s} {params_string}"
         return s
 
@@ -77,6 +71,7 @@ class WaterResponseTemplate(QuerySetResponseTemplate):
         distance = self.distance(km=instance.distance.km)
         s = f"{distance} {instance.name} {instance.in_operation}"
         return s
+
 
 class WifiResponseTemplate(QuerySetResponseTemplate):
 

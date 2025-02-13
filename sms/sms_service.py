@@ -98,6 +98,16 @@ class SMSService:
     def _build_response_service(self, instance: IncomingSMSMessageModel) -> ResponseService:
         return ResponseService(instance=instance)
 
+    def _test_print(self, msg: str):
+        print()
+        print()
+        print('------------------')
+        print(msg)
+        print('------------------')
+        print(f"{len(msg)} chars")
+        print()
+        print()
+
     @classmethod
     def process_sms(cls, msg: str, phone_number: str, message_sid: str):
         sms_service = cls(msg=msg, phone_number=phone_number, message_sid=message_sid)
@@ -118,11 +128,8 @@ class SMSService:
             )
         else:
             wrapped_response_message = response_service.build_help_msg()
-        print()
-        print()
-        print(wrapped_response_message)
-        print('---------')
-        print(len(wrapped_response_message))
-        print()
-        print()
         twiml = response_service.to_twiml(msg=wrapped_response_message)
+
+        sms_service._test_print(msg=wrapped_response_message)
+
+
