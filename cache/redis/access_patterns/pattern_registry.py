@@ -1,26 +1,14 @@
 import logging
 from sms.enums import SMSKeywordEnum
+from street_ninja_server.global_mappings import SMS_KEYWORD_ENUM_TO_ACCESS_PATTERN
 from .base_access_patterns import AccessPatternDB
-from .resources import (
-    ShelterAccessPattern,
-    FoodProgramAccessPattern,
-    ToiletAccessPattern,
-    DrinkingFountainAccessPattern,
-    PublicWifiAccessPattern,
-)
 
 
 logger = logging.getLogger(__name__)
 
 
 class AccessPatternRegistry:
-    _resource_patterns = {
-        SMSKeywordEnum.FOOD: FoodProgramAccessPattern,
-        SMSKeywordEnum.SHELTER: ShelterAccessPattern,
-        SMSKeywordEnum.WATER: DrinkingFountainAccessPattern,
-        SMSKeywordEnum.TOILET: ToiletAccessPattern,
-        SMSKeywordEnum.WIFI: PublicWifiAccessPattern,
-    }
+    _resource_patterns = SMS_KEYWORD_ENUM_TO_ACCESS_PATTERN
 
     @classmethod
     def get_pattern(cls, sms_keyword_enum: SMSKeywordEnum)-> AccessPatternDB:

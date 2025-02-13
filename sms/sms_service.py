@@ -12,8 +12,8 @@ from sms.response import (
 )
 from sms.persistence_service import PersistenceService
 from sms.enums import ResolvedSMSType, SMSKeywordEnum, SMSFollowUpKeywordEnum
-from geo.geocoding import GeocodingService
-from .abstract_models import IncomingSMSMessageModel
+from geo.geocoding.geocoding_service import GeocodingService
+from .abstract_models import IncomingSMSMessageModel, ResponseSMSMessageModel
 from cache.follow_up_caching_service import FollowUpCachingService
 from cache.inquiry_caching_service import InquiryCachingService
 from .persistence_service import PersistenceService
@@ -82,14 +82,18 @@ class SMSService:
             logger.error(f"`{e.__class__.__name__}` occurred while attempting to geocode: {e}", exc_info=True)
             raise
 
-    def save_response(self, response_data: SMSInquiryResponseData | SMSFollowUpResponseData):
+    def save_response(self, response_data: SMSInquiryResponseData | SMSFollowUpResponseData) -> ResponseSMSMessageModel | None:
         match self.sms_data.resolved_sms_type:
             case ResolvedSMSType.INQUIRY:
-                self.persistence_service.save_inquiry_response(response_data=response_data)
+                return self.persistence_service.save_inquiry_response(response_data=response_data)
             case ResolvedSMSType.FOLLOW_UP:
-                self.persistence_service.save_follow_up_response(response_data=response_data)
+                return self.persistence_service.save_follow_up_response(response_data=response_data)
             case ResolvedSMSType.UNRESOLVED:
-                pass
+                return None
+            case _:
+                msg = f"`{self.__class__.__name__}` save_response() method received invalid ResolveSMSType enum: `{self.sms_data.resolved_sms_type}`"
+                logger.error(msg)
+                raise TypeError(msg)
 
     def _build_response_service(self, instance: IncomingSMSMessageModel) -> ResponseService:
         return ResponseService(instance=instance)
@@ -117,9 +121,8 @@ class SMSService:
         print()
         print()
         print(wrapped_response_message)
+        print('---------')
+        print(len(wrapped_response_message))
         print()
         print()
         twiml = response_service.to_twiml(msg=wrapped_response_message)
-
-        print(twiml)
-        print()

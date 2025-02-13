@@ -1,17 +1,10 @@
 import logging
 from typing import Type, Any
 from django.conf import settings
-from sms.enums import SMSKeywordEnum
 from resources.abstract_models import ResourceQuerySet
+from street_ninja_server.global_mappings import SMS_KEYWORD_ENUM_TO_RESPONSE_TEMPLATE
 from ..dataclasses import SMSInquiryResponseData, SMSFollowUpResponseData
 from ..response_templates.base_response_templates import QuerySetResponseTemplate
-from ..response_templates.queryset_templates import (
-    ShelterResponseTemplate,
-    FoodResponseTemplate,
-    WaterResponseTemplate,
-    ToiletResponseTemplate,
-    WifiResponseTemplate,
-)
 
 
 logger = logging.getLogger(__name__)
@@ -19,13 +12,7 @@ logger = logging.getLogger(__name__)
 
 class QuerySetResultBuilder:
 
-    MAPPING = {
-        SMSKeywordEnum.SHELTER: ShelterResponseTemplate,
-        SMSKeywordEnum.FOOD: FoodResponseTemplate,
-        SMSKeywordEnum.TOILET: ToiletResponseTemplate,
-        SMSKeywordEnum.WATER: WaterResponseTemplate,
-        SMSKeywordEnum.WIFI: WifiResponseTemplate,
-    }
+    MAPPING = SMS_KEYWORD_ENUM_TO_RESPONSE_TEMPLATE
 
     def __init__(self, queryset: ResourceQuerySet, offset: int, params: dict[str, Any ] | None = None):
         self.queryset = queryset

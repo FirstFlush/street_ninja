@@ -2,13 +2,11 @@ import logging
 from rest_framework.parsers import FormParser, JSONParser
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView, Request, Response, status
-from geo.geocoding import GeocodingService
 
-from twilio.twiml.messaging_response import MessagingResponse
 from auth.authentication import TwilioSignatureAuthentication
 from .serializers import TwilioSMSSerializer
 from .sms_service import SMSService
-from .resolvers import SMSResolver
+
 
 
 logger = logging.getLogger(__name__)

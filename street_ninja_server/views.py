@@ -1,26 +1,24 @@
 import logging
 from rest_framework.views import APIView, Request, Response
-from common.enums import HttpMethodEnum
-from integrations.clients import VancouverAPIClient, WigleAPIClient
-from integrations.clients.enums import VancouverEndpointsEnum
-from django.conf import settings 
-from resources.models import (
-    Shelter, 
-    FoodProgram, 
-    DrinkingFountain,
-    Toilet,
-)
-from resources.serializers import (
-    ShelterSerializer, 
-    FoodProgramSerializer,
-    DrinkingFountainSerializer,
-    PublicToiletSerializer
-)
-from sms.models import Conversation, PhoneNumber, SMSInquiry
-from integrations.integration_service import IntegrationService, IntegrationServiceParams
-from cache.redis.clients import ResourceCacheClient, PhoneSessionCacheClient
-from cache.redis.access_patterns import ShelterAccessPattern
-from resources.abstract_models import ResourceQuerySet
+# from common.enums import HttpMethodEnum
+# from integrations.clients import VancouverAPIClient, WigleAPIClient
+# from integrations.clients.enums import VancouverEndpointsEnum
+# from django.conf import settings 
+# from resources.models import (
+#     Shelter, 
+#     FoodProgram, 
+#     DrinkingFountain,
+#     Toilet,
+# )
+# from resources.serializers import (
+#     ShelterSerializer, 
+#     FoodProgramSerializer,
+#     DrinkingFountainSerializer,
+#     PublicToiletSerializer
+# )
+from sms.models import SMSInquiry
+# from integrations.integration_service import IntegrationService, IntegrationServiceParams
+
 from sms.resolvers import SMSResolver
 from sms.enums import SMSKeywordEnum
 
@@ -35,11 +33,11 @@ class RedisTestView(APIView):
         # phone_number = PhoneNumber.objects.get(number="+16043451792")
         # conversation = Conversation.objects.filter(phone_number=phone_number).last()
         inquiry = SMSInquiry.objects.last()
-        cache_client = PhoneSessionCacheClient(inquiry)
-        session = cache_client.get_session()
-        print()
-        print(session)
-        print()
+        # cache_client = PhoneSessionCacheClient(inquiry)
+        # session = cache_client.get_session()
+        # print()
+        # print(session)
+        # print()
 
         # data:ResourceQuerySet = cache_client.get_or_set_db()
         # print(data)
@@ -67,21 +65,21 @@ class HomeView(APIView):
         """
         This view currently serves as an all-purpose, quick-n-dirty testing route.
         """
-        params = IntegrationServiceParams(
-            api_client_class=VancouverAPIClient,
-            endpoint_enum=VancouverEndpointsEnum.PUBLIC_WASHROOM,
-            http_method_enum=HttpMethodEnum.GET,
-            serializer_class=PublicToiletSerializer,
-            model_class=Toilet,
-            api_key=settings.VANCOUVER_OPEN_DATA_API_KEY,
-            http_params = {
-                'limit': 100,
-                'offset': 0,
-            }
-        )
+        # params = IntegrationServiceParams(
+        #     api_client_class=VancouverAPIClient,
+        #     endpoint_enum=VancouverEndpointsEnum.PUBLIC_WASHROOM,
+        #     http_method_enum=HttpMethodEnum.GET,
+        #     serializer_class=PublicToiletSerializer,
+        #     model_class=Toilet,
+        #     api_key=settings.VANCOUVER_OPEN_DATA_API_KEY,
+        #     http_params = {
+        #         'limit': 100,
+        #         'offset': 0,
+        #     }
+        # )
 
-        integration_service = IntegrationService(params=params)
-        integration_service.fetch_and_save()
+        # integration_service = IntegrationService(params=params)
+        # integration_service.fetch_and_save()
 
 
 

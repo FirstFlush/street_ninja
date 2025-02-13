@@ -8,7 +8,6 @@ from resources.models import (
     PublicWifi,
 )
 
-
 class ShelterAccessPattern(AccessPatternDB):
 
     redis_store_enum = RedisStoreEnum.RESOURCES

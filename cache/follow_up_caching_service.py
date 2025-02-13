@@ -1,11 +1,9 @@
 import logging
 from common.utils import now
-from sms.enums import SMSFollowUpKeywordEnum, SMSKeywordEnum
 from sms.models import SMSFollowUpInquiry
 from .base_cache_service import BaseCacheService
-from .redis.clients.phone_session_client import PhoneSessionCacheClient
 from .dataclasses import PhoneSessionData
-from .redis.access_patterns import AccessPatternDB, PhoneSessionAccessPattern, AccessPatternRegistry
+from .redis.access_patterns import AccessPatternRegistry
 
 
 logger = logging.getLogger(__name__)

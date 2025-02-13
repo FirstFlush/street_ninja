@@ -1,11 +1,14 @@
 import logging
 import pickle
-from typing import Any, Type
+from typing import Type, TYPE_CHECKING
 from resources.abstract_models import ResourceQuerySet
 from .base_redis_client import BaseRedisClient
 from ..enums import RedisStoreEnum
-from ..access_patterns import AccessPatternDB
+
 from ..exc import RedisClientException
+
+if TYPE_CHECKING:
+    from ..access_patterns.base_access_patterns import AccessPatternDB
 
 
 logger = logging.getLogger(__name__)
@@ -15,10 +18,9 @@ class ResourceCacheClient(BaseRedisClient):
 
     redis_store_enum = RedisStoreEnum.RESOURCES
 
-    def __init__(self, access_pattern: Type[AccessPatternDB]):
+    def __init__(self, access_pattern: Type["AccessPatternDB"]):
         super().__init__(access_pattern=access_pattern)
-        # self._validate_access_pattern_type(expected_type=AccessPatternDB)
-        self.access_pattern: AccessPatternDB
+        self.access_pattern: "AccessPatternDB"
         self.redis_store = self._redis_store()
 
 

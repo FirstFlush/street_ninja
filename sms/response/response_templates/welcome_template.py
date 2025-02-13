@@ -19,7 +19,7 @@ class WelcomeTemplate:
     ]
 
     _HEADER = """
-🥷 Welcome to Street Ninja!
+🥷 Welcome to Street Ninja! 🥷
 
 Get help fast: FOOD, SHELTER, TOILET, WIFI, WATER.
 """

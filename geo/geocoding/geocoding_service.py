@@ -3,7 +3,8 @@ from typing import Type
 
 from django.conf import settings
 from django.contrib.gis.geos import Point
-from .enums import GeocoderEnum
+from street_ninja_server.global_mappings import GEOCODER_ENUM_TO_GEOCODER
+from ..enums import GeocoderEnum
 from .geocoders import *
 from .geocoding_config import GeocoderConfig, GeocoderConfigData
 from geo.geocoding.exc import AllGeocodersFailed
@@ -16,11 +17,7 @@ class GeocodingService:
     """
     Service-layer for all things geocoding.
     """
-
-    GEOCODER_MAPPING = {
-        GeocoderEnum.NOMINATIM : NominatimGeocoder,
-        GeocoderEnum.OPENCAGE : OpenCageGeocoder,
-    }
+    GEOCODER_MAPPING = GEOCODER_ENUM_TO_GEOCODER
 
     def __init__(self, config_data:GeocoderConfigData):
         self.config_data = config_data

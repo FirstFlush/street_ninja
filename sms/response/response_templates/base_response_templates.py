@@ -45,6 +45,12 @@ class QuerySetResponseTemplate(BaseSMSResponseTemplate):
     def _params_string(self, sep: str = ", ") -> str:
         return sep.join([f"{k.capitalize()} {self._convert_bool(v, abbreviated=False) if isinstance(v, bool) else v}" for k, v in self.params.items()])
 
+    def _params_pop(self, *keys: str):
+        # NOTE not yet in use
+        for key in keys:
+            if self.params and self.params.get(key) is not None:
+                self.params.pop(key)
+
     def distance(self, km: float) -> str:
         km = f"{round(km,1)}".rstrip("0").rstrip(".")
         return f"{km}km"
@@ -55,7 +61,7 @@ class QuerySetResponseTemplate(BaseSMSResponseTemplate):
             bottom = WelcomeTemplate.WELCOME_FOOTER
         else:
             top = self.TITLE
-            bottom = f"\n{self.FOOTER}"
+            bottom = f"\n{self.FOOTER}\n"
 
         return f"{top}\n{msg}\n{bottom}"
 
