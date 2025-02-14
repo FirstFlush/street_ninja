@@ -1,6 +1,4 @@
 import logging
-from twilio.twiml.messaging_response import MessagingResponse
-
 from cache.dataclasses import PhoneSessionData
 from cache.follow_up_caching_service import FollowUpCachingService
 from cache.inquiry_caching_service import InquiryCachingService
@@ -50,16 +48,6 @@ class ResponseService:
             logger.error(msg)
             raise ValueError(msg)
         return sms_inquiry
-
-
-    def to_twiml(self, msg: str) -> str:
-        """
-        Converts the response text to TwiML, a type of XML that Twilio Gateway requires.
-        """
-        mr = MessagingResponse()
-        mr.message(msg)
-        logger.info("Created TwiML response")
-        return str(mr)
 
 
     def _build_inquiry_response_data(self) -> SMSInquiryResponseData:

@@ -68,6 +68,7 @@ class SMSService:
         return persistence_service.instance
 
 
+
     # def build_response_data(self, response_service: ResponseService) -> SMSInquiryResponseData | SMSFollowUpResponseData:
     #     return response_service.build_response_data()
 
@@ -109,7 +110,7 @@ class SMSService:
         print()
 
     @classmethod
-    def process_sms(cls, msg: str, phone_number: str, message_sid: str):
+    def process_sms(cls, msg: str, phone_number: str, message_sid: str) -> str:
         sms_service = cls(msg=msg, phone_number=phone_number, message_sid=message_sid)
         sms_service.sms_data = sms_service.resolve()
         sms_location = sms_service.geocode()
@@ -128,8 +129,8 @@ class SMSService:
             )
         else:
             wrapped_response_message = response_service.build_help_msg()
-        twiml = response_service.to_twiml(msg=wrapped_response_message)
+        return response_service.to_twiml(msg=wrapped_response_message)
 
-        sms_service._test_print(msg=wrapped_response_message)
+        # sms_service._test_print(msg=wrapped_response_message)
 
 
