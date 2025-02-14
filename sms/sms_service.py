@@ -101,9 +101,9 @@ class SMSService:
     def _test_print(self, msg: str):
         print()
         print()
-        print('------------------')
+        print('#'*30)
         print(msg)
-        print('------------------')
+        print('#'*30)
         print(f"{len(msg)} chars")
         print()
         print()
@@ -124,7 +124,7 @@ class SMSService:
         if response_instance:
             wrapped_response_message = response_data.template.wrap_response(
                 msg=response_data.msg,
-                new_session=sms_service.persistence_service.new_session
+                new_session=sms_service.persistence_service.new_session,
             )
         else:
             wrapped_response_message = response_service.build_help_msg()

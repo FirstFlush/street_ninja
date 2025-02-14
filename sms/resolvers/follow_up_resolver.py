@@ -2,9 +2,7 @@ from dataclasses import dataclass
 import logging
 from typing import Any, Optional
 from .base_resolver import BaseKeywordResolver
-from .exc import FollowUpSMSResolutionError
-from ..enums import ResolvedSMSType
-from ..enums import SMSFollowUpKeywordEnum
+from ..enums import SMSFollowUpKeywordEnum, FollowUpParams
 
 
 logger = logging.getLogger(__name__)
@@ -54,7 +52,7 @@ class FollowUpResolver(BaseKeywordResolver):
         params = {}
         for token in self.tokens:
             if self._try_param(token):
-                params['param'] = int(token)
+                params[FollowUpParams.SELECTION.value] = int(token)
                 break
         return params
 

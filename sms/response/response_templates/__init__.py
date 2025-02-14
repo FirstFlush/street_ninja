@@ -3,11 +3,8 @@ from .base_response_templates import (
     QuerySetResponseTemplate,
     GeneralResponseTemplate,
 )
-from .general_templates import (
-    DirectionsResponseTemplate,
-    InfoResponseTemplate,
-    HelpResponseTemplate,
-)
+from .directions_template import DirectionsTemplate
+from .help_template import HelpResponseTemplate
 from .queryset_templates import (
     ShelterResponseTemplate,
     FoodResponseTemplate,

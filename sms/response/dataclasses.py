@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Optional, Type
-from resources.abstract_models import ResourceQuerySet
-from sms.models import SMSInquiry
+from resources.abstract_models import ResourceQuerySet, ResourceModel
+from sms.models import SMSInquiry, SMSFollowUpInquiry
 from sms.response.response_templates import QuerySetResponseTemplate, GeneralResponseTemplate
 from cache.dataclasses import PhoneSessionData
 from cache.follow_up_caching_service import FollowUpCachingService
@@ -15,15 +15,10 @@ class InquiryResponseContext:
     queryset: ResourceQuerySet
 
 
-# @dataclass
-# class MetaContext:
-#     top: str
-#     bottom: str
-
-
 @dataclass
 class FollowUpContext:
     sms_inquiry: SMSInquiry
+    follow_up_inquiry: SMSFollowUpInquiry
     current_session: PhoneSessionData
     caching_service: FollowUpCachingService
 
@@ -47,6 +42,7 @@ class SMSInquiryResponseData(BaseResponseData):
 
 @dataclass
 class SMSFollowUpResponseData(BaseResponseData):
-    ids: Optional[list[int]] = None
-    directions_text: Optional[str] = None 
-    # params: Optional[dict[str, Any]] = None
+
+    ids: Optional[list[int]] = None             # MORE needs ids
+    resource: Optional[ResourceModel] = None    # INFO & DIRECTIONS need resource
+    # directions: Optional[list[str]] = None       # DIRECTIONS needs directions_text

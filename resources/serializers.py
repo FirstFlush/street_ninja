@@ -104,7 +104,6 @@ class FoodProgramSerializer(CityOfVancouverSerializer):
     def __new__(cls, *args, **kwargs):
         """Filter out invalid records before DRF processes them"""
         data = kwargs.get("data", None)
-        print()
         if isinstance(data, list):  
             kwargs["data"] = [record for record in data if "geom" in record and record["geom"] is not None]
         return super().__new__(cls, *args, **kwargs)

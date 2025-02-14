@@ -19,7 +19,7 @@ class ShelterResponseTemplate(QuerySetResponseTemplate):
     def _category(self, instance: Shelter) -> str:
         match instance.category:
             case ShelterCategoryParamValue.ADULTS.value:
-                category = "All genders"
+                category = "Adults - all genders"
             case ShelterCategoryParamValue.YOUTH.value:
                 category = "Youth - all genders"
             case _:
@@ -27,9 +27,9 @@ class ShelterResponseTemplate(QuerySetResponseTemplate):
         return category.capitalize()
         
 
-    def format_result(self, instance: Shelter) -> str:
+    def format_result(self, instance: Shelter, num: int=1) -> str:
         distance = self.distance(km=instance.distance.km)
-        s = f"{distance} {instance.facility} ({self._category(instance)})"
+        s = f"{num}. {distance} {instance.facility} ({self._category(instance)})"
         if self.params and self.params.get('category'):
             self.params.pop('category')
         if self.params:

@@ -1,5 +1,6 @@
 import logging
 from .base_handler import BaseFollowUpHandler
+from cache.dataclasses import PhoneSessionData
 from resources.abstract_models import ResourceQuerySet
 from sms.response.response_builders.queryset_result_builder import QuerySetResultBuilder
 from sms.response.dataclasses import FollowUpContext, SMSFollowUpResponseData
@@ -20,9 +21,7 @@ class More(BaseFollowUpHandler):
         self.response_builder = self._response_builder()
 
     def build_response_data(self) -> SMSFollowUpResponseData:
-        print('buidling response data in MORE')
         response_data = self.response_builder.create_response_data(more=True)
-        print('built response data!: ', response_data)
         if len(response_data.ids) == 0:
             response_data.msg = self.END_OF_RESULTS
         return response_data
@@ -33,7 +32,7 @@ class More(BaseFollowUpHandler):
             offset=self.current_session.offset,
         )
 
-    def update_session(self, ids:list[int]):
+    def update_session(self, ids:list[int]) -> PhoneSessionData:
         new_session = self.caching_service.update_phone_session(session_data=self.current_session, ids=ids)
         return new_session
 

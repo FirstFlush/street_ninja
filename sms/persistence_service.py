@@ -16,7 +16,7 @@ from sms.models import (
 )
 from sms.response import SMSInquiryResponseData, SMSFollowUpResponseData
 from sms.resolvers import ResolvedSMS
-from sms.enums import ResolvedSMSType
+from sms.enums import ResolvedSMSType, SMSFollowUpKeywordEnum
 
 
 logger = logging.getLogger(__name__)
@@ -119,17 +119,22 @@ class PersistenceService:
         
 
     def save_follow_up_response(self, response_data: SMSFollowUpResponseData) -> SMSFollowUpResponse:
+        params = {
+            'sms_follow_up': self.instance,
+            'conversation': self.instance.conversation,
+            'resource_ids': response_data.ids,
+        }
+        match self.instance.keyword_enum:
+            case SMSFollowUpKeywordEnum.DIRECTIONS:
+                params = params | {'directions': response_data.msg}
+            case _:
+                pass
         try:
-            response = SMSFollowUpResponse.objects.create(
-                sms_follow_up=self.instance,
-                conversation=self.instance.conversation,
-                resource_ids=response_data.ids,
-                directions=response_data.directions_text,
-            )
+            response = SMSFollowUpResponse.objects.create(**params)
         except Exception as e:
             msg = f"Error while trying to create SMSFollowUpResponse for `{self.instance.__class__.__name__}` #`{self.instance.id}`: {e}"
             logger.error(msg, exc_info=True)
             raise
         else:
-            logger.info(f"Create SMSFollowUpResponse id `{response.id}`")
+            logger.info(f"Created SMSFollowUpResponse id `{response.id}`")
             return response

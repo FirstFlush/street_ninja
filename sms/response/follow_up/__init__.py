@@ -1,3 +1,3 @@
 from .more import More
-from .directions import Directions
-from .info import Info
+from .directions import DirectionsHandler
+from .info import InfoHandler

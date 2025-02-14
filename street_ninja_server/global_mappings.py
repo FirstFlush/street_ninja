@@ -15,6 +15,13 @@ from cache.redis.access_patterns.resources import (
 from geo.enums import GeocoderEnum
 from geo.geocoding.geocoders import NominatimGeocoder, OpenCageGeocoder
 from sms.enums import SMSKeywordEnum
+# from resources.models import (
+#     Shelter,
+#     FoodProgram,
+#     Toilet,
+#     DrinkingFountain,
+#     PublicWifi,
+# )
 from sms.response.response_templates import (
     ShelterResponseTemplate,
     FoodResponseTemplate,
@@ -22,6 +29,24 @@ from sms.response.response_templates import (
     WaterResponseTemplate,
     WifiResponseTemplate,
 )
+from sms.response.response_templates.info_templates import (
+    InfoTemplate,
+    ShelterInfoTemplate,
+    FoodInfoTemplate,
+    WaterInfoTemplate,
+    ToiletInfoTemplate,
+    WifiInfoTemplate,
+)
+
+
+# SMS_KEYWORD_ENUM_TO_RESOURCE_MODEL = {
+#     SMSKeywordEnum.SHELTER: Shelter,
+#     SMSKeywordEnum.FOOD: FoodProgram,
+#     SMSKeywordEnum.TOILET: Toilet,
+#     SMSKeywordEnum.WATER: DrinkingFountain,
+#     SMSKeywordEnum.WIFI: PublicWifi,
+# }
+
 
 SMS_KEYWORD_ENUM_TO_RESPONSE_TEMPLATE = {
     SMSKeywordEnum.SHELTER: ShelterResponseTemplate,
@@ -44,4 +69,14 @@ GEOCODER_ENUM_TO_GEOCODER = {
     GeocoderEnum.OPENCAGE : OpenCageGeocoder,
     GeocoderEnum.NOMINATIM : NominatimGeocoder,
 }
+
+
+SMS_KEYWORD_ENUM_TO_INFO_TEMPLATE: dict[SMSKeywordEnum, InfoTemplate] = {
+    SMSKeywordEnum.SHELTER : ShelterInfoTemplate,
+    SMSKeywordEnum.FOOD : FoodInfoTemplate,
+    SMSKeywordEnum.WATER : WaterInfoTemplate,
+    SMSKeywordEnum.TOILET : ToiletInfoTemplate,
+    SMSKeywordEnum.WIFI : WifiInfoTemplate,
+}
+
 

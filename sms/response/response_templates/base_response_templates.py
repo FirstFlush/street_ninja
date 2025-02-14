@@ -58,10 +58,12 @@ class QuerySetResponseTemplate(BaseSMSResponseTemplate):
     def wrap_response(self, msg:str, new_session: bool = False) -> str:
         if new_session:
             top = f"{WelcomeTemplate.welcome_header()}\n\n{self.TITLE}"
-            bottom = WelcomeTemplate.WELCOME_FOOTER
+            bottom = f"{WelcomeTemplate.WELCOME_FOOTER}"
+            wrapped_msg = f"{top}\n{msg}\n{bottom}"
         else:
             top = self.TITLE
-            bottom = f"\n{self.FOOTER}\n"
+            bottom = f"{self.FOOTER}"
+            wrapped_msg = f"{top}\n{msg}\n\n{bottom}\n"
 
-        return f"{top}\n{msg}\n{bottom}"
+        return wrapped_msg
 

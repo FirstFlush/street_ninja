@@ -26,8 +26,8 @@ Get help fast: FOOD, SHELTER, TOILET, WIFI, WATER.
 
     WELCOME_FOOTER = """
 More results? Reply 'MORE'
-Need details? Reply '[NUMBER] INFO'
-Need directions? Reply '[NUMBER] DIRECTIONS'
+details? Reply '[NUMBER] INFO'
+directions? Reply '[NUMBER] DIRECTIONS'
 Need help? Reply 'HELP'
 """
 
@@ -44,4 +44,4 @@ Need help? Reply 'HELP'
 
     @classmethod
     def welcome_header(cls) -> str:
-        return f"{cls._HEADER}\n{cls._example()}"
+        return f"{cls._HEADER}{cls._example()}"

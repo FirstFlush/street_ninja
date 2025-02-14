@@ -36,12 +36,3 @@ class HelpResponseTemplate(BaseSMSResponseTemplate):
     @classmethod
     def help_msg(cls) -> str:
         return f"{cls.HELP_HEADER}\n\n{cls.HELP_DESCRIPTION}\n\n{cls.RESOURCES}\n\n{cls.EXAMPLE_QUERIES}\n\n{cls.PROMPT}"
-
-class DirectionsResponseTemplate(BaseSMSResponseTemplate):
-    ...
-
-
-
-class InfoResponseTemplate(BaseSMSResponseTemplate):
-    ...
-

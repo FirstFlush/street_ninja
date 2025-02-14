@@ -34,7 +34,7 @@ APPEND_SLASH = False
 # =======================================
 VANCOUVER_OPEN_DATA_API_KEY = config('VANCOUVER_OPEN_DATA_API_KEY')
 WIGLE_API_KEY = config('WIGLE_API_KEY')
-
+OPEN_ROUTE_SERVICE_TOKEN = config('OPEN_ROUTE_SERVICE_TOKEN')
 
 # SMS
 # =======================================

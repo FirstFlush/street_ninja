@@ -35,7 +35,6 @@ class QuerySetResultBuilder:
             logger.error(msg, exc_info=True)
             raise
 
-
     def create_response_data(self, more: bool=False, verbose: bool=True) -> SMSInquiryResponseData:
         if more:
             response_data = self._create_response_data_more()
@@ -45,7 +44,6 @@ class QuerySetResultBuilder:
         if verbose:
             logger.info(f"{response_data}")
         return response_data
-
 
     def _create_response_data_more(self) -> SMSFollowUpResponseData:
         indexed_queryset = self.queryset[self.offset:]
@@ -79,15 +77,12 @@ class QuerySetResultBuilder:
             count = len(truncated_response.split("\n"))
         return truncated_response, count
 
-
     def _create_queryset_response(self, queryset:ResourceQuerySet) -> str:
         response_items = []
         for instance in queryset:
             res = self.template.format_result(instance=instance)
             response_items.append(res)
-        # print(template.TITLE + "\n" + "\n".join(response_items))
         return "\n".join(response_items)
-
 
     def _get_ids(self, qs:ResourceQuerySet, count: int) -> list[int]:
         return [instance.id for instance in qs[:count]]

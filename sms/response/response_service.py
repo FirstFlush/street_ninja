@@ -4,13 +4,13 @@ from twilio.twiml.messaging_response import MessagingResponse
 from cache.dataclasses import PhoneSessionData
 from cache.follow_up_caching_service import FollowUpCachingService
 from cache.inquiry_caching_service import InquiryCachingService
-from sms.enums import SMSKeywordEnum, SMSFollowUpKeywordEnum
-from .follow_up import More, Directions, Info
+from common.utils import coord_string
+from sms.enums import SMSFollowUpKeywordEnum
+from .follow_up import More, DirectionsHandler, InfoHandler
 from sms.models import SMSInquiry, SMSFollowUpInquiry, UnresolvedSMSInquiry
 from .dataclasses import SMSInquiryResponseData, SMSFollowUpResponseData, FollowUpContext, InquiryResponseContext
-from .response_builders.queryset_result_builder import QuerySetResultBuilder
 from .inquiry_response_handler import InquiryResponseHandler
-from .response_templates.general_templates import HelpResponseTemplate
+from .response_templates.help_template import HelpResponseTemplate
 
 logger = logging.getLogger(__name__)
 
@@ -94,6 +94,7 @@ class ResponseService:
             sms_inquiry=sms_inquiry,
             current_session=current_session,
             caching_service=caching_service,
+            follow_up_inquiry=self.instance,
         )
 
 
@@ -108,9 +109,15 @@ class ResponseService:
         )
         match self.instance.keyword_enum:
             case SMSFollowUpKeywordEnum.DIRECTIONS:
-                ...
+                start_coords = coord_string(sms_inquiry.location)
+                directions_handler = DirectionsHandler(context=context)
+                directions_handler.set_directions(start_coords=start_coords)
+                response_data = directions_handler.build_response_data()
+                directions_handler.update_session()
             case SMSFollowUpKeywordEnum.INFO:
-                ...
+                info_handler = InfoHandler(context=context)
+                response_data = info_handler.build_response_data()
+                info_handler.update_session()
             case SMSFollowUpKeywordEnum.MORE:
                 more_handler = More(context=context)
                 response_data = more_handler.build_response_data()

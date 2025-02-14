@@ -4,7 +4,7 @@ from common.enums import StreetNinjaEnum
 class APIClientEnum(StreetNinjaEnum):
     CITY_OF_VANCOUVER = "https://opendata.vancouver.ca"
     WIGLE = "https://api.wigle.net"
-
+    OPEN_ROUTE_SERVICE = "https://api.openrouteservice.org"
 
 
 class EndpointsEnum(StreetNinjaEnum):
@@ -23,3 +23,10 @@ class VancouverEndpointsEnum(EndpointsEnum):
 class WigleEndpointsEnum(EndpointsEnum):
 
     PUBLIC_WIFI = "/api/v2/network/search"
+
+
+class OpenRouteServiceEndpointsEnum(EndpointsEnum):
+
+    # DIRECTIONS_FOOT = "/v2/directions/foot-walking"
+    DIRECTIONS = "/v2/directions/driving-car"
+    

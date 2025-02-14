@@ -25,6 +25,37 @@ from sms.enums import SMSKeywordEnum
 logger = logging.getLogger(__name__)
 
 
+class DirectionsView(APIView):
+
+
+    def get(self, request: Request, *args, **kwargs):
+        from integrations.integration_service import IntegrationService, IntegrationServiceParams
+        from common.enums import HttpMethodEnum
+        from integrations.clients import OpenRouteServiceAPIClient
+        from integrations.clients.enums import APIClientEnum, OpenRouteServiceEndpointsEnum
+        from integrations.serializers import DirectionsSerializer
+        from django.conf import settings
+        import json
+
+        integration_params = IntegrationServiceParams(
+            api_client_class=OpenRouteServiceAPIClient,
+            endpoint_enum=OpenRouteServiceEndpointsEnum.DIRECTIONS_FOOT,
+            http_method_enum=HttpMethodEnum.GET,
+            api_key=settings.OPEN_ROUTE_SERVICE_TOKEN,
+            serializer_class=DirectionsSerializer,
+            http_params={
+                "start": "-123.211495,49.21461",
+                "end": "-123.187872,49.220318",
+            }
+        )       
+        integration_service = IntegrationService(params=integration_params)
+        data = integration_service.fetch()
+        print()
+        print(json.dumps(data, indent=4))
+        print()
+        return Response(data=data)
+
+
 class RedisTestView(APIView):
 
     def get(self, request:Request, *args, **kwargs):
@@ -65,20 +96,39 @@ class HomeView(APIView):
         """
         This view currently serves as an all-purpose, quick-n-dirty testing route.
         """
-        # params = IntegrationServiceParams(
-        #     api_client_class=VancouverAPIClient,
-        #     endpoint_enum=VancouverEndpointsEnum.PUBLIC_WASHROOM,
-        #     http_method_enum=HttpMethodEnum.GET,
-        #     serializer_class=PublicToiletSerializer,
-        #     model_class=Toilet,
-        #     api_key=settings.VANCOUVER_OPEN_DATA_API_KEY,
-        #     http_params = {
-        #         'limit': 100,
-        #         'offset': 0,
-        #     }
-        # )
+        from integrations.integration_service import IntegrationService, IntegrationServiceParams
+        from common.enums import HttpMethodEnum
+        from integrations.clients import VancouverAPIClient, WigleAPIClient
+        from integrations.clients.enums import VancouverEndpointsEnum
+        from resources.serializers import (
+            ShelterSerializer, 
+            FoodProgramSerializer,
+            DrinkingFountainSerializer,
+            PublicToiletSerializer
+        )
+        from resources.models import (
+            Shelter, 
+            FoodProgram, 
+            DrinkingFountain,
+            Toilet,
+        )
+        from django.conf import settings
 
-        # integration_service = IntegrationService(params=params)
+
+        params = IntegrationServiceParams(
+            api_client_class=VancouverAPIClient,
+            endpoint_enum=VancouverEndpointsEnum.PUBLIC_WASHROOM,
+            http_method_enum=HttpMethodEnum.GET,
+            serializer_class=PublicToiletSerializer,
+            model_class=Toilet,
+            api_key=settings.VANCOUVER_OPEN_DATA_API_KEY,
+            http_params = {
+                'limit': 100,
+                'offset': 0,
+            }
+        )
+
+        integration_service = IntegrationService(params=params)
         # integration_service.fetch_and_save()
 
 

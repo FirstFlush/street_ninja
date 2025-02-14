@@ -41,3 +41,6 @@ class ResolvedSMSType(StreetNinjaEnum):
     FOLLOW_UP = "follow_up"
     UNRESOLVED = "unresolved"
 
+
+class FollowUpParams(StreetNinjaEnum):
+    SELECTION = "selection"
