@@ -1,5 +1,5 @@
 from django.contrib import admin
-from street_ninja_server.base_admin import BaseGISAdmin
+from street_ninja_server.base_admin import BaseAdmin, BaseGISAdmin
 from sms.models import (
     PhoneNumber,
     Conversation,
@@ -78,7 +78,7 @@ class SMSInquiryAdmin(BaseGISAdmin):
 
 
 @admin.register(SMSFollowUpInquiry)
-class SMSFollowUpInquiryAdmin(BaseGISAdmin):
+class SMSFollowUpInquiryAdmin(BaseAdmin):
     list_display = ("id", "conversation", "keyword", "message", "date_created")
     search_fields = ("conversation__phone_number__number", "keyword", "message")
     list_filter = ("keyword",)
@@ -86,28 +86,28 @@ class SMSFollowUpInquiryAdmin(BaseGISAdmin):
 
 
 @admin.register(UnresolvedSMSInquiry)
-class UnresolvedSMSInquiryAdmin(BaseGISAdmin):
+class UnresolvedSMSInquiryAdmin(BaseAdmin):
     list_display = ("conversation", "message", "date_created")
     search_fields = ("conversation__phone_number__number", "message")
     ordering = ("-date_created",)
 
 
 @admin.register(SMSMessageOverflow)
-class SMSMessageOverflowAdmin(BaseGISAdmin):
+class SMSMessageOverflowAdmin(BaseAdmin):
     list_display = ("sms_inquiry", "sms_followup", "message", "date_created")
     search_fields = ("sms_inquiry__message", "sms_followup__message", "message")
     ordering = ("-date_created",)
 
 
 @admin.register(SMSInquiryResponse)
-class SMSInquiryResponseAdmin(BaseGISAdmin):
+class SMSInquiryResponseAdmin(BaseAdmin):
     list_display = ("conversation", "sms_inquiry", "resource_ids", "date_created")
     search_fields = ("conversation__phone_number__number",)
     ordering = ("-date_created",)
 
 
 @admin.register(SMSFollowUpResponse)
-class SMSFollowUpResponseAdmin(BaseGISAdmin):
+class SMSFollowUpResponseAdmin(BaseAdmin):
     list_display = ("conversation", "sms_follow_up", "resource_ids_pretty", "date_created")
     search_fields = ("conversation__phone_number__number",)
     ordering = ("-date_created",)

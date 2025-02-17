@@ -41,7 +41,7 @@ class ToiletInfoTemplate(InfoTemplate):
         ...
 
 
-class WifiInfoTemplate(PublicWifi):
+class WifiInfoTemplate(InfoTemplate):
 
     def display_info(self, instance: Shelter) -> str:
         ...

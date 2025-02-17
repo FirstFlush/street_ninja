@@ -99,6 +99,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'cache',
     'common',
+    'contacts',
     'geo',
     'integrations',
     'resources',
