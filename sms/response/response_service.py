@@ -1,5 +1,6 @@
 import logging
 from cache.dataclasses import PhoneSessionData
+from cache.redis.exc import NoSessionFound
 from cache.follow_up_caching_service import FollowUpCachingService
 from cache.inquiry_caching_service import InquiryCachingService
 from common.utils import coord_string
@@ -38,18 +39,6 @@ class ResponseService:
             raise TypeError(msg)
         return response_data
 
-    def _get_sms_inquiry_for_follow_up(self, id: int) -> SMSInquiry:
-        """
-        When a follow-up request comes in, it needs to be matched to an SMS inquiry.
-        """
-        sms_inquiry = self.instance.conversation.smsinquiry_set.filter(id=id).first()
-        if not sms_inquiry:
-            msg = f"No SMSInquiry found in session cache with ID of `{id}` when processing SMSFollowUpInquiry with ID of `{self.instance.id}`"
-            logger.error(msg)
-            raise ValueError(msg)
-        return sms_inquiry
-
-
     def _build_inquiry_response_data(self) -> SMSInquiryResponseData:
         
         caching_service = InquiryCachingService.init(inquiry=self.instance)
@@ -64,13 +53,15 @@ class ResponseService:
         return response_data
 
     def _get_sms_inquiry_for_follow_up(self, id: int) -> SMSInquiry:
+        """
+        When a follow-up request comes in, it needs to be matched to an SMS inquiry.
+        """
         sms_inquiry = self.instance.conversation.smsinquiry_set.filter(id=id).first()
         if not sms_inquiry:
             msg = f"No SMSInquiry found in session cache with ID of `{id}` when processing SMSFollowUpInquiry with ID of `{self.instance.id}`"
             logger.error(msg)
             raise ValueError(msg)
         return sms_inquiry
-
 
     def _build_follow_up_context(
             self,
@@ -88,7 +79,12 @@ class ResponseService:
 
     def _build_follow_up_response_data(self) -> SMSFollowUpResponseData:
 
-        caching_service, current_session = FollowUpCachingService.init(follow_up_inquiry=self.instance)
+        try:
+            caching_service, current_session = FollowUpCachingService.init(follow_up_inquiry=self.instance)
+        except NoSessionFound as e:
+            logger.error(e, exc_info=True)
+
+            
         sms_inquiry = self._get_sms_inquiry_for_follow_up(current_session.inquiry_id)
         context = self._build_follow_up_context(
             sms_inquiry=sms_inquiry,
@@ -111,6 +107,8 @@ class ResponseService:
                 response_data = more_handler.build_response_data()
                 more_handler.update_session(ids=response_data.ids)
         return response_data
+
+
 
 
     def build_help_msg(self) -> str:

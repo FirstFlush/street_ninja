@@ -3,6 +3,7 @@ from common.utils import now
 from sms.models import SMSFollowUpInquiry
 from .base_cache_service import BaseCacheService
 from .dataclasses import PhoneSessionData
+from .redis.exc import NoSessionFound
 from .redis.access_patterns import AccessPatternRegistry
 
 
@@ -16,9 +17,10 @@ class FollowUpCachingService(BaseCacheService):
         session_cache_client = cls._get_session_cache_client(convo_id=follow_up_inquiry.conversation.id)
         current_session = session_cache_client.get_session()
         if current_session is None:
-            msg = f"No session object found by FollowUpCachingService for SMSFollowUpInquiry ID `{follow_up_inquiry.id}`!"
+            msg = f"No session object found by FollowUpCachingService for SMSFollowUpInquiry ID: `{follow_up_inquiry.id}`, Conversation ID: `{follow_up_inquiry.conversation.id}`"
             logger.error(msg)
-            raise ValueError(msg)
+            raise NoSessionFound(msg)
+        
         logger.info("Initialized PhoneSessionCacheClient")
         resource_access_pattern = AccessPatternRegistry.get_pattern(
            sms_keyword_enum=current_session.keyword_enum

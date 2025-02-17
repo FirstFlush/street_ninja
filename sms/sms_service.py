@@ -129,7 +129,7 @@ class SMSService:
             )
         else:
             wrapped_response_message = response_service.build_help_msg()
-        return response_service.to_twiml(msg=wrapped_response_message)
+        return wrapped_response_message
 
         # sms_service._test_print(msg=wrapped_response_message)
 
