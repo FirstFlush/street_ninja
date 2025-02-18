@@ -45,11 +45,14 @@ SMS_CHAR_LIMIT = config('SMS_CHAR_LIMIT', cast=int)
 
 # CORS 
 # =======================================
-# CORS_ALLOWED_ORIGINS = [
-#     "http://192.168.1.169:3000",
-#     "http://localhost:3000",
-# ]
-CORS_ALLOW_ALL_ORIGINS = True
+if DEBUG:
+    CORS_ALLOW_ALL_ORIGINS = True
+else:
+    CORS_ALLOWED_ORIGINS = [
+        f"https://{config('STREET_NINJA_DOMAIN')}",
+    ]
+    CORS_ALLOW_CREDENTIALS = True
+
 
 # Celery
 # =======================================
