@@ -1,8 +1,23 @@
 """
 Common utility functions
 """
+import logging
 from datetime import datetime, timezone
 from django.contrib.gis.geos import Point
+
+
+logger = logging.getLogger(__name__)
+
+
+def convert_bool(value: bool, abbreviated: bool = True) -> str:
+    if isinstance(value, bool):
+        if abbreviated:
+            return "Y" if value else "N"
+        else:
+            return "Yes" if value else "No"
+    msg = f"`{cls.__name__}`.convert_bool() Received invalid type for param value: `{type(value)}`, value `{value}`"
+    logger.error(msg)
+    raise TypeError(msg)
 
 
 def now() -> datetime:

@@ -17,6 +17,9 @@ class ResourceQuerySet(gis_models.QuerySet):
     def closest_to(self, location:Point) -> "ResourceQuerySet":
         """
         Returns a queryset of resources ordered by distance from the given location.
+
+        NOTE not in use because annotate() method causes a DB hit. 
+        Substituted instead for the geo.geospatial_service.GeospatialService.sort_by_distance() method
         """
         return self.annotate(
             distance=Distance("location", location)).order_by("distance")
@@ -46,15 +49,21 @@ class ResourceModel(gis_models.Model):
             logger.error(msg, exc_info=True)
             raise
 
+    @property
+    def map_values(self) -> dict[str, Any]:
+        """
+        This property must be implemented in child classes.
+        Prepares data for the Street Ninja website's interactive map.
+        """
+        msg = f"{self.__class__.__name__} must implement map_values()"
+        logger.error(msg)
+        raise NotImplementedError(msg)
+
     @classmethod
     def get_location(cls, data:Any) -> Point:
         msg = f"{cls.__name__} must implement the `get_location` method."
-        logger.error(msg, exc_info=True)
+        logger.error(msg)
         raise NotImplementedError(msg)
-
-    @staticmethod
-    def get_point(lon:float, lat:float) -> Point:
-        return Point(x=lon, y=lat, srid=4326)
 
     @classmethod
     def normalize_data(cls, data:dict[str, Any]):
@@ -73,3 +82,7 @@ class ResourceModel(gis_models.Model):
         """
         if not hasattr(cls, cls._unique_key):
             raise AttributeError(f"Model {cls.__name__} must define a valid _unique_key.")
+
+    @staticmethod
+    def get_point(lon:float, lat:float) -> Point:
+        return Point(x=lon, y=lat, srid=4326)

@@ -1,18 +1,18 @@
-from dataclasses import dataclass, asdict
-from typing import Literal, Optional
+from dataclasses import dataclass
+from typing import Literal, Any
+
 
 @dataclass
 class MapPoint:
-    # type: Literal["shelter", "food", "water", "toilet", "wifi"]
     longitude: float
     latitude: float
     key:int
-    # name: Optional[str] = None
+    data: dict[str, Any]
 
 
 @dataclass
 class MapData:
-    data: dict[Literal["shelter", "food", "water", "toilet", "wifi"], list[MapPoint]]
+    resources: dict[Literal["shelter", "food", "water", "toilet", "wifi"], list[MapPoint]]
     
 
 

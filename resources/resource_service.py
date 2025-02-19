@@ -31,15 +31,15 @@ class ResourceService:
 
         count = 0
         for keyword_enum, model_class in self.RESOURCE_MODELS.items():
-            qs = model_class.objects.filter(is_active=True).values("location")
+            qs = model_class.objects.filter(is_active=True)#.map_values("location")
             for obj in qs:
-                location: Point = obj["location"]
-                if location:  # Ensure location is not null
+                if obj.location:
                     count += 1
                     map_point = MapPoint(
-                        longitude=location.x,
-                        latitude=location.y,
+                        longitude=obj.location.x,
+                        latitude=obj.location.y,
                         key=count,
+                        data=obj.map_values,
                         # name=obj.get("facility"),
                     )
                     map_data[keyword_enum.value.lower()].append(map_point)
@@ -47,4 +47,4 @@ class ResourceService:
             logger.warning(f"`{len(map_data.keys())}` resource records found when building MapData")
             return None
 
-        return MapData(data=dict(map_data))
+        return MapData(resources=dict(map_data))

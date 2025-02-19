@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.gis.db import models as gis_models
+from typing import Any
+from common.utils import convert_bool
 from sms.enums import SMSKeywordEnum
 from .enums import ShelterCategoryParamValue
 from .abstract_models import CityOfVancouverModel, WigleModel
@@ -20,6 +22,15 @@ class Shelter(CityOfVancouverModel):
     is_active = models.BooleanField(default=True)
     last_fetched = models.DateTimeField(null=True)
     date_created = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def map_values(self) -> dict[str, Any]:
+        return {
+            "Facility": self.facility,
+            "Address": self.address,
+            "Category":self.category,
+            # "Phone":self.phone,
+        }
 
     def __str__(self) -> str:
         return self.facility
@@ -55,6 +66,13 @@ class FoodProgram(CityOfVancouverModel):
     last_fetched = models.DateTimeField(null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def map_values(self) -> dict[str, Any]:
+        return {
+            "Program": self.program_name,
+            "Organization": self.organization_name,
+            "Sign-up required": convert_bool(self.signup_required, abbreviated=False),
+        }
 
 class Toilet(CityOfVancouverModel):
 
@@ -77,6 +95,14 @@ class Toilet(CityOfVancouverModel):
     last_fetched = models.DateTimeField(null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def map_values(self) -> dict[str, Any]:
+        return {
+            "Name": self.name,
+            "Address": self.address,
+            "Summer hours": self.summer_hours,
+            "Winter hours": self.winter_hours,
+        }
 
 
 class DrinkingFountain(CityOfVancouverModel):
@@ -91,6 +117,13 @@ class DrinkingFountain(CityOfVancouverModel):
     last_fetched = models.DateTimeField(null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def map_values(self) -> dict[str, Any]:
+        return {
+            "Name": self.name,
+            "In operation": self.in_operation,
+        }
+
 
 class PublicWifi(WigleModel):
 
@@ -101,3 +134,9 @@ class PublicWifi(WigleModel):
     is_active = models.BooleanField(default=True)
     last_fetched = models.DateTimeField(null=True)
     date_created = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def map_values(self) -> dict[str, Any]:
+        return {
+            "Network": self.ssid,
+        }
