@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from typing import Optional, Type
-from resources.abstract_models import ResourceQuerySet, ResourceModel
+from resources.abstract_models import ResourceModel
 from sms.models import SMSInquiry, SMSFollowUpInquiry
 from sms.response.response_templates import QuerySetResponseTemplate, GeneralResponseTemplate
 from cache.dataclasses import PhoneSessionData
@@ -12,7 +12,7 @@ from cache.inquiry_caching_service import InquiryCachingService
 class InquiryResponseContext:
     instance: SMSInquiry
     caching_service: InquiryCachingService
-    queryset: ResourceQuerySet
+    resources: list[ResourceModel]
 
 
 @dataclass

@@ -57,10 +57,10 @@ class FollowUpHandlerWithParams(BaseFollowUpHandler):
 
     def _get_resource(self) -> ResourceModel: 
         id = self._get_resource_id()
-        qs = self.caching_service.resource_cache_client.get_or_set_db(**(self.current_session.resource_params or {}))
-        resource = qs.filter(id=id).first()
+        resources = self.caching_service.resource_cache_client.get_or_set_db(**(self.current_session.resource_params or {}))
+        resource = next((r for r in resources if r.id == id), None)
         if resource is None:
-            msg = f"{self.__class__.__name__} can not resolve resource model in QuerySet `{qs}` with id of `{id}`."
+            msg = f"{self.__class__.__name__} can not resolve resource model in list of ResourceModel objects `{resources}` with id of `{id}`."
             logger.error(msg)
             raise ResourceModel.DoesNotExist(msg)
         return resource

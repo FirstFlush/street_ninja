@@ -1,7 +1,7 @@
 import logging
 from .base_handler import BaseFollowUpHandler
 from cache.dataclasses import PhoneSessionData
-from resources.abstract_models import ResourceQuerySet
+from resources.abstract_models import ResourceModel
 from sms.response.response_builders.queryset_result_builder import QuerySetResultBuilder
 from sms.response.dataclasses import FollowUpContext, SMSFollowUpResponseData
 
@@ -17,7 +17,7 @@ class More(BaseFollowUpHandler):
         self.sms_inquiry = context.sms_inquiry
         self.current_session = context.current_session
         self.caching_service = context.caching_service
-        self.queryset = self._queryset()
+        self.resources = self._resources()
         self.response_builder = self._response_builder()
 
     def build_response_data(self) -> SMSFollowUpResponseData:
@@ -28,7 +28,7 @@ class More(BaseFollowUpHandler):
 
     def _response_builder(self) -> QuerySetResultBuilder:
         return QuerySetResultBuilder(
-            queryset=self.queryset,
+            resources=self.resources,
             offset=self.current_session.offset,
         )
 
@@ -36,8 +36,8 @@ class More(BaseFollowUpHandler):
         new_session = self.caching_service.update_phone_session(session_data=self.current_session, ids=ids)
         return new_session
 
-    def _queryset(self) -> ResourceQuerySet:
-        qs = self.caching_service.get_resources_by_proximity(location=self.sms_inquiry.location)
-        if len(qs) == 0:
-            logger.warning(f"{self.__class__.__name__} received empty queryset: {qs}")
-        return qs
+    def _resources(self) -> list[ResourceModel]:
+        resources = self.caching_service.get_resources_by_proximity(location=self.sms_inquiry.location)
+        if len(resources) == 0:
+            logger.warning(f"{self.__class__.__name__} received empty queryset: {resources}")
+        return resources

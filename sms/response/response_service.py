@@ -42,11 +42,11 @@ class ResponseService:
     def _build_inquiry_response_data(self) -> SMSInquiryResponseData:
         
         caching_service = InquiryCachingService.init(inquiry=self.instance)
-        qs = caching_service.get_resources_by_proximity(location=self.instance.location)
-        context= InquiryResponseContext(
+        resources = caching_service.get_resources_by_proximity(location=self.instance.location)
+        context = InquiryResponseContext(
             instance=self.instance,
             caching_service=caching_service,
-            queryset=qs,
+            resources=resources,
         )
         inquiry_response_handler = InquiryResponseHandler(context=context)
         response_data = inquiry_response_handler.build_response_data()

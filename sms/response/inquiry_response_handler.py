@@ -11,13 +11,13 @@ class InquiryResponseHandler:
     def __init__(self, context: InquiryResponseContext):
         self.instance = context.instance
         self.caching_service = context.caching_service
-        self.queryset = context.queryset
+        self.resources = context.resources
         self.offset = 0
         self.queryset_result_builder = self._queryset_result_builder()
 
     def _queryset_result_builder(self) -> QuerySetResultBuilder:
         return QuerySetResultBuilder(
-            queryset=self.queryset,
+            resources=self.resources,
             offset=self.offset,
             params=self.instance.params if self.instance.params else None,
         )

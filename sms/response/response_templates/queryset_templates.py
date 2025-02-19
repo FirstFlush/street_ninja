@@ -28,7 +28,7 @@ class ShelterResponseTemplate(QuerySetResponseTemplate):
         
 
     def format_result(self, instance: Shelter, num: int=1) -> str:
-        distance = self.distance(km=instance.distance.km)
+        distance = self.distance(km=instance.distance)
         s = f"{num}. {distance} {instance.facility} ({self._category(instance)})"
         if self.params and self.params.get('category'):
             self.params.pop('category')
@@ -43,7 +43,7 @@ class FoodResponseTemplate(QuerySetResponseTemplate):
     TITLE = "🍽 FOOD PROGRAMS"
 
     def format_result(self, instance: FoodProgram) -> str:
-        distance = self.distance(km=instance.distance.km)
+        distance = self.distance(km=instance.distance)
         s = f"{distance} {instance.program_name}"
         meals = f"Meals: {self._convert_bool(instance.provides_meals)}"
         signup = f"Signup required: {self._convert_bool(instance.signup_required)}"            
@@ -57,7 +57,7 @@ class ToiletResponseTemplate(QuerySetResponseTemplate):
     TITLE = "🧻 PUBLIC TOILETS"
 
     def format_result(self, instance: Toilet) -> str:
-        distance = self.distance(km=instance.distance.km)
+        distance = self.distance(km=instance.distance)
         s = f"{distance} {instance.name} {instance.address}"
         return s
 
@@ -68,7 +68,7 @@ class WaterResponseTemplate(QuerySetResponseTemplate):
     TITLE = "💧 DRINKING FOUNTAINS"
 
     def format_result(self, instance: DrinkingFountain) -> str:
-        distance = self.distance(km=instance.distance.km)
+        distance = self.distance(km=instance.distance)
         s = f"{distance} {instance.name} {instance.in_operation}"
         return s
 
@@ -79,6 +79,6 @@ class WifiResponseTemplate(QuerySetResponseTemplate):
     TITLE = "📶 PUBLIC WIFI"
 
     def format_result(self, instance: PublicWifi) -> str:
-        distance = self.distance(km=instance.distance.km)
+        distance = self.distance(km=instance.distance)
         s = f"{distance} {instance.ssid}"
         return s

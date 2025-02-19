@@ -1,9 +1,10 @@
 import logging
-from abc import ABC, abstractmethod
+from abc import ABC
 from django.contrib.gis.geos import Point
 from cache.dataclasses import PhoneSessionData
 from cache.redis.clients import ResourceCacheClient, PhoneSessionCacheClient
-from resources.abstract_models import ResourceQuerySet
+from geo.geospatial import GeospatialService
+from resources.abstract_models import ResourceModel
 from sms.models import SMSFollowUpInquiry, SMSInquiry
 from .redis.access_patterns import AccessPatternDB, PhoneSessionAccessPattern
 
@@ -41,12 +42,14 @@ class BaseCacheService(ABC):
             access_pattern=phone_session_access_pattern,
         )
 
-    def get_resources_by_proximity(self, location: Point) -> ResourceQuerySet:
+    def get_resources_by_proximity(self, location: Point) -> list[ResourceModel]:
         """
         SMS Inquiries will supply their own location
         """
         inquiry_params = self.inquiry.params or {}
-        return self.resource_cache_client.get_or_set_db(query_params=inquiry_params).closest_to(location)
+        resources = self.resource_cache_client.get_or_set_db(query_params=inquiry_params)#.closest_to(location)
+        return GeospatialService.sort_by_distance(resources=resources, location=location)
+
 
     def get_phone_session(self) -> PhoneSessionData | None:
         return self.session_cache_client.get_session()
