@@ -1,11 +1,12 @@
 import logging
 from abc import ABC, abstractmethod
 from typing import Type
-from cache.dataclasses import PhoneSessionData 
+from cache.dataclasses import PhoneSessionData
 from resources.abstract_models import ResourceModel
 from sms.response.dataclasses import FollowUpContext, SMSFollowUpResponseData
 from sms.enums import FollowUpParams
 from sms.models import SMSFollowUpInquiry
+
 
 logger = logging.getLogger(__name__)
 
@@ -55,9 +56,11 @@ class FollowUpHandlerWithParams(BaseFollowUpHandler):
             logger.error(msg)
             raise
 
-    def _get_resource(self) -> ResourceModel: 
+    def _get_resource(self) -> ResourceModel:
         id = self._get_resource_id()
-        resources = self.caching_service.resource_cache_client.get_or_set_db(**(self.current_session.resource_params or {}))
+        resources = self.caching_service.resource_cache_client.get_or_set_db(
+            **(self.current_session.resource_params or {})
+        )
         resource = next((r for r in resources if r.id == id), None)
         if resource is None:
             msg = f"{self.__class__.__name__} can not resolve resource model in list of ResourceModel objects `{resources}` with id of `{id}`."
@@ -66,6 +69,6 @@ class FollowUpHandlerWithParams(BaseFollowUpHandler):
         return resource
 
     def update_session(self) -> PhoneSessionData:
-        new_session = self.caching_service.update_phone_session(session_data=self.current_session)
+        new_session = self.caching_service.update_phone_session(
+            session_data=self.current_session)
         return new_session
-
