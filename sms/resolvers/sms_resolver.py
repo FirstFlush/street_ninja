@@ -29,16 +29,18 @@ class ResolvedSMSInquiry:
     def is_resolved(self) -> bool:
         return self.keyword_language_data is not None and self.location_data is not None
 
+
 @dataclass
 class UnresolvedSMS:
     msg: str
+
 
 @dataclass
 class ResolvedSMS:
     resolved_sms_type: ResolvedSMSType
     phone_number: str
-    message_sid: str
     data: ResolvedSMSInquiry | ResolvedSMSFollowUp | UnresolvedSMS
+    message_sid: Optional[str] = None
 
 
 class SMSResolver:

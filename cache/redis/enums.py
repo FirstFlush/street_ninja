@@ -22,6 +22,10 @@ class ResourceKeyEnum(RedisKeyEnum):
     WIFI = "wifi:all"
 
 
+class WebSessionKeyEnum(RedisKeyEnum):
+    PHONE = "phone"
+
+
 class PhoneSessionFieldsEnum(StreetNinjaEnum):
 
     KEYWORD = "keyword"

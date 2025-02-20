@@ -1,5 +1,6 @@
 import logging
 from django.contrib.gis.geos import Point
+from django.contrib.sessions.backends.base import SessionBase
 from sms.resolvers import (
     SMSResolver, 
     ResolvedSMS, 
@@ -17,15 +18,9 @@ from .abstract_models import IncomingSMSMessageModel, ResponseSMSMessageModel
 from cache.follow_up_caching_service import FollowUpCachingService
 from cache.inquiry_caching_service import InquiryCachingService
 from .persistence_service import PersistenceService
-
+from .web.sms_web_service import SMSWebService
+from .web.dataclasses import WebServiceData
 from .serializers import TwilioSMSSerializer
-from .models import (
-    SMSInquiry, 
-    SMSFollowUpInquiry, 
-    UnresolvedSMSInquiry,
-    SMSInquiryResponse,
-    SMSFollowUpResponse,
-)
 
 
 logger = logging.getLogger(__name__)
@@ -33,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 class SMSService:
 
-    def __init__(self, msg: str, phone_number: str, message_sid: str):
+    def __init__(self, msg: str, phone_number: str, message_sid: str|None=None):
         self.msg = msg
         self.phone_number = phone_number
         self.message_sid = message_sid
@@ -109,8 +104,22 @@ class SMSService:
         print()
         print()
 
+
     @classmethod
-    def process_sms(cls, msg: str, phone_number: str, message_sid: str) -> str:
+    def process_web_sms(cls, msg: str, session: SessionBase) -> str:
+
+        sms_web_service = SMSWebService.init(query=msg, session=session)
+        phone_number = sms_web_service.get_phone_number()
+        try:
+            return cls.process_sms(msg=msg, phone_number=phone_number) 
+        except Exception as e:
+            msg = f"Unexpected exception `{e.__class__.__name__}`when calling process_sms from the process_web_sms method: {e}"
+            logger.error(msg, exc_info=True)
+            raise
+
+
+    @classmethod
+    def process_sms(cls, msg: str, phone_number: str, message_sid: str|None=None) -> str:
         sms_service = cls(msg=msg, phone_number=phone_number, message_sid=message_sid)
         sms_service.sms_data = sms_service.resolve()
         sms_location = sms_service.geocode()

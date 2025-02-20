@@ -3,5 +3,5 @@ from .views import *
 from django.conf import settings
 
 urlpatterns = [
-    path("all/", AllResourcesView.as_view(), name='resources_all'),  # /api/resources
+    path("map/", MapView.as_view(), name='map'),  # /api/resources
 ]

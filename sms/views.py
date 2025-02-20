@@ -5,12 +5,33 @@ from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView, Request, Response, status
 from twilio.twiml.messaging_response import MessagingResponse
 from auth.authentication import TwilioSignatureAuthentication
-from .serializers import TwilioSMSSerializer
+from .serializers import TwilioSMSSerializer, WebSMSSerializer
 from .sms_service import SMSService
 from sms.response.response_templates.help_template import HelpResponseTemplate
 
 
 logger = logging.getLogger(__name__)
+
+
+class SMSWebsiteView(APIView):
+
+    FAILED = "Unable to resolve your request. Please try another, such as 'food at 222 Main St'."
+
+    def post(self, request: Request, *args, **kwargs):
+        request._request.session
+        deserializer = WebSMSSerializer(data=request.data)
+        if deserializer.is_valid():
+            response = SMSService.process_web_sms(
+                msg=deserializer.validated_data["query"],
+                session=request._request.session,
+            )
+            return Response({"success": True, "res": response})
+
+        else:
+            msg = f"Deserialization failed for deserializer `{deserializer.__class__.__name__}`. Errors: {deserializer.errors}"
+            logger.error(msg)
+            return Response({"success": False, "res": self.FAILED}, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class SMSWebhookView(APIView):
@@ -28,6 +49,7 @@ class SMSWebhookView(APIView):
         mr.message(msg)
         logger.info("Created TwiML response")
         return str(mr)
+
 
     def post(self, request:Request, *args, **kwargs):
 
@@ -56,19 +78,3 @@ class SMSWebhookView(APIView):
         return Response(twiml, content_type="application/xml", status=status.HTTP_200_OK)
     
 
-
-
-
-        # deserializer = TwilioSMSSerializer(data=request.data)
-        # if deserializer.is_valid():
-        #     SMSService.process_sms(
-        #         msg=deserializer.validated_data["Body"],
-        #         phone_number=deserializer.validated_data["From"],
-        #         message_sid=deserializer.validated_data["MessageSid"],
-        #     )
-        # else:
-        #     logger.error(f"Failed to deserialize: {deserializer.errors}")
-        #     return Response("Could not parse message", status=status.HTTP_400_BAD_REQUEST)
-
-        # return Response("fasdfasd", status=status.HTTP_200_OK)
-    

@@ -7,7 +7,7 @@ from .serializers import MapDataSerializer
 logger = logging.getLogger(__name__)
 
 
-class AllResourcesView(APIView):
+class MapView(APIView):
 
     def get(self, request: Request, *args, **kwargs):
         

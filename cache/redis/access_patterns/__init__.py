@@ -8,4 +8,5 @@ from .resources import (
     PublicWifiAccessPattern,
 )
 from .phone_session import PhoneSessionAccessPattern
+from .web_session import WebSessionAccessPattern
 from .pattern_registry import AccessPatternRegistry
