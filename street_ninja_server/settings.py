@@ -46,12 +46,25 @@ SMS_CHAR_LIMIT = config('SMS_CHAR_LIMIT', cast=int)
 # CORS 
 # =======================================
 if DEBUG:
-    CORS_ALLOW_ALL_ORIGINS = True
-else:
-    CORS_ALLOWED_ORIGINS = [
-        f"https://{config('STREET_NINJA_DOMAIN')}",
-    ]
     CORS_ALLOW_CREDENTIALS = True
+    CORS_ALLOW_ALL_ORIGINS = False
+    CORS_ALLOWED_ORIGIN_REGEXES = [r"^https?:\/\/.*"]
+else:
+    CORS_ALLOW_CREDENTIALS = True  
+    CORS_ALLOWED_ORIGINS = [  
+        f"https://{config('STREET_NINJA_DOMAIN')}",
+    ]  
+    CSRF_TRUSTED_ORIGINS = [  
+        f"https://{config('STREET_NINJA_DOMAIN')}", 
+    ]
+
+# if DEBUG:
+#     CORS_ALLOW_ALL_ORIGINS = True
+# else:
+#     CORS_ALLOWED_ORIGINS = [
+#         f"https://{config('STREET_NINJA_DOMAIN')}",
+#     ]
+#     CORS_ALLOW_CREDENTIALS = True
 
 
 # Celery
