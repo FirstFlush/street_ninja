@@ -32,10 +32,7 @@ class WebSessionCacheClient(BaseRedisClient):
         """
         if self.session.session_key is None:
             self.session.save()
-
         try:
-            print('session key: ', self.session.session_key)
-            print('session: ', self.session.items())
             phone_number = self.session.get(self.access_pattern.redis_key_enum.value)
         except Exception as e:
             logger.error(f"Unexpected `{e.__class__.__name__}` error on session.get() call: {e}", exc_info=True)

@@ -18,14 +18,12 @@ class SMSWebsiteView(APIView):
     FAILED = "Unable to resolve your request. Please try another, such as 'food at 222 Main St'."
 
     def post(self, request: Request, *args, **kwargs):
-        print('hihihihi')
         deserializer = WebSMSSerializer(data=request.data)
         if deserializer.is_valid():
             response = SMSService.process_web_sms(
                 msg=deserializer.validated_data["query"],
                 session=request._request.session,
             )
-            print(response)
             return Response({"success": True, "data": response})
 
         else:
