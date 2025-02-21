@@ -18,7 +18,7 @@ class FollowUpCachingService(BaseCacheService):
         current_session = session_cache_client.get_session()
         if current_session is None:
             msg = f"No session object found by FollowUpCachingService for SMSFollowUpInquiry ID: `{follow_up_inquiry.id}`, Conversation ID: `{follow_up_inquiry.conversation.id}`"
-            logger.error(msg)
+            logger.warning(msg)
             raise NoSessionFound(msg)
         
         logger.info("Initialized PhoneSessionCacheClient")

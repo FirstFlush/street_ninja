@@ -19,7 +19,6 @@ class WebSessionCacheClient(BaseRedisClient):
             session: SessionBase
     ):
         self.access_pattern = access_pattern
-        self.session_key = self.access_pattern.redis_key_enum.value
         self.session = session
         self.ttl = access_pattern.key_ttl_enum.value
 
@@ -31,8 +30,13 @@ class WebSessionCacheClient(BaseRedisClient):
         """
         Retrieves the phone number from session cache, or generates and stores a new one.
         """
+        if self.session.session_key is None:
+            self.session.save()
+
         try:
-            phone_number = self.session.get(self.session_key)
+            print('session key: ', self.session.session_key)
+            print('session: ', self.session.items())
+            phone_number = self.session.get(self.access_pattern.redis_key_enum.value)
         except Exception as e:
             logger.error(f"Unexpected `{e.__class__.__name__}` error on session.get() call: {e}", exc_info=True)
             phone_number = None
@@ -44,7 +48,8 @@ class WebSessionCacheClient(BaseRedisClient):
             logger.info(f"Cache miss! Creating new phone number for web session")
             phone_number = self._create_phone_number()
             try:
-                self.session[self.session_key] = phone_number
+                self.session[self.access_pattern.redis_key_enum.value] = phone_number
+                self.session.save()
             except Exception as e:
                 msg = f"Unexpected `{e.__class__.__name__}` error while saving phone number `{phone_number}` to web session: {e}"
                 logger.error(msg, exc_info=True)

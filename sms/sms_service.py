@@ -17,6 +17,7 @@ from geo.geocoding.geocoding_service import GeocodingService
 from .abstract_models import IncomingSMSMessageModel, ResponseSMSMessageModel
 from cache.follow_up_caching_service import FollowUpCachingService
 from cache.inquiry_caching_service import InquiryCachingService
+from .response.response_templates.help_template import HelpResponseTemplate
 from .persistence_service import PersistenceService
 from .web.sms_web_service import SMSWebService
 from .web.dataclasses import WebServiceData
@@ -107,7 +108,6 @@ class SMSService:
 
     @classmethod
     def process_web_sms(cls, msg: str, session: SessionBase) -> str:
-
         sms_web_service = SMSWebService.init(query=msg, session=session)
         phone_number = sms_web_service.get_phone_number()
         try:
@@ -116,7 +116,6 @@ class SMSService:
             msg = f"Unexpected exception `{e.__class__.__name__}`when calling process_sms from the process_web_sms method: {e}"
             logger.error(msg, exc_info=True)
             raise
-
 
     @classmethod
     def process_sms(cls, msg: str, phone_number: str, message_sid: str|None=None) -> str:
@@ -129,18 +128,20 @@ class SMSService:
 
         response_service = sms_service._build_response_service(instance=sms_service.persistence_service.instance)
         response_data = response_service.build_response_data()
+        if response_data is not None:
+            response_instance = sms_service.save_response(response_data=response_data)
+            if response_instance:
+                wrapped_response_message = response_data.template.wrap_response(
+                    msg=response_data.msg,
+                    new_session=sms_service.persistence_service.new_session,
+                )
+            else:
+                wrapped_response_message = response_service.build_help_msg()
+            
+            sms_service._test_print(msg=wrapped_response_message)
+            return wrapped_response_message
 
-        response_instance = sms_service.save_response(response_data=response_data)
-        if response_instance:
-            wrapped_response_message = response_data.template.wrap_response(
-                msg=response_data.msg,
-                new_session=sms_service.persistence_service.new_session,
-            )
         else:
-            wrapped_response_message = response_service.build_help_msg()
-        
-        sms_service._test_print(msg=wrapped_response_message)
-        return wrapped_response_message
-
+            return HelpResponseTemplate.help_msg()
 
 

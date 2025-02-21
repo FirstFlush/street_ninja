@@ -19,7 +19,7 @@ class ResponseService:
     def __init__(self, instance: SMSInquiry | SMSFollowUpInquiry | UnresolvedSMSInquiry):
         self.instance = instance
 
-    def build_response_data(self) -> SMSInquiryResponseData | SMSFollowUpResponseData:
+    def build_response_data(self) -> SMSInquiryResponseData | SMSFollowUpResponseData | None:
         """
         Processes the inquiry and generates a response according to its type.
 
@@ -37,6 +37,7 @@ class ResponseService:
             msg = f"Received invalid type for instance argument: `{type(self.instance)}`"
             logger.error(msg)
             raise TypeError(msg)
+
         return response_data
 
     def _build_inquiry_response_data(self) -> SMSInquiryResponseData:
@@ -77,13 +78,13 @@ class ResponseService:
         )
 
 
-    def _build_follow_up_response_data(self) -> SMSFollowUpResponseData:
+    def _build_follow_up_response_data(self) -> SMSFollowUpResponseData | None:
 
         try:
             caching_service, current_session = FollowUpCachingService.init(follow_up_inquiry=self.instance)
         except NoSessionFound as e:
-            logger.error(e, exc_info=True)
-
+            logger.warning(e)
+            return None
             
         sms_inquiry = self._get_sms_inquiry_for_follow_up(current_session.inquiry_id)
         context = self._build_follow_up_context(

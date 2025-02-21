@@ -25,3 +25,6 @@ class SMSWebService:
     def get_phone_number(self) -> str:
         return self.cache_client.get_or_set_phone_number()
         
+    def set_phone_number(self, phone_number: str):
+        self.cache_client.session[self.cache_client.access_pattern.redis_key_enum.value] = phone_number
+        self.cache_client.session.save()
