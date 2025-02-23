@@ -24,9 +24,24 @@ class InfoTemplate(GeneralResponseTemplate, Generic[T]):
 
 class ShelterInfoTemplate(InfoTemplate[Shelter]):
     
-    def display_info(self) -> str:
-        return f"{self.instance.facility} blehhh"
+    def _address(self) -> str:
+        if self.instance.address:
+            return self.instance.address
+        else:
+            return "(Address not listed)"
 
+    def display_info(self) -> str:
+        return f"""
+{self.instance.facility}
+{self.instance.category}
+
+{self._address()}
+{self.instance.phone}
+
+Serves meals: {self._convert_bool(self.instance.meals)}
+Pets allowed: {self._convert_bool(self.instance.pets)}
+Carts allowed: {self._convert_bool(self.instance.carts)}
+"""
 
 
 class FoodInfoTemplate(InfoTemplate[FoodProgram]):
@@ -70,12 +85,10 @@ class FoodInfoTemplate(InfoTemplate[FoodProgram]):
             s += f"\n{self.instance.referral_email}"
         return s
 
-
     def _program(self) -> str:
         if self.instance.program_population_served:
             return f"{self.instance.program_name}\nPopulation served: {self.instance.program_population_served}"
         return self.instance.program_name
-
 
     def display_info(self) -> str:
         return f"""
@@ -104,18 +117,56 @@ Organized by
 class WaterInfoTemplate(InfoTemplate[DrinkingFountain]):
 
     def display_info(self) -> str:
-        ...
+        return f"""
+{self.instance.name}
+
+In operation: {self.instance.in_operation}
+
+Pet friendly: {self._convert_bool(self.instance.pet_friendly)}
+"""
 
 
 class ToiletInfoTemplate(InfoTemplate[Toilet]):
 
+    def _address(self) -> str:
+        return self.instance.address if self.instance.address \
+            else "(Address not listed)" 
+
+    def _details(self) -> str:
+        details = []
+        if self.instance.description:
+            details.append(self.instance.description)
+        if self.instance.notes:
+            details.append(self.instance.notes)
+        return "\n".join(details) if details else "(No details)"
+
+    def _hours(self) -> str:
+        summer_hours = self.instance.summer_hours if self.instance.summer_hours else "Unknown"
+        winter_hours = self.instance.winter_hours if self.instance.winter_hours else "Unknown"
+        return f"Summer hours: {summer_hours}\nWinter hours: {winter_hours}"
+
+
     def display_info(self) -> str:
-        ...
+        return f"""
+{self.instance.name}
+
+{self.instance.address}
+
+{self._details()}
+
+{self._hours()}
+
+Wheelchair accessible: {self._convert_bool(self.instance.is_wheelchair)}
+"""
 
 
 class WifiInfoTemplate(InfoTemplate[PublicWifi]):
 
     def display_info(self) -> str:
-        ...
+        f"""
+SSID: {self.instance.ssid}
+
+No additional informatino for Wifi hotspots at this time.
+"""
 
 
