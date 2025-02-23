@@ -16,14 +16,14 @@ class InfoHandler(FollowUpHandlerWithParams):
     def __init__(self, context: FollowUpContext):
         super().__init__(context=context)
         self.info_template = self._info_template()
-
+    
     def _create_response_msg(self) -> str:
-        return self.info_template.display_info(instance=self.resource)
+        return self.info_template.display_info()
 
 
     def _info_template(self) -> InfoTemplate:
         try:
-            return self.MAPPING[self.sms_inquiry.keyword_enum]()
+            return self.MAPPING[self.sms_inquiry.keyword_enum](self.resource)
         except KeyError:
             msg = f"InfoHandler received invalid SMSKeywordEnum: `{self.sms_inquiry.keyword_enum}`. Can not fetch InfoTemplate!"
             logger.error(msg)

@@ -1,11 +1,11 @@
 import logging
 from abc import ABC, abstractmethod
-from typing import Type
 from cache.dataclasses import PhoneSessionData
 from resources.abstract_models import ResourceModel
 from sms.response.dataclasses import FollowUpContext, SMSFollowUpResponseData
 from sms.enums import FollowUpParams
 from sms.models import SMSFollowUpInquiry
+from ..exc import SendHelpError
 
 
 logger = logging.getLogger(__name__)
@@ -42,11 +42,11 @@ class FollowUpHandlerWithParams(BaseFollowUpHandler):
         except KeyError:
             msg = f"SMSFollowUpInquiry #`{self.follow_up_inquiry.id}` params does not contain `{FollowUpParams.SELECTION.value}` key: `{self.follow_up_inquiry.params}`"
             logger.error(msg)
-            raise
+            raise SendHelpError(msg)
         except TypeError:
             msg = f"SMSFollowUpInquiry #`{self.follow_up_inquiry.id}` params invalid type: `{type(self.follow_up_inquiry.params)}`"
             logger.error(msg)
-            raise
+            raise SendHelpError(msg)
 
     def _get_resource_id(self) -> int:
         try:
@@ -54,7 +54,7 @@ class FollowUpHandlerWithParams(BaseFollowUpHandler):
         except IndexError:
             msg = f"Invalid index position for selection of `{self.selection}` and ID list with length of `{len(self.current_session.ids)}`"
             logger.error(msg)
-            raise
+            raise SendHelpError(msg)
 
     def _get_resource(self) -> ResourceModel:
         id = self._get_resource_id()

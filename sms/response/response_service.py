@@ -10,6 +10,7 @@ from sms.models import SMSInquiry, SMSFollowUpInquiry, UnresolvedSMSInquiry
 from .dataclasses import SMSInquiryResponseData, SMSFollowUpResponseData, FollowUpContext, InquiryResponseContext
 from .inquiry_response_handler import InquiryResponseHandler
 from .response_templates.help_template import HelpResponseTemplate
+from .exc import SendHelpError
 
 logger = logging.getLogger(__name__)
 
@@ -27,16 +28,19 @@ class ResponseService:
         the persistence layer to create the SMS Response object, and the
         caching layer to update and necessary ephemeral data.
         """
-        if isinstance(self.instance, SMSInquiry):
-            response_data = self._build_inquiry_response_data()
-        elif isinstance(self.instance, SMSFollowUpInquiry):
-            response_data = self._build_follow_up_response_data()
-        elif isinstance(self.instance, UnresolvedSMSInquiry):
+        try:
+            if isinstance(self.instance, SMSInquiry):
+                response_data = self._build_inquiry_response_data()
+            elif isinstance(self.instance, SMSFollowUpInquiry):
+                response_data = self._build_follow_up_response_data()
+            elif isinstance(self.instance, UnresolvedSMSInquiry):
+                response_data = None
+            else:
+                msg = f"Received invalid type for instance argument: `{type(self.instance)}`"
+                logger.error(msg)
+                raise TypeError(msg)
+        except SendHelpError:
             response_data = None
-        else:
-            msg = f"Received invalid type for instance argument: `{type(self.instance)}`"
-            logger.error(msg)
-            raise TypeError(msg)
 
         return response_data
 
@@ -108,8 +112,6 @@ class ResponseService:
                 response_data = more_handler.build_response_data()
                 more_handler.update_session(ids=response_data.ids)
         return response_data
-
-
 
 
     def build_help_msg(self) -> str:

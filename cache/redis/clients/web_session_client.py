@@ -2,7 +2,7 @@ import logging
 import random
 from django.contrib.sessions.backends.base import SessionBase
 from .base_redis_client import BaseRedisClient
-from ..enums import WebSessionKeyEnum, RedisStoreEnum
+from ..enums import RedisStoreEnum
 from ..access_patterns import WebSessionAccessPattern
 
 

@@ -5,7 +5,7 @@ class APIClientEnum(StreetNinjaEnum):
     CITY_OF_VANCOUVER = "https://opendata.vancouver.ca"
     WIGLE = "https://api.wigle.net"
     OPEN_ROUTE_SERVICE = "https://api.openrouteservice.org"
-
+    # GRAPH_HOPPER = "https://graphhopper.com"
 
 class EndpointsEnum(StreetNinjaEnum):
     ...
@@ -30,3 +30,6 @@ class OpenRouteServiceEndpointsEnum(EndpointsEnum):
     # DIRECTIONS_FOOT = "/v2/directions/foot-walking"
     DIRECTIONS = "/v2/directions/driving-car"
     
+
+# class GraphHopperEndpointsEnum(EndpointsEnum):
+#     DIRECTIONS = "/api/1/route"

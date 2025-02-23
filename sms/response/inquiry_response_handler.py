@@ -22,7 +22,6 @@ class InquiryResponseHandler:
             params=self.instance.params if self.instance.params else None,
         )
 
-
     def build_response_data(self) -> SMSInquiryResponseData:
         session_data = self.caching_service.get_phone_session()
         response_data = self.queryset_result_builder.create_response_data()
