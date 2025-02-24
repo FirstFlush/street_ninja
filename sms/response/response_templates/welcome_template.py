@@ -26,9 +26,9 @@ Get help fast: FOOD, SHELTER, TOILET, WIFI, WATER.
 
     WELCOME_FOOTER = """
 More results? Reply 'MORE'
-details? Reply '[NUMBER] INFO'
-directions? Reply '[NUMBER] DIRECTIONS'
 Need help? Reply 'HELP'
+details? Reply '# INFO'
+directions? Reply '# DIRECTIONS'
 """
 
     @classmethod

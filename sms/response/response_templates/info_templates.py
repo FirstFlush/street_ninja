@@ -18,7 +18,7 @@ class InfoTemplate(GeneralResponseTemplate, Generic[T]):
         self.instance = instance
 
     @abstractmethod
-    def display_info(self, instance: ResourceModel) -> str:
+    def display_info(self) -> str:
         ...
 
 
@@ -56,7 +56,7 @@ class FoodInfoTemplate(InfoTemplate[FoodProgram]):
         s = f"Hampers: {self._convert_bool(self.instance.provides_hampers)}"
         if not self.instance.hamper_cost:
             return s
-        return f"Cost: {self.instance.hamper_cost}"
+        return f"{s}\nCost: {self.instance.hamper_cost}"
 
     def _address(self) -> str:
         addy = self.instance.location_address if self.instance.location_address else "(no address provided)"
