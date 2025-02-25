@@ -34,5 +34,8 @@ class HelpResponseTemplate(BaseSMSResponseTemplate):
     PROMPT = "What can Street Ninja help you find today?"
 
     @classmethod
-    def help_msg(cls) -> str:
-        return f"{cls.HELP_HEADER}\n\n{cls.HELP_DESCRIPTION}\n\n{cls.RESOURCES}\n\n{cls.EXAMPLE_QUERIES}\n\n{cls.PROMPT}"
+    def help_msg(cls, msg: str | None=None) -> str:
+        s = f"{cls.HELP_HEADER}\n\n{cls.HELP_DESCRIPTION}\n\n{cls.RESOURCES}\n\n{cls.EXAMPLE_QUERIES}\n\n{cls.PROMPT}"
+        if msg:
+            return f"{msg}\n\n{s}"
+        return s
