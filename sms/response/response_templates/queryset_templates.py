@@ -1,7 +1,10 @@
+from abc import abstractmethod
 from typing import Any
 from resources.enums import ShelterCategoryParamValue
 from sms.enums import SMSKeywordEnum
-from .base_response_templates import QuerySetResponseTemplate
+from .base_response_templates import BaseSMSResponseTemplate
+from .welcome_template import WelcomeTemplate
+from resources.abstract_models import ResourceModel
 from resources.enums import ShelterParamKey
 from resources.models import (
     Shelter,
@@ -10,6 +13,46 @@ from resources.models import (
     Toilet,
     PublicWifi,
 )
+
+
+class QuerySetResponseTemplate(BaseSMSResponseTemplate):
+
+    keyword_enum: SMSKeywordEnum | None = None
+    FOOTER = "Reply 'MORE' for more results" 
+
+    def __init__(self, params: dict[str, Any] | None = None):
+        self.params = params
+
+    @abstractmethod
+    def format_result(self) -> str:
+        ...
+
+    def _params_string(self, sep: str = ", ") -> str:
+        return sep.join([f"{k.capitalize()} {self._convert_bool(v, abbreviated=False) if isinstance(v, bool) else v}" for k, v in self.params.items()])
+
+    # def _params_pop(self, *keys: str):
+    #     # NOTE not yet in use
+    #     for key in keys:
+    #         if self.params and self.params.get(key) is not None:
+    #             self.params.pop(key)
+
+    def distance(self, km: float) -> str:
+        km = f"{round(km,1)}".rstrip("0").rstrip(".")
+        return f"{km}km"
+    
+    def wrap_response(self, msg:str, new_session: bool = False) -> str:
+        if new_session:
+            top = f"{WelcomeTemplate.welcome_header()}\n\n{self.TITLE}"
+            bottom = f"{WelcomeTemplate.WELCOME_FOOTER}"
+            wrapped_msg = f"{top}\n{msg}\n{bottom}"
+        else:
+            top = self.TITLE
+            bottom = f"{self.FOOTER}"
+            wrapped_msg = f"{top}\n{msg}\n\n{bottom}\n"
+
+        return wrapped_msg
+
+
 
 
 class ShelterResponseTemplate(QuerySetResponseTemplate):
@@ -24,8 +67,7 @@ class ShelterResponseTemplate(QuerySetResponseTemplate):
                 category = "Youth - all genders"
             case _:
                 category = instance.category
-        return category.capitalize()
-        
+        return category.capitalize()        
 
     def format_result(self, instance: Shelter) -> str:
         distance = self.distance(km=instance.distance)
@@ -42,13 +84,39 @@ class FoodResponseTemplate(QuerySetResponseTemplate):
 
     TITLE = "🍽 FOOD PROGRAMS"
 
+    def _signup_or_referral(self, instance:FoodProgram) -> str:
+        d = {
+            "sign-up required" : instance.signup_required,
+            "referral required" : instance.requires_referral,
+        }
+        txt = ", ".join(txt for txt, is_available in d.items() if is_available).capitalize()
+        if txt:
+            return f"*{txt}*"
+        return ""
+
+    def _program_offerings(self, instance: FoodProgram) -> str:
+        offerings = {
+            "meals": (instance.provides_meals, instance.meal_cost),
+            "hampers": (instance.provides_hampers, instance.hamper_cost),
+            "delivery": (instance.delivery_available, None),
+            "takeout": (instance.takeout_available, None),
+        }
+
+        return ", ".join(
+            f"{name} ({cost if cost is not None else 'UNKNOWN'})" 
+            if cost is not None or name in ["meals", "hampers"] else name
+            for name, (is_available, cost) in offerings.items()
+            if is_available
+        )
+
     def format_result(self, instance: FoodProgram) -> str:
         distance = self.distance(km=instance.distance)
         s = f"{distance} {instance.program_name}"
-        meals = f"Meals: {self._convert_bool(instance.provides_meals)}"
-        signup = f"Signup required: {self._convert_bool(instance.signup_required)}"            
+
+        # meals = f"Meals: {self._convert_bool(instance.provides_meals)}"
+        # signup = f"Signup required: {self._convert_bool(instance.signup_required)}"            
         meal_cost = f"Cost: {instance.meal_cost}" if instance.meal_cost else "Free"
-        return f"{s} -> {meals} {signup} {meal_cost}"
+        return f"{s} {self._program_offerings(instance)} {self._signup_or_referral(instance)}"
 
 
 class ToiletResponseTemplate(QuerySetResponseTemplate):

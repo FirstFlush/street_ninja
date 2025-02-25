@@ -81,7 +81,6 @@ class ResponseService:
             follow_up_inquiry=self.instance,
         )
 
-
     def _build_follow_up_response_data(self) -> SMSFollowUpResponseData | None:
 
         try:

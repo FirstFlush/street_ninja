@@ -23,7 +23,8 @@ class DirectionsHandler(FollowUpHandlerWithParams):
     @property
     def directions_text(self) -> str:
         if isinstance(self.directions, list):
-            return "\n".join(self.directions)
+            directions_text = "\n".join(self.directions)
+            return f"{self._header()}\n\n{self.resource.__str__()}\n\n{directions_text}"
         else:
             logger.error(f"DirectionsHandler.directions_text is using invalid self.directions attribute: {self.directions} Defaulting to empty string.")
             return ""
@@ -31,6 +32,12 @@ class DirectionsHandler(FollowUpHandlerWithParams):
     def __init__(self, context: FollowUpContext):
         super().__init__(context=context)
         self.directions: list[str] | None = None
+
+
+    def _header(self) -> str:
+        start = self.sms_inquiry.location_text
+        return f'Directions from "{start}"'
+
 
     def build_response_data(self) -> SMSFollowUpResponseData:
         return SMSFollowUpResponseData(
@@ -56,6 +63,7 @@ class DirectionsHandler(FollowUpHandlerWithParams):
 
 
     def _build_ors_params(self, start_coords: str) -> IntegrationServiceParams:
+        """Builds the required config data for the OpenRouteService API"""
         params = IntegrationServiceParams(
             api_client_class=OpenRouteServiceAPIClient,
             endpoint_enum=OpenRouteServiceEndpointsEnum.DIRECTIONS,

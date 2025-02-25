@@ -4,7 +4,7 @@ from django.conf import settings
 from resources.abstract_models import ResourceModel
 from street_ninja_server.global_mappings import SMS_KEYWORD_ENUM_TO_RESPONSE_TEMPLATE
 from ..dataclasses import SMSInquiryResponseData, SMSFollowUpResponseData
-from ..response_templates.base_response_templates import QuerySetResponseTemplate
+from ..response_templates.queryset_templates import QuerySetResponseTemplate
 
 
 logger = logging.getLogger(__name__)
@@ -76,10 +76,24 @@ class QuerySetResultBuilder:
             count = len(truncated_response.split("\n"))
         return truncated_response, count
 
+    def _get_index(self, i:int) -> int:
+        """
+        Example SMS response:
+        🏠 SHELTERS
+        1) 0.2km The Haven (Men)
+        2) 0.2km Anchor of Hope (Adults - all genders)
+        3) 0.2km Lookout Downtown (Adults - all genders)
+        
+        This method generates the index number for each resource shown to the user.
+        Offset is used because if the user requests 'MORE', 
+        the indexing must start from where the previous message left off.
+        """
+        return i + self.offset + 1
+
     def _create_queryset_response(self, resources: list[ResourceModel]) -> str:
         response_items = []
         for i, instance in enumerate(resources):
-            res = f"{i}) {self.template.format_result(instance=instance)}"
+            res = f"{self._get_index(i)}) {self.template.format_result(instance=instance)}"
             response_items.append(res)
         return "\n".join(response_items)
 
