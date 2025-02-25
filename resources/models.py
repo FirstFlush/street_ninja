@@ -24,6 +24,10 @@ class Shelter(CityOfVancouverModel):
     date_created = models.DateTimeField(auto_now_add=True)
 
     @property
+    def resource_name(self) -> str:
+        return self.facility
+
+    @property
     def map_values(self) -> dict[str, Any]:
         return {
             "Facility": self.facility,
@@ -67,6 +71,10 @@ class FoodProgram(CityOfVancouverModel):
     date_created = models.DateTimeField(auto_now_add=True)
 
     @property
+    def resource_name(self) -> str:
+        return self.program_name
+    
+    @property
     def map_values(self) -> dict[str, Any]:
         return {
             "Program": self.program_name,
@@ -96,6 +104,10 @@ class Toilet(CityOfVancouverModel):
     date_created = models.DateTimeField(auto_now_add=True)
 
     @property
+    def resource_name(self) -> str:
+        return self.name
+
+    @property
     def map_values(self) -> dict[str, Any]:
         return {
             "Name": self.name,
@@ -118,6 +130,10 @@ class DrinkingFountain(CityOfVancouverModel):
     date_created = models.DateTimeField(auto_now_add=True)
 
     @property
+    def resource_name(self) -> str:
+        return self.name
+    
+    @property
     def map_values(self) -> dict[str, Any]:
         return {
             "Name": self.name,
@@ -134,6 +150,10 @@ class PublicWifi(WigleModel):
     is_active = models.BooleanField(default=True)
     last_fetched = models.DateTimeField(null=True)
     date_created = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def resource_name(self) -> str:
+        return self.ssid
 
     @property
     def map_values(self) -> dict[str, Any]:

@@ -41,6 +41,11 @@ class ResourceModel(gis_models.Model):
         abstract = True
 
     @property
+    def resource_name(self) -> str:
+        logger.warning(f"Did not set resource_name property in child class `{self.__class__.__name__}`. Defaulting to __str__() value.")
+        return self.__str__()
+
+    @property
     def keyword_enum(self) -> SMSKeywordEnum:
         try:
             return SMSKeywordEnum(self._keyword_enum)
