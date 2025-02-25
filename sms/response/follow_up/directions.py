@@ -24,7 +24,7 @@ class DirectionsHandler(FollowUpHandlerWithParams):
     def directions_text(self) -> str:
         if isinstance(self.directions, list):
             directions_text = "\n".join(self.directions)
-            return f"{self._header()}\n\n{self.resource.__str__()}\n\n{directions_text}"
+            return f"{self._header()}\n\n{self.resource.resource_name}\n\n{directions_text}"
         else:
             logger.error(f"DirectionsHandler.directions_text is using invalid self.directions attribute: {self.directions} Defaulting to empty string.")
             return ""

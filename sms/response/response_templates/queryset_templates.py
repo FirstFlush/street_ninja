@@ -112,11 +112,7 @@ class FoodResponseTemplate(QuerySetResponseTemplate):
     def format_result(self, instance: FoodProgram) -> str:
         distance = self.distance(km=instance.distance)
         s = f"{distance} {instance.program_name}"
-
-        # meals = f"Meals: {self._convert_bool(instance.provides_meals)}"
-        # signup = f"Signup required: {self._convert_bool(instance.signup_required)}"            
-        meal_cost = f"Cost: {instance.meal_cost}" if instance.meal_cost else "Free"
-        return f"{s} {self._program_offerings(instance)} {self._signup_or_referral(instance)}"
+        return f"{s}: {self._program_offerings(instance)} {self._signup_or_referral(instance)}"
 
 
 class ToiletResponseTemplate(QuerySetResponseTemplate):
