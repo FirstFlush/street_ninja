@@ -12,7 +12,7 @@ from sms.response.dataclasses import SMSFollowUpResponseData
 from sms.response.response_templates import DirectionsTemplate
 from .base_handler import FollowUpHandlerWithParams
 from ..dataclasses import FollowUpContext
-
+from ..exc import SendHelpError
 
 logger = logging.getLogger(__name__)
 
@@ -23,30 +23,31 @@ class DirectionsHandler(FollowUpHandlerWithParams):
     @property
     def directions_text(self) -> str:
         if isinstance(self.directions, list):
-            directions_text = "\n".join(self.directions)
-            return f"{self._header()}\n\n{self.resource.resource_name}\n\n{directions_text}"
+            return "\n".join([f"{step['instruction']} for {step['distance']}m" for step in self.directions])
         else:
-            logger.error(f"DirectionsHandler.directions_text is using invalid self.directions attribute: {self.directions} Defaulting to empty string.")
+            logger.error(f"DirectionsHandler.directions_text is using invalid self.directions attribute: `{self.directions}` Defaulting to empty string.")
             return ""
 
     def __init__(self, context: FollowUpContext):
         super().__init__(context=context)
-        self.directions: list[str] | None = None
-
-
-    def _header(self) -> str:
-        start = self.sms_inquiry.location_text
-        return f'Directions from "{start}"'
-
+        self.directions: list[dict[str, str|float]] | None = None
 
     def build_response_data(self) -> SMSFollowUpResponseData:
         return SMSFollowUpResponseData(
-            template=DirectionsTemplate(),
+            template=DirectionsTemplate(
+                start_text=self.sms_inquiry.location_text,
+                resource=self.resource
+            ),
             msg=self.directions_text,
         )
 
     def set_directions(self, start_coords: str):
-        self.directions = self._fetch_directions(start_coords)
+        try:
+            self.directions = self._fetch_directions(start_coords)
+        except Exception as e:
+            msg = f"Unexpected `{e.__class__.__name__}` while fetching directions"
+            logger.error(msg, exc_info=True)
+            raise SendHelpError(msg) from e
 
 
     def _fetch_directions(self, start_coords: str) -> list[str]:
@@ -54,11 +55,13 @@ class DirectionsHandler(FollowUpHandlerWithParams):
         integration_service = self._init_ors(params=params)
         try:
             directions = integration_service.fetch()
-        except IntegrationServiceError:
-            logger.error("What do here?")
-            # NOTE needs to return help message
-            raise
-        logger.info(f"Directions found: `{len(directions)}` steps.")
+        except IntegrationServiceError as e:
+            msg = f"`{e.__class__.__name__}` while fetching directions in `{self.__class__.__name__}`"
+            logger.error(msg, exc_info=True)
+            raise e
+        else:
+            if directions:
+                logger.info(f"Directions found: `{len(directions)}` steps.")
         return directions
 
 

@@ -122,7 +122,7 @@ class WaterInfoTemplate(InfoTemplate[DrinkingFountain]):
 
 In operation: {self.instance.in_operation}
 
-Pet friendly: {self._convert_bool(self.instance.pet_friendly)}
+Pet friendly: {self._convert_bool(self.instance.pet_friendly, allow_null=True)}
 """
 
 
