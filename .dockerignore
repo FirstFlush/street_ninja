@@ -1,0 +1,43 @@
+# Ignore Python cache & compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore environment files
+.env
+.env.local
+*.env
+
+# Ignore virtual environments (if present)
+venv/
+.venv/
+
+# Ignore IDE/editor config files
+.vscode/
+.idea/
+*.iml
+
+# Ignore logs & temporary files
+*.log
+Okay*.pid
+
+# Ignore database & migration artifacts
+*.sqlite3
+db.sqlite3
+migrations/
+
+# Ignore Django static & media files (they should be managed externally)
+staticfiles/
+media/
+
+# Ignore build artifacts & OS files
+build/
+dist/
+*.egg-info
+.DS_Store
+Thumbs.db
+
+# Ignore Git-related files
+.git/
+.gitignore
