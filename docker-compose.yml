@@ -8,63 +8,68 @@ services:
       - db
       - redis
     env_file:
-      - .env
+      - .env.prod
     ports:
       - "8000:8000"
     volumes:
       - .:/app
-    command: ["gunicorn", "--bind", "0.0.0.0:8000", "street_ninja.wsgi:application"]
+    command: ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "4", "--timeout", "120", "street_ninja_server.wsgi:application"]
+    restart: always
 
   db:
     image: postgis/postgis:15-3.3
     container_name: street_ninja_db
     restart: always
     env_file:
-      - .env
+      - .env.prod
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_DB: ${DB_NAME}
     ports:
-      - "5432:5432"
+      - "5433:5432"  # Binding 5433 externally. So we don't conflict with local postgres installation.
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
 
   redis:
     image: redis:alpine
     container_name: street_ninja_redis
     restart: always
     ports:
-      - "6379:6379"
+      - "6380:6379"  # Binding 6380 externally
 
   celery-worker:
     build: .
     container_name: street_ninja_celery_worker
+    restart: always
     depends_on:
       - redis
       - db
     env_file:
-      - .env
-    command: ["celery", "-A", "street_ninja", "worker", "--loglevel=info"]
+      - .env.prod
+    command: ["celery", "-A", "street_ninja_server", "worker", "--loglevel=info"]
+    # command: ["celery", "-A", "street_ninja", "worker", "--loglevel=info"]
 
   celery-beat:
     build: .
     container_name: street_ninja_celery_beat
+    restart: always
     depends_on:
       - redis
       - db
     env_file:
-      - .env
-    command: ["celery", "-A", "street_ninja", "beat", "--loglevel=info"]
+      - .env.prod
+    # command: ["celery", "-A", "street_ninja", "beat", "--loglevel=info"]
+    command: ["celery", "-A", "street_ninja_server", "beat", "--loglevel=info"]
 
   nginx:
     image: nginx:alpine
     container_name: street_ninja_nginx
+    restart: always
     depends_on:
       - web
     ports:
-      - "80:80"
+      - "8080:80"  # Binding 8080 externally 
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
 

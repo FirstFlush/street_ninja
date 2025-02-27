@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 from decouple import config
+import os
 from pathlib import Path
 from .logging_config import LOGGING
 
@@ -19,11 +20,11 @@ LOGGING = LOGGING
 BASE_DIR = Path(__file__).resolve().parent.parent
 LOG_DIR = BASE_DIR / 'log'
 LOGGING['handlers']['file']['filename'] = f"{LOG_DIR}/street_ninja.log"
+ROOT_URLCONF = "street_ninja_server.urls"  
 
-
-SECRET_KEY = config('DJANGO_SECRET_KEY')
-
-DEBUG = config('DEBUG', default=True, cast=bool)
+# SECRET_KEY = config('DJANGO_SECRET_KEY')
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+DEBUG = bool(os.environ.get('DEBUG', True))
 
 ALLOWED_HOSTS = ['*']
 
@@ -32,15 +33,15 @@ APPEND_SLASH = False
 
 # API Keys
 # =======================================
-VANCOUVER_OPEN_DATA_API_KEY = config('VANCOUVER_OPEN_DATA_API_KEY')
-WIGLE_API_KEY = config('WIGLE_API_KEY')
-OPEN_ROUTE_SERVICE_TOKEN = config('OPEN_ROUTE_SERVICE_TOKEN')
-GRAPH_HOPPER_API_KEY = config('GRAPH_HOPPER_API_KEY')
+VANCOUVER_OPEN_DATA_API_KEY = os.environ.get('VANCOUVER_OPEN_DATA_API_KEY')
+WIGLE_API_KEY = os.environ.get('WIGLE_API_KEY')
+OPEN_ROUTE_SERVICE_TOKEN = os.environ.get('OPEN_ROUTE_SERVICE_TOKEN')
+GRAPH_HOPPER_API_KEY = os.environ.get('GRAPH_HOPPER_API_KEY')
 
 
 # SMS
 # =======================================
-SMS_CHAR_LIMIT = config('SMS_CHAR_LIMIT', cast=int)
+SMS_CHAR_LIMIT = int(os.environ.get('SMS_CHAR_LIMIT', 400))
 
 
 # CORS 
@@ -52,10 +53,10 @@ if DEBUG:
 else:
     CORS_ALLOW_CREDENTIALS = True  
     CORS_ALLOWED_ORIGINS = [  
-        f"https://{config('STREET_NINJA_DOMAIN')}",
+        f"https://{os.environ.get('STREET_NINJA_DOMAIN')}",
     ]  
     CSRF_TRUSTED_ORIGINS = [  
-        f"https://{config('STREET_NINJA_DOMAIN')}", 
+        f"https://{os.environ.get('STREET_NINJA_DOMAIN')}", 
     ]
 
 # if DEBUG:
@@ -69,7 +70,7 @@ else:
 
 # Celery
 # =======================================
-CELERY_BROKER_URL = config('CELERY_BROKER_URL')
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
@@ -77,28 +78,28 @@ CELERY_TASK_SERIALIZER = 'json'
 # Geocoding
 # =======================================
 GEOCODER_CONFIG = {
-    "NOMINATIM": {"user_agent": config("NOMINATIM_USER_AGENT")},
-    "OPENCAGE": {"api_key": config("OPENCAGE_API_KEY")},
+    "NOMINATIM": {"user_agent": os.environ.get("NOMINATIM_USER_AGENT")},
+    "OPENCAGE": {"api_key": os.environ.get("OPENCAGE_API_KEY")},
 }
 PRIMARY_GEOCODER = "Nominatim"  # Nominatim, OpenCage, positionstack
 
 
 # PHONE SESSION
 # =======================================
-TTL_PHONE_SESSION = config("TTL_PHONE_SESSION", cast=int)
+TTL_PHONE_SESSION = int(os.environ.get("TTL_PHONE_SESSION", 3600))
 
 
 # Routes
 # =======================================
-ROUTE_ADMIN = config("ROUTE_ADMIN")
-ROUTE_SMS_GATEWAY = config("ROUTE_SMS_GATEWAY")
+ROUTE_ADMIN = os.environ.get("ROUTE_ADMIN")
+ROUTE_SMS_GATEWAY = os.environ.get("ROUTE_SMS_GATEWAY")
 
 
 # Twilio
 # =======================================
-TWILIO_AUTH_TOKEN = config("TWILIO_AUTH_TOKEN")
-TWILIO_ACCOUNT_SID = config("TWILIO_ACCOUNT_SID")
-TWILIO_PHONE_NUMBER = config("TWILIO_PHONE_NUMBER")
+TWILIO_AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN")
+TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID")
+TWILIO_PHONE_NUMBER = os.environ.get("TWILIO_PHONE_NUMBER")
 
 
 INSTALLED_APPS = [
@@ -209,11 +210,11 @@ SESSION_CACHE_ALIAS = 'session'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASS'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT'),
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASS'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT'),
     }
 }
 

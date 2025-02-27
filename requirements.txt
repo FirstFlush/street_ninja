@@ -44,7 +44,7 @@ django-csp==3.7
 django-debug-toolbar==3.2.1
 django-environ==0.10.0
 django-extensions==3.2.3
-django-filter==2.4.0
+django-filter
 django-geojson==4.1.0
 django-migration-linter==5.1.0
 django-model-utils==4.1.1
@@ -102,8 +102,6 @@ jsf==0.11.2
 jsonschema==4.23.0
 jsonschema-specifications==2024.10.1
 kombu==5.4.2
-label-studio==1.15.0
-label-studio-sdk==1.0.8
 launchdarkly-server-sdk==8.2.1
 lockfile==0.12.2
 lxml==5.3.0
