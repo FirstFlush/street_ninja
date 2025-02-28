@@ -1,5 +1,11 @@
 import os
+from dotenv import load_dotenv
 from celery import Celery
+# from django.conf import settings
+
+load_dotenv()
+
+# print("DEBUG: ROUTE_ADMIN is", getattr(settings, "ROUTE_ADMIN", "admin/"))  # 👀 Debug
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'street_ninja_server.settings')
 

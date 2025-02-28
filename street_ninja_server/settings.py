@@ -44,6 +44,13 @@ GRAPH_HOPPER_API_KEY = os.environ.get('GRAPH_HOPPER_API_KEY')
 SMS_CHAR_LIMIT = int(os.environ.get('SMS_CHAR_LIMIT', 400))
 
 
+# Celery
+# =======================================
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+
+
 # CORS 
 # =======================================
 if DEBUG:
@@ -66,13 +73,6 @@ else:
 #         f"https://{config('STREET_NINJA_DOMAIN')}",
 #     ]
 #     CORS_ALLOW_CREDENTIALS = True
-
-
-# Celery
-# =======================================
-CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
 
 
 # Geocoding

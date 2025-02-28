@@ -7,12 +7,16 @@ admin.site.site_header = "Street Ninja Admin Panel"
 admin.site.site_title = "Street Ninja"
 admin.site.index_title = "Street Ninja"
 
+admin_route = getattr(settings, "ROUTE_ADMIN", "admin/")
+if admin_route is None:
+    admin_route = "admin/"
+
 urlpatterns = [
-    path(settings.ROUTE_ADMIN, admin.site.urls),
+    path(admin_route, admin.site.urls),
     path('', HomeView.as_view(), name='home'),
-    path('keywords/', KeywordTestView.as_view(), name='keyword_test'),
-    path('redis/', RedisTestView.as_view(), name='redis_test'),
-    path('directions/', DirectionsView.as_view(), name='directions'),
+    # path('keywords/', KeywordTestView.as_view(), name='keyword_test'),
+    # path('redis/', RedisTestView.as_view(), name='redis_test'),
+    # path('directions/', DirectionsView.as_view(), name='directions'),
     path('api/contact/', include('contacts.urls')),
     path('api/resources/', include('resources.urls')),
     path('api/sms/', include('sms.urls')),

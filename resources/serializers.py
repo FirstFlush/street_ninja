@@ -5,7 +5,6 @@ from common.serializer_fields import YesNoBooleanField
 from .dataclasses import MapPoint, MapData
 
 
-
 class MapPointSerializer(serializers.Serializer):
     longitude = serializers.FloatField()
     latitude = serializers.FloatField()
@@ -33,6 +32,15 @@ class MapDataSerializer(serializers.Serializer):
         return asdict(instance)
 
 
+class DirectionsSerializer(serializers.Serializer):
+
+    instruction = serializers.CharField()
+    distance = serializers.FloatField()
+
+
+# ===================================================================================
+# ===================================================================================
+# ===================================================================================
 
 
 class ResourceSerializer(serializers.Serializer):
