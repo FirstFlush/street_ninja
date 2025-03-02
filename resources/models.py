@@ -123,6 +123,7 @@ class Toilet(CityOfVancouverModel):
 class DrinkingFountain(CityOfVancouverModel):
 
     _keyword_enum = SMSKeywordEnum.WATER
+    _unique_key = "location"
 
     name = models.CharField(max_length=256)
     location = gis_models.PointField(srid=4326)
@@ -150,7 +151,8 @@ class DrinkingFountain(CityOfVancouverModel):
 class PublicWifi(WigleModel):
 
     _keyword_enum = SMSKeywordEnum.WIFI
-
+    _unique_key = "location"
+    
     ssid = models.CharField(max_length=256)
     location = gis_models.PointField(srid=4326)
     is_active = models.BooleanField(default=True)

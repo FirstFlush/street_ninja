@@ -117,10 +117,10 @@ class HomeView(APIView):
 
         params = IntegrationServiceParams(
             api_client_class=VancouverAPIClient,
-            endpoint_enum=VancouverEndpointsEnum.SHELTERS,
+            endpoint_enum=VancouverEndpointsEnum.DRINKING_FOUNTAINS,
             http_method_enum=HttpMethodEnum.GET,
-            serializer_class=ShelterSerializer,
-            model_class=Shelter,
+            serializer_class=DrinkingFountainSerializer,
+            model_class=DrinkingFountain,
             api_key=settings.VANCOUVER_OPEN_DATA_API_KEY,
             http_params = {
                 'limit': 100,

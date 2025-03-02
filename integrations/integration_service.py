@@ -195,20 +195,14 @@ class IntegrationService:
 
     def _update(self, data: list[ResourceModel]):
 
-        # update_fields = list(data[0].keys()) if data else []
         update_fields = [field.name for field in self.model_class._meta.fields if field.name != "id"]
-
         try:
             with transaction.atomic():
                 self.model_class.objects.bulk_update(data, fields=update_fields)
         except IntegrityError:
-            # transaction.set_rollback(True)
             for resource in data:
-                # print(resource.resource_name)
                 try:
-                    # self.model_class.objects.update(**resource, fields=update_fields)
                     with transaction.atomic():
-                        print(resource.resource_name)
                         resource.save()
                 except IntegrityError:
                     logger.warning(f"Resource `{resource._keyword_enum}: {resource.resource_name}` already exists. Skipping...")
