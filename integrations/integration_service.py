@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Any, Optional, Type
 
-from django.db import transaction
+from django.db import transaction, IntegrityError
 
 from common.dataclasses import RequestData
 from common.enums import HttpMethodEnum
@@ -13,7 +13,7 @@ from resources.abstract_models.base_model import ResourceModel
 from .clients import BaseAPIClient
 from .clients.enums import EndpointsEnum
 from .exc import IntegrationServiceError
-
+from psycopg2.errors import UniqueViolation
 
 logger = logging.getLogger(__name__)
 
@@ -97,7 +97,6 @@ class IntegrationService:
         return deserializer.validated_data
 
 
-
     def fetch_and_save(self, no_save:bool=False):
         """
         Orchestrates the process of fetching data from the API, 
@@ -120,6 +119,155 @@ class IntegrationService:
                 msg = f"Failed to save data to DB from `{self.api_client.__class__.__name__}` endpoint `{self.endpoint_enum.value}`"
                 logger.error(msg, exc_info=True)
                 raise IntegrationServiceError(msg) from e
+
+    def _fetch_data(self) -> list[dict[str, Any]]:
+        data = self.api_client.make_request(request_data=self.request_data)
+        return self.api_client.normalize_data(data=data)
+
+    def _serialize_data(self, data:list[dict[str, Any]]) -> ResourceSerializer:
+        return self.serializer_class(data=data, many=True)
+
+    def _normalize_data(self, data:list[dict[str, Any]]) -> dict[str, Any]:
+        return [self.model_class.normalize_data(data=record) for record in data]        
+
+    def _prepare_bulk_operations(
+            self, 
+            data: list[dict[str, Any]], 
+            key_to_record_map: dict[str, Any], 
+            time_fetched: datetime
+    ) -> tuple[list[dict[str, Any]], list[ResourceModel]]:
+        """
+        Prepares lists of records for bulk insertion and updates.
+        """
+        to_insert = []
+        to_update = []
+
+        for record in data:
+            record['last_fetched'] = time_fetched
+            unique_field = record[self.model_class._unique_key]
+            if unique_field in key_to_record_map:
+                # Check for changes and update if necessary
+                existing_record = key_to_record_map[unique_field]
+                updated = False
+                for key, value in record.items():
+                    if getattr(existing_record, key, None) != value:
+                        setattr(existing_record, key, value)
+                        updated = True
+                if updated:
+                    to_update.append(existing_record)
+            else:
+                # New record
+                to_insert.append(self.model_class(**record))
+        return to_insert, to_update
+
+    def _get_existing_records(self, data: list[dict[str, Any]]) -> dict[Any, ResourceModel]:
+        """
+        Fetches existing records from the database and indexes them by their unique key.
+        Example:
+            {
+                <Point object at 0x7ecc3a99f510>: <Shelter: The Beacon>,
+                <Point object at 0x7ecc3a99d390>: <Shelter: Tenth Avenue Church>, 
+                <Point object at 0x7ecc3a99ee90>: <Shelter: Yukon Shelter>,
+            }
+
+        Args:
+            data: The list of incoming records to process.
+
+        Returns:
+            A dictionary mapping unique key values to database records.
+        """
+        unique_keys = [item[self.model_class._unique_key] for item in data]
+        filter_kwarg = {f"{self.model_class._unique_key}__in": unique_keys}
+        existing_records = self.model_class.objects.filter(**filter_kwarg)
+        key_to_record_map = {getattr(record, self.model_class._unique_key): record for record in existing_records}
+        return key_to_record_map
+
+
+    def _create(self, data: list[dict[str, Any]]):
+        try:
+            self.model_class.objects.bulk_create(data)
+        except IntegrityError:
+            for resource in data:
+                try:
+                    self.model_class.objects.create(**resource)
+                except IntegrityError:
+                    logger.warning(f"Resource `{resource.keyword}: {resource.resource_name}` already exists. Skipping...")
+
+    def _update(self, data: list[ResourceModel]):
+
+        # update_fields = list(data[0].keys()) if data else []
+        update_fields = [field.name for field in self.model_class._meta.fields if field.name != "id"]
+
+        try:
+            with transaction.atomic():
+                self.model_class.objects.bulk_update(data, fields=update_fields)
+        except IntegrityError:
+            # transaction.set_rollback(True)
+            for resource in data:
+                # print(resource.resource_name)
+                try:
+                    # self.model_class.objects.update(**resource, fields=update_fields)
+                    with transaction.atomic():
+                        print(resource.resource_name)
+                        resource.save()
+                except IntegrityError:
+                    logger.warning(f"Resource `{resource._keyword_enum}: {resource.resource_name}` already exists. Skipping...")
+                    continue
+
+
+    def _save_data(self, data: list[dict[str, Any]]):
+        """
+        Saves data to the database, performing inserts for new records and updates for existing ones.
+        """
+        key_to_record_map = self._get_existing_records(data=data)        
+        time_fetched = datetime.now(timezone.utc)
+        to_insert, to_update = self._prepare_bulk_operations(
+            data=data,
+            key_to_record_map=key_to_record_map,
+            time_fetched=time_fetched,
+        )
+        # with transaction.atomic():
+        if to_insert:
+            self._create(data=to_insert)
+            # self.model_class.objects.bulk_create(to_insert)
+        if to_update:
+            self._update(data=to_update)
+            # update_fields = list(data[0].keys())  # Explicitly track fields to update
+            # self.model_class.objects.bulk_update(to_update, fields=update_fields)
+
+        logger.info(f"Inserted `{len(to_insert)}` new records and synced `{len(to_update)}` existing records.")
+        return to_insert + to_update
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     # def fetch_and_save(self, no_save:bool=False):
     #     """
@@ -155,89 +303,3 @@ class IntegrationService:
     #             msg = f"Failed to save data to DB from `{self.api_client.__class__.__name__}` endpoint `{self.endpoint_enum.value}`"
     #             logger.error(msg, exc_info=True)
     #             raise IntegrationServiceError(msg) from e
-
-    def _fetch_data(self) -> list[dict[str, Any]]:
-        data = self.api_client.make_request(request_data=self.request_data)
-        return self.api_client.normalize_data(data=data)
-
-    def _serialize_data(self, data:list[dict[str, Any]]) -> ResourceSerializer:
-        return self.serializer_class(data=data, many=True)
-
-    def _normalize_data(self, data:list[dict[str, Any]]) -> dict[str, Any]:
-        return [self.model_class.normalize_data(data=record) for record in data]        
-
-    def _prepare_bulk_operations(
-            self, 
-            data: list[dict[str, Any]], 
-            key_to_record_map: dict[str, Any], 
-            time_fetched: datetime
-    ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-        """
-        Prepares lists of records for bulk insertion and updates.
-        """
-        to_insert = []
-        to_update = []
-
-        for record in data:
-            record['last_fetched'] = time_fetched
-            unique_field = record[self.model_class._unique_key]
-            if unique_field in key_to_record_map:
-                # Check for changes and update if necessary
-                existing_record = key_to_record_map[unique_field]
-                updated = False
-                for key, value in record.items():
-                    if getattr(existing_record, key, None) != value:
-                        setattr(existing_record, key, value)
-                        updated = True
-                if updated:
-                    to_update.append(existing_record)
-            else:
-                # New record
-                to_insert.append(self.model_class(**record))
-
-        return to_insert, to_update
-
-    def _get_existing_records(self, data: list[dict[str, Any]]) -> dict[Any, ResourceModel]:
-        """
-        Fetches existing records from the database and indexes them by their unique key.
-        Example:
-            {
-                <Point object at 0x7ecc3a99f510>: <Shelter: The Beacon>,
-                <Point object at 0x7ecc3a99d390>: <Shelter: Tenth Avenue Church>, 
-                <Point object at 0x7ecc3a99ee90>: <Shelter: Yukon Shelter>,
-            }
-
-        Args:
-            data: The list of incoming records to process.
-
-        Returns:
-            A dictionary mapping unique key values to database records.
-        """
-        unique_keys = [item[self.model_class._unique_key] for item in data]
-        filter_kwarg = {f"{self.model_class._unique_key}__in": unique_keys}
-        existing_records = self.model_class.objects.filter(**filter_kwarg)
-        key_to_record_map = {getattr(record, self.model_class._unique_key): record for record in existing_records}
-        return key_to_record_map
-
-
-    def _save_data(self, data: list[dict[str, Any]]):
-        """
-        Saves data to the database, performing inserts for new records and updates for existing ones.
-        """
-        key_to_record_map = self._get_existing_records(data=data)        
-        time_fetched = datetime.now(timezone.utc)
-        to_insert, to_update = self._prepare_bulk_operations(
-            data=data,
-            key_to_record_map=key_to_record_map,
-            time_fetched=time_fetched,
-        )
-
-        with transaction.atomic():
-            if to_insert:
-                self.model_class.objects.bulk_create(to_insert)
-            if to_update:
-                update_fields = list(data[0].keys())  # Explicitly track fields to update
-                self.model_class.objects.bulk_update(to_update, fields=update_fields)
-
-        logger.info(f"Inserted `{len(to_insert)}` new records and synced `{len(to_update)}` existing records.")
-        return to_insert + to_update

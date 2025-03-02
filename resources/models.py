@@ -10,6 +10,7 @@ from .abstract_models import CityOfVancouverModel, WigleModel
 class Shelter(CityOfVancouverModel):
 
     _keyword_enum = SMSKeywordEnum.SHELTER
+    _unique_key = "facility"
 
     facility = models.CharField(max_length=256, unique=True)
     address = models.CharField(max_length=256)
@@ -43,6 +44,7 @@ class Shelter(CityOfVancouverModel):
 class FoodProgram(CityOfVancouverModel):
 
     _keyword_enum = SMSKeywordEnum.FOOD
+    _unique_key = "program_name"
 
     program_name = models.CharField(max_length=256, unique=True)
     program_status = models.CharField(max_length=20)
@@ -89,6 +91,7 @@ class Toilet(CityOfVancouverModel):
         ('parks', 'Parks'),
     )
     _keyword_enum = SMSKeywordEnum.TOILET
+    
 
     name = models.CharField(max_length=256)
     address = models.CharField(max_length=256, null=True)
@@ -139,6 +142,9 @@ class DrinkingFountain(CityOfVancouverModel):
             "Name": self.name,
             "In operation": self.in_operation,
         }
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class PublicWifi(WigleModel):

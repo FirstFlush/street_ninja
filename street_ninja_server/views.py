@@ -1,5 +1,5 @@
 # import logging
-# from rest_framework.views import APIView, Request, Response
+from rest_framework.views import APIView, Request, Response
 # from common.enums import HttpMethodEnum
 # from integrations.clients import VancouverAPIClient, WigleAPIClient
 # from integrations.clients.enums import VancouverEndpointsEnum
@@ -89,79 +89,79 @@
 #         return Response({"hihi":"hoho"})
 
 
-# class HomeView(APIView):
+class HomeView(APIView):
 
 
-#     def get(self, request:Request, *args, **kwargs):
-#         """
-#         This view currently serves as an all-purpose, quick-n-dirty testing route.
-#         """
-#         from integrations.integration_service import IntegrationService, IntegrationServiceParams
-#         from common.enums import HttpMethodEnum
-#         from integrations.clients import VancouverAPIClient, WigleAPIClient
-#         from integrations.clients.enums import VancouverEndpointsEnum
-#         from resources.serializers import (
-#             ShelterSerializer, 
-#             FoodProgramSerializer,
-#             DrinkingFountainSerializer,
-#             PublicToiletSerializer
-#         )
-#         from resources.models import (
-#             Shelter, 
-#             FoodProgram, 
-#             DrinkingFountain,
-#             Toilet,
-#         )
-#         from django.conf import settings
+    def get(self, request:Request, *args, **kwargs):
+        """
+        This view currently serves as an all-purpose, quick-n-dirty testing route.
+        """
+        from integrations.integration_service import IntegrationService, IntegrationServiceParams
+        from common.enums import HttpMethodEnum
+        from integrations.clients import VancouverAPIClient, WigleAPIClient
+        from integrations.clients.enums import VancouverEndpointsEnum
+        from resources.serializers import (
+            ShelterSerializer, 
+            FoodProgramSerializer,
+            DrinkingFountainSerializer,
+            PublicToiletSerializer
+        )
+        from resources.models import (
+            Shelter, 
+            FoodProgram, 
+            DrinkingFountain,
+            Toilet,
+        )
+        from django.conf import settings
 
 
-#         params = IntegrationServiceParams(
-#             api_client_class=VancouverAPIClient,
-#             endpoint_enum=VancouverEndpointsEnum.SHELTERS,
-#             http_method_enum=HttpMethodEnum.GET,
-#             serializer_class=Shelter,
-#             model_class=Shelter,
-#             api_key=settings.VANCOUVER_OPEN_DATA_API_KEY,
-#             http_params = {
-#                 'limit': 100,
-#                 'offset': 0,
-#             }
-#         )
+        params = IntegrationServiceParams(
+            api_client_class=VancouverAPIClient,
+            endpoint_enum=VancouverEndpointsEnum.SHELTERS,
+            http_method_enum=HttpMethodEnum.GET,
+            serializer_class=ShelterSerializer,
+            model_class=Shelter,
+            api_key=settings.VANCOUVER_OPEN_DATA_API_KEY,
+            http_params = {
+                'limit': 100,
+                'offset': 0,
+            }
+        )
         
-#         integration_service = IntegrationService(params=params)
-#         integration_service.fetch_and_save()
+        integration_service = IntegrationService(params=params)
+        integration_service.fetch_and_save()
 
 
 
-#         # api_client = WigleAPIClient(api_key=settings.WIGLE_API_KEY)
-#         # request_data = RequestData(
-#         #     method="GET",
-#         #     endpoint=api_client.endpoints.PUBLIC_WIFI,
-#         #     headers=api_client.api_header,
-#         #     params={
-#         #         "latrange1":49.275,
-#         #         "latrange2":49.295,
-#         #         "longrange1":-123.075,
-#         #         "longrange2":-123.100,
-#         #         "freenet":True,
-#         #     }
-#         # )
+        # api_client = WigleAPIClient(api_key=settings.WIGLE_API_KEY)
+        # request_data = RequestData(
+        #     method="GET",
+        #     endpoint=api_client.endpoints.PUBLIC_WIFI,
+        #     headers=api_client.api_header,
+        #     params={
+        #         "latrange1":49.275,
+        #         "latrange2":49.295,
+        #         "longrange1":-123.075,
+        #         "longrange2":-123.100,
+        #         "freenet":True,
+        #     }
+        # )
 
-#         # data = api_client.make_request(request_data=request_data)
-
-
-
-#         # api_client = VancouverAPIClient(
-#         #     api_key=settings.VANCOUVER_OPEN_DATA_API_KEY
-#         # )
-#         # request_data = RequestData(
-#         #     method="GET",
-#         #     endpoint=api_client.endpoints.SHELTERS.value,
-#         #     headers=api_client.api_header,
-#         # )
+        # data = api_client.make_request(request_data=request_data)
 
 
-#         # data = api_client.make_request(request_data=request_data)
-#         # serializer = ResourceSerializer(data=data['results'], many=True)
 
-#         return Response({"ok":"good"})
+        # api_client = VancouverAPIClient(
+        #     api_key=settings.VANCOUVER_OPEN_DATA_API_KEY
+        # )
+        # request_data = RequestData(
+        #     method="GET",
+        #     endpoint=api_client.endpoints.SHELTERS.value,
+        #     headers=api_client.api_header,
+        # )
+
+
+        # data = api_client.make_request(request_data=request_data)
+        # serializer = ResourceSerializer(data=data['results'], many=True)
+
+        return Response({"ok":"good"})
