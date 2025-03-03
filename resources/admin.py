@@ -1,5 +1,5 @@
 from django.contrib import admin
-from street_ninja_server.base_admin import BaseAdmin, BaseGISAdmin
+from street_ninja_server.base_admin import BaseGISAdmin
 from .models import Shelter
 
 

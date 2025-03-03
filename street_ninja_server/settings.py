@@ -46,7 +46,7 @@ SMS_CHAR_LIMIT = int(os.environ.get('SMS_CHAR_LIMIT', 400))
 
 # Celery
 # =======================================
-CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
+CELERY_BROKER_URL = os.environ.get('CACHE_CELERY_LOCATION')
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
@@ -81,7 +81,7 @@ GEOCODER_CONFIG = {
     "NOMINATIM": {"user_agent": os.environ.get("NOMINATIM_USER_AGENT")},
     "OPENCAGE": {"api_key": os.environ.get("OPENCAGE_API_KEY")},
 }
-PRIMARY_GEOCODER = "Nominatim"  # Nominatim, OpenCage, positionstack
+PRIMARY_GEOCODER = "Nominatim"  # Nominatim, OpenCage
 
 
 # PHONE SESSION
@@ -168,35 +168,35 @@ WSGI_APPLICATION = 'street_ninja_server.wsgi.application'
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/0',
+        'LOCATION': os.environ.get('CACHE_DEFAULT_LOCATION'),
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         },
     },
     'session': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'LOCATION': os.environ.get('CACHE_SESSION_LOCATION'),
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         },
     },
     'phone_session': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/2',
+        'LOCATION': os.environ.get('CACHE_PHONE_SESSION_LOCATION'),
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         },
     },
     'resources': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/3',
+        'LOCATION': os.environ.get('CACHE_RESOURCES_LOCATION'),
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         },
     },
     'celery': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/4',
+        'LOCATION': os.environ.get('CACHE_CELERY_LOCATION'),
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         },
