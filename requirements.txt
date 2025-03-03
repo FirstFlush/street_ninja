@@ -44,7 +44,7 @@ django-csp==3.7
 django-debug-toolbar==3.2.1
 django-environ==0.10.0
 django-extensions==3.2.3
-django-filter
+django-filter==2.4.0
 django-geojson==4.1.0
 django-migration-linter==5.1.0
 django-model-utils==4.1.1
@@ -141,6 +141,7 @@ pytest-django==4.9.0
 python-crontab==3.2.0
 python-dateutil==2.9.0.post0
 python-decouple==3.8
+python-dotenv==1.0.1
 python-json-logger==2.0.4
 pytz==2022.7.1
 PyYAML==6.0.2
