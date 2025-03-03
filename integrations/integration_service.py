@@ -162,14 +162,7 @@ class IntegrationService:
 
     def _get_existing_records(self, data: list[dict[str, Any]]) -> dict[Any, ResourceModel]:
         """
-        Fetches existing records from the database and indexes them by their unique key.
-        Example:
-            {
-                <Point object at 0x7ecc3a99f510>: <Shelter: The Beacon>,
-                <Point object at 0x7ecc3a99d390>: <Shelter: Tenth Avenue Church>, 
-                <Point object at 0x7ecc3a99ee90>: <Shelter: Yukon Shelter>,
-            }
-
+        Fetches existing records from the database and indexes them by their _unique_key attribute.
         Args:
             data: The list of incoming records to process.
 
