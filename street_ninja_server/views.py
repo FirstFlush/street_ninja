@@ -1,4 +1,11 @@
-# from rest_framework.views import APIView, Request, Response
+from rest_framework.views import APIView, Request, Response
+
+
+class TestView(APIView):
+
+    def get(self, request: Request, *args, **kwargs):
+
+        return Response({"ping":"pong"})
 
 
 # class HomeView(APIView):
