@@ -39,6 +39,7 @@ services:
       - "6380:6379"  # Binding 6380 externally
 
   celery-worker:
+    user: "1000:1000"
     build: .
     container_name: street_ninja_celery_worker
     restart: always
@@ -51,6 +52,7 @@ services:
     # command: ["celery", "-A", "street_ninja", "worker", "--loglevel=info"]
 
   celery-beat:
+    user: "1000:1000"
     build: .
     container_name: street_ninja_celery_beat
     restart: always
