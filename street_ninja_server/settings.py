@@ -14,15 +14,14 @@ import os
 from pathlib import Path
 from .logging_config import LOGGING
 
-LOGGING = LOGGING
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 LOG_DIR = BASE_DIR / 'log'
+os.makedirs(LOG_DIR, exist_ok=True)
+LOGGING = LOGGING
 LOGGING['handlers']['file']['filename'] = f"{LOG_DIR}/street_ninja.log"
 ROOT_URLCONF = "street_ninja_server.urls"  
 
-# SECRET_KEY = config('DJANGO_SECRET_KEY')
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 DEBUG = bool(os.environ.get('DEBUG', True))
 
