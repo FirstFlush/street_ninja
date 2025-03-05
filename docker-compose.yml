@@ -50,7 +50,8 @@ services:
     env_file:
       - .env.prod
     command: ["celery", "-A", "street_ninja_server", "worker", "--loglevel=info"]
-    # command: ["celery", "-A", "street_ninja", "worker", "--loglevel=info"]
+    volumes:
+      - ./log:/app/log
 
   celery-beat:
     user: "1000:1000"
@@ -62,8 +63,9 @@ services:
       - db
     env_file:
       - .env.prod
-    # command: ["celery", "-A", "street_ninja", "beat", "--loglevel=info"]
     command: ["celery", "-A", "street_ninja_server", "beat", "--loglevel=info"]
+    volumes:
+      - ./log:/app/log
 
   nginx:
     image: nginx:alpine
