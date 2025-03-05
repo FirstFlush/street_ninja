@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   web:
+    user: "1000:1000"
     build: .
     container_name: street_ninja_web
     depends_on:
