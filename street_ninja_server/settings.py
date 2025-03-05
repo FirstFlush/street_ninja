@@ -17,12 +17,13 @@ from .logging_config import LOGGING
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 LOG_DIR = BASE_DIR / 'log'
+os.makedirs(LOG_DIR, exist_ok=True)
 LOG_FILE = LOG_DIR / 'street_ninja.log'
+LOG_FILE.touch()
 if not LOG_FILE.exists():
     with open(LOG_FILE, "a") as f:
         os.chown(LOG_FILE, 1000, 1000)
         os.chmod(LOG_FILE, 0o664)
-os.makedirs(LOG_DIR, exist_ok=True)
 LOGGING = LOGGING
 LOGGING['handlers']['file']['filename'] = f"{LOG_DIR}/street_ninja.log"
 ROOT_URLCONF = "street_ninja_server.urls"  
