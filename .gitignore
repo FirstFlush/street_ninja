@@ -1,7 +1,7 @@
 
 .secret
-log/
-logs/
+log/*
+logs/*
 media/
 static/
 static-dev/
