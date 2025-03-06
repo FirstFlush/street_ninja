@@ -18,6 +18,9 @@ Street Ninja is an SMS-based app designed to help homeless individuals in the ci
    - Street Ninja sends a formatted SMS with the requested information.
    - Example: `"Closest meal: UGM, 601 Hastings, free lunch 11:30-1:30."`
 
+## Why SMS?
+
+Many homeless individuals are more likely to have access to a basic phone that can send text messages rather than a smartphone with mobile data. Instead of requiring users to download an app, Street Ninja works instantly—just text the number when you need help. No installation or internet connection required.
 
 ## Goals
 
