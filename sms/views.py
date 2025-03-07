@@ -1,5 +1,6 @@
 import logging
 from django.conf import settings
+from django.http import HttpResponse
 from rest_framework.parsers import FormParser, JSONParser
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView, Request, Response, status
@@ -35,7 +36,7 @@ class SMSWebsiteView(APIView):
 
 class SMSWebhookView(APIView):
 
-    # authentication_classes = [TwilioSignatureAuthentication]
+    authentication_classes = [TwilioSignatureAuthentication]
     permission_classes = [AllowAny]
     parser_classes = [FormParser, JSONParser]
 
@@ -74,6 +75,6 @@ class SMSWebhookView(APIView):
         else:
             twiml = self.to_twiml(msg=response)
 
-        return Response(twiml, content_type="application/xml", status=status.HTTP_200_OK)
+        return HttpResponse(twiml, content_type="text/xml", status=status.HTTP_200_OK)
     
 
