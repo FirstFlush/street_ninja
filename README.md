@@ -1,3 +1,5 @@
+![Street Ninja logo](logo.png)
+
 # Street Ninja [![In Development](https://img.shields.io/badge/status-IN%20DEVELOPMENT-yellow)](https://github.com/your-repo-link)
 
 **⚠️ This project is currently in active development. Features and documentation are subject to change as we work towards the first MVP release.**
