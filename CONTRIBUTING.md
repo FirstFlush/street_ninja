@@ -32,6 +32,22 @@ Thank you for your interest in contributing to **Street Ninja**! This project is
    - Street Ninja does not yet have a full test suite, but testing will be added in the future using pytest-django.
 
 
+## Help Improve Location Resolution
+
+The **location resolution system** located in sms/resolvers/location is critical—everything in Street Ninja depends on correctly interpreting user locations. Right now, it is functional but needs improvement and testing.
+
+### Why This Matters
+1. **The entire app relies on accurate location parsing.** If we misinterpret where a user's request is coming from, we can't properly help them.
+2. **Userbase has low tolerance for nonsense.** If "food 155 Hastings St E" works but "food 155 E Hastings" doesn’t, they'll lose trust and stop using the app.
+
+### Where Help Is Needed
+- **Better extraction of addresses, intersections, and landmarks** from unstructured text.  
+- **Handling street formatting variations** (e.g., "E Hastings" vs. "Hastings St E").  
+- **More robust handling of typos, missing words, and mixed formats.**  
+
+If you have experience with **parsing, NLP, or fuzzy matching**, or if you just want to brainstorm, your help would make a huge impact. Open an issue or start a discussion if you have ideas!  
+
+
 ## Submitting a Pull Request
 
 1. Fork the repository and create your branch:
