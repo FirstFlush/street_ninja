@@ -43,7 +43,8 @@ The **location resolution system** located in sms/resolvers/location is critical
 ### Where Help Is Needed
 - **Better extraction of addresses, intersections, and landmarks** from unstructured text.  
 - **Handling street formatting variations** (e.g., "E Hastings" vs. "Hastings St E").  
-- **More robust handling of typos, missing words, and mixed formats.**  
+- **More robust handling of typos, missing words, and mixed formats.**
+- **Handling edge cases** "FOOD" and "WATER" are both keywords a user can search for. But how do we handle it when someone is searching for food on Water St?
 
 If you have experience with **parsing, NLP, or fuzzy matching**, or if you just want to brainstorm, your help would make a huge impact. Open an issue or start a discussion if you have ideas!  
 
