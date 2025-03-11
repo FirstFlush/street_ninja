@@ -59,18 +59,12 @@ else:
     CORS_ALLOW_CREDENTIALS = True  
     CORS_ALLOWED_ORIGINS = [  
         f"https://{os.environ.get('STREET_NINJA_DOMAIN')}",
+        f"https://www.{os.environ.get('STREET_NINJA_DOMAIN')}",
     ]  
     CSRF_TRUSTED_ORIGINS = [  
         f"https://{os.environ.get('STREET_NINJA_DOMAIN')}", 
+        f"https://www.{os.environ.get('STREET_NINJA_DOMAIN')}", 
     ]
-
-# if DEBUG:
-#     CORS_ALLOW_ALL_ORIGINS = True
-# else:
-#     CORS_ALLOWED_ORIGINS = [
-#         f"https://{config('STREET_NINJA_DOMAIN')}",
-#     ]
-#     CORS_ALLOW_CREDENTIALS = True
 
 
 # Geocoding
