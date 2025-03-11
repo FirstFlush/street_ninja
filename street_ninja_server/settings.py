@@ -22,7 +22,7 @@ LOGGING['handlers']['file']['filename'] = f"{LOG_DIR}/street_ninja.log"
 ROOT_URLCONF = "street_ninja_server.urls"  
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
-DEBUG = bool(os.environ.get('DEBUG', True))
+DEBUG = True if os.environ.get("DEBUG").lower() == "true" else False
 
 ALLOWED_HOSTS = ['*']
 
