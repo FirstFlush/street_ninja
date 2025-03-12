@@ -35,3 +35,4 @@ class TTLSecondsEnum(StreetNinjaEnum):
     MINUTES_THIRTY = 1800           
     HOUR = 3600                 
     HOURS_FOUR = 14400            
+    DAILY = 86400
