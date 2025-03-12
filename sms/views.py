@@ -1,6 +1,7 @@
 import logging
 from django.conf import settings
 from django.http import HttpResponse
+from rest_framework.authentication import BasicAuthentication, TokenAuthentication
 from rest_framework.parsers import FormParser, JSONParser
 from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView, Request, Response, status
@@ -9,7 +10,7 @@ from auth.authentication import TwilioSignatureAuthentication
 from .serializers import TwilioSMSSerializer, WebSMSSerializer
 from .sms_service import SMSService
 from sms.response.response_templates.help_template import HelpResponseTemplate
-
+from sms.throttlers import ChatMinuteThrottle, ChatHourThrottle, ChatDayThrottle
 
 logger = logging.getLogger(__name__)
 
@@ -17,6 +18,10 @@ logger = logging.getLogger(__name__)
 class SMSWebsiteView(APIView):
 
     FAILED = "Unable to resolve your request. Please try another, such as 'food at 222 Main St'."
+
+    authentication_classes = []
+    permission_classes = [AllowAny]
+    throttle_classes = [ChatMinuteThrottle, ChatHourThrottle, ChatDayThrottle]
 
     def post(self, request: Request, *args, **kwargs):
         deserializer = WebSMSSerializer(data=request.data)
