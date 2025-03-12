@@ -61,7 +61,7 @@ def fetch_food(self):
 
 
 @app.task(bind=True)
-def fetch_shelter(self):
+def fetch_toilet(self):
     params = IntegrationServiceParams(
         api_client_class=VancouverAPIClient,
         api_key=settings.VANCOUVER_OPEN_DATA_API_KEY,
@@ -79,7 +79,7 @@ def fetch_shelter(self):
 
 
 @app.task(bind=True)
-def fetch_shelter(self):
+def fetch_water(self):
     params = IntegrationServiceParams(
         api_client_class=VancouverAPIClient,
         api_key=settings.VANCOUVER_OPEN_DATA_API_KEY,
@@ -94,4 +94,6 @@ def fetch_shelter(self):
     )
     integration_service = IntegrationService(params)
     integration_service.fetch_and_save()
+
+
 
