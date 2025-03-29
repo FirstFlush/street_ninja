@@ -59,6 +59,18 @@ EMAIL_ROUTE_LOGGING = os.environ.get("EMAIL_ROUTE_LOGGING")
 EMAIL_ROUTE_SENTRY = os.environ.get("EMAIL_ROUTE_SENTRY")
 
 
+# Sentry
+# =======================================
+if not DEBUG:
+    import sentry_sdk
+    sentry_sdk.init(
+        dsn="https://57fe7909f58441a08c24f9de1da36ebc@o4509062836060160.ingest.us.sentry.io/4509062856572928",
+        # Add data like request headers and IP for users,
+        # see https://docs.sentry.io/platforms/python/data-management/data-collected/ for more info
+        send_default_pii=True,
+    )
+
+
 # SMS
 # =======================================
 SMS_CHAR_LIMIT = int(os.environ.get('SMS_CHAR_LIMIT', 400))
