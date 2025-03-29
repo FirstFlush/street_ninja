@@ -7,7 +7,7 @@ from street_ninja_server.global_mappings import GEOCODER_ENUM_TO_GEOCODER
 from ..enums import GeocoderEnum
 from .geocoders import *
 from .geocoding_config import GeocoderConfig, GeocoderConfigData
-from geo.exc import AllGeocodersFailed
+from .exc import AllGeocodersFailed
 
 
 logger = logging.getLogger(__name__)

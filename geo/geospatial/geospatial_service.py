@@ -1,7 +1,7 @@
 import logging
 from geopy.distance import distance
 from django.contrib.gis.geos import Point
-from geo.exc import GeospatialException
+from .exc import GeospatialException
 from resources.abstract_models import ResourceModel
 
 
