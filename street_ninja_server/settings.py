@@ -42,13 +42,21 @@ GRAPH_HOPPER_API_KEY = os.environ.get('GRAPH_HOPPER_API_KEY')
 STREET_NINJA_DOMAIN = os.environ.get("STREET_NINJA_DOMAIN")
 
 
-# EMAIL
+# EMAIL CONFIG
 # =======================================
 EMAIL_HOST = os.environ.get("EMAIL_HOST")
 EMAIL_PORT = int(os.environ.get("EMAIL_PORT"))
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True  # always, no need for env var
+
+
+# EMAIL ROUTES
+# =======================================
+EMAIL_ROUTE_CELERY = os.environ.get("EMAIL_ROUTE_CELERY")
+EMAIL_ROUTE_LOCATION_PARSING = os.environ.get("EMAIL_ROUTE_LOCATION_PARSING")
+EMAIL_ROUTE_LOGGING = os.environ.get("EMAIL_ROUTE_LOGGING")
+EMAIL_ROUTE_SENTRY = os.environ.get("EMAIL_ROUTE_SENTRY")
 
 
 # SMS

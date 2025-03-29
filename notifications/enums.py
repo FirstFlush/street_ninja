@@ -1,10 +1,10 @@
+from django.conf import settings
 from common.enums import StreetNinjaEnum
 
 
 class EmailRouteEnum(StreetNinjaEnum):
 
-    CELERY = "celery"
-    LOCATION_PARSING = "location-parsing"
-    LOGGING = "logging"
-    SENTRY = "sentry"
-
+    CELERY = settings.EMAIL_ROUTE_CELERY
+    LOCATION_PARSING = settings.EMAIL_ROUTE_LOCATION_PARSING
+    LOGGING = settings.EMAIL_ROUTE_LOGGING
+    SENTRY = settings.EMAIL_ROUTE_SENTRY
