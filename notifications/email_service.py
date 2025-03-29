@@ -26,24 +26,53 @@ class EmailService:
             logger.error(msg)
             raise SuspiciousEmailError(msg)
 
+    def _preview_email(self, subject: str, message: str, fail_silently: bool):
+        """
+        Prints email details to the terminal instead of sending the actual email.
+        Used when DEBUG=True in settings.py so I don't flood my inbox in development.
+        """
+        print()
+        print("="*50)
+        print("[DEV EMAIL PREVIEW]")
+        print()
+        print(f"From: {self.from_email}",)
+        print(f"To: {self.to_email}")
+        print()
+        print(f"Subject: {subject}")
+        print()
+        print("Message:")
+        print(message)
+        print()
+        print(f"Fail silently: {fail_silently}")
+        print()
+        print("="*50)
+        print()
+
     @property
     def from_email(self) -> str:
-        return f"{settings.EMAIL_HOST_USER}@{settings.STREET_NINJA_DOMAIN}"
+        return settings.EMAIL_HOST_USER
 
     @property
     def to_email(self) -> str:
         return f"{self.route_enum.value}@{settings.STREET_NINJA_DOMAIN}"
 
     def send_email(self, message: str, subject: str, fail_silently: bool=False):
-        try:
-            django_send_mail(
-                subject=subject,
-                message=message,
-                from_email=self.from_email,
-                recipient_list=[self.to_email],
-                fail_silently=fail_silently,
+        if settings.DEBUG:
+            self._preview_email(
+                subject=subject, 
+                message=message, 
+                fail_silently=fail_silently
             )
-        except Exception as e:
-            msg = f"Failed to send email due to unexpected error: `{e.__class__.__name__}`"
-            logger.error(msg, exc_info=True)
-            raise SendEmailError(msg) from e
+        else:
+            try:
+                django_send_mail(
+                    subject=subject,
+                    message=message,
+                    from_email=self.from_email,
+                    recipient_list=[self.to_email],
+                    fail_silently=fail_silently,
+                )
+            except Exception as e:
+                msg = f"Failed to send email due to unexpected error: `{e.__class__.__name__}`"
+                logger.error(msg, exc_info=True)
+                raise SendEmailError(msg) from e

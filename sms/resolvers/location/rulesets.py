@@ -10,27 +10,6 @@ from .location_data import (
 from .regex_library import RegexLibrary
 from .enums import StreetSuffixEnum, StreetDirectionEnum
 
-
-# class BaseRuleset:
-#     def __init_subclass__(cls):
-#         """
-#         Ensure all static methods of subclasses match the method signature:
-#         (token_index: int, tokens: list[str]) -> float
-#         """
-#         for name, method in inspect.getmembers(cls, predicate=inspect.isfunction):
-#             if not name.startswith("_") and isinstance(getattr(cls, name, None), classmethod):
-#                 sig = inspect.signature(method)
-#                 params = list(sig.parameters.values())
-
-#                 if (
-#                     len(params) != 2 or  # No `self`, so only 2 params now
-#                     params[0].annotation != int or
-#                     params[1].annotation != list[str]
-#                 ):
-#                     raise TypeError(f"Method `{name}` in {cls.__name__} must have "
-#                                     f"signature (token_index: int, tokens: list[str]) -> float")
-
-
 class BaseLocationRuleset(ABC):
     """
     Base class for all rulesets (AddressRuleset, IntersectionRuleset, etc.).

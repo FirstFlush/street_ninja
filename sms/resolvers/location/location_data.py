@@ -4,7 +4,7 @@ from .enums import StreetSuffixEnum, StreetDirectionEnum
 STREET_SUFFIXES = {e.value for e in StreetSuffixEnum}
 STREET_DIRECTIONS = {e.value for e in StreetDirectionEnum}
 JUNK_WORDS = {
-    "the", "a", "an", "some", "any",
+    "i", "the", "a", "an", "some", "any",
     "and", "or", "but", "so", "because",
     "is", "are", "was", "were", "be", "been", "being",
     "where", "what", "why", "when", "which", "who", 

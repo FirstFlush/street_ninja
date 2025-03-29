@@ -24,18 +24,23 @@ class SMSWebsiteView(APIView):
     throttle_classes = [ChatMinuteThrottle, ChatHourThrottle, ChatDayThrottle]
 
     def post(self, request: Request, *args, **kwargs):
+        http_status = status.HTTP_400_BAD_REQUEST
         deserializer = WebSMSSerializer(data=request.data)
         if deserializer.is_valid():
-            response = SMSService.process_web_sms(
-                msg=deserializer.validated_data["query"],
-                session=request._request.session,
-            )
-            return Response({"success": True, "data": response})
-
+            try:
+                response = SMSService.process_web_sms(
+                    msg=deserializer.validated_data["query"],
+                    session=request._request.session,
+                )
+            except Exception as e:
+                http_status = status.HTTP_404_NOT_FOUND
+            else:
+                http_status = status.HTTP_200_OK
+                return Response({"success": True, "data": response}, status=http_status)
         else:
             msg = f"Deserialization failed for deserializer `{deserializer.__class__.__name__}`. Errors: {deserializer.errors}"
             logger.error(msg)
-            return Response({"success": False, "data": self.FAILED}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"success": False, "data": self.FAILED}, status=http_status)
 
 
 
@@ -73,6 +78,7 @@ class SMSWebhookView(APIView):
             msg = f"Error `{e.__class__.__name__}` caught by high-level try/except in SMSWebhookView. Details: {e}"
             logger.error(msg, exc_info=True)
             if settings.DEBUG == True:
+                logger.warning("Error is being raised due to DEBUG = True in settings.py. Disable this in production and error will not be raised!")
                 raise
         
         if response is None:

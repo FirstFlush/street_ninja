@@ -3,25 +3,23 @@ from django.contrib.gis.geos import Point
 from django.contrib.sessions.backends.base import SessionBase
 from sms.resolvers import (
     SMSResolver, 
-    ResolvedSMS, 
+    ResolvedSMS,
+    SMSResolutionError
 )
-# from sms.response.respones_templates import ResourceResponseTemplate
 from sms.response import (
     SMSInquiryResponseData, 
     SMSFollowUpResponseData,
     ResponseService,
 )
 from sms.persistence_service import PersistenceService
-from sms.enums import ResolvedSMSType, SMSKeywordEnum, SMSFollowUpKeywordEnum
+from sms.enums import ResolvedSMSType
 from geo.geocoding.geocoding_service import GeocodingService
+from geo.geocoding.exc import AllGeocodersFailed
+from notifications.tasks import send_geocoding_failed_email, send_sms_resolution_failed_email
 from .abstract_models import IncomingSMSMessageModel, ResponseSMSMessageModel
-from cache.follow_up_caching_service import FollowUpCachingService
-from cache.inquiry_caching_service import InquiryCachingService
 from .response.response_templates.help_template import HelpResponseTemplate
 from .persistence_service import PersistenceService
 from .web.sms_web_service import SMSWebService
-from .web.dataclasses import WebServiceData
-from .serializers import TwilioSMSSerializer
 
 
 logger = logging.getLogger(__name__)
@@ -37,15 +35,19 @@ class SMSService:
         self.sms_data: None | ResolvedSMS = None
         self.persistence_service: None | PersistenceService = None
 
-
     def _get_resolver(self) -> SMSResolver:
         return SMSResolver(msg=self.msg)
 
     def resolve(self) -> ResolvedSMS:
-        return self.resolver.resolve_sms(
-            message_sid=self.message_sid,
-            phone_number=self.phone_number,
-        )
+        try:
+            return self.resolver.resolve_sms(
+                message_sid=self.message_sid,
+                phone_number=self.phone_number,
+            )
+        except SMSResolutionError:
+            logger.error("SMS Resolution failed! Sending email notification...", exc_info=True)
+            send_sms_resolution_failed_email.delay(self.msg)
+            raise
 
     def geocode(self) -> Point | None:
         match self.sms_data.resolved_sms_type:
@@ -63,18 +65,18 @@ class SMSService:
         persistence_service.save_sms()
         return persistence_service.instance
 
-
-
-    # def build_response_data(self, response_service: ResponseService) -> SMSInquiryResponseData | SMSFollowUpResponseData:
-    #     return response_service.build_response_data()
-
-
     def _build_persistence_service(self, sms_data:ResolvedSMS, location: Point | None) -> PersistenceService:
         return PersistenceService(sms_data=sms_data, location=location)
+
 
     def _get_location(self, location_str:str) -> Point:
         try:
             return GeocodingService.geocode(query=location_str)
+        except AllGeocodersFailed:
+            logger.error(f"All Geocoders failed. sending email notification...", exc_info=True)
+            send_geocoding_failed_email.delay(self.msg)
+            raise
+
         except Exception as e:
             logger.error(f"`{e.__class__.__name__}` occurred while attempting to geocode: {e}", exc_info=True)
             raise
@@ -95,15 +97,15 @@ class SMSService:
     def _build_response_service(self, instance: IncomingSMSMessageModel) -> ResponseService:
         return ResponseService(instance=instance)
 
-    def _test_print(self, msg: str):
-        print()
-        print()
-        print('#'*30)
-        print(msg)
-        print('#'*30)
-        print(f"{len(msg)} chars")
-        print()
-        print()
+    # def _test_print(self, msg: str):
+    #     print()
+    #     print()
+    #     print('#'*30)
+    #     print(msg)
+    #     print('#'*30)
+    #     print(f"{len(msg)} chars")
+    #     print()
+    #     print()
 
 
     @classmethod
@@ -114,7 +116,7 @@ class SMSService:
             return cls.process_sms(msg=msg, phone_number=phone_number) 
         except Exception as e:
             msg = f"Unexpected exception `{e.__class__.__name__}`when calling process_sms from the process_web_sms method: {e}"
-            logger.error(msg, exc_info=True)
+            logger.error(msg)
             raise
 
     @classmethod
@@ -138,7 +140,8 @@ class SMSService:
             else:
                 wrapped_response_message = response_service.build_help_msg()
             
-            sms_service._test_print(msg=wrapped_response_message)
+            
+            # sms_service._test_print(msg=wrapped_response_message)
             return wrapped_response_message
 
         else:

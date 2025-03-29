@@ -113,7 +113,7 @@ class SMSResolver:
         except LocationResolutionError as e:
             logger.error(e, exc_info=True)
             raise
-            return None
+
 
     def _resolve_follow_up_sms(self) -> ResolvedSMSFollowUp | None:
         try:

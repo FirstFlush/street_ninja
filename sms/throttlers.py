@@ -2,10 +2,10 @@ from rest_framework.throttling import AnonRateThrottle
 
 
 class ChatMinuteThrottle(AnonRateThrottle):
-    rate = "20/min"
+    rate = "60/min"
 
 class ChatHourThrottle(AnonRateThrottle):
-    rate = "100/hour"
+    rate = "3600/hour"
 
 class ChatDayThrottle(AnonRateThrottle):
-    rate = "500/day"
+    rate = "10000/day"
