@@ -37,6 +37,20 @@ OPEN_ROUTE_SERVICE_TOKEN = os.environ.get('OPEN_ROUTE_SERVICE_TOKEN')
 GRAPH_HOPPER_API_KEY = os.environ.get('GRAPH_HOPPER_API_KEY')
 
 
+# Domain
+# =======================================
+STREET_NINJA_DOMAIN = os.environ.get("STREET_NINJA_DOMAIN")
+
+
+# EMAIL
+# =======================================
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT"))
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = True  # always, no need for env var
+
+
 # SMS
 # =======================================
 SMS_CHAR_LIMIT = int(os.environ.get('SMS_CHAR_LIMIT', 400))
@@ -111,6 +125,7 @@ INSTALLED_APPS = [
     'contacts',
     'geo',
     'integrations',
+    'notifications',
     'resources',
     'sms',
 ]
