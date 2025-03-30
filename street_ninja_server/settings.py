@@ -54,6 +54,7 @@ EMAIL_USE_TLS = True  # always, no need for env var
 # EMAIL ROUTES
 # =======================================
 EMAIL_ROUTE_CELERY = os.environ.get("EMAIL_ROUTE_CELERY")
+EMAIL_ROUTE_DIRECTIONS = os.environ.get("EMAIL_ROUTE_DIRECTIONS")
 EMAIL_ROUTE_LOCATION_PARSING = os.environ.get("EMAIL_ROUTE_LOCATION_PARSING")
 EMAIL_ROUTE_LOGGING = os.environ.get("EMAIL_ROUTE_LOGGING")
 EMAIL_ROUTE_SENTRY = os.environ.get("EMAIL_ROUTE_SENTRY")

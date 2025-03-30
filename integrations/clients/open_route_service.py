@@ -2,8 +2,6 @@ from typing import Any
 from .base_api_client import BaseAPIClient
 from .enums import APIClientEnum, OpenRouteServiceEndpointsEnum
 
-import json
-
 
 class OpenRouteServiceAPIClient(BaseAPIClient):
 

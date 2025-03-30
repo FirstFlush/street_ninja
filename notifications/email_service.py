@@ -1,7 +1,7 @@
 import logging
+from urllib.parse import urlparse
 from django.conf import settings
 from django.core.mail import send_mail as django_send_mail
-import traceback
 from .enums import EmailRouteEnum
 from .exc import SendEmailError, SuspiciousEmailError 
 
@@ -57,12 +57,33 @@ class EmailService:
         return f"{self.route_enum.value}@{settings.STREET_NINJA_DOMAIN}"
 
     @classmethod
-    def send_email_celery(cls, url: str, resource: str, e: Exception):
-        trace= traceback.format_exc()
+    def send_email_celery_beat(
+        cls, 
+        url: str, 
+        resource: str, 
+        exception_name: str,
+        trace: str,
+    ):
         cls(EmailRouteEnum.CELERY).send_email(
-            subject=f"{e.__class__.__name__} fetching {resource.upper()} data",
+            subject=f"{exception_name} fetching {resource.upper()} data",
             message=f"{url}\n\n{trace}"
         )
+
+    @classmethod
+    def send_email_directions(
+        cls,
+        url: str,
+        exception_name: str,
+        trace: str,
+    ):
+        """Sends an internal notifications email when we encounter a directions routing API failure."""
+        parsed_url = urlparse(url)
+        hostname = parsed_url.hostname if parsed_url.hostname else "(HOSTNAME IS NONE!)"
+        cls(EmailRouteEnum.DIRECTIONS).send_email(
+            subject=f"{exception_name} fetching directions from {hostname}",
+            message=f"{url}\n\n{trace}"
+        )
+
 
     def send_email(self, message: str, subject: str, fail_silently: bool=False):
         if settings.DEBUG:

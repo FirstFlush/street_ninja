@@ -1,6 +1,7 @@
 import logging
+import traceback
 from .integration_service import IntegrationService, IntegrationServiceParams
-from notifications import EmailService
+from notifications.tasks import send_celery_beat_failure_email
 
 
 logger = logging.getLogger(__name__)
@@ -33,10 +34,12 @@ class ResourceFetcher:
             self.integration_service.fetch_and_save()
         except Exception as e:
             if email_on_error:
-                EmailService.send_email_celery(
+                trace = traceback.format_exc()
+                send_celery_beat_failure_email.delay(
                     resource=self.params.endpoint_enum.value,
                     url=self.params.url,
-                    e=e,
+                    exception_name=e.__class__.__name__,
+                    trace=trace,
                 )
             logger.error(self._logger_msg(e), exc_info=True)
             raise
