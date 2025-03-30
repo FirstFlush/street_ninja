@@ -29,6 +29,10 @@ class IntegrationServiceParams:
     http_params:Optional[dict[str, str] | None] = None   # GET data
     http_data:Optional[dict[str, str] | None] = None     # POST data
 
+    @property
+    def url(self) -> str:
+        return f"{self.api_client_class.BASE_URL}{self.endpoint_enum.value}"
+
 
 class IntegrationService:
     """

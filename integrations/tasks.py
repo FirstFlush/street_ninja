@@ -16,7 +16,8 @@ from resources.serializers import (
     WigleSerializer,
 )
 from street_ninja_server.celery import app
-from .integration_service import IntegrationService, IntegrationServiceParams
+from .integration_service import IntegrationServiceParams
+from .resource_fetcher import ResourceFetcher
 from .clients import VancouverAPIClient, WigleAPIClient
 from .clients.enums import VancouverEndpointsEnum, WigleEndpointsEnum
 
@@ -38,8 +39,7 @@ def fetch_shelter(self):
             'offset': 0,
         }
     )
-    integration_service = IntegrationService(params)
-    integration_service.fetch_and_save()
+    ResourceFetcher(params).run()
 
 
 @app.task(bind=True)
@@ -56,8 +56,7 @@ def fetch_food(self):
             'offset': 0,
         }
     )
-    integration_service = IntegrationService(params)
-    integration_service.fetch_and_save()
+    ResourceFetcher(params).run()
 
 
 @app.task(bind=True)
@@ -74,8 +73,7 @@ def fetch_toilet(self):
             'offset': 0,
         }
     )
-    integration_service = IntegrationService(params)
-    integration_service.fetch_and_save()
+    ResourceFetcher(params).run()
 
 
 @app.task(bind=True)
@@ -92,8 +90,7 @@ def fetch_water(self):
             'offset': 0,
         }
     )
-    integration_service = IntegrationService(params)
-    integration_service.fetch_and_save()
+    ResourceFetcher(params).run()
 
 
 

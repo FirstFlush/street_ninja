@@ -1,9 +1,9 @@
 import logging
 from django.conf import settings
 from django.core.mail import send_mail as django_send_mail
+import traceback
 from .enums import EmailRouteEnum
-from .exc import SendEmailError, SuspiciousEmailError
-
+from .exc import SendEmailError, SuspiciousEmailError 
 
 logger = logging.getLogger(__name__)
 
@@ -55,6 +55,14 @@ class EmailService:
     @property
     def to_email(self) -> str:
         return f"{self.route_enum.value}@{settings.STREET_NINJA_DOMAIN}"
+
+    @classmethod
+    def send_email_celery(cls, url: str, resource: str, e: Exception):
+        trace= traceback.format_exc()
+        cls(EmailRouteEnum.CELERY).send_email(
+            subject=f"{e.__class__.__name__} fetching {resource.upper()} data",
+            message=f"{url}\n\n{trace}"
+        )
 
     def send_email(self, message: str, subject: str, fail_silently: bool=False):
         if settings.DEBUG:
