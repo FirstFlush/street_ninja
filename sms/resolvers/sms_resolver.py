@@ -11,7 +11,7 @@ from .exc import (
 )
 from .location.location_resolver import LocationResolver, ResolvedLocation
 from .keyword_and_language_resolver import KeywordLanguageResolver, ResolvedKeywordAndLanguage
-from .param_resolver import ParamResolver, ParamDict
+from .params.param_resolver import ParamResolver, ParamDict
 from .follow_up_resolver import ResolvedSMSFollowUp, FollowUpResolver
 
 
