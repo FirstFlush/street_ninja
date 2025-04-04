@@ -19,15 +19,14 @@ class ShelterParams(BaseResourceParams):
 
     PARAM_MAPPING = {
         ShelterParamKey.CATEGORY: {
-
             ShelterCategoryParamValue.WOMEN: [
-                "woman", "women", "womens", "lady", "ladies", "female", "females",
+                "woman", "women", "womens", "womans", "lady", "ladies", "female", "females",
             ],
             ShelterCategoryParamValue.MEN: [
                 "man", "men", "mens", "male", "males", "gentleman", "gentlemen",
             ],
             ShelterCategoryParamValue.ADULTS: [
-                "adult", "adults",
+                "adult", "adults", "everyone", "everybody",
             ],
             ShelterCategoryParamValue.YOUTH: [
                 "youth", "youths", "kid", "kids", "teen", "teens", "teenager", "teenagers"

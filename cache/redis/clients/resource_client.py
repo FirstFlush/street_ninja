@@ -49,7 +49,7 @@ class ResourceCacheClient(BaseRedisClient):
         raise RedisClientException(f"`{self.__class__.__name__}` converting queryset to list for caching.") from TypeError(msg)
 
 
-    def get_or_set_db(self) -> ResourceQuerySet:
+    def get_or_set_db(self) -> list[ResourceModel]:
         """
         Fetch data from Redis if available; otherwise, query the database and cache the result.
 

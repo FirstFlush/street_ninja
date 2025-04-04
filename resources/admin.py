@@ -1,6 +1,6 @@
 from django.contrib import admin
 from street_ninja_server.base_admin import BaseGISAdmin
-from .models import Shelter
+from .models import Shelter, FoodProgram, Toilet, DrinkingFountain, PublicWifi
 
 
 @admin.register(Shelter)
@@ -27,12 +27,6 @@ class ShelterAdmin(BaseGISAdmin):
     default_zoom = 12
 
 
-
-from django.contrib import admin
-from street_ninja_server.base_admin import BaseGISAdmin
-from .models import FoodProgram, Toilet, DrinkingFountain, PublicWifi
-
-
 @admin.register(FoodProgram)
 class FoodProgramAdmin(BaseGISAdmin):
     list_display = (
@@ -46,7 +40,14 @@ class FoodProgramAdmin(BaseGISAdmin):
         'last_fetched',
         'date_created',
     )
-    list_filter = ('provides_meals', 'provides_hampers', 'signup_required', 'requires_referral')
+    list_filter = (
+        'provides_meals', 
+        'provides_hampers',
+        'delivery_available',
+        'takeout_available', 
+        'signup_required', 
+        'requires_referral'
+    )
     search_fields = ('program_name', 'organization_name', 'location_address')
     ordering = ('-last_fetched',)
 

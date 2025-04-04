@@ -37,7 +37,10 @@ class More(BaseFollowUpHandler):
         return new_session
 
     def _resources(self) -> list[ResourceModel]:
-        resources = self.caching_service.get_resources_by_proximity(location=self.sms_inquiry.location)
+        resources = self.caching_service.get_resources_by_proximity(
+            location=self.sms_inquiry.location,
+            inquiry_params=self.sms_inquiry.params,
+        )
         if len(resources) == 0:
             logger.warning(f"{self.__class__.__name__} received empty queryset: {resources}")
         return resources
