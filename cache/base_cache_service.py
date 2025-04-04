@@ -47,7 +47,7 @@ class BaseCacheService(ABC):
         SMS Inquiries will supply their own location
         """
         inquiry_params = self.inquiry.params or {}
-        resources = self.resource_cache_client.get_or_set_db(query_params=inquiry_params)#.closest_to(location)
+        resources = self.resource_cache_client.get_or_set_db()#.closest_to(location)
         return GeospatialService.sort_by_distance(resources=resources, location=location)
 
 

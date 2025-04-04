@@ -26,13 +26,13 @@ class WebSessionKeyEnum(RedisKeyEnum):
     PHONE = "phone"
 
 
-class PhoneSessionFieldsEnum(StreetNinjaEnum):
+# class PhoneSessionFieldsEnum(StreetNinjaEnum):
 
-    KEYWORD = "keyword"
-    ORDER = "order"
-    OFFSET = "offset"
-    LAST_UPDATED = "last_updated"
-
+#     KEYWORD = "keyword"
+#     ORDER = "order"
+#     OFFSET = "offset"
+#     LAST_UPDATED = "last_updated"
+    
 
 class RedisKeyTTL(StreetNinjaEnum):
     """TTL for resource data in redis cache in seconds"""

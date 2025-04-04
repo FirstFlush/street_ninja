@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 class ResourceCacheClient(BaseRedisClient):
 
     redis_store_enum = RedisStoreEnum.RESOURCES
+    QUERY_PARAMS = {"is_active": True}  # Populate the cache with this filter ALWAYS.
 
     def __init__(self, access_pattern: Type["AccessPatternDB"]):
         super().__init__(access_pattern=access_pattern)
@@ -48,7 +49,7 @@ class ResourceCacheClient(BaseRedisClient):
         raise RedisClientException(f"`{self.__class__.__name__}` converting queryset to list for caching.") from TypeError(msg)
 
 
-    def get_or_set_db(self, query_params: dict = None) -> ResourceQuerySet:
+    def get_or_set_db(self) -> ResourceQuerySet:
         """
         Fetch data from Redis if available; otherwise, query the database and cache the result.
 
@@ -67,7 +68,7 @@ class ResourceCacheClient(BaseRedisClient):
         # Cache miss, fetch from DB
         try:
             logger.info(f"Cache miss for key: `{self.access_pattern.redis_key_enum}`. Fetching from DB...")
-            db_data = self.access_pattern.query(**(query_params or {}))
+            db_data = self.access_pattern.query(**self.QUERY_PARAMS)
             list_data = self._to_list(db_data) 
             pickled_data = self._pickle(list_data)
             self.redis_store.set(
