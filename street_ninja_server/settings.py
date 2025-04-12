@@ -24,7 +24,18 @@ ROOT_URLCONF = "street_ninja_server.urls"
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 DEBUG = True if os.environ.get("DEBUG").lower() == "true" else False
 
-ALLOWED_HOSTS = ['*']
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+else:
+    ALLOWED_HOSTS = [
+        "api.streetninja.ca",
+        "streetninja.ca",
+        "www.streetninja.ca",
+        "localhost",
+        "127.0.0.1",
+        "street_ninja_web",
+        "web",
+    ]
 
 APPEND_SLASH = False
 
@@ -40,7 +51,7 @@ GRAPH_HOPPER_API_KEY = os.environ.get('GRAPH_HOPPER_API_KEY')
 # Domain
 # =======================================
 STREET_NINJA_WEBSITE_DOMAIN = os.environ.get("STREET_NINJA_WEBSITE_DOMAIN")
-
+STREET_NINJA_API_DOMAIN = os.environ.get("STREET_NINJA_API_DOMAIN")
 
 # EMAIL CONFIG
 # =======================================
@@ -93,12 +104,14 @@ if DEBUG:
 else:
     CORS_ALLOW_CREDENTIALS = True  
     CORS_ALLOWED_ORIGINS = [  
-        f"https://{os.environ.get('STREET_NINJA_WEBSITE_DOMAIN')}",
-        f"https://www.{os.environ.get('STREET_NINJA_WEBSITE_DOMAIN')}",
+        f"https://{STREET_NINJA_WEBSITE_DOMAIN}",
+        f"https://www.{STREET_NINJA_WEBSITE_DOMAIN}",
+        f"https://{STREET_NINJA_API_DOMAIN}",
     ]  
     CSRF_TRUSTED_ORIGINS = [  
-        f"https://{os.environ.get('STREET_NINJA_WEBSITE_DOMAIN')}", 
-        f"https://www.{os.environ.get('STREET_NINJA_WEBSITE_DOMAIN')}", 
+        f"https://{STREET_NINJA_WEBSITE_DOMAIN}", 
+        f"https://www.{STREET_NINJA_WEBSITE_DOMAIN}",
+        f"https://{STREET_NINJA_API_DOMAIN}",
     ]
 
 
