@@ -39,7 +39,7 @@ GRAPH_HOPPER_API_KEY = os.environ.get('GRAPH_HOPPER_API_KEY')
 
 # Domain
 # =======================================
-STREET_NINJA_DOMAIN = os.environ.get("STREET_NINJA_DOMAIN")
+STREET_NINJA_WEBSITE_DOMAIN = os.environ.get("STREET_NINJA_WEBSITE_DOMAIN")
 
 
 # EMAIL CONFIG
@@ -93,12 +93,12 @@ if DEBUG:
 else:
     CORS_ALLOW_CREDENTIALS = True  
     CORS_ALLOWED_ORIGINS = [  
-        f"https://{os.environ.get('STREET_NINJA_DOMAIN')}",
-        f"https://www.{os.environ.get('STREET_NINJA_DOMAIN')}",
+        f"https://{os.environ.get('STREET_NINJA_WEBSITE_DOMAIN')}",
+        f"https://www.{os.environ.get('STREET_NINJA_WEBSITE_DOMAIN')}",
     ]  
     CSRF_TRUSTED_ORIGINS = [  
-        f"https://{os.environ.get('STREET_NINJA_DOMAIN')}", 
-        f"https://www.{os.environ.get('STREET_NINJA_DOMAIN')}", 
+        f"https://{os.environ.get('STREET_NINJA_WEBSITE_DOMAIN')}", 
+        f"https://www.{os.environ.get('STREET_NINJA_WEBSITE_DOMAIN')}", 
     ]
 
 

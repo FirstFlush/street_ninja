@@ -21,7 +21,7 @@ class EmailService:
         self._security_check()
 
     def _security_check(self):
-        if not self.to_email.endswith(settings.STREET_NINJA_DOMAIN):
+        if not self.to_email.endswith(settings.STREET_NINJA_WEBSITE_DOMAIN):
             msg = f"Suspicious email recipient detected: `{self.to_email}`"
             logger.error(msg)
             raise SuspiciousEmailError(msg)
@@ -54,7 +54,7 @@ class EmailService:
 
     @property
     def to_email(self) -> str:
-        return f"{self.route_enum.value}@{settings.STREET_NINJA_DOMAIN}"
+        return f"{self.route_enum.value}@{settings.STREET_NINJA_WEBSITE_DOMAIN}"
 
     @classmethod
     def send_email_celery_beat(
