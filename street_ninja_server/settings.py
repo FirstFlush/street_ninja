@@ -31,6 +31,7 @@ else:
         "api.streetninja.ca",
         "streetninja.ca",
         "www.streetninja.ca",
+        "206.81.12.149",
         "localhost",
         "127.0.0.1",
         "street_ninja_web",
