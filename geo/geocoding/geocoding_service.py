@@ -75,7 +75,7 @@ class GeocodingService:
 
         result = self._try_fallbacks(query=query)
         if result:
-            logger.info(f"Geocoding succeeded using a fallback geocoder.")
+            logger.info(f"Geocoding succeeded using a fallback geocoder. Coordinates: `{result.point.__str__()}`")
             return result
 
         msg = f"All geocoders failed for query: `{query}`."
