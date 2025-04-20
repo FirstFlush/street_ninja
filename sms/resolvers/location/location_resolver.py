@@ -25,8 +25,10 @@ class LocationResolver(BaseKeywordResolver):
 
     RULES_COMMON = [
         AddressRuleset.has_preceding_number,
-        AddressRuleset.has_proceeding_suffix,
-        AddressRuleset.has_proceeding_direction,
+        # AddressRuleset.has_proceeding_suffix,
+        # AddressRuleset.has_proceeding_direction,
+        AddressRuleset.has_street_direction_nearby,
+        AddressRuleset.has_street_suffix_nearby,
         IntersectionRuleset.is_potential_intersection,
     ]
     RULES_PRIORITY = [
