@@ -1,7 +1,5 @@
 import logging
-import random
 from .base_response_templates import BaseSMSResponseTemplate
-from sms.enums import SMSKeywordEnum
 
 
 logger = logging.getLogger(__name__)

@@ -53,8 +53,6 @@ class QuerySetResponseTemplate(BaseSMSResponseTemplate):
         return wrapped_msg
 
 
-
-
 class ShelterResponseTemplate(QuerySetResponseTemplate):
 
     TITLE = "🏠 SHELTERS"
