@@ -59,7 +59,9 @@ VANCOUVER_LANDMARKS.update({
     "bc childrens hospital",
     "downtown eastside womens centre",
     "union gospel mission",
-    "carnegie community centre",
+    "carnegie center",
+    "carnegie centre",
+    "carnegie community center",
 })
 
 # Shopping

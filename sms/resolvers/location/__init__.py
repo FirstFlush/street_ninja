@@ -1,1 +1,1 @@
-from .location_resolver import LocationResolver
+from .location_resolver import LocationResolver, ResolvedLocation

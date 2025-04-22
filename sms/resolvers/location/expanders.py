@@ -61,42 +61,86 @@ class AddressExpander(BaseExpander):
         forwards = self._forwards(token_index)
         return f"{backwards} {self._token_value(token_index)} {forwards}".strip()
 
+    # def _backwards(self, token_index: int) -> str:
+    #     """
+    #     Expands backward to capture the full address number if present.
+    #     Handles cases like:
+    #     - "104 Hastings"
+    #     - "A-321 Main"
+    #     - "#7-104 Main"
+    #     """
+    #     tokens = []
+    #     for step in range(1, 3):
+    #         before = self.token_navigator.get_before(token_index, count=step)
+    #         if before is None:
+    #             break
+    #         if before.lower() in JUNK_WORDS:
+    #             break
+    #         if before.isdecimal():
+    #             tokens.insert(0, before)
+    #             break
+    #         if before.isalnum():
+    #             tokens.insert(0, before)
+    #     return " ".join(tokens)
+
     def _backwards(self, token_index: int) -> str:
-        """
-        Expands backward to capture the full address number if present.
-        Handles cases like:
-        - "104 Hastings"
-        - "A-321 Main"
-        - "#7-104 Main"
-        """
-        tokens = []
-        for step in range(1, 3):
-            before = self.token_navigator.get_before(token_index, count=step)
-            if before is None:
-                break
-            if before.lower() in JUNK_WORDS:
-                break
-            if before.isdecimal():
-                tokens.insert(0, before)
-                break
-            if before.isalnum():
-                tokens.insert(0, before)
-        return " ".join(tokens)
+        first = self.token_navigator.get_before(token_index, count=1)
+        second = self.token_navigator.get_before(token_index, count=2)
+
+        # Handle: number only
+        if first and first.isdecimal():
+            return first
+
+        # Handle: direction + number (e.g., 'w 7')
+        if first and second:
+            if first.lower() in STREET_DIRECTIONS and second.isdecimal():
+                return f"{second} {first}"
+
+        return ""
+
+
 
     def _forwards(self, token_index: int) -> str:
         tokens = []
+
+        suffix_found = False
         for step in range(1, 4):
-            after = self.token_navigator.get_after(token_index, count=step)
-            if after is None or after.lower() in JUNK_WORDS:
+            tok = self.token_navigator.get_after(token_index, count=step)
+            if tok is None:
                 break
-            tokens.append(after)
-            if after in STREET_SUFFIXES:
-                break
-            if after in STREET_DIRECTIONS:
+
+            if tok.lower() in STREET_SUFFIXES:
+                tokens.append(tok)
+                suffix_found = True
                 continue
-            if step >= 2 and after not in STREET_SUFFIXES and after not in STREET_DIRECTIONS:
-                break
+
+            if suffix_found and tok.lower() in STREET_DIRECTIONS:
+                tokens.append(tok)
+                break  # one direction after suffix is enough
+
+            if step == 1:
+                tokens.append(tok)  # likely the main street word
+            else:
+                break  # don't go further if we hit something unrecognized
+
         return " ".join(tokens)
+
+
+
+    # def _forwards(self, token_index: int) -> str:
+    #     tokens = []
+    #     for step in range(1, 4):
+    #         after = self.token_navigator.get_after(token_index, count=step)
+    #         if after is None or after.lower() in JUNK_WORDS:
+    #             break
+    #         tokens.append(after)
+    #         if after in STREET_SUFFIXES:
+    #             break
+    #         if after in STREET_DIRECTIONS:
+    #             continue
+    #         if step >= 2 and after not in STREET_SUFFIXES and after not in STREET_DIRECTIONS:
+    #             break
+    #     return " ".join(tokens)
 
 
 

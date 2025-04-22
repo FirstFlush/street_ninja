@@ -25,14 +25,29 @@ class BaseLocationRuleset(ABC):
 
 class PriorityRuleset(BaseLocationRuleset):
 
+    # @staticmethod
+    # def detect_landmark(msg: str) -> tuple[str, LocationType] | None:
+    #     words = set(msg.split())
+    #     matches = words & VANCOUVER_LANDMARKS
+    #     if matches:
+    #         return next(iter(matches)), LocationType.LANDMARK
+
+
     @staticmethod
     def detect_landmark(msg: str) -> tuple[str, LocationType] | None:
-        words = set(msg.split())
-        matches = words & VANCOUVER_LANDMARKS
-        if matches:
-            return next(iter(matches)), LocationType.LANDMARK
-        
-    @staticmethod   
+        normalized_msg = re.sub(RegexLibrary.normalize_string, "", msg).lower().replace(" ", "")
+
+        if normalized_msg == "wificarnegiecenter":
+            print(normalized_msg)
+            print(msg)
+
+        for landmark in VANCOUVER_LANDMARKS:
+            normalized_landmark = re.sub(RegexLibrary.normalize_string, "", landmark).lower().replace(" ", "")
+            if normalized_landmark in normalized_msg:
+
+                return landmark, LocationType.LANDMARK
+
+    @staticmethod
     def detect_full_address(msg: str) -> tuple[str, LocationType] | None:
         compiled_regex = re.compile(RegexLibrary.full_address)
         match = compiled_regex.search(msg)
