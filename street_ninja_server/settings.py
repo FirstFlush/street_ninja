@@ -19,7 +19,6 @@ LOG_DIR = BASE_DIR / 'log'
 os.makedirs(LOG_DIR, exist_ok=True)
 LOGGING = LOGGING
 LOGGING['handlers']['file']['filename'] = f"{LOG_DIR}/street_ninja.log"
-ROOT_URLCONF = "street_ninja_server.urls"  
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 DEBUG = True if os.environ.get("DEBUG").lower() == "true" else False
