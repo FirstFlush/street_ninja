@@ -6,6 +6,77 @@ SECRET_KEY = "ci-test-secret"
 DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
+
+EMAIL_HOST = ""
+EMAIL_PORT = 55555
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""
+EMAIL_USE_TLS = True
+
+EMAIL_ROUTE_CELERY = ""
+EMAIL_ROUTE_DIRECTIONS = ""
+EMAIL_ROUTE_LOCATION_PARSING = ""
+EMAIL_ROUTE_LOGGING = ""
+EMAIL_ROUTE_SENTRY = ""
+
+
+
+# API Keys
+# =======================================
+VANCOUVER_OPEN_DATA_API_KEY = ""
+WIGLE_API_KEY = ""
+OPEN_ROUTE_SERVICE_TOKEN = ""
+GRAPH_HOPPER_API_KEY = ""
+
+
+# Domain
+# =======================================
+STREET_NINJA_WEBSITE_DOMAIN = ""
+STREET_NINJA_API_DOMAIN = ""
+
+SMS_CHAR_LIMIT = 400
+
+
+# Celery
+# =======================================
+CELERY_BROKER_URL = ""
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+
+
+# CORS 
+# =======================================
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGIN_REGEXES = [r"^https?:\/\/.*"]
+
+
+# Geocoding
+# =======================================
+GEOCODER_CONFIG = {
+    "NOMINATIM": {"user_agent": ""},
+    "OPENCAGE": {"api_key": ""},
+}
+PRIMARY_GEOCODER = ""
+
+
+# PHONE SESSION
+# =======================================
+TTL_PHONE_SESSION = 3600
+
+
+# Routes
+# =======================================
+ROUTE_ADMIN = ""
+ROUTE_SMS_GATEWAY = ""
+
+
+# Twilio
+# =======================================
+TWILIO_AUTH_TOKEN = ""
+TWILIO_ACCOUNT_SID = ""
+TWILIO_PHONE_NUMBER = ""
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
