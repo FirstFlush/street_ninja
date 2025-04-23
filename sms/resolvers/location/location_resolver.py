@@ -11,6 +11,7 @@ from ..exc import LocationResolutionError
 from .expanders import BaseExpander, AddressExpander, IntersectionExpander, LandmarkExpander
 from .token_navigator import TokenNavigator
 from ..base_resolver import BaseKeywordResolver
+from .location_data import JUNK_WORDS
 
 logger = logging.getLogger(__name__)
 
@@ -55,6 +56,17 @@ class LocationResolver(BaseKeywordResolver):
         self.scoreboard = self._build_scoreboard()
         self.token_navigator = TokenNavigator(tokens=self.tokens)
 
+
+    def _strip_junk_words(self, location_text: str) -> str:
+        """Removes junk words from beginning and end, but not in the middle."""
+        tokens = location_text.strip().split()
+        while tokens and tokens[0].lower() in JUNK_WORDS:
+            tokens.pop(0)
+        while tokens and tokens[-1].lower() in JUNK_WORDS:
+            tokens.pop()
+        return " ".join(tokens)
+
+
     def _get_expander(
             self, 
             location_type_enum: LocationType,
@@ -66,20 +78,20 @@ class LocationResolver(BaseKeywordResolver):
 
     def _resolve_location(self) -> ResolvedLocation:
         resolved_location = self._try_rules_priority()
-        if resolved_location:
-            return resolved_location
-        
-        self._try_rules_common()
-        hot_token, location_type_enum = self._analyze_scoreboard()
-        expander = self._get_expander(
-            location_type_enum=location_type_enum,
-            token_navigator=self.token_navigator,
-        )
-        location = expander.expand_outward(token_index=hot_token)
-        return ResolvedLocation(
-            location=location,
-            location_type=location_type_enum
-        )
+        if not resolved_location:
+            self._try_rules_common()
+            hot_token, location_type_enum = self._analyze_scoreboard()
+            expander = self._get_expander(
+                location_type_enum=location_type_enum,
+                token_navigator=self.token_navigator,
+            )
+            location = expander.expand_outward(token_index=hot_token)
+            resolved_location = ResolvedLocation(
+                location=location,
+                location_type=location_type_enum
+            )
+        resolved_location.location = self._strip_junk_words(resolved_location.location)
+        return resolved_location
 
     def _analyze_scoreboard(self) -> tuple[int, LocationType]:
         """

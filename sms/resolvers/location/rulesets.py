@@ -36,11 +36,6 @@ class PriorityRuleset(BaseLocationRuleset):
     @staticmethod
     def detect_landmark(msg: str) -> tuple[str, LocationType] | None:
         normalized_msg = re.sub(RegexLibrary.normalize_string, "", msg).lower().replace(" ", "")
-
-        if normalized_msg == "wificarnegiecenter":
-            print(normalized_msg)
-            print(msg)
-
         for landmark in VANCOUVER_LANDMARKS:
             normalized_landmark = re.sub(RegexLibrary.normalize_string, "", landmark).lower().replace(" ", "")
             if normalized_landmark in normalized_msg:

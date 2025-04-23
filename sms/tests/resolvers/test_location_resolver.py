@@ -12,10 +12,3 @@ def test_location_resolver(sample: InquirySample):
     assert resolved.location.lower() == sample.location.location.lower()
     assert resolved.location_type == sample.location.location_type
 
-
-# @pytest.mark.parametrize("msg,expected_location,expected_type", LOCATION_SAMPLES)
-# def test_location_resolver(msg, expected_location, expected_type):
-#     resolved = LocationResolver.resolve_location(msg)
-#     assert isinstance(resolved, ResolvedLocation)
-#     assert resolved.location.lower() == expected_location.lower()
-#     assert resolved.location_type == expected_type

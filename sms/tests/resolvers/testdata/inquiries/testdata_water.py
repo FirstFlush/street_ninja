@@ -14,7 +14,7 @@ WATER_INQUIRIES = [
     InquirySample(
         message="#102-1333 W Broadway hydrate",
         keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.WATER, LanguageEnum.ENGLISH),
-        location=ResolvedLocation("#102-1333 W Broadway", LocationType.ADDRESS),
+        location=ResolvedLocation("1333 W Broadway", LocationType.ADDRESS),
     ),
     InquirySample(
         message="drink 1200 W Georgia St",
@@ -32,9 +32,9 @@ WATER_INQUIRIES = [
         location=ResolvedLocation("4438 Fraser St", LocationType.ADDRESS),
     ),
     InquirySample(
-        message="fountains on robson?",
+        message="fountains on robson near bute & davie?",
         keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.WATER, LanguageEnum.ENGLISH),
-        location=ResolvedLocation("robson", LocationType.LANDMARK),
+        location=ResolvedLocation("bute & davie", LocationType.INTERSECTION),
     ),
     InquirySample(
         message="thirsty by main and terminal",

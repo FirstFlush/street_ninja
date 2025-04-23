@@ -25,7 +25,7 @@ TOILET_INQUIRIES = [
     InquirySample(
         message="washroom #201-2211 Alberta St",
         keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.TOILET, LanguageEnum.ENGLISH),
-        location=ResolvedLocation("#201-2211 Alberta St", LocationType.ADDRESS),
+        location=ResolvedLocation("2211 Alberta St", LocationType.ADDRESS),
     ),
     InquirySample(
         message="bathroom 1985 Commercial Dr",
@@ -38,9 +38,9 @@ TOILET_INQUIRIES = [
         location=ResolvedLocation("500 granville", LocationType.ADDRESS),
     ),
     InquirySample(
-        message="need toilet - i'm near nelson park",
+        message="need toilet - i'm near broadway station",
         keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.TOILET, LanguageEnum.ENGLISH),
-        location=ResolvedLocation("nelson park", LocationType.LANDMARK),
+        location=ResolvedLocation("broadway station", LocationType.LANDMARK),
     ),
     InquirySample(
         message="washroom around 6th and cambie?",

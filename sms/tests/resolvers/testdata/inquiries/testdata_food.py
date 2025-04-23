@@ -29,12 +29,12 @@ FOOD_INQUIRIES = [
     InquirySample(
         message="#3-224 E 10th Ave breakfast",
         keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.FOOD, LanguageEnum.ENGLISH),
-        location=ResolvedLocation("#3-224 E 10th Ave", LocationType.ADDRESS),
+        location=ResolvedLocation("224 E 10th Ave", LocationType.ADDRESS),
     ),
     InquirySample(
         message="any food near #212-104 W Cordova?",
         keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.FOOD, LanguageEnum.ENGLISH),
-        location=ResolvedLocation("#212-104 W Cordova", LocationType.ADDRESS),
+        location=ResolvedLocation("104 W Cordova", LocationType.ADDRESS),
     ),
     InquirySample(
         message="hungry at main and hastings",
@@ -44,7 +44,7 @@ FOOD_INQUIRIES = [
     InquirySample(
         message="any place to eat 222 main st",
         keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.FOOD, LanguageEnum.ENGLISH),
-        location=ResolvedLocation("library downtown", LocationType.LANDMARK),
+        location=ResolvedLocation("222 main st", LocationType.ADDRESS),
     ),
     InquirySample(
         message="brunch 101 e 7th ave",

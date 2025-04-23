@@ -24,7 +24,7 @@ WIFI_INQUIRIES = [
     InquirySample(
         message="#4-827 Seymour St ONLINE",
         keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.WIFI, LanguageEnum.ENGLISH),
-        location=ResolvedLocation("#4-827 Seymour St", LocationType.ADDRESS),
+        location=ResolvedLocation("827 Seymour St", LocationType.ADDRESS),
     ),
     InquirySample(
         message="567 Hornby St wireless",

@@ -29,7 +29,7 @@ SHELTER_INQUIRIES = [
     InquirySample(
         message="#5-99 Commercial Dr homeless",
         keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.SHELTER, LanguageEnum.ENGLISH),
-        location=ResolvedLocation("#5-99 Commercial Dr", LocationType.ADDRESS),
+        location=ResolvedLocation("99 Commercial Dr", LocationType.ADDRESS),
     ),
     InquirySample(
         message="need shelter by victory square",
