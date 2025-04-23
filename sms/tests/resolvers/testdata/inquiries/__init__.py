@@ -1,0 +1,1 @@
+from .testdata_all_inquiries import ALL_INQUIRIES

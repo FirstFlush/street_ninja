@@ -41,12 +41,17 @@ VANCOUVER_LANDMARKS = {
 VANCOUVER_LANDMARKS.update({
     "waterfront station",
     "broadway city hall",
+    "city hall",
     "main street science world",
     "granville station",
     "burrard station",
     "king edward station",
     "metrotown",
     "commercial broadway",
+    "broadway skytrain",
+    "broadway station",
+    "stadium chinatown",
+    "stadium-chinatown",
 })
 
 # Medical

@@ -33,7 +33,7 @@ class KeywordLanguageResolver(BaseKeywordResolver):
     REVERSE_MAPPING = None
     MAPPING = {
         SMSKeywordEnum.SHELTER: {
-            LanguageEnum.ENGLISH: {"shelter", "shelters", "homeless", "roof", "bed"},
+            LanguageEnum.ENGLISH: {"shelter", "shelters", "homeless", "bed", "sleep",},
             LanguageEnum.FRENCH: {"abri", "toit", "sansabri"},  # sans-abri
             LanguageEnum.PUNJABI: {"saran", "asra", "ghar"},  # Punjabi
             LanguageEnum.CHINESE: {"避难所", "收容所", "住所"},  # Combined Mandarin/Cantonese as "Chinese"
@@ -47,7 +47,7 @@ class KeywordLanguageResolver(BaseKeywordResolver):
             LanguageEnum.YORUBA: {"ounje", "jẹun", "ebi", "ebin", "onje"},  # Yoruba
         },
         SMSKeywordEnum.WATER: {
-            LanguageEnum.ENGLISH: {"water", "hydration", "drink", "drinking", "fountain"},
+            LanguageEnum.ENGLISH: {"water", "hydration", "hydrate", "thirst", "thirsty", "drink", "drinking", "fountain", "fountains"},
             LanguageEnum.FRENCH: {"eau", "hydratation", "boire", "fontaine", "soif"},
             LanguageEnum.PUNJABI: {"pani", "paaniyan", "piyau"},  # Punjabi
             LanguageEnum.CHINESE: {"水", "喝水", "水源", "饮水"},  # Combined as "Chinese"
