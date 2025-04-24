@@ -1,4 +1,3 @@
-import hmac
 from django.conf import settings
 from rest_framework.authentication import BaseAuthentication
 from rest_framework.exceptions import AuthenticationFailed
@@ -20,7 +19,7 @@ class TwilioSignatureAuthentication(BaseAuthentication):
         # DO NOT REPLACE IN PRODUCTION
 
         if settings.DEBUG:
-            url.replace("http://", "https://") 
+            url = url.replace("http://", "https://") 
 
         post_data = request.POST.dict()
         validator = RequestValidator(auth_token)
