@@ -17,7 +17,8 @@ class TwilioSignatureAuthentication(BaseAuthentication):
 
         auth_token = settings.TWILIO_AUTH_TOKEN
         url = request.build_absolute_uri()
-        logger.critical("URI from build_absolute_uri: ", url)
+        logger.critical(f"URI from build_absolute_uri: {url}")
+        logger.critical(f"HEADERS: {request._request.headers}")
 
 
         # If using ngrok you may need to replace 'http' for 'https'
