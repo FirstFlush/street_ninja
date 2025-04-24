@@ -11,11 +11,21 @@ FOOD_INQUIRIES = [
         keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.FOOD, LanguageEnum.ENGLISH),
         location=ResolvedLocation("104 W Cordova St", LocationType.ADDRESS),
     ),
-    InquirySample(
-        message="34th Ave and Knight St FOOD",
-        keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.FOOD, LanguageEnum.ENGLISH),
-        location=ResolvedLocation("34th Ave and Knight St", LocationType.INTERSECTION),
-    ),
+    # InquirySample(
+    #     message="fourth ave and knight st FOOD",
+    #     keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.FOOD, LanguageEnum.ENGLISH),
+    #     location=ResolvedLocation("fourth ave and knight st", LocationType.INTERSECTION),
+    # ),
+    # InquirySample(
+    #     message="34th Ave and Knight St FOOD",
+    #     keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.FOOD, LanguageEnum.ENGLISH),
+    #     location=ResolvedLocation("34th Ave and Knight St", LocationType.INTERSECTION),
+    # ),
+    # InquirySample(
+    #     message="22nd Ave & Knight St FOOD",
+    #     keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.FOOD, LanguageEnum.ENGLISH),
+    #     location=ResolvedLocation("22nd Ave & Knight St", LocationType.INTERSECTION),
+    # ),
     InquirySample(
         message="hungry 123 Powell St",
         keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.FOOD, LanguageEnum.ENGLISH),

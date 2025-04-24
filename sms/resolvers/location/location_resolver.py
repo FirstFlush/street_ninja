@@ -127,7 +127,7 @@ class LocationResolver(BaseKeywordResolver):
         for rule in self.RULES_PRIORITY:
             result = rule(msg=self.msg)
             if isinstance(result, tuple) and len(result) == 2:
-                return ResolvedLocation(result[0], result[1])
+                return ResolvedLocation(location=result[0], location_type=result[1])
 
     def _build_scoreboard(self) -> dict[int, dict[LocationType, float]]:
         """

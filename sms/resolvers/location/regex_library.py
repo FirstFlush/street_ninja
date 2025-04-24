@@ -8,7 +8,7 @@ class RegexLibrary:
     street_direction_after_suffix = rf"\b({StreetDirectionEnum.regex_string()})\b"
     intersection = r"\b(\w+)\s+(?:&|and)\s+(\w+)\b"
     # normalize_string = re.compile(r"[^\w\s]")
-    normalize_string = re.compile(r"[^\w\s&]")
+    normalize_string = re.compile(r"[^\w\s&]") # Strip special chars but keep `&` since it appears intersections
 
     # full_address = rf"\b(\d+[-#]?\w*)\s+(\w+(\s+\w+)*)\s+({StreetSuffixEnum.regex_string()})(\s+({StreetDirectionEnum.regex_string()}))?\b"
 

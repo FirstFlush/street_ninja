@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import re
 from .token_navigator import TokenNavigator
 from .location_data import (
     VANCOUVER_LANDMARKS, 
@@ -100,47 +101,47 @@ class AddressExpander(BaseExpander):
 
 
 
-    def _forwards(self, token_index: int) -> str:
-        tokens = []
-
-        suffix_found = False
-        for step in range(1, 4):
-            tok = self.token_navigator.get_after(token_index, count=step)
-            if tok is None:
-                break
-
-            if tok.lower() in STREET_SUFFIXES:
-                tokens.append(tok)
-                suffix_found = True
-                continue
-
-            if suffix_found and tok.lower() in STREET_DIRECTIONS:
-                tokens.append(tok)
-                break  # one direction after suffix is enough
-
-            if step == 1:
-                tokens.append(tok)  # likely the main street word
-            else:
-                break  # don't go further if we hit something unrecognized
-
-        return " ".join(tokens)
-
-
-
     # def _forwards(self, token_index: int) -> str:
     #     tokens = []
+
+    #     suffix_found = False
     #     for step in range(1, 4):
-    #         after = self.token_navigator.get_after(token_index, count=step)
-    #         if after is None or after.lower() in JUNK_WORDS:
+    #         tok = self.token_navigator.get_after(token_index, count=step)
+    #         if tok is None:
     #             break
-    #         tokens.append(after)
-    #         if after in STREET_SUFFIXES:
-    #             break
-    #         if after in STREET_DIRECTIONS:
+
+    #         if tok.lower() in STREET_SUFFIXES:
+    #             tokens.append(tok)
+    #             suffix_found = True
     #             continue
-    #         if step >= 2 and after not in STREET_SUFFIXES and after not in STREET_DIRECTIONS:
-    #             break
+
+    #         if suffix_found and tok.lower() in STREET_DIRECTIONS:
+    #             tokens.append(tok)
+    #             break  # one direction after suffix is enough
+
+    #         if step == 1:
+    #             tokens.append(tok)  # likely the main street word
+    #         else:
+    #             break  # don't go further if we hit something unrecognized
+
     #     return " ".join(tokens)
+
+
+
+    def _forwards(self, token_index: int) -> str:
+        tokens = []
+        for step in range(1, 4):
+            after = self.token_navigator.get_after(token_index, count=step)
+            if after is None or after.lower() in JUNK_WORDS:
+                break
+            tokens.append(after)
+            if after in STREET_SUFFIXES:
+                break
+            if after in STREET_DIRECTIONS:
+                continue
+            if step >= 2 and after not in STREET_SUFFIXES and after not in STREET_DIRECTIONS:
+                break
+        return " ".join(tokens)
 
 
 
@@ -227,61 +228,170 @@ class AddressExpander(BaseExpander):
 
 
 
+# class IntersectionExpander(BaseExpander):
+
+#     def expand_outward(self, token_index:int) -> str:
+#         backwards = self._backwards(token_index)
+#         forwards = self._forwards(token_index)
+#         return f"{backwards} {self._token_value(token_index)} {forwards}"
+
+#     def _backwards(self, token_index:int) ->str:
+
+#         collected_tokens = []
+#         for step in range(1, 5):
+#             before = self.token_navigator.get_before(token_index, count=step)
+#             if before is None:
+#                 break
+#             collected_tokens.insert(0, before)
+            
+#         max_length = 4
+#         tokens_set = set(collected_tokens)
+#         if not tokens_set & STREET_SUFFIXES:
+#             max_length -= 1
+#         if not tokens_set & STREET_DIRECTIONS:
+#             max_length -= 1
+#         if len(collected_tokens) > max_length:
+#             collected_tokens = collected_tokens[-max_length:]
+
+#         return " ".join(collected_tokens)
+    
+#     def _forwards(self, token_index:int) ->str:
+#         """
+#         Expands forward from an intersection keyword ("&" or "and").
+#         - Captures alphanumeric tokens.
+#         - Stops at a street suffix (e.g., "St", "Ave"), but allows one optional street direction (e.g., "NW").
+#         - If no suffix or direction is found, takes only the first token (if it's not junk).
+#         """
+#         collected_tokens = []
+#         for step in range(1, 4):
+#             after = self.token_navigator.get_after(token_index, count=step)
+#             if after is None:
+#                 break
+#             collected_tokens.append(after)
+#             if after in STREET_SUFFIXES:
+#                 possible_direction = self.token_navigator.get_after(token_index, count=step + 1)
+#                 if possible_direction and possible_direction in STREET_DIRECTIONS:
+#                     collected_tokens.append(possible_direction)
+#                 break
+#         max_length = 3
+#         tokens_set = set(collected_tokens)
+#         if not tokens_set & STREET_SUFFIXES:
+#             max_length -= 1
+#         if not tokens_set & STREET_DIRECTIONS:
+#             max_length -= 1
+#         if len(collected_tokens) > max_length:
+#             collected_tokens= collected_tokens[:max_length]
+
+#         return " ".join(collected_tokens)
+
+
+
 class IntersectionExpander(BaseExpander):
 
-    def expand_outward(self, token_index:int) -> str:
-        backwards = self._backwards(token_index)
-        forwards = self._forwards(token_index)
-        return f"{backwards} {self._token_value(token_index)} {forwards}"
+    def expand_outward(self, token_index: int) -> str:
+        left = self._backwards(token_index)
+        right = self._forwards(token_index)
+        return f"{left} {self._token_value(token_index)} {right}".strip()
 
-    def _backwards(self, token_index:int) ->str:
+    def _backwards(self, token_index: int) -> str:
+        tokens = []
+        
+        # step 1: suffix (e.g., "ave")
+        suffix = self.token_navigator.get_before(token_index)
+        if not suffix or suffix.lower() in JUNK_WORDS:
+            return ""
 
-        collected_tokens = []
-        for step in range(1, 5):
-            before = self.token_navigator.get_before(token_index, count=step)
-            if before is None:
-                break
-            collected_tokens.insert(0, before)
-            
-        max_length = 4
-        tokens_set = set(collected_tokens)
-        if not tokens_set & STREET_SUFFIXES:
-            max_length -= 1
-        if not tokens_set & STREET_DIRECTIONS:
-            max_length -= 1
-        if len(collected_tokens) > max_length:
-            collected_tokens = collected_tokens[-max_length:]
+        tokens.insert(0, suffix)
 
-        return " ".join(collected_tokens)
+        # step 2: ordinal or numeric (e.g., "34th", "33")
+        street_number = self.token_navigator.get_before(token_index, count=2)
+        if street_number and re.match(r"^\d+(st|nd|rd|th)?$", street_number.lower()):
+            tokens.insert(0, street_number)
+
+            # optional: direction before number
+            direction = self.token_navigator.get_before(token_index, count=3)
+            if direction and direction.lower() in STREET_DIRECTIONS:
+                tokens.insert(0, direction)
+
+        return " ".join(tokens)
     
-    def _forwards(self, token_index:int) ->str:
-        """
-        Expands forward from an intersection keyword ("&" or "and").
-        - Captures alphanumeric tokens.
-        - Stops at a street suffix (e.g., "St", "Ave"), but allows one optional street direction (e.g., "NW").
-        - If no suffix or direction is found, takes only the first token (if it's not junk).
-        """
-        collected_tokens = []
-        for step in range(1, 4):
-            after = self.token_navigator.get_after(token_index, count=step)
-            if after is None:
-                break
-            collected_tokens.append(after)
-            if after in STREET_SUFFIXES:
-                possible_direction = self.token_navigator.get_after(token_index, count=step + 1)
-                if possible_direction and possible_direction in STREET_DIRECTIONS:
-                    collected_tokens.append(possible_direction)
-                break
-        max_length = 3
-        tokens_set = set(collected_tokens)
-        if not tokens_set & STREET_SUFFIXES:
-            max_length -= 1
-        if not tokens_set & STREET_DIRECTIONS:
-            max_length -= 1
-        if len(collected_tokens) > max_length:
-            collected_tokens= collected_tokens[:max_length]
 
-        return " ".join(collected_tokens)
+    def _forwards(self, token_index: int) -> str:
+        tokens = []
+
+        # Step 1: grab possible street name
+        first = self.token_navigator.get_after(token_index, count=1)
+        if not first or first.lower() in JUNK_WORDS:
+            return ""
+
+        tokens.append(first)
+
+        # Step 2: grab suffix
+        second = self.token_navigator.get_after(token_index, count=2)
+        if not second or second.lower() not in STREET_SUFFIXES:
+            return " ".join(tokens)  # no suffix, stop early
+
+        tokens.append(second)
+
+        # Step 3: optional direction
+        third = self.token_navigator.get_after(token_index, count=3)
+        if third and third.lower() in STREET_DIRECTIONS:
+            tokens.append(third)
+
+        return " ".join(tokens)
+
+
+
+    # def _backwards(self, token_index: int) -> str:
+    #     tokens = []
+    #     max_tokens = 3
+
+    #     for step in range(1, max_tokens + 1):
+    #         tok = self.token_navigator.get_before(token_index, count=step)
+    #         if tok is None or tok.lower() in JUNK_WORDS:
+    #             break
+    #         tokens.insert(0, tok)
+
+    #         if tok.lower() in STREET_SUFFIXES:
+    #             prev = self.token_navigator.get_before(token_index, count=step + 1)
+    #             if prev and re.match(r"^\d+(st|nd|rd|th)?$", prev.lower()):
+    #                 tokens.insert(0, prev)
+    #             break
+
+    #     return " ".join(tokens)
+
+    # def _forwards(self, token_index: int) -> str:
+    #     tokens = []
+    #     max_tokens = 4
+    #     suffix_found = False
+
+    #     for step in range(1, max_tokens + 1):
+    #         tok = self.token_navigator.get_after(token_index, count=step)
+    #         if tok is None or tok.lower() in JUNK_WORDS:
+    #             break
+
+    #         tokens.append(tok)
+
+    #         if tok.lower() in STREET_SUFFIXES:
+    #             suffix_found = True
+    #             continue
+
+    #         if suffix_found and tok.lower() in STREET_DIRECTIONS:
+    #             tokens.append(tok)
+    #             break
+
+    #         if step >= 2 and not suffix_found:
+    #             break
+
+    #     return " ".join(tokens)
+
+
+
+
+
+
+
+
 
 class LandmarkExpander(BaseExpander):
 

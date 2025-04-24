@@ -14,6 +14,7 @@ JUNK_WORDS = {
     "need", "want", "have", "get", "looking", "find", 
     "my", "your", "his", "her", "their", "our", 
     "me", "him", "her", "them", "us", "you",  "there",
+    "around", "by",
 }
 
 VANCOUVER_LANDMARKS = {
