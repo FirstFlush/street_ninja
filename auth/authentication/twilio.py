@@ -14,11 +14,13 @@ class TwilioSignatureAuthentication(BaseAuthentication):
             raise AuthenticationFailed("Missing SMS gateway signature")
 
         auth_token = settings.TWILIO_AUTH_TOKEN
+        url = request.build_absolute_uri()
 
         # If using ngrok you may need to replace 'http' for 'https'
         # DO NOT REPLACE IN PRODUCTION
+
         if settings.DEBUG:
-            url = request.build_absolute_uri().replace("http://", "https://") 
+            url.replace("http://", "https://") 
 
         post_data = request.POST.dict()
         validator = RequestValidator(auth_token)
