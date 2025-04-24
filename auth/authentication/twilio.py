@@ -3,7 +3,10 @@ from rest_framework.authentication import BaseAuthentication
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.views import Request
 from twilio.request_validator import RequestValidator
+import logging
 
+
+logger = logging.getLogger(__name__)
 
 class TwilioSignatureAuthentication(BaseAuthentication):
     def authenticate(self, request: Request):
@@ -14,6 +17,8 @@ class TwilioSignatureAuthentication(BaseAuthentication):
 
         auth_token = settings.TWILIO_AUTH_TOKEN
         url = request.build_absolute_uri()
+        logger.critical("URI from build_absolute_uri: ", url)
+
 
         # If using ngrok you may need to replace 'http' for 'https'
         # DO NOT REPLACE IN PRODUCTION
