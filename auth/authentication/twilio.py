@@ -17,15 +17,10 @@ class TwilioSignatureAuthentication(BaseAuthentication):
 
         auth_token = settings.TWILIO_AUTH_TOKEN
         url = request.build_absolute_uri()
-        logger.critical(f"URI from build_absolute_uri: {url}")
-        logger.critical(f"META: {request._request.META}")
 
-
-        # If using ngrok you may need to replace 'http' for 'https'
-        # DO NOT REPLACE IN PRODUCTION
-
+        # If using ngrok you may need to replace 'http' for 'https':
         if settings.DEBUG:
-            url = url.replace("http://", "https://") 
+            url = url.replace("http://", "https://") # DO NOT REPLACE IN PRODUCTION
 
         post_data = request.POST.dict()
         validator = RequestValidator(auth_token)
