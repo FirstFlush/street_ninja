@@ -10,8 +10,6 @@ services:
       - redis
     env_file:
       - .env.prod
-    ports:
-      - "8000:8000"
     volumes:
       - .:/app
     command: ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "4", "--timeout", "120", "street_ninja_server.wsgi:application"]
