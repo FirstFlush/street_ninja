@@ -65,16 +65,5 @@ services:
     volumes:
       - ./log:/app/log
 
-  nginx:
-    image: nginx:alpine
-    container_name: street_ninja_nginx
-    restart: always
-    depends_on:
-      - web
-    ports:
-      - "8080:80"  # Binding 8080 externally 
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-
 volumes:
   postgres_data:
