@@ -3,6 +3,8 @@ version: '3.8'
 services:
   web:
     user: "1000:1000"
+    ports:
+    - "127.0.0.1:8000:8000"
     build: .
     container_name: street_ninja_web
     depends_on:
