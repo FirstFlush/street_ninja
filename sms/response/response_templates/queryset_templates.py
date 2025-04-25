@@ -1,11 +1,10 @@
 from abc import abstractmethod
+from django.conf import settings
 from typing import Any
 from resources.enums import ShelterCategoryParamValue
 from sms.enums import SMSKeywordEnum
 from .base_response_templates import BaseSMSResponseTemplate
 from .welcome_template import WelcomeTemplate
-from resources.abstract_models import ResourceModel
-from resources.enums import ShelterParamKey
 from resources.models import (
     Shelter,
     FoodProgram,
@@ -18,7 +17,10 @@ from resources.models import (
 class QuerySetResponseTemplate(BaseSMSResponseTemplate):
 
     keyword_enum: SMSKeywordEnum | None = None
-    FOOTER = "Reply 'MORE' for more results" 
+    FOOTER = """
+More? 'MORE' | Help? 'HELP'
+Details? '# INFO' | Maps? '# DIRECTIONS'
+"""
 
     def __init__(self, params: dict[str, Any] | None = None):
         self.params = params
@@ -30,11 +32,6 @@ class QuerySetResponseTemplate(BaseSMSResponseTemplate):
     def _params_string(self, sep: str = ", ") -> str:
         return sep.join([f"{k.capitalize()} {self._convert_bool(v, abbreviated=False) if isinstance(v, bool) else v}" for k, v in self.params.items()])
 
-    # def _params_pop(self, *keys: str):
-    #     # NOTE not yet in use
-    #     for key in keys:
-    #         if self.params and self.params.get(key) is not None:
-    #             self.params.pop(key)
 
     def distance(self, km: float) -> str:
         km = f"{round(km,1)}".rstrip("0").rstrip(".")
@@ -44,18 +41,20 @@ class QuerySetResponseTemplate(BaseSMSResponseTemplate):
         if new_session:
             top = f"{WelcomeTemplate.welcome_header()}\n\n{self.TITLE}"
             bottom = f"{WelcomeTemplate.WELCOME_FOOTER}"
-            wrapped_msg = f"{top}\n{msg}\n{bottom}"
+            wrapped_msg = f"{top}\n{msg}{bottom}"
         else:
             top = self.TITLE
             bottom = f"{self.FOOTER}"
-            wrapped_msg = f"{top}\n{msg}\n\n{bottom}\n"
+            wrapped_msg = f"{top}\n\n{msg}\n{bottom}"
+            if msg == settings.END_OF_RESULTS:
 
+                wrapped_msg = wrapped_msg.replace(bottom, "")
         return wrapped_msg
 
 
 class ShelterResponseTemplate(QuerySetResponseTemplate):
 
-    TITLE = "🏠 SHELTERS"
+    TITLE = "SHELTERS"
 
     def _category(self, instance: Shelter) -> str:
         match instance.category:
@@ -80,7 +79,7 @@ class ShelterResponseTemplate(QuerySetResponseTemplate):
 
 class FoodResponseTemplate(QuerySetResponseTemplate):
 
-    TITLE = "🍽 FOOD PROGRAMS"
+    TITLE = "FOOD PROGRAMS"
 
     def _signup_or_referral(self, instance:FoodProgram) -> str:
         d = {
@@ -116,7 +115,7 @@ class FoodResponseTemplate(QuerySetResponseTemplate):
 class ToiletResponseTemplate(QuerySetResponseTemplate):
 
     keyword_enum = SMSKeywordEnum.TOILET
-    TITLE = "🧻 PUBLIC TOILETS"
+    TITLE = "TOILETS"
 
     def format_result(self, instance: Toilet) -> str:
         distance = self.distance(km=instance.distance)
@@ -127,7 +126,7 @@ class ToiletResponseTemplate(QuerySetResponseTemplate):
 class WaterResponseTemplate(QuerySetResponseTemplate):
 
     keyword_enum = SMSKeywordEnum.WATER
-    TITLE = "💧 DRINKING FOUNTAINS"
+    TITLE = "FOUNTAINS"
 
     def format_result(self, instance: DrinkingFountain) -> str:
         distance = self.distance(km=instance.distance)
@@ -138,7 +137,7 @@ class WaterResponseTemplate(QuerySetResponseTemplate):
 class WifiResponseTemplate(QuerySetResponseTemplate):
 
     keyword_enum = SMSKeywordEnum.WIFI
-    TITLE = "📶 PUBLIC WIFI"
+    TITLE = "PUBLIC WIFI"
 
     def format_result(self, instance: PublicWifi) -> str:
         distance = self.distance(km=instance.distance)

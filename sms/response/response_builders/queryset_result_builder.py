@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 class QuerySetResultBuilder:
 
     MAPPING = SMS_KEYWORD_ENUM_TO_RESPONSE_TEMPLATE
+    SEPARATOR = "\n\n"
 
     def __init__(self, resources: list[ResourceModel], offset: int, params: dict[str, Any ] | None = None):
         self.resources = resources
@@ -68,18 +69,18 @@ class QuerySetResultBuilder:
     def _truncate_response(self, formatted_response: str) -> tuple[str, int]:
         logger.info(f"SMS Character limit: `{settings.SMS_CHAR_LIMIT}`")
         if len(formatted_response) > settings.SMS_CHAR_LIMIT:
-            truncated_results = formatted_response[:settings.SMS_CHAR_LIMIT].split('\n')[:-1]
+            truncated_results = formatted_response[:settings.SMS_CHAR_LIMIT].split(self.SEPARATOR)[:-1]
             count = len(truncated_results)
-            truncated_response = "\n".join(truncated_results)
+            truncated_response = self.SEPARATOR.join(truncated_results)
         else:
             truncated_response = formatted_response
-            count = len(truncated_response.split("\n"))
+            count = len(truncated_response.split(self.SEPARATOR))
         return truncated_response, count
 
     def _get_index(self, i:int) -> int:
         """
         Example SMS response:
-        🏠 SHELTERS
+        SHELTERS
         1) 0.2km The Haven (Men)
         2) 0.2km Anchor of Hope (Adults - all genders)
         3) 0.2km Lookout Downtown (Adults - all genders)
@@ -95,7 +96,7 @@ class QuerySetResultBuilder:
         for i, instance in enumerate(resources):
             res = f"{self._get_index(i)}) {self.template.format_result(instance=instance)}"
             response_items.append(res)
-        return "\n".join(response_items)
+        return self.SEPARATOR.join(response_items)
 
     def _get_ids(self, resources:list[ResourceModel], count: int) -> list[int]:
         return [instance.id for instance in resources[:count]]

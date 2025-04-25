@@ -2,6 +2,7 @@ import logging
 from .base_handler import BaseFollowUpHandler
 from cache.dataclasses import PhoneSessionData
 from resources.abstract_models import ResourceModel
+from django.conf import settings
 from sms.response.response_builders.queryset_result_builder import QuerySetResultBuilder
 from sms.response.dataclasses import FollowUpContext, SMSFollowUpResponseData
 
@@ -11,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 class More(BaseFollowUpHandler):
 
-    END_OF_RESULTS = "End of results, sorry.\n\nPlease Call 211 if you need more immediate assistance."
+    # END_OF_RESULTS = "End of results, sorry.\n\nPlease Call 211 if you need more immediate assistance."
 
     def __init__(self, context: FollowUpContext):
         self.sms_inquiry = context.sms_inquiry
@@ -23,7 +24,7 @@ class More(BaseFollowUpHandler):
     def build_response_data(self) -> SMSFollowUpResponseData:
         response_data = self.response_builder.create_response_data(more=True)
         if len(response_data.ids) == 0:
-            response_data.msg = self.END_OF_RESULTS
+            response_data.msg = settings.END_OF_RESULTS
         return response_data
 
     def _response_builder(self) -> QuerySetResultBuilder:

@@ -6,34 +6,25 @@ logger = logging.getLogger(__name__)
 
 
 class HelpResponseTemplate(BaseSMSResponseTemplate):
-    """602 characters"""
-    HELP_HEADER = "🥷 Street Ninja Help 🥷"
+    """230 chars on April 24, 2025"""
+    HELP_HEADER = "Street Ninja gives quick help with food, shelter, toilets, WiFi & water."
 
-    HELP_DESCRIPTION = "Street Ninja gives you quick info on essential resources nearby. Just text what you need along with your location, and get instant results. No sign-ups, no hassle."
+    INSTRUCTION = "Text what you need + a location."
 
-    RESOURCES = (
-        "📌 Resources:\n"
-        "- FOOD → Find free meals nearby.\n"
-        "- SHELTER → Get a list of shelters.\n"
-        "- TOILET → Locate public restrooms.\n"
-        "- WIFI → Find free WiFi spots.\n"
-        "- WATER → Get drinking fountain locations."
+    EXAMPLES = (
+        "Examples:",
+        "FOOD 222 Main",
+        "SHELTER 275 E Cordova",
+        "TOILET Drake and Seymour",
     )
 
-    EXAMPLE_QUERIES = (
-        "📝 Example inquiries:\n"
-        "SHELTER 275 Cordova St E\n"
-        "FOOD Main and Hastings St\n"
-        "WIFI Drake and Seymour\n"
-        "mens shelter granville st & pender\n"
-        "shelter for women with pets allowed 222 Main St"
-    )
+    PROMPT = "Try it now — what can we help you find?"
 
-    PROMPT = "What can Street Ninja help you find today?"
 
     @classmethod
     def help_msg(cls, msg: str | None=None) -> str:
-        s = f"{cls.HELP_HEADER}\n\n{cls.HELP_DESCRIPTION}\n\n{cls.RESOURCES}\n\n{cls.EXAMPLE_QUERIES}\n\n{cls.PROMPT}"
+        examples = '\n'.join(cls.EXAMPLES)
+        s = f"{cls.HELP_HEADER}\n\n{cls.INSTRUCTION}\n\n{examples}\n\n{cls.PROMPT}"
         if msg:
             return f"{msg}\n\n{s}"
         return s

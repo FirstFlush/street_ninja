@@ -41,6 +41,7 @@ APPEND_SLASH = False
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
+
 # API Keys
 # =======================================
 VANCOUVER_OPEN_DATA_API_KEY = os.environ.get('VANCOUVER_OPEN_DATA_API_KEY')
@@ -53,6 +54,7 @@ GRAPH_HOPPER_API_KEY = os.environ.get('GRAPH_HOPPER_API_KEY')
 # =======================================
 STREET_NINJA_WEBSITE_DOMAIN = os.environ.get("STREET_NINJA_WEBSITE_DOMAIN")
 STREET_NINJA_API_DOMAIN = os.environ.get("STREET_NINJA_API_DOMAIN")
+
 
 # EMAIL CONFIG
 # =======================================
@@ -87,6 +89,7 @@ if not DEBUG:
 # SMS
 # =======================================
 SMS_CHAR_LIMIT = int(os.environ.get('SMS_CHAR_LIMIT', 400))
+END_OF_RESULTS = "End of results, sorry.\n\nPlease Call 211 if you need more immediate assistance."
 
 
 # Celery
