@@ -40,7 +40,9 @@ docker compose down
 
 echo "[3/6] Removing old containers and pruning images..."
 docker compose rm -f
-docker image prune -f
+docker container prune -f
+docker image prune -af
+docker network prune -f
 
 echo "[4/6] Rebuilding containers with .env.prod..."
 docker compose --env-file $ENV_FILE build --no-cache
