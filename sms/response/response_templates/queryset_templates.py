@@ -41,7 +41,7 @@ Details? '# INFO' | Maps? '# DIRECTIONS'
         if new_session:
             top = f"{WelcomeTemplate.welcome_header()}\n\n{self.TITLE}"
             bottom = f"{WelcomeTemplate.WELCOME_FOOTER}"
-            wrapped_msg = f"{top}\n{msg}{bottom}"
+            wrapped_msg = f"{top}\n{msg}\n{bottom}"
         else:
             top = self.TITLE
             bottom = f"{self.FOOTER}"
