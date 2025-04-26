@@ -32,9 +32,9 @@ FOOD_INQUIRIES = [
         location=ResolvedLocation("123 Powell St", LocationType.ADDRESS),
     ),
     InquirySample(
-        message="905 Main St meal",
+        message="420 Main St hungry",
         keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.FOOD, LanguageEnum.ENGLISH),
-        location=ResolvedLocation("905 Main St", LocationType.ADDRESS),
+        location=ResolvedLocation("420 Main St", LocationType.ADDRESS),
     ),
     InquirySample(
         message="#3-224 E 10th Ave breakfast",

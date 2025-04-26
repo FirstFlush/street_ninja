@@ -3,7 +3,7 @@ from django.contrib.gis.db import models as gis_models
 from typing import Any
 from common.utils import convert_bool
 from sms.enums import SMSKeywordEnum
-from .enums import ShelterCategoryParamValue
+from sms.resolvers.params.param_mappings.shelter import ShelterCategoryParamValue
 from .abstract_models import CityOfVancouverModel, WigleModel
 
 

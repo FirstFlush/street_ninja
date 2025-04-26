@@ -33,7 +33,7 @@ class KeywordLanguageResolver(BaseKeywordResolver):
     REVERSE_MAPPING = None
     MAPPING = {
         SMSKeywordEnum.SHELTER: {
-            LanguageEnum.ENGLISH: {"shelter", "shelters", "homeless", "bed", "sleep",},
+            LanguageEnum.ENGLISH: {"shelter", "shelters", "homeless", "bed", "beds", "sleep",},
             LanguageEnum.FRENCH: {"abri", "toit", "sansabri"},  # sans-abri
             LanguageEnum.PUNJABI: {"saran", "asra", "ghar"},  # Punjabi
             LanguageEnum.CHINESE: {"避难所", "收容所", "住所"},  # Combined Mandarin/Cantonese as "Chinese"

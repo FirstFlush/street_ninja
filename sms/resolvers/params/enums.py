@@ -28,23 +28,23 @@ class BooleanParamValue(ParamValueEnum):
     FALSE = False
 
 
-class ShelterParamKey(ParamKeyEnum):
-    CATEGORY = "category"
-    PETS = "pets"
-    CARTS = "carts"
+# class ShelterParamKey(ParamKeyEnum):
+#     CATEGORY = "category"
+#     PETS = "pets"
+#     CARTS = "carts"
 
 
-class ShelterCategoryParamValue(ParamValueEnum):
-    MEN = "Men"
-    ADULTS = "Adults (all genders)"
-    WOMEN = "Women"
-    YOUTH = "Youth (all genders)"
+# class ShelterCategoryParamValue(ParamValueEnum):
+#     MEN = "Men"
+#     ADULTS = "Adults (all genders)"
+#     WOMEN = "Women"
+#     YOUTH = "Youth (all genders)"
 
 
 
-class FoodParamKey(ParamKeyEnum):
-    MEALS = "meals"
-    HAMPERS = "hampers"
-    WHEELCHAIR = "wheelchair_accessible"
-    TAKEOUT = "takeout_available"
-    DELIVER = "delivery_available"
+# class FoodParamKey(ParamKeyEnum):
+#     MEALS = "meals"
+#     HAMPERS = "hampers"
+#     WHEELCHAIR = "wheelchair_accessible"
+#     TAKEOUT = "takeout_available"
+#     DELIVER = "delivery_available"

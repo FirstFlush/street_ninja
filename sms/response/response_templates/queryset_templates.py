@@ -1,7 +1,8 @@
 from abc import abstractmethod
 from django.conf import settings
 from typing import Any
-from resources.enums import ShelterCategoryParamValue
+# from resources.enums import ShelterCategoryParamValue
+from sms.resolvers.params.param_mappings.shelter import ShelterCategoryParamValue
 from sms.enums import SMSKeywordEnum
 from .base_response_templates import BaseSMSResponseTemplate
 from .welcome_template import WelcomeTemplate

@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import logging
 from typing import Any
 from common.base_enum import StreetNinjaEnum
@@ -18,8 +18,7 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class ParamDict:
-    params: dict[ParamKeyEnum, ParamValueEnum] = None
-
+    params: dict[ParamKeyEnum, ParamValueEnum] = field(default=None)
 
     def to_dict(self) -> dict[str, Any]:
         if not self.params:
@@ -56,7 +55,9 @@ class ParamResolver(BaseKeywordResolver):
             logger.error(msg, exc_info=True)
             raise ParamResolutionError(msg) from e
         else:
+            print("\n\n\n")
             logger.info(f"Params found: {param_result}")
+            print("\n\n\n")
             return ParamDict(params={**param_result})
 
 

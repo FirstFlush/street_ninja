@@ -9,5 +9,5 @@ class InquirySample:
     message: str
     location: ResolvedLocation
     keyword_and_language: ResolvedKeywordAndLanguage
-    params: Optional[ParamDict] = field(default_factory=dict)
+    params: Optional[ParamDict] = field(default_factory=ParamDict)
 
