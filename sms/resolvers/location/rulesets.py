@@ -55,29 +55,30 @@ class PriorityRuleset(BaseLocationRuleset):
 
     @staticmethod
     def detect_full_intersection(msg: str) -> tuple[str, LocationType] | None:
-        tokens = re.sub(RegexLibrary.normalize_string, "", msg).split()
-        # tokens = msg.split()
-        nav = TokenNavigator(tokens)
-        for i, token in enumerate(tokens):
-            if token not in {"&", "and"}:
-                continue
-            if i == 0 or i >= len(tokens) - 1:
-                continue
 
-            before = nav.get_before(i)
-            after = nav.get_after(i)
+        if msg.isalpha():
+            tokens = re.sub(RegexLibrary.normalize_string, "", msg).split()
+            nav = TokenNavigator(tokens)
+            for i, token in enumerate(tokens):
+                if token not in {"&", "and"}:
+                    continue
+                if i == 0 or i >= len(tokens) - 1:
+                    continue
 
-            # Skip if either side is junky
-            if before and before.lower() in JUNK_WORDS:
-                continue
-            if after and after.lower() in JUNK_WORDS:
-                continue
+                before = nav.get_before(i)
+                after = nav.get_after(i)
 
-            left_phrase = PriorityRuleset._backwards(nav, i)
-            right_phrase = PriorityRuleset._forwards(nav, i)
+                # Skip if either side is junky
+                if before and before.lower() in JUNK_WORDS:
+                    continue
+                if after and after.lower() in JUNK_WORDS:
+                    continue
 
-            if left_phrase and right_phrase:
-                return f"{left_phrase} {token} {right_phrase}", LocationType.INTERSECTION
+                left_phrase = PriorityRuleset._backwards(nav, i)
+                right_phrase = PriorityRuleset._forwards(nav, i)
+
+                if left_phrase and right_phrase:
+                    return f"{left_phrase} {token} {right_phrase}", LocationType.INTERSECTION
 
         return None
 
