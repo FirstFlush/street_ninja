@@ -19,7 +19,6 @@ class BaseRedisClient(ABC):
         self.access_pattern = access_pattern
         self.redis_store_enum = self.access_pattern.redis_store_enum
         self.redis_store = self._redis_store()
-        # self.redis_store = self._redis_store()
 
 
     def _redis_store(self) -> BaseCache:

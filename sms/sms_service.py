@@ -15,6 +15,8 @@ from sms.persistence_service import PersistenceService
 from sms.enums import ResolvedSMSType
 from geo.geocoding.geocoding_service import GeocodingService
 from geo.geocoding.exc import AllGeocodersFailed
+from geo.location_service import LocationService
+from geo.models import Location
 from notifications.tasks import send_geocoding_failed_email, send_sms_resolution_failed_email
 from .abstract_models import IncomingSMSMessageModel, ResponseSMSMessageModel
 from .response.response_templates.help_template import HelpResponseTemplate
@@ -52,7 +54,7 @@ class SMSService:
     def geocode(self) -> Point | None:
         match self.sms_data.resolved_sms_type:
             case ResolvedSMSType.INQUIRY:
-                location = self._get_location(location_str=self.sms_data.data.location_data.location)
+                location = self._get_geocoded_location(location_str=self.sms_data.data.location_data.location)
             case ResolvedSMSType.FOLLOW_UP | ResolvedSMSType.UNRESOLVED | _:
                 location = None        
         return location
@@ -69,7 +71,7 @@ class SMSService:
         return PersistenceService(sms_data=sms_data, location=location)
 
 
-    def _get_location(self, location_str:str) -> Point:
+    def _get_geocoded_location(self, location_str:str) -> Point:
         try:
             return GeocodingService.geocode(query=location_str)
         except AllGeocodersFailed:
@@ -97,16 +99,26 @@ class SMSService:
     def _build_response_service(self, instance: IncomingSMSMessageModel) -> ResponseService:
         return ResponseService(instance=instance)
 
-    # def _test_print(self, msg: str):
-    #     print()
-    #     print()
-    #     print('#'*30)
-    #     print(msg)
-    #     print('#'*30)
-    #     print(f"{len(msg)} chars")
-    #     print()
-    #     print()
 
+    def get_location(self) -> Location:
+        location_service = LocationService()
+        location_id = location_service.check_mapping(
+            location_text=self.sms_data.data.location_data.location
+        )
+        if location_id is not None:
+            logger.info(f"location id `{location_id}` found in location cache")
+            location = location_service.get_location_instance(id=location_id)
+            location.total_inquiries += 1
+            location.save()
+        else:
+            logger.info(f"No location id found in location cache. Creating new Location instance...")
+            sms_location = self.geocode()
+            location = location_service.create_location(
+                resolved_location=self.sms_data.data.location_data,
+                location=sms_location,
+            )
+            location_service.update_mapping(location)
+        return location
 
     @classmethod
     def process_web_sms(cls, msg: str, session: SessionBase) -> str:
@@ -120,12 +132,24 @@ class SMSService:
             raise
 
     @classmethod
-    def process_sms(cls, msg: str, phone_number: str, message_sid: str|None=None) -> str:
+    def process_sms(
+            cls, 
+            msg: str, 
+            phone_number: str, 
+            message_sid: str|None=None
+    ) -> str:
         sms_service = cls(msg=msg, phone_number=phone_number, message_sid=message_sid)
         sms_service.sms_data = sms_service.resolve()
-        sms_location = sms_service.geocode()
 
-        sms_service.persistence_service = sms_service._build_persistence_service(sms_data=sms_service.sms_data, location=sms_location)
+        try:
+            location = sms_service.get_location()
+        except Exception as e:
+            logger.error(e)
+
+        sms_service.persistence_service = sms_service._build_persistence_service(
+            sms_data=sms_service.sms_data, 
+            location=location.location
+        )
         sms_service.persistence_service.save_sms()
 
         response_service = sms_service._build_response_service(instance=sms_service.persistence_service.instance)

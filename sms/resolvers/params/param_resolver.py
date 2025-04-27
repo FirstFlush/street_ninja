@@ -55,9 +55,7 @@ class ParamResolver(BaseKeywordResolver):
             logger.error(msg, exc_info=True)
             raise ParamResolutionError(msg) from e
         else:
-            print("\n\n\n")
             logger.info(f"Params found: {param_result}")
-            print("\n\n\n")
             return ParamDict(params={**param_result})
 
 

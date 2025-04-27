@@ -13,14 +13,13 @@ logger = logging.getLogger(__name__)
 class LocationService:
 
     def __init__(self):
-        self.cache_client = LocationCacheClient(
-            access_pattern=LocationMapAccessPattern,
-        )
+        self.cache_client = LocationCacheClient()
+
 
     def _normalize_text(self, location_text: str) -> str:
         text = RegexLibrary.normalize_string.sub("", location_text)
         text = text.lower().replace("&","and")
-        text = RegexLibrary.multiple_whitespace.sub("", text)
+        text = RegexLibrary.multiple_whitespace.sub(" ", text)
         return text.strip()
 
     def _build_mapping(self, locations: QuerySet[Location]) -> dict[str, int]:
@@ -62,6 +61,9 @@ class LocationService:
     def create_location(self, resolved_location: ResolvedLocation, location: Point) -> Location:
         return Location.objects.create(
             location_text = resolved_location.location,
-            location_type = resolved_location.location_type,
+            location_type = resolved_location.location_type.value,
             location = location
         )
+    
+
+
