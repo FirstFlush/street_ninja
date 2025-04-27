@@ -1,20 +1,20 @@
-from cache.redis.clients import LocationCacheClient
+from cache.redis.clients.location_client import LocationCacheClient
 from cache.redis.access_patterns.location import LocationMapAccessPattern
 import logging
-from geo.models import Location
+from geo.models import Location, InquiryCount
 from django.contrib.gis.geos import Point
 from django.db.models import QuerySet
 from sms.resolvers.location.regex_library import RegexLibrary
 from sms.resolvers.location import ResolvedLocation
+from typing import Type
 
 logger = logging.getLogger(__name__)
 
 
 class LocationService:
 
-    def __init__(self):
-        self.cache_client = LocationCacheClient()
-
+    def __init__(self, access_pattern: Type[LocationMapAccessPattern] = Type[LocationMapAccessPattern]):
+        self.cache_client = LocationCacheClient(access_pattern)
 
     def _normalize_text(self, location_text: str) -> str:
         text = RegexLibrary.normalize_string.sub("", location_text)
@@ -42,28 +42,53 @@ class LocationService:
     def _set_mapping_in_cache(self, mapping: dict[str, int]):
         self.cache_client.set_mapping(mapping)
 
-    def update_mapping(self, location: Location):
+    def _update_mapping(self, location: Location):
         mapping = self._get_mapping()
         mapping[self._normalize_text(location.location_text)] = location.id
         self._set_mapping_in_cache(mapping)
 
-    def check_mapping(self, location_text: str) -> int | None:
-        mapping = self._get_mapping()
-        return mapping.get(self._normalize_text(location_text))
+    def _count_location(self, location: Location) -> InquiryCount:
+        """
+        When a location object exists in our mapping, 
+        we update its count by creating a new InquiryCount object
+        """
+        return InquiryCount.objects.create(
+            location=location,
+        )
 
-    def get_location_instance(self, id: int) -> Location:
-        return Location.objects.get(id=id)
-
-    def update_location(self, location: Location):
-        location.total_inquiries += 1
-        location.save()
-
-    def create_location(self, resolved_location: ResolvedLocation, location: Point) -> Location:
+    def _create_location(self, resolved_location: ResolvedLocation, location: Point) -> Location:
         return Location.objects.create(
             location_text = resolved_location.location,
             location_type = resolved_location.location_type.value,
             location = location
         )
-    
+
+    def check_mapping(self, location_text: str) -> int | None:
+        mapping = self._get_mapping()
+        return mapping.get(self._normalize_text(location_text))
+
+    def get_location(self, id: int) -> Location:
+        """
+        -Retrieve the location object
+        -Create a InquiryCount object to update that location's count
+        """
+        location =  Location.objects.get(id=id)
+        self._count_location(location)
+        return location
+
+    def new_location(self, resolved_location:ResolvedLocation, point: Point) -> Location:
+        """
+        When a user's location is not found in the mapping, a new Location object is
+        created and a new InquiryCount object is created with it.
+
+        The mapping is then updated with the new location and it is returned.
+        """
+        location = self._create_location(
+            resolved_location=resolved_location, 
+            location=point,
+        )
+        self._count_location(location)
+        self._update_mapping(location)
+        return location
 
 

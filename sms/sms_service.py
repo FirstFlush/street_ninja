@@ -29,7 +29,11 @@ logger = logging.getLogger(__name__)
 
 class SMSService:
 
-    def __init__(self, msg: str, phone_number: str, message_sid: str|None=None):
+    def __init__(
+            self, msg: str, 
+            phone_number: str, 
+            message_sid: str | None = None
+    ):
         self.msg = msg
         self.phone_number = phone_number
         self.message_sid = message_sid
@@ -70,7 +74,6 @@ class SMSService:
     def _build_persistence_service(self, sms_data:ResolvedSMS, location: Point | None) -> PersistenceService:
         return PersistenceService(sms_data=sms_data, location=location)
 
-
     def _get_geocoded_location(self, location_str:str) -> Point:
         try:
             return GeocodingService.geocode(query=location_str)
@@ -99,7 +102,6 @@ class SMSService:
     def _build_response_service(self, instance: IncomingSMSMessageModel) -> ResponseService:
         return ResponseService(instance=instance)
 
-
     def get_location(self) -> Location:
         location_service = LocationService()
         location_id = location_service.check_mapping(
@@ -107,17 +109,14 @@ class SMSService:
         )
         if location_id is not None:
             logger.info(f"location id `{location_id}` found in location cache")
-            location = location_service.get_location_instance(id=location_id)
-            location.total_inquiries += 1
-            location.save()
+            location = location_service.get_location(id=location_id)
         else:
             logger.info(f"No location id found in location cache. Creating new Location instance...")
-            sms_location = self.geocode()
-            location = location_service.create_location(
+            point = self.geocode()
+            location = location_service.new_location(
                 resolved_location=self.sms_data.data.location_data,
-                location=sms_location,
+                point=point,
             )
-            location_service.update_mapping(location)
         return location
 
     @classmethod
