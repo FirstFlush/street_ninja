@@ -4,7 +4,7 @@ from sms.models import SMSFollowUpInquiry
 from .base_cache_service import BaseCacheService
 from .dataclasses import PhoneSessionData
 from .redis.exc import NoSessionFound
-from .redis.access_patterns import AccessPatternRegistry
+from .redis.access_patterns.pattern_registry import AccessPatternRegistry
 
 
 logger = logging.getLogger(__name__)

@@ -4,7 +4,7 @@ import logging
 from django.core.cache import cache, caches
 from django.core.cache.backends.base import BaseCache
 from typing import Any, Type
-from ..enums import RedisStoreEnum, RedisKeyEnum
+from ..enums import RedisKeyEnum
 from ..exc import RedisClientException, InvalidAccessPattern
 from ..access_patterns import *
 from ..access_patterns.base_access_patterns import BaseRedisAccessPattern

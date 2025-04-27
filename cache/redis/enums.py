@@ -8,6 +8,7 @@ class RedisStoreEnum(StreetNinjaEnum):
     RESOURCES = "resources"
     CELERY = "celery"
     LOCATION = "location"
+    TESTS = "tests"
 
 
 class RedisKeyEnum(StreetNinjaEnum):
@@ -29,6 +30,12 @@ class WebSessionKeyEnum(RedisKeyEnum):
 
 class LocationKeyEnum(RedisKeyEnum):
     MAPPING = "location_mapping:all"
+
+
+class TestKeyEnum(RedisKeyEnum):
+    MAPPING = "tests:location_mapping:all"
+
+
 
 
 class RedisKeyTTL(StreetNinjaEnum):

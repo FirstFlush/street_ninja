@@ -253,6 +253,13 @@ CACHES = {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         },
     },
+    'tests': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': os.environ.get('CACHE_TESTS_LOCATION'),
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        },
+    },
 }
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
@@ -267,6 +274,10 @@ DATABASES = {
         'PASSWORD': os.environ.get('DB_PASS'),
         'HOST': os.environ.get('DB_HOST'),
         'PORT': os.environ.get('DB_PORT'),
+        'TEST': {
+            'NAME': 'test_street_ninja',
+            'TEMPLATE': 'template_postgis',
+        },
     }
 }
 

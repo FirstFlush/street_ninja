@@ -2,7 +2,6 @@ import logging
 from .base_redis_client import BaseRedisClient
 from ..enums import RedisStoreEnum
 from ..access_patterns import LocationMapAccessPattern
-from typing import TYPE_CHECKING
 
 
 logger = logging.getLogger(__name__)
@@ -11,11 +10,10 @@ logger = logging.getLogger(__name__)
 class LocationCacheClient(BaseRedisClient):
 
     redis_store_enum = RedisStoreEnum.LOCATION
-
-    def __init__(self):
-        super().__init__(access_pattern=LocationMapAccessPattern)
-        if TYPE_CHECKING:
-            self.access_pattern: LocationMapAccessPattern
+    access_pattern: LocationMapAccessPattern
+    
+    def __init__(self, access_pattern: LocationMapAccessPattern):
+        super().__init__(access_pattern=access_pattern)
 
     def get_mapping(self) -> dict[str, int] | None:
         return self._get_cached_data(redis_key=self.access_pattern.redis_key_enum)
