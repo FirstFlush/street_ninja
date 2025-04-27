@@ -9,4 +9,5 @@ from .resources import (
 )
 from .phone_session import PhoneSessionAccessPattern
 from .web_session import WebSessionAccessPattern
+from .location import LocationMapAccessPattern
 from .pattern_registry import AccessPatternRegistry

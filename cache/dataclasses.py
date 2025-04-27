@@ -36,4 +36,3 @@ class PhoneSessionData:
         if self.keyword and self.keyword not in SMSKeywordEnum.values:
             raise ValueError(f"Invalid keyword `{self.keyword}`. Must be one of: {SMSKeywordEnum.values}")
 
-

@@ -7,9 +7,12 @@ class Location(gis_models.Model):
 
     total_inquiries = models.IntegerField(default=0)
     location_type = models.CharField(max_length=20, choices=LocationType.choices)
-    location_text = models.CharField(max_length=255)
+    location_text = models.CharField(max_length=255, unique=True)
     location = gis_models.PointField(srid=4326)
+    date_last = models.DateTimeField(auto_now=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
         return f"{self.location_text}, {LocationType(self.location_type)}"
+
+

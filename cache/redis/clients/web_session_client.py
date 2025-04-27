@@ -20,7 +20,6 @@ class WebSessionCacheClient(BaseRedisClient):
     ):
         self.access_pattern = access_pattern
         self.session = session
-        self.ttl = access_pattern.key_ttl_enum.value
 
     @staticmethod
     def _create_phone_number() -> str:
