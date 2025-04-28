@@ -1,8 +1,10 @@
 from dataclasses import dataclass, field
 from typing import Optional
+from sms.enums import ResolvedSMSType
 from sms.resolvers.keyword_and_language_resolver import ResolvedKeywordAndLanguage
 from sms.resolvers.location import ResolvedLocation
 from sms.resolvers.params import ParamDict
+
 
 @dataclass
 class InquirySample:
@@ -11,3 +13,8 @@ class InquirySample:
     keyword_and_language: ResolvedKeywordAndLanguage
     params: Optional[ParamDict] = field(default_factory=ParamDict)
 
+
+@dataclass
+class UnresolvedSMSSample:
+    message: str
+    sms_type: ResolvedSMSType.UNRESOLVED

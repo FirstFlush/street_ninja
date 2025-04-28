@@ -3,6 +3,7 @@ import logging
 from django.contrib.gis.geos import Point
 from django.db import transaction
 from common.utils import now
+from geo.models import Location
 from sms.abstract_models import IncomingSMSMessageModel
 from sms.models import (
     SMSInquiry, 
@@ -24,9 +25,10 @@ logger = logging.getLogger(__name__)
 
 class PersistenceService:
 
-    def __init__(self, sms_data: ResolvedSMS, location: Point|None = None):
+    def __init__(self, sms_data: ResolvedSMS, location: Point|None = None, inquiry_location: Location | None = None):
         self.sms_data = sms_data
         self.location = location
+        self.inquiry_location = inquiry_location
         self.now = now()
         logger.info(f"{self.__class__.__name__}.now stringified: `{self.now.strftime('%Y-%m-%d %H:%M:%S')}`")
         self.phone_number = self._phone_number(sms_data.phone_number)
@@ -53,8 +55,9 @@ class PersistenceService:
     def _save_inquiry_sms(self) -> SMSInquiry:
         return SMSInquiry.objects.save_inquiry_sms(
             conversation=self.conversation,
-            location=self.location,
+            # location=self.location,
             sms_data=self.sms_data.data,
+            inquiry_location=self.inquiry_location,
         )
 
     def _save_follow_up_sms(self) -> SMSFollowUpInquiry:

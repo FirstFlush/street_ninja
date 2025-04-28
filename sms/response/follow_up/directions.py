@@ -40,7 +40,7 @@ class DirectionsHandler(FollowUpHandlerWithParams):
     def build_response_data(self) -> SMSFollowUpResponseData:
         return SMSFollowUpResponseData(
             template=DirectionsTemplate(
-                start_text=self.sms_inquiry.location_text,
+                start_text=self.sms_inquiry.inquiry_location.location_text,
                 resource=self.resource
             ),
             msg=self.directions_text,

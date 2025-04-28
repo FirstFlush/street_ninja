@@ -33,6 +33,7 @@ class ResolvedSMSInquiry:
 @dataclass
 class UnresolvedSMS:
     msg: str
+    location_data = None
 
 
 @dataclass

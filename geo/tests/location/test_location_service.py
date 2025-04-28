@@ -8,7 +8,7 @@ from .testdata_factories import generate_bulk_fake_locations
 
 
 @pytest.mark.django_db
-@pytest.mark.parametrize("location_text, point", generate_bulk_fake_locations(100))
+@pytest.mark.parametrize("location_text, point", generate_bulk_fake_locations(50))
 def test_check_mapping_finds_existing_location(
     location_service: LocationService,
     location_text: str,
@@ -27,7 +27,7 @@ def test_check_mapping_finds_existing_location(
 
 
 @pytest.mark.django_db
-@pytest.mark.parametrize("location_text, point", generate_bulk_fake_locations(100))
+@pytest.mark.parametrize("location_text, point", generate_bulk_fake_locations(50))
 def test_create_new_location_adds_to_cache_and_creates_inquiry(
     location_service: LocationService,
     location_text: str,

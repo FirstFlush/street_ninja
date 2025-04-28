@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 class LocationService:
 
-    def __init__(self, access_pattern: Type[LocationMapAccessPattern] = Type[LocationMapAccessPattern]):
+    def __init__(self, access_pattern: Type[LocationMapAccessPattern] = LocationMapAccessPattern):
         self.cache_client = LocationCacheClient(access_pattern)
 
     def _normalize_text(self, location_text: str) -> str:

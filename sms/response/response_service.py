@@ -48,7 +48,7 @@ class ResponseService:
         
         caching_service = InquiryCachingService.init(inquiry=self.instance)
         resources = caching_service.get_resources_by_proximity(
-            location=self.instance.location, 
+            location=self.instance.inquiry_location.location, 
             inquiry_params=self.instance.params
         )
         context = InquiryResponseContext(
@@ -91,7 +91,7 @@ class ResponseService:
         except NoSessionFound as e:
             logger.warning(e)
             return None
-            
+        
         sms_inquiry = self._get_sms_inquiry_for_follow_up(current_session.inquiry_id)
         context = self._build_follow_up_context(
             sms_inquiry=sms_inquiry,
@@ -100,7 +100,7 @@ class ResponseService:
         )
         match self.instance.keyword_enum:
             case SMSFollowUpKeywordEnum.DIRECTIONS:
-                start_coords = coord_string(sms_inquiry.location)
+                start_coords = coord_string(sms_inquiry.inquiry_location.location)
                 directions_handler = DirectionsHandler(context=context)
                 directions_handler.set_directions(start_coords=start_coords)
                 response_data = directions_handler.build_response_data()

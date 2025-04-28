@@ -9,6 +9,7 @@ from common.enums import (
     LanguageEnum, 
     LocationType,
 )
+from geo.models import Location
 from sms.enums import ConversationStatus, SMSFollowUpKeywordEnum, SMSKeywordEnum
 from sms.resolvers import ResolvedSMSFollowUp, ResolvedSMSInquiry
 from .abstract_models import IncomingSMSMessageModel, ResponseSMSMessageModel
@@ -70,16 +71,18 @@ class SMSInquiryManager(models.Manager):
     def save_inquiry_sms(
             self, 
             conversation: Conversation,
-            location: Point,
-            sms_data: ResolvedSMSInquiry
+            # location: Point,
+            sms_data: ResolvedSMSInquiry,
+            inquiry_location: Location,
     )-> "SMSInquiry":
         return SMSInquiry.objects.create(
             conversation=conversation,
             keyword=sms_data.keyword_language_data.sms_keyword_enum.value,
             message=sms_data.msg,
-            location=location,
-            location_text=sms_data.location_data.location,
-            location_type=sms_data.location_data.location_type.value,
+            # location=location,
+            # location_text=sms_data.location_data.location,
+            # location_type=sms_data.location_data.location_type.value,
+            inquiry_location=inquiry_location,
             language=sms_data.keyword_language_data.language_enum.value,
             params=sms_data.params.to_dict(),
         )
@@ -88,9 +91,10 @@ class SMSInquiryManager(models.Manager):
 class SMSInquiry(IncomingSMSMessageModel):
     conversation = models.ForeignKey(to=Conversation, on_delete=models.CASCADE)
     keyword = models.CharField(max_length=20, choices=SMSKeywordEnum.choices)
-    location = gis_models.PointField(srid=4326)
-    location_text = models.CharField(max_length=256)
-    location_type = models.CharField(max_length=20, choices=LocationType.choices)
+    location = gis_models.PointField(srid=4326, null=True)
+    location_text = models.CharField(max_length=256, null=True)
+    location_type = models.CharField(max_length=20, choices=LocationType.choices, null=True)
+    inquiry_location = models.ForeignKey(to=Location, on_delete=models.CASCADE, null=True)
     language = models.CharField(max_length=3, choices=LanguageEnum.choices)
     message = models.CharField(max_length=256)
     params = models.JSONField(default=dict)

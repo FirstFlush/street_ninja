@@ -39,7 +39,7 @@ class More(BaseFollowUpHandler):
 
     def _resources(self) -> list[ResourceModel]:
         resources = self.caching_service.get_resources_by_proximity(
-            location=self.sms_inquiry.location,
+            location=self.sms_inquiry.inquiry_location.location,
             inquiry_params=self.sms_inquiry.params,
         )
         if len(resources) == 0:
