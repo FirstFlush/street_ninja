@@ -11,15 +11,12 @@ class Location(gis_models.Model):
     date_last = models.DateTimeField(auto_now=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
-    def count_hits(self) -> int:
-        return self.inquirycount_set.count()
-
     def __str__(self) -> str:
         return f"{self.location_text}, {LocationType(self.location_type)}"
 
 
-class InquiryCount(models.Model):
+# class InquiryCount(models.Model):
 
-    location = models.ForeignKey(to=Location, on_delete=models.CASCADE)
-    timestamp = models.DateTimeField(auto_now_add=True)
+#     location = models.ForeignKey(to=Location, on_delete=models.CASCADE)
+#     timestamp = models.DateTimeField(auto_now_add=True)
 

@@ -1,7 +1,7 @@
 from cache.redis.clients.location_client import LocationCacheClient
 from cache.redis.access_patterns.location import LocationMapAccessPattern
 import logging
-from geo.models import Location, InquiryCount
+from geo.models import Location
 from django.contrib.gis.geos import Point
 from django.db.models import QuerySet
 from sms.resolvers.location.regex_library import RegexLibrary
@@ -47,15 +47,6 @@ class LocationService:
         mapping[self._normalize_text(location.location_text)] = location.id
         self._set_mapping_in_cache(mapping)
 
-    def _count_location(self, location: Location) -> InquiryCount:
-        """
-        When a location object exists in our mapping, 
-        we update its count by creating a new InquiryCount object
-        """
-        return InquiryCount.objects.create(
-            location=location,
-        )
-
     def _create_location(self, resolved_location: ResolvedLocation, location: Point) -> Location:
         return Location.objects.create(
             location_text = resolved_location.location,
@@ -68,26 +59,18 @@ class LocationService:
         return mapping.get(self._normalize_text(location_text))
 
     def get_location(self, id: int) -> Location:
-        """
-        -Retrieve the location object
-        -Create a InquiryCount object to update that location's count
-        """
         location =  Location.objects.get(id=id)
-        self._count_location(location)
         return location
 
     def new_location(self, resolved_location:ResolvedLocation, point: Point) -> Location:
         """
-        When a user's location is not found in the mapping, a new Location object is
-        created and a new InquiryCount object is created with it.
-
+        When a user's location is not found in the mapping, a new Location object is created
         The mapping is then updated with the new location and it is returned.
         """
         location = self._create_location(
             resolved_location=resolved_location, 
             location=point,
         )
-        self._count_location(location)
         self._update_mapping(location)
         return location
 

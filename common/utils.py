@@ -23,6 +23,8 @@ def convert_bool(value: bool, abbreviated: bool = True) -> str:
 def now() -> datetime:
     return datetime.now(tz=timezone.utc)
 
+def get_point(x:float, y:float) -> Point:
+    return Point(x=x, y=y)
 
 def coord_string(point: Point) -> str:
     """

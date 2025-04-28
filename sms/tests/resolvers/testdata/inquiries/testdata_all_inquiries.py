@@ -6,6 +6,9 @@ from .testdata_wifi import WIFI_INQUIRIES
 
 from .testdata_shelter_params import SHELTER_PARAMS_INQUIRIES
 from .testdata_food_params import FOOD_PARAMS_INQUIRIES
+from .testdata_water_params import WATER_PARAMS_INQUIRIES
+from .testdata_toilet_params import TOILET_PARAMS_INQUIRIES
+
 
 ALL_INQUIRIES = (
     FOOD_INQUIRIES +
@@ -15,5 +18,7 @@ ALL_INQUIRIES = (
     WIFI_INQUIRIES +
 
     SHELTER_PARAMS_INQUIRIES +
-    FOOD_PARAMS_INQUIRIES
+    FOOD_PARAMS_INQUIRIES +
+    WATER_PARAMS_INQUIRIES +
+    TOILET_PARAMS_INQUIRIES
 )
