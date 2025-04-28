@@ -40,7 +40,7 @@ class KeywordLanguageResolver(BaseKeywordResolver):
             LanguageEnum.YORUBA: {"abẹ", "ilé"},  # Yoruba
         },
         SMSKeywordEnum.FOOD: {
-            LanguageEnum.ENGLISH: {"food", "meal", "meals", "hunger", "hungry", "dinner", "eat", "lunch", "breakfast", "brunch"},
+            LanguageEnum.ENGLISH: {"food", "meal", "meals", "groceries", "grocery", "hampers", "hamper", "hunger", "hungry", "dinner", "eat", "lunch", "breakfast", "brunch"},
             LanguageEnum.FRENCH: {"nourriture", "repas", "manger", "faim", "affamé"},
             LanguageEnum.PUNJABI: {"khana", "roti", "bhuk", "bhukh", "khaan"},  # Punjabi
             LanguageEnum.CHINESE: {"食物", "饭", "吃", "饥饿", "饿了"},  # Combined as "Chinese"

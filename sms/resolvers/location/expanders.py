@@ -5,7 +5,8 @@ from .location_data import (
     VANCOUVER_LANDMARKS, 
     JUNK_WORDS, 
     STREET_DIRECTIONS, 
-    STREET_SUFFIXES
+    STREET_SUFFIXES,
+    BAD_ADDRESS_TOKENS
 )
 
 class BaseExpander(ABC):
@@ -132,7 +133,7 @@ class AddressExpander(BaseExpander):
         tokens = []
         for step in range(1, 4):
             after = self.token_navigator.get_after(token_index, count=step)
-            if after is None or after.lower() in JUNK_WORDS:
+            if after is None or after.lower() in JUNK_WORDS or after.lower() in BAD_ADDRESS_TOKENS:
                 break
             tokens.append(after)
             if after in STREET_SUFFIXES:

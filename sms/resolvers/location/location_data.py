@@ -17,6 +17,16 @@ JUNK_WORDS = {
     "around", "by",
 }
 
+BAD_ADDRESS_TOKENS = {
+    "disability", "disabled", "handicap", "parking", "wheelchair", "wheelchairfriendly",
+    "access", "accessible", "food", "meals", "groceries", "hamper", "grocery", "takeaway",
+    "shelter", "beds", "housing", "pet", "pets", "sleep", "takeout", "delivery", "deliver", "delivered",
+    "bathroom", "toilet", "washroom", "restroom", "shit", "help", "wtf", "ok", "lol", "hurry",
+    "piss", "poo", "pee", "hygiene", "hygene", "fuck", "cats",
+    "wifi", "internet", "connect", "pets", "animals", "dogs"
+    "shower", "hygiene", "drink", "hydration", "carts", "shopping", "shoppingcart", "shoppingcarts"
+}
+
 VANCOUVER_LANDMARKS = {
     "canada place",
     "science world",

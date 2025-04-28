@@ -35,7 +35,7 @@ class FoodParams(BaseResourceParams):
         },
         FoodParamKey.DELIVER: {
             BooleanParamValue.TRUE: [
-                "delivery", "deliver", "delivers", "homedelivery",
+                "delivery", "deliver", "delivers", "delivered", "homedelivery",
             ]
         }
     }

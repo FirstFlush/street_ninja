@@ -11,7 +11,8 @@ class ToiletParams(BaseResourceParams):
     PARAM_MAPPING = {
         ToiletParamKey.WHEELCHAIR: {
             BooleanParamValue.TRUE: [
-                'wheelchair', 'wheelchairs',
+                'wheelchair', 'wheelchairs', 'wheelchairfriendly', 'handicap', 'handicapped', 
+                'disabled', 'disability',
             ]
         }
     }
