@@ -70,4 +70,4 @@ Street Ninja is licensed under the MIT License. See `LICENSE` for more informati
 
 ## Contact
 
-For inquiries, partnerships, or contributions, contact Michael Pearce at: firstflush@protonmail.com
+For inquiries, partnerships, or contributions, contact Michael Pearce at michaelpearce@streetninja.ca
