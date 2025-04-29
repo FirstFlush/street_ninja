@@ -76,11 +76,6 @@ class SMSService:
 
 
     def save_sms(self, sms_data: ResolvedSMS, location: Point | None, inquiry_location: Location | None) -> IncomingSMSMessageModel:
-        # persistence_service = self._build_persistence_service(
-        #     sms_data=sms_data, 
-        #     location=location,
-        #     inquiry_location=inquiry_location,
-        # )
         self._set_persistence_service(
             sms_data=sms_data, 
             location=location,
@@ -89,17 +84,6 @@ class SMSService:
         self.persistence_service.save_sms()
         return self.persistence_service.instance
 
-    # def _build_persistence_service(
-    #         self, 
-    #         sms_data:ResolvedSMS, 
-    #         location: Point | None, 
-    #         inquiry_location: Location | None,
-    # ) -> PersistenceService:
-    #     return PersistenceService(
-    #         sms_data=sms_data, 
-    #         location=location, 
-    #         inquiry_location=inquiry_location
-    #     )
 
     def _get_geocoded_location(self, location_str:str) -> Point:
         try:
@@ -166,7 +150,6 @@ class SMSService:
     ) -> str:
         sms_service = cls(msg=msg, phone_number=phone_number, message_sid=message_sid)
         sms_service.sms_data = sms_service.resolve()
-
         try:
             if sms_service.sms_data.resolved_sms_type == ResolvedSMSType.INQUIRY:
                 location = sms_service.get_location()
@@ -175,7 +158,7 @@ class SMSService:
                 location = None
 
         except Exception as e:
-            logger.error(f"{e.__class__.__name__}: {e}")
+            logger.error(f"{e.__class__.__name__}: fdjskal {e}")
         sms_service.save_sms(
             sms_data=sms_service.sms_data, 
             location=location.location if location is not None else None,

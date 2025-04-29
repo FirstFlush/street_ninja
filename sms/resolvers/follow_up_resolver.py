@@ -1,18 +1,11 @@
-from dataclasses import dataclass
 import logging
-from typing import Any, Optional
+from typing import Any
 from .base_resolver import BaseKeywordResolver
+from .dataclasses import ResolvedSMSFollowUp
 from ..enums import SMSFollowUpKeywordEnum, FollowUpParams
 
 
 logger = logging.getLogger(__name__)
-
-
-@dataclass
-class ResolvedSMSFollowUp:
-    msg: str
-    follow_up_keyword_enum: Optional[SMSFollowUpKeywordEnum] = None
-    follow_up_params: Optional[dict[str, Any]] = None
 
 
 class FollowUpResolver(BaseKeywordResolver):
