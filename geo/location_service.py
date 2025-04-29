@@ -56,7 +56,10 @@ class LocationService:
 
     def check_mapping(self, location_text: str) -> int | None:
         mapping = self._get_mapping()
-        return mapping.get(self._normalize_text(location_text))
+        id = mapping.get(self._normalize_text(location_text))
+        if id is not None:
+            logger.info(f"Found location in cache mapping: {location_text} => Location ID #{id}")
+        return id
 
     def get_location(self, id: int) -> Location:
         location =  Location.objects.get(id=id)
