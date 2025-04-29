@@ -153,12 +153,10 @@ class SMSService:
         try:
             if sms_service.sms_data.resolved_sms_type == ResolvedSMSType.INQUIRY:
                 location = sms_service.get_location()
-
             else:
                 location = None
-
         except Exception as e:
-            logger.error(f"{e.__class__.__name__}: fdjskal {e}")
+            logger.error(f"{e.__class__.__name__}: {e}")
         sms_service.save_sms(
             sms_data=sms_service.sms_data, 
             location=location.location if location is not None else None,
