@@ -9,7 +9,6 @@ from .testdata_food_params import FOOD_PARAMS_INQUIRIES
 from .testdata_water_params import WATER_PARAMS_INQUIRIES
 from .testdata_toilet_params import TOILET_PARAMS_INQUIRIES
 
-
 ALL_INQUIRIES = (
     FOOD_INQUIRIES +
     SHELTER_INQUIRIES +
