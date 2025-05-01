@@ -56,6 +56,7 @@ class ResourceCacheClient(BaseRedisClient):
         Raises:
             RedisClientException: If the DB query or Redis operation fails.
         """
+
         cached_data = self._get_cached_data(redis_key=self.access_pattern.redis_key_enum)
         if cached_data is not None:
             unpickled_data = self._unpickle(cached_data)

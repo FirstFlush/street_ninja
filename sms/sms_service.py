@@ -156,7 +156,8 @@ class SMSService:
             else:
                 location = None
         except Exception as e:
-            logger.error(f"{e.__class__.__name__}: {e}")
+            logger.error(f"Unexpected error `{e.__class__.__name__}` while parsing location: {e}")
+
         sms_service.save_sms(
             sms_data=sms_service.sms_data, 
             location=location.location if location is not None else None,
@@ -171,6 +172,7 @@ class SMSService:
             response_data = response_service.build_response_data()
         except Exception as e:
             logger.error(f"{e.__class__.__name__} while building response data: {e}")
+
         if response_data is not None:
             response_instance = sms_service.save_response(response_data=response_data)
             if response_instance:
@@ -180,9 +182,7 @@ class SMSService:
                 )
             else:
                 wrapped_response_message = response_service.build_help_msg()
-            
-            
-            # sms_service._test_print(msg=wrapped_response_message)
+                
             return wrapped_response_message
 
         else:
