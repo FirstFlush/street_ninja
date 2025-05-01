@@ -1,0 +1,1892 @@
+[
+{
+  "model": "resources.toilet",
+  "pk": 211,
+  "fields": {
+    "name": "Adanac Park",
+    "address": "1025 Boundary Road",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.024071960319 49.2758809677686)",
+    "notes": "East side, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.218Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 212,
+  "fields": {
+    "name": "Balaclava Park",
+    "address": "4594 Balaclava Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.175460949361 49.2452339943975)",
+    "notes": "Central, field house",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.218Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 213,
+  "fields": {
+    "name": "Beaconsfield Park",
+    "address": "3215 Slocan Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.049933959326 49.2552329902121)",
+    "notes": "East side, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.218Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 214,
+  "fields": {
+    "name": "Braemar Park",
+    "address": "895 W 27th Avenue",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.124483021671 49.2474209947128)",
+    "notes": "East edge, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.218Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 215,
+  "fields": {
+    "name": "Brewers Park",
+    "address": "4175 Victoria Drive",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.065425949078 49.2478549906707)",
+    "notes": "North east corner fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Closed",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.218Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 216,
+  "fields": {
+    "name": "Burrard View Park",
+    "address": "650 North Penticton Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.049648970845 49.2903639621952)",
+    "notes": "Fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.218Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 217,
+  "fields": {
+    "name": "CRAB Park at Portside",
+    "address": "101 E Waterfront Road",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.101835004137 49.2845920073111)",
+    "notes": "South side at fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.218Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 218,
+  "fields": {
+    "name": "Clinton Park",
+    "address": "2690 Grant Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.049782027867 49.2711450328993)",
+    "notes": "North east corner, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.218Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 219,
+  "fields": {
+    "name": "Columbia Park",
+    "address": "5908 Alberta Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.112908974023 49.231522997877)",
+    "notes": null,
+    "summer_hours": "Dawn to Dusk Weekends only",
+    "winter_hours": "Dawn to Dusk Weekends only",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.219Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 220,
+  "fields": {
+    "name": "Falaise Park",
+    "address": "3434 Falaise Avenue",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.029405986745 49.2551230346758)",
+    "notes": "Community Hall",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.219Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 221,
+  "fields": {
+    "name": "Garden Park",
+    "address": "1851 Garden Drive",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.058333994001 49.2682859984386)",
+    "notes": "North east corner, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.219Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 222,
+  "fields": {
+    "name": "Grandview Park",
+    "address": "1255 Commercial Drive",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.069954446436 49.2737616313216)",
+    "notes": "South side",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.219Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 223,
+  "fields": {
+    "name": "Grays Park",
+    "address": "4850 St. Catherines Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.084887032665 49.2407870046013)",
+    "notes": "Centre west by parking lot",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Closed",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.219Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 224,
+  "fields": {
+    "name": "Hadden Park",
+    "address": "1905 Ogden Avenue",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.15030998211 49.2774609930893)",
+    "notes": "West, caretaker house (actually in Kits)",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.219Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 225,
+  "fields": {
+    "name": "Jericho Beach Park",
+    "address": "3941 Point Grey Road",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.191658959557 49.2715800212711)",
+    "notes": "Concession/fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.219Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 226,
+  "fields": {
+    "name": "Jonathan Rogers Park",
+    "address": "110 W 7th Avenue",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.107620016125 49.2644980299255)",
+    "notes": "North side, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.219Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 227,
+  "fields": {
+    "name": "Jones Park",
+    "address": "5350 Commercial Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.068328027105 49.2362049589966)",
+    "notes": "North west corner, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.219Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 228,
+  "fields": {
+    "name": "Memorial West Park",
+    "address": "4701 Dunbar Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.188455003096 49.2433349852208)",
+    "notes": "Central, field house",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.219Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 229,
+  "fields": {
+    "name": "Montgomery Park",
+    "address": "1040 W 43rd Avenue",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.129240986478 49.2318260466293)",
+    "notes": "North east corner",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.219Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 230,
+  "fields": {
+    "name": "New Brighton Park",
+    "address": "3201 New Brighton Road",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.036025007443 49.2893339699629)",
+    "notes": "South side of pool building",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.219Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 231,
+  "fields": {
+    "name": "New Brighton Park",
+    "address": "3201 New Brighton Road",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.036308 49.289293)",
+    "notes": "North east corner, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.219Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 232,
+  "fields": {
+    "name": "Oak Park",
+    "address": "900 W 59th Avenue",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.127640978659 49.216285995094)",
+    "notes": "East side field house",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.220Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 233,
+  "fields": {
+    "name": "Prince Edward Park",
+    "address": "3773 Prince Edward Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.097056994174 49.2511909721127)",
+    "notes": "Sout east corner, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.220Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 234,
+  "fields": {
+    "name": "Robson Park",
+    "address": "599 Kingsway",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.092848986795 49.2586270164444)",
+    "notes": null,
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.220Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 235,
+  "fields": {
+    "name": "Stanley Park",
+    "address": "2000 W Georgia Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.150733000629 49.2956269925671)",
+    "notes": "2nd Beach, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": true,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.220Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 236,
+  "fields": {
+    "name": "Stanley Park",
+    "address": "2000 W Georgia Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.138591029397 49.2939220383499)",
+    "notes": "Chilco",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": true,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.220Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 237,
+  "fields": {
+    "name": "Stanley Park",
+    "address": "2000 W Georgia Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.146599024764 49.2930350373012)",
+    "notes": "Pitch & Putt Golf Course",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.220Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 238,
+  "fields": {
+    "name": "Stanley Park",
+    "address": "2000 W Georgia Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.12127801962 49.2994400235276)",
+    "notes": "Totems",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": true,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.220Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 239,
+  "fields": {
+    "name": "Stanley Park",
+    "address": "2000 W Georgia Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.132923042179 49.3020690032254)",
+    "notes": "Train, Picnic Shelter",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": true,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.220Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 240,
+  "fields": {
+    "name": "Sunset Beach Park",
+    "address": "1204 Beach Avenue",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.137950043494 49.2788370147886)",
+    "notes": "Concession",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "7:00 am - Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.220Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 241,
+  "fields": {
+    "name": "VanDusen Botanical Garden",
+    "address": "5251 Oak Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.128638340165 49.2385104498556)",
+    "notes": "Floral hall",
+    "summer_hours": "Hours of operation only",
+    "winter_hours": "Hours of operation only",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.220Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 242,
+  "fields": {
+    "name": "Vanier Park",
+    "address": "1000 Chestnut Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.139855943743 49.2751960118216)",
+    "notes": "Burrard Civic Marina",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.220Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 243,
+  "fields": {
+    "name": "Victory Square",
+    "address": "N/A",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.110132 49.2825906)",
+    "notes": "N/A",
+    "summer_hours": "Men: 6am - Women: 8am to Midnight",
+    "winter_hours": "Men: 6am - Women: 8am to Midnight",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.220Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 244,
+  "fields": {
+    "name": "Bute at Davie",
+    "address": "NE corner of intersection",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.133141 49.2818541)",
+    "notes": "NE corner of intersection",
+    "summer_hours": "24 hrs",
+    "winter_hours": "24 hrs",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.220Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 245,
+  "fields": {
+    "name": "Andy Livingstone Park",
+    "address": "89 Expo Boulevard",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.103599022256 49.2778209665246)",
+    "notes": "South side, fieldhouse",
+    "summer_hours": "10:00 am - 11:00 pm",
+    "winter_hours": "10:00 am - 11:00 pm",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.220Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 246,
+  "fields": {
+    "name": "Bobolink Park",
+    "address": "2510 Hoylake Avenue",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.056414955041 49.2156069867489)",
+    "notes": "North side, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.221Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 247,
+  "fields": {
+    "name": "Carnarvon Park",
+    "address": "2995 W 19th Avenue",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.172609010381 49.2567420168862)",
+    "notes": "West side, field house",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.221Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 248,
+  "fields": {
+    "name": "Chaldecott Park",
+    "address": "4175 Wallace Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.19112496205 49.2494269600837)",
+    "notes": "East side fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.221Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 249,
+  "fields": {
+    "name": "Collingwood Park",
+    "address": "5275 McKinnon Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.036715960679 49.2365299637476)",
+    "notes": "South corner, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.221Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 250,
+  "fields": {
+    "name": "English Bay Beach Park",
+    "address": "1700 Beach Avenue",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.142804967084 49.2861540400257)",
+    "notes": "Bathhouse",
+    "summer_hours": "7:00 am - Dusk",
+    "winter_hours": "10:00 am - Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.221Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 251,
+  "fields": {
+    "name": "Fraser River Park",
+    "address": "8705 Angus Drive",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.149856004532 49.2073949985982)",
+    "notes": "West corner",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Closed",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.221Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 252,
+  "fields": {
+    "name": "Fraserview Golf Course",
+    "address": "7800 Vivian Drive",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.042299667586 49.2112953517694)",
+    "notes": "Kerr Road @13th hole",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.221Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 253,
+  "fields": {
+    "name": "Gordon Park",
+    "address": "6675 Commercial Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.069499978534 49.2238700450659)",
+    "notes": "East side",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.221Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 254,
+  "fields": {
+    "name": "Harbour Green Park",
+    "address": "1199 W Cordova Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.121466998595 49.2898040141255)",
+    "notes": "Central",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.222Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 255,
+  "fields": {
+    "name": "Locarno Park",
+    "address": "4445 NW Marine Drive",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.206555013072 49.2750659923232)",
+    "notes": "Concession at fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.222Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 256,
+  "fields": {
+    "name": "MacLean Park",
+    "address": "710 Keefer Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.0893660404 49.27900702288)",
+    "notes": "North west corner, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.222Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 257,
+  "fields": {
+    "name": "Moberly Park",
+    "address": "7646 Prince Albert Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.087354978911 49.2152529959461)",
+    "notes": "South west corner at Community Hall",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.222Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 258,
+  "fields": {
+    "name": "Nanaimo Park",
+    "address": "2390 E 46th Avenue",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.057429042023 49.2282419990449)",
+    "notes": "North side, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.222Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 259,
+  "fields": {
+    "name": "Norquay Park",
+    "address": "5050 Wales Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.051424959911 49.2379749903438)",
+    "notes": "West side, field house",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.222Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 260,
+  "fields": {
+    "name": "Oppenheimer Park",
+    "address": "400 Powell Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.094181035354 49.2829379681762)",
+    "notes": "North east corner",
+    "summer_hours": "Tue - Sat 9:00 am - 8:00 pm",
+    "winter_hours": "Tue - Sat 9:00 am - 5:00 pm",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.222Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 261,
+  "fields": {
+    "name": "Pandora Park",
+    "address": "2325 Franklin Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.057478049186 49.2822799986755)",
+    "notes": "South side, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.222Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 262,
+  "fields": {
+    "name": "Queen Elizabeth Park",
+    "address": "4600 Cambie Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.111577056628 49.2389380178008)",
+    "notes": "Fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.222Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 263,
+  "fields": {
+    "name": "Queen Elizabeth Park",
+    "address": "4600 Cambie Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.112844975315 49.2422110176667)",
+    "notes": "Under \"Seasons\"",
+    "summer_hours": "7:30 am - 9:00 pm",
+    "winter_hours": "7:30 am - 9:00 pm",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.222Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 264,
+  "fields": {
+    "name": "Rupert Park",
+    "address": "1600 Rupert Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.030682959269 49.2730500015562)",
+    "notes": "Pitch & Putt (north side)",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.222Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 265,
+  "fields": {
+    "name": "Spanish Banks Beach Park",
+    "address": "4801 NW Marine Drive",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.222679055401 49.2774719860241)",
+    "notes": "West, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.222Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 266,
+  "fields": {
+    "name": "Spanish Banks Beach Park",
+    "address": "4801 NW Marine Drive",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.21492003747 49.2762439755221)",
+    "notes": "East, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.222Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 267,
+  "fields": {
+    "name": "Stanley Park",
+    "address": "2000 W Georgia Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.155931048676 49.3031529920237)",
+    "notes": "3rd Beach, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.222Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 268,
+  "fields": {
+    "name": "Stanley Park",
+    "address": "2000 W Georgia Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.13070000487 49.2998679959831)",
+    "notes": "Aquarium plaza",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": true,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.223Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 269,
+  "fields": {
+    "name": "Stanley Park",
+    "address": "2000 W Georgia Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.126023002581 49.2996259645902)",
+    "notes": "Brockton Oval",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": true,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.223Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 270,
+  "fields": {
+    "name": "Stanley Park",
+    "address": "2000 W Georgia Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.130707978951 49.3029259847064)",
+    "notes": "Lumberman's Arch",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": true,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.223Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 271,
+  "fields": {
+    "name": "Stanley Park",
+    "address": "2000 W Georgia Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.142649989276 49.3124120320746)",
+    "notes": "Prospect Point",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": true,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.223Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 272,
+  "fields": {
+    "name": "Sunrise Park",
+    "address": "1950 Windermere Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.03601798246 49.2669229919436)",
+    "notes": "North west corner, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.223Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 273,
+  "fields": {
+    "name": "Trafalgar Park",
+    "address": "2610 W 23rd Avenue",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.163471973425 49.2515549664121)",
+    "notes": "North side, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.223Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 274,
+  "fields": {
+    "name": "Trillium Park",
+    "address": "600 National Avenue",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.092911042306 49.2748)",
+    "notes": null,
+    "summer_hours": "Dawn to 10:15 pm",
+    "winter_hours": "Dawn to 10:15 pm",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.223Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 275,
+  "fields": {
+    "name": "VanDusen Botanical Garden",
+    "address": "5251 Oak Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.129557645767 49.2386594327158)",
+    "notes": "At front entrance",
+    "summer_hours": "Hours of operation only",
+    "winter_hours": "Hours of operation only",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.223Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 276,
+  "fields": {
+    "name": "Victoria Park",
+    "address": "1425 Victoria Drive",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.067413016488 49.2717440428088)",
+    "notes": "West side",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.223Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 277,
+  "fields": {
+    "name": "West Point Grey Park",
+    "address": "2250 Trimble Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.204579564378 49.2665415433898)",
+    "notes": "Centre",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.223Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 278,
+  "fields": {
+    "name": "Woodland Park",
+    "address": "705 Woodland Drive",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.073220004653 49.2783689722403)",
+    "notes": "Central, field house",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.223Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 279,
+  "fields": {
+    "name": "Bute at Davie",
+    "address": "Mid Block Between Davie St and See-Em_la Lane",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.133157 49.282003)",
+    "notes": "Mid Block Between Davie St and See-Em_la Lane",
+    "summer_hours": "24 hrs",
+    "winter_hours": "24 hrs",
+    "is_wheelchair": true,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.223Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 280,
+  "fields": {
+    "name": "Nelson Park",
+    "address": "West side of park",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.130677 49.283378)",
+    "notes": "West side of park",
+    "summer_hours": "24 hrs",
+    "winter_hours": "24 hrs",
+    "is_wheelchair": true,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.223Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 281,
+  "fields": {
+    "name": "Powell at Main",
+    "address": "NW corner of intersection",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.099849 49.2832763)",
+    "notes": "NW corner of intersection",
+    "summer_hours": "24 hrs",
+    "winter_hours": "24 hrs",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.223Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 282,
+  "fields": {
+    "name": "Barclay Heritage Square",
+    "address": "1433 Barclay Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.132560510918 49.2872148697549)",
+    "notes": "Barclay Manor (WECC)",
+    "summer_hours": "Hours of the centre",
+    "winter_hours": "Hours of the centre",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.223Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 283,
+  "fields": {
+    "name": "David Lam Park",
+    "address": "1300 Pacific Boulevard",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.125415035162 49.2723830073375)",
+    "notes": "West side",
+    "summer_hours": "10:00 am - Dusk",
+    "winter_hours": "10:00 am - Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.224Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 284,
+  "fields": {
+    "name": "Elm Park",
+    "address": "5800 Elm Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.163283944614 49.2334319792246)",
+    "notes": "Central, field house",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.224Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 285,
+  "fields": {
+    "name": "Granville Park",
+    "address": "3001 Fir Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.14196994988 49.2584930114999)",
+    "notes": "Central, field house",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.224Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 286,
+  "fields": {
+    "name": "Hastings Community Park",
+    "address": "3000 E Pender Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.03787394911 49.2806479707568)",
+    "notes": "Central, field house",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Closed",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.224Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 287,
+  "fields": {
+    "name": "Jericho Beach Park",
+    "address": "3941 Point Grey Road",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.20280599872 49.2744279889871)",
+    "notes": "Service Yard - public exterior attached to service building",
+    "summer_hours": "Dawn - 11:00 pm",
+    "winter_hours": "Dawn - 11:00 pm",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.224Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 288,
+  "fields": {
+    "name": "John Hendry (Trout Lake) Park",
+    "address": "3300 Victoria Drive",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.061387988851 49.2539260388866)",
+    "notes": "At Trout Lake",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.224Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 289,
+  "fields": {
+    "name": "Kitsilano Beach Park",
+    "address": "1499 Arbutus Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.157542967602 49.2730140340116)",
+    "notes": "Kitsilano Showboat concession",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.224Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 290,
+  "fields": {
+    "name": "Kitsilano Beach Park",
+    "address": "1499 Arbutus Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.153702974672 49.2744719935869)",
+    "notes": "Lifeguard station",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.224Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 291,
+  "fields": {
+    "name": "Maple Grove Park",
+    "address": "6875 Yew Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.159582974748 49.2233840215141)",
+    "notes": "Central, field house",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.224Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 292,
+  "fields": {
+    "name": "McBride Park",
+    "address": "3350 W 4th Avenue",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.180140962198 49.2681069665443)",
+    "notes": "Central, field house",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.224Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 293,
+  "fields": {
+    "name": "Memorial South Park",
+    "address": "5955 Ross Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.084388002617 49.2307380348496)",
+    "notes": "Oval",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.224Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 294,
+  "fields": {
+    "name": "Queen Elizabeth Park",
+    "address": "4600 Cambie Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.112919003359 49.2421839651063)",
+    "notes": "Lookout",
+    "summer_hours": "7:30 am - 9:00 pm",
+    "winter_hours": "7:30 am - 9:00 pm",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.225Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 295,
+  "fields": {
+    "name": "Quilchena Park",
+    "address": "4590 Magnolia Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.148723944856 49.2446430482962)",
+    "notes": "North east corner, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.225Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 296,
+  "fields": {
+    "name": "Riverfront Park",
+    "address": "2750 E Kent Ave S",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.051846970695 49.2057680376434)",
+    "notes": "North side",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.225Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 297,
+  "fields": {
+    "name": "Ross Park",
+    "address": "7402 Ross Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.082798035022 49.2166999806775)",
+    "notes": "South west corner, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.225Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 298,
+  "fields": {
+    "name": "Rupert Park",
+    "address": "1600 Rupert Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.030604979627 49.2701350041925)",
+    "notes": "South side, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.225Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 299,
+  "fields": {
+    "name": "Slocan Park",
+    "address": "2750 E 29th Avenue",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.047952017189 49.2444379784009)",
+    "notes": "North side",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.225Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 300,
+  "fields": {
+    "name": "Stanley Park",
+    "address": "2000 W Georgia Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.145354964422 49.2908669672286)",
+    "notes": "Park Board Main office",
+    "summer_hours": "Weekdays only 8:30 am - 5:00 pm",
+    "winter_hours": "Weekdays only 8:30 am - 5:00 pm",
+    "is_wheelchair": true,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.225Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 301,
+  "fields": {
+    "name": "Stanley Park",
+    "address": "2000 W Georgia Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.148714956707 49.2936169900948)",
+    "notes": "Ceperley Picnic Shelter",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": true,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.225Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 302,
+  "fields": {
+    "name": "Stanley Park",
+    "address": "2000 W Georgia Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.131432966091 49.2977530146591)",
+    "notes": "Info Booth",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": true,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.225Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 303,
+  "fields": {
+    "name": "Stanley Park",
+    "address": "2000 W Georgia Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.134051016088 49.2995490315169)",
+    "notes": "Pavilion",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": true,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.226Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 304,
+  "fields": {
+    "name": "Stanley Park",
+    "address": "2000 W Georgia Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.148388039898 49.3105500283612)",
+    "notes": "Prospect Point Picnic, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": true,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.226Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 305,
+  "fields": {
+    "name": "Strathcona Park",
+    "address": "857 Malkin Avenue",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.086188991758 49.2745570066112)",
+    "notes": "South side, fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.226Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 306,
+  "fields": {
+    "name": "Tatlow Park",
+    "address": "2845 W 3rd Avenue",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.169511949678 49.269476011815)",
+    "notes": "South, field house",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.226Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 307,
+  "fields": {
+    "name": "Main at Hastings",
+    "address": "SW corner of intersection",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.09985 49.281107)",
+    "notes": "SW corner of intersection",
+    "summer_hours": "Men: 6am - Women: 8am to Midnight",
+    "winter_hours": "Men: 6am - Women: 8am to Midnight",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.226Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 308,
+  "fields": {
+    "name": "Winona Park",
+    "address": "7575 Columbia Street",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.112948945253 49.2157179803502)",
+    "notes": "Fieldhouse",
+    "summer_hours": "Dawn to Dusk",
+    "winter_hours": "Dawn to Dusk",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.226Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 309,
+  "fields": {
+    "name": "Hastings at Carral - Pigeon Park",
+    "address": "NW corner of intersection",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.104602 49.2816384)",
+    "notes": "NW corner of intersection",
+    "summer_hours": "24 hrs",
+    "winter_hours": "24 hrs",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.226Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 310,
+  "fields": {
+    "name": "Main at Terminal",
+    "address": "NE corner of intersection",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.099778 49.2731387)",
+    "notes": "NE corner of intersection",
+    "summer_hours": "6am to 10pm",
+    "winter_hours": "6am to 10pm",
+    "is_wheelchair": true,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.226Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 311,
+  "fields": {
+    "name": "Nelson at Howe",
+    "address": "NE corner of intersection",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.123516 49.2796964)",
+    "notes": "NE corner of intersection",
+    "summer_hours": "24 hrs",
+    "winter_hours": "24 hrs",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.227Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 312,
+  "fields": {
+    "name": "Richards at Davie - Emery Barnes Park",
+    "address": "NW corner of intersection",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.124114 49.2760544)",
+    "notes": "NW corner of intersection",
+    "summer_hours": "24 hrs",
+    "winter_hours": "24 hrs",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.227Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 313,
+  "fields": {
+    "name": "Robson at Granville",
+    "address": "NW corner of intersection",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.120082 49.2816325)",
+    "notes": "NW corner of intersection",
+    "summer_hours": "6am to 10pm",
+    "winter_hours": "6am to 10pm",
+    "is_wheelchair": true,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.228Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 314,
+  "fields": {
+    "name": "Robson at Richards",
+    "address": "NW corner of intersection",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.118054 49.2803243)",
+    "notes": "NW corner of intersection",
+    "summer_hours": "24 hrs",
+    "winter_hours": "24 hrs",
+    "is_wheelchair": false,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.229Z"
+  }
+},
+{
+  "model": "resources.toilet",
+  "pk": 315,
+  "fields": {
+    "name": "Vancouver Art Gallary",
+    "address": "NE Side of VAG Building",
+    "dataset": "public",
+    "description": null,
+    "location": "SRID=4326;POINT (-123.119864 49.282961)",
+    "notes": "NE Side of VAG Building",
+    "summer_hours": "6am to 10pm",
+    "winter_hours": "6am to 10pm",
+    "is_wheelchair": true,
+    "is_active": true,
+    "last_fetched": "2025-03-03T00:14:50.209Z",
+    "date_created": "2025-03-03T00:14:50.229Z"
+  }
+}
+]

@@ -1,0 +1,291 @@
+[
+{
+  "model": "resources.shelter",
+  "pk": 3,
+  "fields": {
+    "facility": "Catholic Charities Men's Hostel",
+    "address": "",
+    "location": "SRID=4326;POINT (-123.1147756731615 49.27769337237721)",
+    "category": "Men",
+    "phone": "604-443-3292",
+    "meals": false,
+    "pets": false,
+    "carts": false,
+    "is_active": true,
+    "last_fetched": "2025-03-02T23:35:04.578Z",
+    "date_created": "2025-01-22T06:38:05.486Z"
+  }
+},
+{
+  "model": "resources.shelter",
+  "pk": 4,
+  "fields": {
+    "facility": "Tenth Avenue Church",
+    "address": "",
+    "location": "SRID=4326;POINT (-123.10586046207774 49.262338305195684)",
+    "category": "Adults (all genders)",
+    "phone": "604-876-2181",
+    "meals": true,
+    "pets": false,
+    "carts": false,
+    "is_active": true,
+    "last_fetched": "2025-03-02T23:35:04.578Z",
+    "date_created": "2025-01-22T06:38:05.486Z"
+  }
+},
+{
+  "model": "resources.shelter",
+  "pk": 5,
+  "fields": {
+    "facility": "Yukon Shelter",
+    "address": "",
+    "location": "SRID=4326;POINT (-123.11236726193974 49.26689088504469)",
+    "category": "Adults (all genders)",
+    "phone": "604-264-1680",
+    "meals": false,
+    "pets": true,
+    "carts": false,
+    "is_active": true,
+    "last_fetched": "2025-03-02T23:35:04.578Z",
+    "date_created": "2025-01-22T06:38:05.486Z"
+  }
+},
+{
+  "model": "resources.shelter",
+  "pk": 6,
+  "fields": {
+    "facility": "The Haven",
+    "address": "",
+    "location": "SRID=4326;POINT (-123.10109474719326 49.282056211986955)",
+    "category": "Men",
+    "phone": "604-646-6800",
+    "meals": false,
+    "pets": false,
+    "carts": false,
+    "is_active": true,
+    "last_fetched": "2025-03-02T23:35:04.578Z",
+    "date_created": "2025-01-22T06:38:05.486Z"
+  }
+},
+{
+  "model": "resources.shelter",
+  "pk": 7,
+  "fields": {
+    "facility": "First Baptist Church",
+    "address": "",
+    "location": "SRID=4326;POINT (-123.12645824751823 49.281851154764425)",
+    "category": "Adults (all genders)",
+    "phone": "604-683-8441",
+    "meals": true,
+    "pets": false,
+    "carts": false,
+    "is_active": true,
+    "last_fetched": "2025-03-02T23:35:04.578Z",
+    "date_created": "2025-01-22T06:38:05.486Z"
+  }
+},
+{
+  "model": "resources.shelter",
+  "pk": 8,
+  "fields": {
+    "facility": "Belkin House",
+    "address": "",
+    "location": "SRID=4326;POINT (-123.11293968534518 49.28245838143064)",
+    "category": "Adults (all genders)",
+    "phone": "604-681-3405",
+    "meals": false,
+    "pets": false,
+    "carts": false,
+    "is_active": true,
+    "last_fetched": "2025-03-02T23:35:04.578Z",
+    "date_created": "2025-01-22T06:38:05.486Z"
+  }
+},
+{
+  "model": "resources.shelter",
+  "pk": 9,
+  "fields": {
+    "facility": "Lookout Downtown",
+    "address": "",
+    "location": "SRID=4326;POINT (-123.09620765787055 49.28374408771319)",
+    "category": "Adults (all genders)",
+    "phone": "604-681-9126",
+    "meals": false,
+    "pets": true,
+    "carts": false,
+    "is_active": true,
+    "last_fetched": "2025-03-02T23:35:04.578Z",
+    "date_created": "2025-01-22T06:38:05.486Z"
+  }
+},
+{
+  "model": "resources.shelter",
+  "pk": 10,
+  "fields": {
+    "facility": "Anchor of Hope",
+    "address": "",
+    "location": "SRID=4326;POINT (-123.10109474719326 49.282056211986955)",
+    "category": "Adults (all genders)",
+    "phone": "604-646-6899",
+    "meals": true,
+    "pets": false,
+    "carts": false,
+    "is_active": true,
+    "last_fetched": "2025-03-02T23:35:04.578Z",
+    "date_created": "2025-01-22T06:38:05.486Z"
+  }
+},
+{
+  "model": "resources.shelter",
+  "pk": 11,
+  "fields": {
+    "facility": "Grandview Calvary Baptist Church",
+    "address": "",
+    "location": "SRID=4326;POINT (-123.06735635798717 49.26974745114546)",
+    "category": "Adults (all genders)",
+    "phone": "604-255-1411",
+    "meals": true,
+    "pets": false,
+    "carts": false,
+    "is_active": true,
+    "last_fetched": "2025-03-02T23:35:04.578Z",
+    "date_created": "2025-01-22T06:38:05.486Z"
+  }
+},
+{
+  "model": "resources.shelter",
+  "pk": 12,
+  "fields": {
+    "facility": "Crosswalk",
+    "address": "",
+    "location": "SRID=4326;POINT (-123.10767247883172 49.28180507947213)",
+    "category": "Adults (all genders)",
+    "phone": "604-669-4349",
+    "meals": false,
+    "pets": false,
+    "carts": false,
+    "is_active": true,
+    "last_fetched": "2025-03-02T23:35:04.578Z",
+    "date_created": "2025-01-22T06:38:05.486Z"
+  }
+},
+{
+  "model": "resources.shelter",
+  "pk": 13,
+  "fields": {
+    "facility": "The Beacon",
+    "address": "",
+    "location": "SRID=4326;POINT (-123.10109474719326 49.282056211986955)",
+    "category": "Men",
+    "phone": "604-646-6846",
+    "meals": false,
+    "pets": false,
+    "carts": false,
+    "is_active": true,
+    "last_fetched": "2025-03-02T23:35:04.578Z",
+    "date_created": "2025-01-22T06:38:05.486Z"
+  }
+},
+{
+  "model": "resources.shelter",
+  "pk": 14,
+  "fields": {
+    "facility": "Aboriginal Shelter",
+    "address": "",
+    "location": "SRID=4326;POINT (-123.09934686157887 49.27157435253819)",
+    "category": "Adults (all genders)",
+    "phone": "604-347-0299",
+    "meals": true,
+    "pets": true,
+    "carts": true,
+    "is_active": true,
+    "last_fetched": "2025-03-02T23:35:04.578Z",
+    "date_created": "2025-01-22T06:38:05.486Z"
+  }
+},
+{
+  "model": "resources.shelter",
+  "pk": 15,
+  "fields": {
+    "facility": "Union Gospel Mission",
+    "address": "",
+    "location": "SRID=4326;POINT (-123.09098604679792 49.281871703205425)",
+    "category": "Men",
+    "phone": "604-253-3323",
+    "meals": true,
+    "pets": false,
+    "carts": false,
+    "is_active": true,
+    "last_fetched": "2025-03-02T23:35:04.578Z",
+    "date_created": "2025-01-22T06:38:05.486Z"
+  }
+},
+{
+  "model": "resources.shelter",
+  "pk": 16,
+  "fields": {
+    "facility": "Vineyard Church",
+    "address": "",
+    "location": "SRID=4326;POINT (-123.07055190144827 49.269335660054985)",
+    "category": "Adults (all genders)",
+    "phone": "604-255-4463",
+    "meals": true,
+    "pets": false,
+    "carts": false,
+    "is_active": true,
+    "last_fetched": "2025-03-02T23:35:04.578Z",
+    "date_created": "2025-01-22T06:38:05.486Z"
+  }
+},
+{
+  "model": "resources.shelter",
+  "pk": 17,
+  "fields": {
+    "facility": "First United Church",
+    "address": "",
+    "location": "SRID=4326;POINT (-123.09704179173589 49.28098552764485)",
+    "category": "Adults (all genders)",
+    "phone": "604-681-8365",
+    "meals": true,
+    "pets": true,
+    "carts": true,
+    "is_active": true,
+    "last_fetched": "2025-03-02T23:35:04.578Z",
+    "date_created": "2025-01-22T06:38:05.486Z"
+  }
+},
+{
+  "model": "resources.shelter",
+  "pk": 18,
+  "fields": {
+    "facility": "Dusk to Dawn-Directions Youth Centre",
+    "address": "",
+    "location": "SRID=4326;POINT (-123.12780362309378 49.27956687773119)",
+    "category": "Youth (all genders)",
+    "phone": "604-633-1472",
+    "meals": true,
+    "pets": false,
+    "carts": false,
+    "is_active": true,
+    "last_fetched": "2025-03-02T23:35:04.578Z",
+    "date_created": "2025-01-22T06:38:05.486Z"
+  }
+},
+{
+  "model": "resources.shelter",
+  "pk": 19,
+  "fields": {
+    "facility": "Triage",
+    "address": "",
+    "location": "SRID=4326;POINT (-123.08914065335308 49.28325701333048)",
+    "category": "Adults (all genders)",
+    "phone": "604-254-3700",
+    "meals": false,
+    "pets": false,
+    "carts": false,
+    "is_active": true,
+    "last_fetched": "2025-03-02T23:35:04.578Z",
+    "date_created": "2025-01-22T06:38:05.486Z"
+  }
+}
+]

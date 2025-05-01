@@ -1,0 +1,3616 @@
+[
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2693,
+  "fields": {
+    "name": "Fountain location:\nAberdeen Park",
+    "location": "SRID=4326;POINT (-123.02723857691211 49.235052244781656)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.306Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2694,
+  "fields": {
+    "name": "Fountain location:\nAlexandra Park",
+    "location": "SRID=4326;POINT (-123.14237717569814 49.28566025871612)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.306Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2695,
+  "fields": {
+    "name": "Fountain location:\nAndy Livingstone Park - South of soccer fields",
+    "location": "SRID=4326;POINT (-123.10355994686793 49.27805711332229)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.306Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2696,
+  "fields": {
+    "name": "Fountain location:\nArbutus Greenway Park",
+    "location": "SRID=4326;POINT (-123.15530331979778 49.26223376304301)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.306Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2697,
+  "fields": {
+    "name": "Fountain location:\nBobolink Park",
+    "location": "SRID=4326;POINT (-123.0560918132228 49.215625829513684)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.306Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2698,
+  "fields": {
+    "name": "Fountain location:\nBrewers Park",
+    "location": "SRID=4326;POINT (-123.06621079065098 49.24755549015022)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.306Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2699,
+  "fields": {
+    "name": "Fountain location:\nCRAB Park at Portside",
+    "location": "SRID=4326;POINT (-123.10180591766984 49.28475995490833)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.306Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2700,
+  "fields": {
+    "name": "Fountain location:\nCharleson Park",
+    "location": "SRID=4326;POINT (-123.12588611678844 49.26811789687622)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.306Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2701,
+  "fields": {
+    "name": "Fountain location:\nChina Creek North Park",
+    "location": "SRID=4326;POINT (-123.08311885257991 49.2644778372994)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.306Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2702,
+  "fields": {
+    "name": "Fountain location:\nColumbia Park",
+    "location": "SRID=4326;POINT (-123.11299013036627 49.231930146654)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.307Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2703,
+  "fields": {
+    "name": "Fountain location:\nConnaught Park - North of playground",
+    "location": "SRID=4326;POINT (-123.16141535959855 49.26187335311721)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.307Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2704,
+  "fields": {
+    "name": "Fountain location:\nDavid Lam Park - South west of basketball courts",
+    "location": "SRID=4326;POINT (-123.12570510564845 49.2717379729765)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.308Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2705,
+  "fields": {
+    "name": "Fountain location:\nDevonian Harbour Park",
+    "location": "SRID=4326;POINT (-123.13598610995344 49.295091459181194)",
+    "is_active": true,
+    "in_operation": "year-round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.308Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2706,
+  "fields": {
+    "name": "Fountain location:\nDouglas Park - Right side of wading pool",
+    "location": "SRID=4326;POINT (-123.12230213245175 49.25319458591402)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.308Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2707,
+  "fields": {
+    "name": "Fountain location:\nEmery Barnes Park - South west of playground",
+    "location": "SRID=4326;POINT (-123.12426708261285 49.27664197562022)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.308Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2708,
+  "fields": {
+    "name": "Fountain location:\nEnglish Bay Beach Park - West of bath-house",
+    "location": "SRID=4326;POINT (-123.14302017755426 49.28613326803492)",
+    "is_active": true,
+    "in_operation": "year-round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.308Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2709,
+  "fields": {
+    "name": "Fountain location:\nEnglish Bay Beach Park - concessions",
+    "location": "SRID=4326;POINT (-123.13792016443693 49.27900682012942)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.308Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2710,
+  "fields": {
+    "name": "Fountain location:\nFraser River Park - South west",
+    "location": "SRID=4326;POINT (-123.15079343698349 49.206524604715234)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.308Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2711,
+  "fields": {
+    "name": "Fountain location:\nFraserview Golf Course - West of kerr st.",
+    "location": "SRID=4326;POINT (-123.04226773752653 49.211400947247654)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.308Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2712,
+  "fields": {
+    "name": "Fountain location:\nFraserview Golf Course - driving range",
+    "location": "SRID=4326;POINT (-123.0513797921426 49.21249686599673)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.308Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2713,
+  "fields": {
+    "name": "Fountain location:\nGrandview Park - South of playground",
+    "location": "SRID=4326;POINT (-123.06985194061305 49.27384806653218)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.308Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2714,
+  "fields": {
+    "name": "Fountain location:\nGranville Loop Park",
+    "location": "SRID=4326;POINT (-123.13774119438631 49.2672333741722)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.308Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2715,
+  "fields": {
+    "name": "Fountain location:\nGuelph Park",
+    "location": "SRID=4326;POINT (-123.09555993281812 49.26432582925835)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.309Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2716,
+  "fields": {
+    "name": "Fountain location:\nHarbour Green Park - In front of washrooms",
+    "location": "SRID=4326;POINT (-123.12167903062401 49.29010735949297)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.309Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2717,
+  "fields": {
+    "name": "Fountain location:\nHarbour Green Park - Viewpoint",
+    "location": "SRID=4326;POINT (-123.1232550375787 49.291334384434094)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.309Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2718,
+  "fields": {
+    "name": "Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields",
+    "location": "SRID=4326;POINT (-123.03424848993296 49.282669236667665)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.309Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2719,
+  "fields": {
+    "name": "Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields",
+    "location": "SRID=4326;POINT (-123.034264 49.282563)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:41:41.284Z",
+    "date_created": "2025-03-02T23:41:41.309Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2720,
+  "fields": {
+    "name": "Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields",
+    "location": "SRID=4326;POINT (-123.03337505588075 49.28381447906172)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.309Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2721,
+  "fields": {
+    "name": "Fountain location:\nHillcrest Park - North of playground",
+    "location": "SRID=4326;POINT (-123.106969 49.2456626)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.309Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2722,
+  "fields": {
+    "name": "Fountain location:\nJericho Beach Park",
+    "location": "SRID=4326;POINT (-123.19172152670885 49.27201435405524)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.309Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2723,
+  "fields": {
+    "name": "Fountain location:\nJonathan Rogers Park",
+    "location": "SRID=4326;POINT (-123.10749900955489 49.26426982320041)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.309Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2724,
+  "fields": {
+    "name": "Fountain location:\nKillarney Park - E 45th Ave. @ Killarney St.",
+    "location": "SRID=4326;POINT (-123.04532770779115 49.22930011794244)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2725,
+  "fields": {
+    "name": "Fountain location:\nKillarney Park - East of wading pool",
+    "location": "SRID=4326;POINT (-123.04186669078801 49.227164074533114)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2726,
+  "fields": {
+    "name": "Fountain location:\nKitsilano Beach Park - South of playground",
+    "location": "SRID=4326;POINT (-123.153186687643 49.27478748031104)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2727,
+  "fields": {
+    "name": "Fountain location:\nLangara Golf Course - clubhouse building",
+    "location": "SRID=4326;POINT (-123.11252814833458 49.22389007931097)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2728,
+  "fields": {
+    "name": "Fountain location:\nLocarno Beach Park",
+    "location": "SRID=4326;POINT (-123.20714961781954 49.27507501211316)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2729,
+  "fields": {
+    "name": "Fountain location:\nMacDonald Park",
+    "location": "SRID=4326;POINT (-123.09849604345541 49.230075113614106)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2730,
+  "fields": {
+    "name": "Fountain location:\nMaple Grove Park - South of baseball diamond",
+    "location": "SRID=4326;POINT (-123.16081645575363 49.22361195604753)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2731,
+  "fields": {
+    "name": "Fountain location:\nMarpole Park",
+    "location": "SRID=4326;POINT (-123.13894336301057 49.20572859250458)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2732,
+  "fields": {
+    "name": "Fountain location:\nMcCleery Golf Course - servive yard",
+    "location": "SRID=4326;POINT (-123.17072538868275 49.22073774832735)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2733,
+  "fields": {
+    "name": "Fountain location:\nMoberly Park - Arts & Cultural Centre",
+    "location": "SRID=4326;POINT (-123.08718501007823 49.21544341401607)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2734,
+  "fields": {
+    "name": "Fountain location:\nMorton Park",
+    "location": "SRID=4326;POINT (-123.14224916999193 49.287535297882734)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2735,
+  "fields": {
+    "name": "Fountain location:\nNanaimo Park",
+    "location": "SRID=4326;POINT (-123.05690478396131 49.228382094384926)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2736,
+  "fields": {
+    "name": "Fountain location:\nNelson Park",
+    "location": "SRID=4326;POINT (-123.12996610354612 49.28294420590987)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2737,
+  "fields": {
+    "name": "Fountain location:\nNorquay Park",
+    "location": "SRID=4326;POINT (-123.05081271824574 49.23827830254492)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2738,
+  "fields": {
+    "name": "Fountain location:\nOak Park - East of fieldhouse",
+    "location": "SRID=4326;POINT (-123.12814026541413 49.21698683039526)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2739,
+  "fields": {
+    "name": "Fountain location:\nOak Park - East of spray park",
+    "location": "SRID=4326;POINT (-123.12737226202022 49.216689824099134)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2740,
+  "fields": {
+    "name": "Fountain location:\nOak Park - North west of field hockey",
+    "location": "SRID=4326;POINT (-123.12910727287776 49.21671182405714)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2741,
+  "fields": {
+    "name": "Fountain location:\nPandora Park",
+    "location": "SRID=4326;POINT (-123.0573907228131 49.28241944355695)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2742,
+  "fields": {
+    "name": "Fountain location:\nPark Site On South East False Creek - Hinge",
+    "location": "SRID=4326;POINT (-123.11019100783243 49.27115666646443)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2743,
+  "fields": {
+    "name": "Fountain location:\nPioneer Place (Pigeon Park)",
+    "location": "SRID=4326;POINT (-123.10448994330177 49.281769090820944)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2744,
+  "fields": {
+    "name": "Fountain location:\nQueen Elizabeth Park - 37th and Ontario",
+    "location": "SRID=4326;POINT (-123.10560606822328 49.23752526603095)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2745,
+  "fields": {
+    "name": "Fountain location:\nRiley Park",
+    "location": "SRID=4326;POINT (-123.10479228037154 49.2426880999357)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.310Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2746,
+  "fields": {
+    "name": "Fountain location:\nRiverfront Park - West of tennis courts",
+    "location": "SRID=4326;POINT (-123.05096580744122 49.205843628445386)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2747,
+  "fields": {
+    "name": "Fountain location:\nRoss Park",
+    "location": "SRID=4326;POINT (-123.08261997732612 49.21705184897251)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2748,
+  "fields": {
+    "name": "Fountain location:\nRupert Park - South of golf entrance booth",
+    "location": "SRID=4326;POINT (-123.03062049301315 49.27317703975057)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2749,
+  "fields": {
+    "name": "Fountain location:\nSeaforth Peace Park",
+    "location": "SRID=4326;POINT (-123.14619023821574 49.27109595186446)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2750,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - Brockton Cricket Pavilion",
+    "location": "SRID=4326;POINT (-123.148332 49.310653)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:41:41.284Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2751,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - Dog Off-leash area",
+    "location": "SRID=4326;POINT (-123.148332 49.310653)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:41:41.284Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2752,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - Prospect Point Lookout",
+    "location": "SRID=4326;POINT (-123.1424377015813 49.313489270665016)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2753,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - Prospect Point Picnic Site",
+    "location": "SRID=4326;POINT (-123.14818844616497 49.31072472615588)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2754,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - Tennis Courts",
+    "location": "SRID=4326;POINT (-123.14599767463297 49.292326017929625)",
+    "is_active": true,
+    "in_operation": "year-round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2755,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - Third Beach Seawall",
+    "location": "SRID=4326;POINT (-123.15632021825063 49.30326262273198)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2756,
+  "fields": {
+    "name": "Fountain location:\nStrathcona Park - besides baseball diamond",
+    "location": "SRID=4326;POINT (-123.08667384655139 49.27493305453203)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2757,
+  "fields": {
+    "name": "Fountain location:\nSutcliffe Park",
+    "location": "SRID=4326;POINT (-123.13401616561772 49.26922691690112)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2758,
+  "fields": {
+    "name": "Fountain location:\nTecumseh Park",
+    "location": "SRID=4326;POINT (-123.07017586403101 49.2297128163117)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2759,
+  "fields": {
+    "name": "Fountain location:\nTrafalgar Park",
+    "location": "SRID=4326;POINT (-123.16382240251893 49.25137853323129)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2760,
+  "fields": {
+    "name": "Fountain location:\nTrillium Park",
+    "location": "SRID=4326;POINT (-123.09310688779313 49.27506635498275)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2761,
+  "fields": {
+    "name": "Fountain location:\nVanier Park (Burrard Civic Marina)",
+    "location": "SRID=4326;POINT (-123.13975418570803 49.27521804024948)",
+    "is_active": true,
+    "in_operation": "year-round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2762,
+  "fields": {
+    "name": "Fountain location:\nW.C. Shelly Park",
+    "location": "SRID=4326;POINT (-123.07309279284456 49.26315381297962)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2763,
+  "fields": {
+    "name": "Fountain location:\nWest Point Grey Park - North of wading pool",
+    "location": "SRID=4326;POINT (-123.20524762794798 49.266126826024426)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2764,
+  "fields": {
+    "name": "Temporary Misting Station Location: Oppenheimer Park",
+    "location": "SRID=4326;POINT (-123.093796 49.282808)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2765,
+  "fields": {
+    "name": "Temporary Misting Station location: Commercial & E 10th",
+    "location": "SRID=4326;POINT (-123.069583 49.261443)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2766,
+  "fields": {
+    "name": "Temporary Misting Station location: W 70th Ave & Hudson St",
+    "location": "SRID=4326;POINT (-123.134724 49.208585)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2767,
+  "fields": {
+    "name": "Bottle Filling Station location: \nGranville St Pumping Station",
+    "location": "SRID=4326;POINT (-123.131579 49.2733345)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2768,
+  "fields": {
+    "name": "Bottle Filling Station location: \nKitsilano Pumping Station",
+    "location": "SRID=4326;POINT (-123.1527806 49.2737142)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.311Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2769,
+  "fields": {
+    "name": "Bottle Filling Station location: \nThornton Park Pumping Station",
+    "location": "SRID=4326;POINT (-123.098886 49.2730368)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.312Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2770,
+  "fields": {
+    "name": "Fountain location:\n1650 W 7th",
+    "location": "SRID=4326;POINT (-123.142081 49.265329)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": true,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.312Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2771,
+  "fields": {
+    "name": "Fountain location:\n39th & Nanaimo",
+    "location": "SRID=4326;POINT (-123.058912 49.234752)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.312Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2772,
+  "fields": {
+    "name": "Fountain location:\n4th & Arbutus",
+    "location": "SRID=4326;POINT (-123.152706 49.26822777)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.312Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2773,
+  "fields": {
+    "name": "Fountain location:\n7th & Yukon",
+    "location": "SRID=4326;POINT (-123.112967 49.2646599)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.312Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2774,
+  "fields": {
+    "name": "Fountain location:\nBroadway & Ontario",
+    "location": "SRID=4326;POINT (-123.105026 49.262875)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.312Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2775,
+  "fields": {
+    "name": "Fountain location:\nBurrard & Davie",
+    "location": "SRID=4326;POINT (-123.12923210062 49.2792475453812)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.312Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2776,
+  "fields": {
+    "name": "Fountain location:\nGilford & Comox",
+    "location": "SRID=4326;POINT (-123.14128655 49.28977703)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.315Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2777,
+  "fields": {
+    "name": "Fountain location:\nGilford & Nelson",
+    "location": "SRID=4326;POINT (-123.14022516 49.29049866)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.315Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2778,
+  "fields": {
+    "name": "Fountain location:\nHastings & Kamloops",
+    "location": "SRID=4326;POINT (-123.054448 49.280998)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.315Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2779,
+  "fields": {
+    "name": "Fountain location:\nNicola & Beach",
+    "location": "SRID=4326;POINT (-123.140508 49.282385)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.315Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2780,
+  "fields": {
+    "name": "Fountain location: 733 W 14th Avenue",
+    "location": "SRID=4326;POINT (-123.121414 49.258738)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.315Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2781,
+  "fields": {
+    "name": "Fountain location: Cambie & 29th Avenue",
+    "location": "SRID=4326;POINT (-123.116339 49.245083)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.315Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2782,
+  "fields": {
+    "name": "Fountain location: Gilford St & Haro St",
+    "location": "SRID=4326;POINT (-123.138092 49.291825)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": true,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.315Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2783,
+  "fields": {
+    "name": "Fountain location: Ormidale St & Vanness Avenue",
+    "location": "SRID=4326;POINT (-123.024717 49.234702)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.315Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2784,
+  "fields": {
+    "name": "Fountain location: W 63rd Avenue & Yukon Street",
+    "location": "SRID=4326;POINT (-123.114629 49.213173)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.315Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2785,
+  "fields": {
+    "name": "Fountain location:Nelson & Howe",
+    "location": "SRID=4326;POINT (-123.123513 49.279672)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.315Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2786,
+  "fields": {
+    "name": "Temporary Fountain location: Commercial & E Broadway",
+    "location": "SRID=4326;POINT (-123.069471 49.262436)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.315Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2787,
+  "fields": {
+    "name": "Temporary Fountain location: Main & E Hastings",
+    "location": "SRID=4326;POINT (-123.099907 49.281431)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.315Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2788,
+  "fields": {
+    "name": "Temporary Fountain location: Powell & Gore",
+    "location": "SRID=4326;POINT (-123.097852 49.283263)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.316Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2789,
+  "fields": {
+    "name": "Temporary Fountain location: Powell & Jackson",
+    "location": "SRID=4326;POINT (-123.093446 49.283174)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.316Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2790,
+  "fields": {
+    "name": "Temporary Handwashing Station location: 201 Central",
+    "location": "SRID=4326;POINT (-123.099444 49.271398)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.316Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2791,
+  "fields": {
+    "name": "Temporary Handwashing Station location: 384 Main",
+    "location": "SRID=4326;POINT (-123.097359 49.281754)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.316Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2792,
+  "fields": {
+    "name": "Temporary Handwashing Station location: ICBC 999 Kingsway",
+    "location": "SRID=4326;POINT (-123.085449 49.254676)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.316Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2793,
+  "fields": {
+    "name": "Fountain location:\nAlmond Park",
+    "location": "SRID=4326;POINT (-123.18474450987034 49.26108572763105)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.316Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2794,
+  "fields": {
+    "name": "Fountain location:\nArbutus Village Park",
+    "location": "SRID=4326;POINT (-123.157976371445 49.248784480708856)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.316Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2795,
+  "fields": {
+    "name": "Fountain location:\nBeaconsfield Park",
+    "location": "SRID=4326;POINT (-123.05005566614936 49.25529665790978)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.316Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2796,
+  "fields": {
+    "name": "Fountain location:\nCarnarvon Park",
+    "location": "SRID=4326;POINT (-123.17249944309232 49.25703164790549)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.316Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2797,
+  "fields": {
+    "name": "Fountain location:\nClinton Park - East side of wading pool",
+    "location": "SRID=4326;POINT (-123.05012162418116 49.27080498248805)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.316Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2798,
+  "fields": {
+    "name": "Fountain location:\nCoal Harbour Park",
+    "location": "SRID=4326;POINT (-123.12537005471899 49.28997735565045)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.316Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2799,
+  "fields": {
+    "name": "Fountain location:\nDavid Lam Park - South west of playgrounds",
+    "location": "SRID=4326;POINT (-123.12327408831909 49.27249998987751)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.317Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2800,
+  "fields": {
+    "name": "Fountain location:\nDouglas Park (community centre)",
+    "location": "SRID=4326;POINT (-123.12248713679699 49.252041562131495)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.317Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2801,
+  "fields": {
+    "name": "Fountain location:\nElm Park",
+    "location": "SRID=4326;POINT (-123.16338644585873 49.2335891619661)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.317Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2802,
+  "fields": {
+    "name": "Fountain location:\nEmery Barnes Park - Dog off-leash area",
+    "location": "SRID=4326;POINT (-123.12378107952713 49.277097085980934)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.317Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2803,
+  "fields": {
+    "name": "Fountain location:\nFraser River Park - park entrance by Angus Dr",
+    "location": "SRID=4326;POINT (-123.14932242480502 49.20723462029865)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.319Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2804,
+  "fields": {
+    "name": "Fountain location:\nGeorge Park",
+    "location": "SRID=4326;POINT (-123.09358705827185 49.212521750458855)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2805,
+  "fields": {
+    "name": "Fountain location:\nGrandview Park - West of Stage",
+    "location": "SRID=4326;POINT (-123.07079528098261 49.27367804148393)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2806,
+  "fields": {
+    "name": "Fountain location:\nGrays Park",
+    "location": "SRID=4326;POINT (-123.08497892775704 49.24108234786047)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2807,
+  "fields": {
+    "name": "Fountain location:\nHastings Community Park - South of wading pool",
+    "location": "SRID=4326;POINT (-123.03820552198269 49.280485189595346)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2808,
+  "fields": {
+    "name": "Fountain location:\nHillcrest Park - East side",
+    "location": "SRID=4326;POINT (-123.10695405521624 49.24576803722393)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2809,
+  "fields": {
+    "name": "Fountain location:\nKaslo Park",
+    "location": "SRID=4326;POINT (-123.04513661129735 49.26405984253122)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2810,
+  "fields": {
+    "name": "Fountain location:\nKerrisdale Centennial Park",
+    "location": "SRID=4326;POINT (-123.15718540627705 49.23343616142541)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2811,
+  "fields": {
+    "name": "Fountain location:\nKitsilano Beach Park - North of parking lot",
+    "location": "SRID=4326;POINT (-123.15172825900372 49.276845069596696)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2812,
+  "fields": {
+    "name": "Fountain location:\nKitsilano Beach Park - washroom wall",
+    "location": "SRID=4326;POINT (-123.15380496982891 49.27448261571296)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2813,
+  "fields": {
+    "name": "Fountain location:\nLangara Golf Course - cambie pathway",
+    "location": "SRID=4326;POINT (-123.11632117402527 49.22318016335154)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2814,
+  "fields": {
+    "name": "Fountain location:\nLangara Golf Course - servive yard",
+    "location": "SRID=4326;POINT (-123.11170640059784 49.21827204955769)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2815,
+  "fields": {
+    "name": "Fountain location:\nMaclean Park",
+    "location": "SRID=4326;POINT (-123.08942685427833 49.27894833743796)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2816,
+  "fields": {
+    "name": "Fountain location:\nMajor Matthews Park",
+    "location": "SRID=4326;POINT (-123.10699401283071 49.26168106933267)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2817,
+  "fields": {
+    "name": "Fountain location:\nMaple Grove Park - East of pool",
+    "location": "SRID=4326;POINT (-123.15968744948694 49.22328494934488)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2818,
+  "fields": {
+    "name": "Fountain location:\nMcCleery Golf Course - 5th tee",
+    "location": "SRID=4326;POINT (-123.17088052677056 49.22048268726047)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2819,
+  "fields": {
+    "name": "Fountain location:\nMelbourne Park",
+    "location": "SRID=4326;POINT (-123.02909158487584 49.2365292742264)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2820,
+  "fields": {
+    "name": "Fountain location:\nMemorial South Park - West of Softball Diamond",
+    "location": "SRID=4326;POINT (-123.08475728792786 49.231628076232425)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2821,
+  "fields": {
+    "name": "Fountain location:\nMemorial West Park",
+    "location": "SRID=4326;POINT (-123.18728157172303 49.24346335953531)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2822,
+  "fields": {
+    "name": "Fountain location:\nMount Pleasant Park",
+    "location": "SRID=4326;POINT (-123.10643102129615 49.25697067120588)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2823,
+  "fields": {
+    "name": "Fountain location:\nNew Brighton Park - South west of playground",
+    "location": "SRID=4326;POINT (-123.03867549952085 49.28953737894174)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.320Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2824,
+  "fields": {
+    "name": "Fountain location:\nNew Brighton Park - West of tennis courts",
+    "location": "SRID=4326;POINT (-123.03551547838973 49.289696384000045)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2825,
+  "fields": {
+    "name": "Fountain location:\nPark Site On South East False Creek",
+    "location": "SRID=4326;POINT (-123.10941362001645 49.27234240595487)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2826,
+  "fields": {
+    "name": "Fountain location:\nQueen Elizabeth Park - Pitch and Putt Course",
+    "location": "SRID=4326;POINT (-123.11152710106677 49.23927230037656)",
+    "is_active": true,
+    "in_operation": "year-round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2827,
+  "fields": {
+    "name": "Fountain location:\nQuilchena Park",
+    "location": "SRID=4326;POINT (-123.1488133244043 49.24472539986782)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2828,
+  "fields": {
+    "name": "Fountain location:\nRenfrew Community Park",
+    "location": "SRID=4326;POINT (-123.04207062382282 49.25221559661864)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2829,
+  "fields": {
+    "name": "Fountain location:\nRiverfront Park - East of washrooms",
+    "location": "SRID=4326;POINT (-123.05180181298957 49.20585962877704)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2830,
+  "fields": {
+    "name": "Fountain location:\nRoss Park",
+    "location": "SRID=4326;POINT (-123.08241897664004 49.21691584630587)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2831,
+  "fields": {
+    "name": "Fountain location:\nRupert Park",
+    "location": "SRID=4326;POINT (-123.03306351417534 49.27122599793046)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2832,
+  "fields": {
+    "name": "Fountain location:\nSeawall - Creekside",
+    "location": "SRID=4326;POINT (-123.10573882205857 49.27218289136859)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2833,
+  "fields": {
+    "name": "Fountain location:\nShannon Mews Park",
+    "location": "SRID=4326;POINT (-123.14147665855549 49.21970273952661)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2834,
+  "fields": {
+    "name": "Fountain location:\nSlocan Greenway",
+    "location": "SRID=4326;POINT (-123.0497356630516 49.25835999543246)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2835,
+  "fields": {
+    "name": "Fountain location:\nSlocan Park",
+    "location": "SRID=4326;POINT (-123.04835768589251 49.24439943119382)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2836,
+  "fields": {
+    "name": "Fountain location:\nSpanish Banks Beach Park",
+    "location": "SRID=4326;POINT (-123.2223817077116 49.27759005971061)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2837,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - Admin building",
+    "location": "SRID=4326;POINT (-123.148332 49.310653)",
+    "is_active": true,
+    "in_operation": "year-round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:41:41.284Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2838,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - Lumbermen's Arch",
+    "location": "SRID=4326;POINT (-123.1306800546251 49.30310662903523)",
+    "is_active": true,
+    "in_operation": "year-round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2839,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - North east of Rose and Perennial Ga",
+    "location": "SRID=4326;POINT (-123.13414455639086 49.29913054667917)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2840,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - Putting Green",
+    "location": "SRID=4326;POINT (-123.14647218147267 49.293113413609824)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2841,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - Second Beach",
+    "location": "SRID=4326;POINT (-123.15001256396323 49.294985445746754)",
+    "is_active": true,
+    "in_operation": "year-round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2842,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - Second Beach Pool",
+    "location": "SRID=4326;POINT (-123.15104120435711 49.295573663121964)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2843,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - South west of playground",
+    "location": "SRID=4326;POINT (-123.148332 49.310653)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:41:41.284Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2844,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - West of Shore to Shore sculpture",
+    "location": "SRID=4326;POINT (-123.1206750891925 49.29905793154208)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.321Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2845,
+  "fields": {
+    "name": "Fountain location:\nSunrise Park",
+    "location": "SRID=4326;POINT (-123.03565354298085 49.26699890812438)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.322Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2846,
+  "fields": {
+    "name": "Fountain location:\nSunset Beach",
+    "location": "SRID=4326;POINT (-123.1380051652894 49.27900212016302)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.322Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2847,
+  "fields": {
+    "name": "Fountain location:\nVandusen Botanical Garden",
+    "location": "SRID=4326;POINT (-123.1294242143457 49.23950659846841)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.322Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2848,
+  "fields": {
+    "name": "Fountain location:\nWest End minipark - JERVIS ST @ BURNABY ST",
+    "location": "SRID=4326;POINT (-123.13603714371125 49.28209318599128)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.322Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2849,
+  "fields": {
+    "name": "Fountain location:\nWest Point Grey Park - lawn bowling court",
+    "location": "SRID=4326;POINT (-123.20514683290192 49.266959448015996)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.322Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2850,
+  "fields": {
+    "name": "Fountain location:\nWinona Park",
+    "location": "SRID=4326;POINT (-123.1130441730933 49.21594381468852)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.324Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2851,
+  "fields": {
+    "name": "Temporary Misting Station location: Andy Livingston Park",
+    "location": "SRID=4326;POINT (-123.105654 49.279211)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.324Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2852,
+  "fields": {
+    "name": "Temporary Misting Station location: Granville & W 10th",
+    "location": "SRID=4326;POINT (-123.138411 49.262698)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.324Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2853,
+  "fields": {
+    "name": "Temporary Misting Station location: Nelson Park",
+    "location": "SRID=4326;POINT (-123.129159 49.281931)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.324Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2854,
+  "fields": {
+    "name": "Temporary Misting Station location: Robson & Cardero",
+    "location": "SRID=4326;POINT (-123.132493 49.289447)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.324Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2855,
+  "fields": {
+    "name": "Temporary Misting Station location: West Blvd & W 45th",
+    "location": "SRID=4326;POINT (-123.155629 49.230778)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.324Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2856,
+  "fields": {
+    "name": "Bottle Filling Station location: \nCharleson Park Pumping Station",
+    "location": "SRID=4326;POINT (-123.125914 49.2663411)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.324Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2857,
+  "fields": {
+    "name": "Bottle Filling Station location: \nGrandview Hwy Pumping Station",
+    "location": "SRID=4326;POINT (-123.041381 49.257924)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2858,
+  "fields": {
+    "name": "Fountain location : E 30th Ave & Gladstone St",
+    "location": "SRID=4326;POINT (-123.0624878 49.242966)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2859,
+  "fields": {
+    "name": "Fountain location:\n28th & Main",
+    "location": "SRID=4326;POINT (-123.10102 49.245762)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2860,
+  "fields": {
+    "name": "Fountain location:\n37th & Oak",
+    "location": "SRID=4326;POINT (-123.127384 49.237587)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2861,
+  "fields": {
+    "name": "Fountain location:\n37th & Ontario",
+    "location": "SRID=4326;POINT (-123.105647 49.237446)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2862,
+  "fields": {
+    "name": "Fountain location:\n37th & Prince Edward",
+    "location": "SRID=4326;POINT (-123.09728295 49.2371952)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": true,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2863,
+  "fields": {
+    "name": "Fountain location:\nAshburn & Elliot",
+    "location": "SRID=4326;POINT (-123.055044 49.2187548)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2864,
+  "fields": {
+    "name": "Fountain location:\nCardero & Burnaby",
+    "location": "SRID=4326;POINT (-123.13955439 49.28451988)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2865,
+  "fields": {
+    "name": "Fountain location:\nDenman & Nelson",
+    "location": "SRID=4326;POINT (-123.13854854 49.28922483)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2866,
+  "fields": {
+    "name": "Fountain location:\nElgin & 37th",
+    "location": "SRID=4326;POINT (-123.084037 49.2365274)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2867,
+  "fields": {
+    "name": "Fountain location:\nGranville & 59th",
+    "location": "SRID=4326;POINT (-123.139586 49.2173117)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2868,
+  "fields": {
+    "name": "Fountain location:\nHastings & Gore",
+    "location": "SRID=4326;POINT (-123.097231 49.281386)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2869,
+  "fields": {
+    "name": "Fountain location:\nRobson & Chilco",
+    "location": "SRID=4326;POINT (-123.13827002 49.29345716)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": true,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2870,
+  "fields": {
+    "name": "Fountain location:\nUnion & Hawks",
+    "location": "SRID=4326;POINT (-123.087389 49.2775724)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2871,
+  "fields": {
+    "name": "Fountain location: 10th & Kingsway",
+    "location": "SRID=4326;POINT (-123.098912 49.261984)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": true,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2872,
+  "fields": {
+    "name": "Fountain location: 4963 Cambie St",
+    "location": "SRID=4326;POINT (-123.117008 49.238962)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2873,
+  "fields": {
+    "name": "Fountain location: Davie & Bute (Jim Deva Plaza)",
+    "location": "SRID=4326;POINT (-123.133952 49.281882)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": true,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2874,
+  "fields": {
+    "name": "Fountain location: Oak & 46th",
+    "location": "SRID=4326;POINT (-123.127987 49.229344)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2875,
+  "fields": {
+    "name": "Fountain location: Point Grey Road & Waterloo",
+    "location": "SRID=4326;POINT (-123.179475 49.271936)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2876,
+  "fields": {
+    "name": "Fountain location: River District Crossing & E Kent Ave North",
+    "location": "SRID=4326;POINT (-123.031131 49.205331)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.325Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2877,
+  "fields": {
+    "name": "Fountain location:Pt.Grey & MacDonald",
+    "location": "SRID=4326;POINT (-123.167863 49.271674)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.326Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2878,
+  "fields": {
+    "name": "Fountian Location: Fraser & Broadway",
+    "location": "SRID=4326;POINT (-123.089225 49.262628)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.326Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2879,
+  "fields": {
+    "name": "Temporary Fountain location: 2067 W 15th Ave",
+    "location": "SRID=4326;POINT (-123.152452 49.25823)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.326Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2880,
+  "fields": {
+    "name": "Temporary Fountain location: London Drugs",
+    "location": "SRID=4326;POINT (-123.118113 49.282333)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.326Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2881,
+  "fields": {
+    "name": "Temporary Handwashing Station location: 15 E Hastings",
+    "location": "SRID=4326;POINT (-123.104022 49.281473)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.326Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2882,
+  "fields": {
+    "name": "Temporary Handwashing Station location: Dunlevy & E Cordova",
+    "location": "SRID=4326;POINT (-123.095427 49.282337)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.326Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2883,
+  "fields": {
+    "name": "Temporary Handwashing Station location: E Hastings & Columbia",
+    "location": "SRID=4326;POINT (-123.102144 49.281547)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.326Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2884,
+  "fields": {
+    "name": "Temporary Handwashing Station location: The Gathering Place",
+    "location": "SRID=4326;POINT (-123.123678 49.277664)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.326Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2885,
+  "fields": {
+    "name": "Fountain location:\nAdanac Park",
+    "location": "SRID=4326;POINT (-123.0241254441794 49.27596410057139)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.326Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2886,
+  "fields": {
+    "name": "Fountain location:\nAndy Livingstone Park - North of basketball court",
+    "location": "SRID=4326;POINT (-123.10617896100499 49.278917130264055)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.326Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2887,
+  "fields": {
+    "name": "Fountain location:\nArt Phillips Park (Discovery Square)",
+    "location": "SRID=4326;POINT (-123.12092403672209 49.28602527394457)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.326Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2888,
+  "fields": {
+    "name": "Fountain location:\nBalaclava Park",
+    "location": "SRID=4326;POINT (-123.17532748987207 49.24571941099743)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.326Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2889,
+  "fields": {
+    "name": "Fountain location:\nBurrard View Park",
+    "location": "SRID=4326;POINT (-123.05046757249366 49.290521395563395)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.326Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2890,
+  "fields": {
+    "name": "Fountain location:\nCedar Cottage Park",
+    "location": "SRID=4326;POINT (-123.07677246160404 49.260897510427014)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.326Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2891,
+  "fields": {
+    "name": "Fountain location:\nChaldecott Park",
+    "location": "SRID=4326;POINT (-123.19167358377561 49.24969048752799)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.326Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2892,
+  "fields": {
+    "name": "Fountain location:\nChina Creek South Park",
+    "location": "SRID=4326;POINT (-123.0790458346744 49.26174978155622)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.327Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2893,
+  "fields": {
+    "name": "Fountain location:\nClark Park",
+    "location": "SRID=4326;POINT (-123.07309180917856 49.256851681418766)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.327Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2894,
+  "fields": {
+    "name": "Fountain location:\nClinton Park - North side of ball diamond",
+    "location": "SRID=4326;POINT (-123.05167063296136 49.27138699405095)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.327Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2895,
+  "fields": {
+    "name": "Fountain location:\nCollingwood Park",
+    "location": "SRID=4326;POINT (-123.03636462915456 49.2370512820887)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.330Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2896,
+  "fields": {
+    "name": "Fountain location:\nConnaught Park - East side of fieldhouse",
+    "location": "SRID=4326;POINT (-123.15932134359271 49.26297477699926)",
+    "is_active": true,
+    "in_operation": "year-round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.330Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2897,
+  "fields": {
+    "name": "Fountain location:\nCoopers' Park",
+    "location": "SRID=4326;POINT (-123.11304201854614 49.27391462297168)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.330Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2898,
+  "fields": {
+    "name": "Fountain location:\nCoopers' Park - underneath bridge, near basket",
+    "location": "SRID=4326;POINT (-123.11463403132457 49.2729040014691)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.330Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2899,
+  "fields": {
+    "name": "Fountain location:\nCreekside Park",
+    "location": "SRID=4326;POINT (-123.10299407627441 49.27436956341148)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.330Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2900,
+  "fields": {
+    "name": "Fountain location:\nEbisu Park",
+    "location": "SRID=4326;POINT (-123.13283432618276 49.20551059072722)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.330Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2901,
+  "fields": {
+    "name": "Fountain location:\nEnglish Bay Beach Park - Davie st entrance",
+    "location": "SRID=4326;POINT (-123.14255817215084 49.28752529728865)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.330Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2902,
+  "fields": {
+    "name": "Fountain location:\nFalaise Park",
+    "location": "SRID=4326;POINT (-123.02996353965862 49.25494765836279)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.330Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2903,
+  "fields": {
+    "name": "Fountain location:\nFraserview Golf Course - 6th tee",
+    "location": "SRID=4326;POINT (-123.04567976712876 49.20831528164534)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.331Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2904,
+  "fields": {
+    "name": "Fountain location:\nFraserview Golf Course - clubhouse building",
+    "location": "SRID=4326;POINT (-123.05151778887551 49.214039497855346)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.331Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2905,
+  "fields": {
+    "name": "Fountain location:\nGarden Park",
+    "location": "SRID=4326;POINT (-123.05841268395888 49.268494930486206)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.331Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2906,
+  "fields": {
+    "name": "Fountain location:\nGaston Park",
+    "location": "SRID=4326;POINT (-123.03139559954171 49.236603275262475)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.331Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2907,
+  "fields": {
+    "name": "Fountain location:\nGeorge Wainborn Park",
+    "location": "SRID=4326;POINT (-123.12977813047853 49.271907974746064)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.331Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2908,
+  "fields": {
+    "name": "Fountain location:\nHarbour Green Park - foot of Jervis Mews",
+    "location": "SRID=4326;POINT (-123.12316503926135 49.29064536983438)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.331Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2909,
+  "fields": {
+    "name": "Fountain location:\nHastings Community Park - SE of tennis courts",
+    "location": "SRID=4326;POINT (-123.04060853748953 49.280475188141146)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.331Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2910,
+  "fields": {
+    "name": "Fountain location:\nHastings Park - Italian gardens",
+    "location": "SRID=4326;POINT (-123.04294354474824 49.28325024558667)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.331Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2911,
+  "fields": {
+    "name": "Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields",
+    "location": "SRID=4326;POINT (-123.034264 49.282563)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.331Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2912,
+  "fields": {
+    "name": "Fountain location:\nHastings Park -Plateau Sport Parks / Empire Fields",
+    "location": "SRID=4326;POINT (-123.03448505726166 49.28299828401808)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.331Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2913,
+  "fields": {
+    "name": "Fountain location:\nJohn Hendry (Trout Lake) Park",
+    "location": "SRID=4326;POINT (-123.06197074568475 49.25403462695769)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.331Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2914,
+  "fields": {
+    "name": "Fountain location:\nKensington Park",
+    "location": "SRID=4326;POINT (-123.07427486768654 49.238243292967304)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.332Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2915,
+  "fields": {
+    "name": "Fountain location:\nKingcrest Park",
+    "location": "SRID=4326;POINT (-123.0745638442458 49.247430484145035)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.332Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2916,
+  "fields": {
+    "name": "Fountain location:\nLangara Golf Course - East of tennis courts",
+    "location": "SRID=4326;POINT (-123.10632012065498 49.21951059074085)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.332Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2917,
+  "fields": {
+    "name": "Fountain location:\nMcBride Park",
+    "location": "SRID=4326;POINT (-123.18011946249462 49.26802887520497)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.332Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2918,
+  "fields": {
+    "name": "Fountain location:\nMcCleery Golf Course - clubhouse building",
+    "location": "SRID=4326;POINT (-123.16784850616567 49.221060000503236)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.334Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2919,
+  "fields": {
+    "name": "Fountain location:\nMcCleery Golf Course - driving range",
+    "location": "SRID=4326;POINT (-123.16961351863812 49.22069559153487)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.334Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2920,
+  "fields": {
+    "name": "Fountain location:\nMemorial South Park - West of wading pool",
+    "location": "SRID=4326;POINT (-123.08690730640086 49.231445967892725)",
+    "is_active": true,
+    "in_operation": "year-round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.334Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2921,
+  "fields": {
+    "name": "Fountain location:\nMoberly Park - West of tennis courts",
+    "location": "SRID=4326;POINT (-123.08458399526312 49.21493280370756)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.334Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2922,
+  "fields": {
+    "name": "Fountain location:\nMosaic Creek Park",
+    "location": "SRID=4326;POINT (-123.0742017723588 49.27329802539632)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.334Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2923,
+  "fields": {
+    "name": "Fountain location:\nNew Brighton Park - South of pool",
+    "location": "SRID=4326;POINT (-123.03665048696202 49.28937437677413)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.334Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2924,
+  "fields": {
+    "name": "Fountain location:\nOppenheimer Park",
+    "location": "SRID=4326;POINT (-123.09404187251305 49.28300722094974)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.334Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2925,
+  "fields": {
+    "name": "Fountain location:\nQueen Elizabeth Park - At Conservatory",
+    "location": "SRID=4326;POINT (-123.11352810609957 49.2423803644047)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.334Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2926,
+  "fields": {
+    "name": "Fountain location:\nRobson Park",
+    "location": "SRID=4326;POINT (-123.09189692645658 49.25789769612121)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.334Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2927,
+  "fields": {
+    "name": "Fountain location:\nRupert Park - East of fieldhouse",
+    "location": "SRID=4326;POINT (-123.03061150164847 49.27025397819598)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.334Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2928,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - Brockton Oval Fieldhouse",
+    "location": "SRID=4326;POINT (-123.12613848786123 49.29975598431441)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.334Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2929,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - Brockton Point Viewpoint",
+    "location": "SRID=4326;POINT (-123.148332 49.310653)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:41:41.284Z",
+    "date_created": "2025-03-02T23:41:41.334Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2930,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - Ceperley Washrooms",
+    "location": "SRID=4326;POINT (-123.14870677517186 49.293751732669826)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.334Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2931,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - Lawn Bowling Club",
+    "location": "SRID=4326;POINT (-123.148332 49.310653)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.334Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2932,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - Legends Of The Moon Washroom",
+    "location": "SRID=4326;POINT (-123.12128509247478 49.299634364378655)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2933,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - Prospect Point Washrooms",
+    "location": "SRID=4326;POINT (-123.14271559277007 49.312494515728226)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2934,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - Stanley Park Pavilion",
+    "location": "SRID=4326;POINT (-123.13379001924541 49.29960619520646)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2935,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - West of Restaurant",
+    "location": "SRID=4326;POINT (-123.1469851874114 49.292345397302135)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2936,
+  "fields": {
+    "name": "Fountain location:\nStanley Park - West side of Stanley Park Train",
+    "location": "SRID=4326;POINT (-123.13451408205303 49.301668197766205)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2937,
+  "fields": {
+    "name": "Fountain location:\nStrathcona Park - North west of basketball court",
+    "location": "SRID=4326;POINT (-123.08556206292319 49.27601569903952)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2938,
+  "fields": {
+    "name": "Fountain location:\nSunset Park",
+    "location": "SRID=4326;POINT (-123.09646723658864 49.22295426740642)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2939,
+  "fields": {
+    "name": "Fountain location:\nTea Swamp Park",
+    "location": "SRID=4326;POINT (-123.09857497062325 49.25746168419921)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2940,
+  "fields": {
+    "name": "Fountain location:\nTisdall Park",
+    "location": "SRID=4326;POINT (-123.11825117290374 49.22847607289638)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2941,
+  "fields": {
+    "name": "Fountain location:\nVancouver Technical HS",
+    "location": "SRID=4326;POINT (-123.05011946685549 49.26062486270534)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2942,
+  "fields": {
+    "name": "Fountain location:\nVandusen Botanical Garden - upper gardens",
+    "location": "SRID=4326;POINT (-123.12992421918467 49.23872068169798)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2943,
+  "fields": {
+    "name": "Fountain location:\nVictoria Park",
+    "location": "SRID=4326;POINT (-123.06674701318637 49.27171896210611)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2944,
+  "fields": {
+    "name": "Fountain location:\nVictory Square",
+    "location": "SRID=4326;POINT (-123.11005097846787 49.2819511927667)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2945,
+  "fields": {
+    "name": "Fountain location:\nWest End minipark",
+    "location": "SRID=4326;POINT (-123.1280300840173 49.285296255875174)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2946,
+  "fields": {
+    "name": "Fountain location:\nWoodland Park",
+    "location": "SRID=4326;POINT (-123.07340875242025 49.278548135565664)",
+    "is_active": true,
+    "in_operation": "spring to fall",
+    "pet_friendly": null,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2947,
+  "fields": {
+    "name": "Temporary Misting Station location: Columbia & Powell",
+    "location": "SRID=4326;POINT (-123.102033 49.283301)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2948,
+  "fields": {
+    "name": "Temporary Misting Station location: Main St & 14th Ave",
+    "location": "SRID=4326;POINT (-123.100806 49.258476)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2949,
+  "fields": {
+    "name": "Temporary Misting Station location: Thornton Park",
+    "location": "SRID=4326;POINT (-123.098856 49.273801)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2950,
+  "fields": {
+    "name": "Bottle Filling Station location: \nGranville Island Pumping Station",
+    "location": "SRID=4326;POINT (-123.136177 49.269566)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2951,
+  "fields": {
+    "name": "Fountain location:\n56th & Ontario",
+    "location": "SRID=4326;POINT (-123.106415 49.219505)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": true,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.335Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2952,
+  "fields": {
+    "name": "Fountain location:\nBroadway & Stephens",
+    "location": "SRID=4326;POINT (-123.1666474 49.26423514)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.336Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2953,
+  "fields": {
+    "name": "Fountain location:\nBroadway & Victoria",
+    "location": "SRID=4326;POINT (-123.065619 49.262066)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.336Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2954,
+  "fields": {
+    "name": "Fountain location:\nCommercial & 3rd",
+    "location": "SRID=4326;POINT (-123.06939067 49.2678194)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": true,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.336Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2955,
+  "fields": {
+    "name": "Fountain location:\nComox & Cardero",
+    "location": "SRID=4326;POINT (-123.136516 49.2867384)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.336Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2956,
+  "fields": {
+    "name": "Fountain location:\nComox & Chilco",
+    "location": "SRID=4326;POINT (-123.14264686 49.29067407)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.336Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2957,
+  "fields": {
+    "name": "Fountain location:\nComox & Denman",
+    "location": "SRID=4326;POINT (-123.13969 49.2887857)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.336Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2958,
+  "fields": {
+    "name": "Fountain location:\nGranville & Robson",
+    "location": "SRID=4326;POINT (-123.119937 49.281542)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.336Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2959,
+  "fields": {
+    "name": "Fountain location:\nMain & 11th",
+    "location": "SRID=4326;POINT (-123.100784 49.2610594)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.336Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2960,
+  "fields": {
+    "name": "Fountain location:\nNelson & Broughton",
+    "location": "SRID=4326;POINT (-123.13333675 49.28571023)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.336Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2961,
+  "fields": {
+    "name": "Fountain location: 10th & Willow",
+    "location": "SRID=4326;POINT (-123.122156 49.262387)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.336Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2962,
+  "fields": {
+    "name": "Fountain location: 11th & Prince Edward",
+    "location": "SRID=4326;POINT (-123.09634 49.261036)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": true,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.336Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2963,
+  "fields": {
+    "name": "Fountain location: 2001 W 10th Avenue",
+    "location": "SRID=4326;POINT (-123.152238 49.262911)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.336Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2964,
+  "fields": {
+    "name": "Fountain location: 375 W 59th Avenue",
+    "location": "SRID=4326;POINT (-123.11323 49.217003)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.336Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2965,
+  "fields": {
+    "name": "Fountain location: 8683 Kerr",
+    "location": "SRID=4326;POINT (-123.042394 49.20577)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": true,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.336Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2966,
+  "fields": {
+    "name": "Fountain location: Cambie & 10th",
+    "location": "SRID=4326;POINT (-123.114544 49.262294)",
+    "is_active": true,
+    "in_operation": "Year Round",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.336Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2967,
+  "fields": {
+    "name": "Temporary Fountain location: E Hastings & Heatley",
+    "location": "SRID=4326;POINT (-123.089387 49.281264)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.336Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2968,
+  "fields": {
+    "name": "Temporary Fountain location: Wessex & Kingsway",
+    "location": "SRID=4326;POINT (-123.034049 49.233332)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.336Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2969,
+  "fields": {
+    "name": "Temporary Handwashing Station location: Evelyne Saller Centre",
+    "location": "SRID=4326;POINT (-123.097629 49.284006)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.336Z"
+  }
+},
+{
+  "model": "resources.drinkingfountain",
+  "pk": 2970,
+  "fields": {
+    "name": "Temporary Handwashing Station location: Union Gospel Mission",
+    "location": "SRID=4326;POINT (-123.091297 49.281446)",
+    "is_active": true,
+    "in_operation": "May-October",
+    "pet_friendly": false,
+    "last_fetched": "2025-03-02T23:42:01.584Z",
+    "date_created": "2025-03-02T23:41:41.336Z"
+  }
+}
+]

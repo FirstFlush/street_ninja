@@ -119,7 +119,7 @@ class SMSService:
             location_text=self.sms_data.data.location_data.location
         )
         if location_id is not None:
-            logger.info(f"location id `{location_id}` found in location cache")
+            # logger.info(f"location id `{location_id}` found in location cache for `{self.sms_data.data.location_data.location}`")
             location = location_service.get_location(id=location_id)
         else:
             logger.info(f"No location id found in location cache. Creating new Location instance...")
