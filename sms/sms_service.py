@@ -74,7 +74,6 @@ class SMSService:
             inquiry_location=inquiry_location
         )
 
-
     def save_sms(self, sms_data: ResolvedSMS, location: Point | None, inquiry_location: Location | None) -> IncomingSMSMessageModel:
         self._set_persistence_service(
             sms_data=sms_data, 
@@ -148,6 +147,7 @@ class SMSService:
             phone_number: str, 
             message_sid: str|None=None
     ) -> str:
+        """"Primary orchestration method for the entire app."""
         sms_service = cls(msg=msg, phone_number=phone_number, message_sid=message_sid)
         sms_service.sms_data = sms_service.resolve()
         try:
