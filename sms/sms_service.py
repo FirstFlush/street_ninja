@@ -40,11 +40,12 @@ class SMSService:
         self.resolver = self._get_resolver()
         self.sms_data: None | ResolvedSMS = None
         self.persistence_service: None | PersistenceService = None
+        self.response_service: None | ResponseService = None
 
     def _get_resolver(self) -> SMSResolver:
         return SMSResolver(msg=self.msg)
 
-    def resolve(self) -> ResolvedSMS:
+    def _resolve(self) -> ResolvedSMS:
         try:
             return self.resolver.resolve_sms(
                 message_sid=self.message_sid,
@@ -55,7 +56,7 @@ class SMSService:
             send_sms_resolution_failed_email.delay(self.msg)
             raise
 
-    def geocode(self) -> Point | None:
+    def _geocode(self) -> Point | None:
         match self.sms_data.resolved_sms_type:
             case ResolvedSMSType.INQUIRY:
                 location = self._get_geocoded_location(location_str=self.sms_data.data.location_data.location)
@@ -109,20 +110,26 @@ class SMSService:
                 logger.error(msg)
                 raise TypeError(msg)
 
-    def _build_response_service(self, instance: IncomingSMSMessageModel) -> ResponseService:
-        return ResponseService(instance=instance)
 
-    def get_location(self) -> Location:
+    def _set_response_service(self, sms_instance: IncomingSMSMessageModel):
+        try:
+            response_service = ResponseService(instance=sms_instance)
+        except Exception as e:
+            logger.error(f"{e.__class__.__name__} while building response service: {e}")
+        else:
+            self.response_service = response_service
+
+
+    def _get_location(self) -> Location:
         location_service = LocationService()
         location_id = location_service.check_mapping(
             location_text=self.sms_data.data.location_data.location
         )
         if location_id is not None:
-            # logger.info(f"location id `{location_id}` found in location cache for `{self.sms_data.data.location_data.location}`")
             location = location_service.get_location(id=location_id)
         else:
             logger.info(f"No location id found in location cache. Creating new Location instance...")
-            point = self.geocode()
+            point = self._geocode()
             location = location_service.new_location(
                 resolved_location=self.sms_data.data.location_data,
                 point=point,
@@ -140,6 +147,78 @@ class SMSService:
             logger.error(msg)
             raise
 
+    def _build_response(self) -> SMSInquiryResponseData | SMSFollowUpResponseData | None:
+        if self.response_service is None:
+            msg = "SMSService.response_service is None! Can not build response."
+            logger.error(msg)
+            raise RuntimeError(msg)
+        else:
+            try:
+                return self.response_service.build_response_data()
+            except Exception as e:
+                logger.error(f"{e.__class__.__name__} while building response data: {e}")
+        return None
+
+
+    def _render_response(self, response_data: SMSInquiryResponseData | SMSFollowUpResponseData) -> str:
+        response_instance = self.save_response(response_data=response_data)
+        if response_instance:
+            wrapped_response_message = response_data.template.wrap_response(
+                msg=response_data.msg,
+                new_session=self.persistence_service.new_session,
+            )
+        else:
+            wrapped_response_message = self.response_service.build_help_msg()
+            
+        return wrapped_response_message
+
+
+    def _sms_intake(self) -> IncomingSMSMessageModel:
+        """
+        Resolves the incoming SMS message, performs geocoding (if required),
+        and saves the inquiry and related metadata to the database.
+
+        This method orchestrates the first half of the SMS processing flow:
+        - Parsing and resolving keyword, filters, and location text
+        - Looking up or geocoding the physical location
+        - Persisting the parsed SMS and location data
+        """
+        self.sms_data = self._resolve()
+        try:
+            if self.sms_data.resolved_sms_type == ResolvedSMSType.INQUIRY:
+                location = self._get_location()
+            else:
+                location = None
+        except Exception as e:
+            logger.error(f"Unexpected error `{e.__class__.__name__}` while parsing location: {e}")
+
+        return self.save_sms(
+            sms_data=self.sms_data, 
+            location=location.location if location is not None else None,
+            inquiry_location=location,
+        )
+
+    def _sms_response(self, sms_instance: IncomingSMSMessageModel):
+        """
+        Orchestrates the second half of the SMS processing flow by 
+        generating and formatting the final response message.
+
+        This method:
+        - Initializes the response service using the saved SMS instance
+        - Builds the response content based on the resolved SMS data
+        - Renders the final response string using the appropriate template
+
+        If response generation fails, a default help message is returned.
+        """
+        self._set_response_service(sms_instance)
+        response_data = self._build_response()
+        if response_data is None:
+            return HelpResponseTemplate.help_msg()
+        else:
+            return self._render_response(
+                response_data=response_data,
+            )
+
     @classmethod
     def process_sms(
             cls, 
@@ -149,43 +228,6 @@ class SMSService:
     ) -> str:
         """"Primary orchestration method for the entire app."""
         sms_service = cls(msg=msg, phone_number=phone_number, message_sid=message_sid)
-        sms_service.sms_data = sms_service.resolve()
-        try:
-            if sms_service.sms_data.resolved_sms_type == ResolvedSMSType.INQUIRY:
-                location = sms_service.get_location()
-            else:
-                location = None
-        except Exception as e:
-            logger.error(f"Unexpected error `{e.__class__.__name__}` while parsing location: {e}")
-
-        sms_service.save_sms(
-            sms_data=sms_service.sms_data, 
-            location=location.location if location is not None else None,
-            inquiry_location=location,
-        )
-
-        try:
-            response_service = sms_service._build_response_service(instance=sms_service.persistence_service.instance)
-        except Exception as e:
-            logger.error(f"{e.__class__.__name__} while building response service: {e}")
-        try:
-            response_data = response_service.build_response_data()
-        except Exception as e:
-            logger.error(f"{e.__class__.__name__} while building response data: {e}")
-
-        if response_data is not None:
-            response_instance = sms_service.save_response(response_data=response_data)
-            if response_instance:
-                wrapped_response_message = response_data.template.wrap_response(
-                    msg=response_data.msg,
-                    new_session=sms_service.persistence_service.new_session,
-                )
-            else:
-                wrapped_response_message = response_service.build_help_msg()
-                
-            return wrapped_response_message
-
-        else:
-            return HelpResponseTemplate.help_msg()
-
+        sms_instance = sms_service._sms_intake()
+        return sms_service._sms_response(sms_instance)
 

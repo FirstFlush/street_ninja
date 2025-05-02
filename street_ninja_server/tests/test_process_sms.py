@@ -39,8 +39,8 @@ def get_or_set_db_monkeypatch(self: ResourceCacheClient) -> list[FoodProgram]:
 @pytest.mark.django_db
 def test_process_sms(client, preload_all_resources, monkeypatch: MonkeyPatch):
 
-    monkeypatch.setattr(SMSService, "get_location", get_location_monkeypatch)
-    monkeypatch.setattr(SMSService, "geocode", geocode_monkeypatch)
+    monkeypatch.setattr(SMSService, "_get_location", get_location_monkeypatch)
+    monkeypatch.setattr(SMSService, "_geocode", geocode_monkeypatch)
     monkeypatch.setattr(ResourceCacheClient, "get_or_set_db", get_or_set_db_monkeypatch)
 
     response = SMSService.process_sms(
