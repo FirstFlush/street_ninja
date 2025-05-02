@@ -37,7 +37,7 @@ services:
     container_name: street_ninja_redis
     restart: always
     ports:
-      - "127.0.0.16380:6379"  # Binding 6380 externally
+      - "127.0.0.1:6380:6379"  # Binding 6380 externally
 
   celery-worker:
     user: "1000:1000"
