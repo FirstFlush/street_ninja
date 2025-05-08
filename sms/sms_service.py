@@ -1,4 +1,5 @@
 import logging
+import string
 from django.contrib.gis.geos import Point
 from django.contrib.sessions.backends.base import SessionBase
 from sms.resolvers import (
@@ -34,13 +35,22 @@ class SMSService:
             phone_number: str, 
             message_sid: str | None = None
     ):
-        self.msg = msg
+        self.msg = self._sanitize_sms(msg)
         self.phone_number = phone_number
         self.message_sid = message_sid
         self.resolver = self._get_resolver()
         self.sms_data: None | ResolvedSMS = None
         self.persistence_service: None | PersistenceService = None
         self.response_service: None | ResponseService = None
+
+    def _sanitize_sms(self, msg: str) -> str:
+        """
+        Sanitize incoming SMS message by: 
+            - removing non-printable control chars
+            - stripping leading/trailing whitespace
+            - truncating to 256 chars (to fit our DB schema)
+        """
+        return "".join(char for char in msg if char in string.printable).strip()[:256]
 
     def _get_resolver(self) -> SMSResolver:
         return SMSResolver(msg=self.msg)
