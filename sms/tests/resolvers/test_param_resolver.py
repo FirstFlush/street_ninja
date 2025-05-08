@@ -1,7 +1,7 @@
 import pytest
 from sms.resolvers import ParamResolver, ParamDict
-from sms.tests.resolvers.test_schemas import InquirySample
-from .testdata.inquiries import ALL_INQUIRIES
+from sms.tests.test_schemas import InquirySample
+from ..testdata.inquiries import ALL_INQUIRIES
 
 
 @pytest.mark.parametrize("sample", ALL_INQUIRIES)

@@ -1,7 +1,7 @@
 import pytest
 from sms.resolvers.keyword_and_language_resolver import ResolvedKeywordAndLanguage, KeywordLanguageResolver
-from sms.tests.resolvers.test_schemas import InquirySample
-from .testdata.inquiries import ALL_INQUIRIES
+from sms.tests.test_schemas import InquirySample
+from ..testdata.inquiries import ALL_INQUIRIES
 
 
 @pytest.mark.parametrize("sample", ALL_INQUIRIES)

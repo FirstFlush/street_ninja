@@ -19,7 +19,7 @@ class FollowUpSample:
     message: str
     location: None
     follow_up_enum: SMSFollowUpKeywordEnum
-    params: Optional[dict[FollowUpParams.SELECTION.value, int]] = field(default=None)
+    params: Optional[dict[FollowUpParams.SELECTION.value, int]] = field(default_factory=dict)
 
 
 @dataclass

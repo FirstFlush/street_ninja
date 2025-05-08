@@ -1,7 +1,7 @@
 import pytest
 from sms.resolvers.location import LocationResolver, ResolvedLocation
-from .testdata.inquiries import ALL_INQUIRIES
-from sms.tests.resolvers.test_schemas import InquirySample
+from ..testdata.inquiries import ALL_INQUIRIES
+from sms.tests.test_schemas import InquirySample
 
 
 

@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any, Optional
 from ..enums import ResolvedSMSType, SMSFollowUpKeywordEnum
 from .keyword_and_language_resolver import ResolvedKeywordAndLanguage
@@ -23,7 +23,7 @@ class ResolvedSMSFollowUp:
     msg: str
     # follow_up_keyword_enum: Optional[SMSFollowUpKeywordEnum] = None
     follow_up_keyword_enum: SMSFollowUpKeywordEnum
-    follow_up_params: Optional[dict[str, Any]] = None
+    follow_up_params: Optional[dict[str, Any]] = field(default_factory=dict)
 
 
 @dataclass

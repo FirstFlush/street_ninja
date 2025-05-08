@@ -2,8 +2,8 @@
 import pytest
 from sms.enums import FollowUpParams
 from sms.resolvers import SMSResolver
-from .testdata.follow_up import FOLLOWUP_INQUIRIES
-from sms.tests.resolvers.test_schemas import FollowUpSample
+from ..testdata.follow_up import FOLLOWUP_INQUIRIES
+from sms.tests.test_schemas import FollowUpSample
 
 
 @pytest.mark.parametrize("sample", FOLLOWUP_INQUIRIES)

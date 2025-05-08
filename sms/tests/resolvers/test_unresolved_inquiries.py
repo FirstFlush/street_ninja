@@ -1,7 +1,7 @@
 import pytest
 from sms.resolvers import SMSResolver
-from .testdata.unresolved import UNRESOLVED_INQUIRIES
-from sms.tests.resolvers.test_schemas import UnresolvedSample
+from ..testdata.unresolved import UNRESOLVED_INQUIRIES
+from sms.tests.test_schemas import UnresolvedSample
 
 
 @pytest.mark.parametrize("sample", UNRESOLVED_INQUIRIES)

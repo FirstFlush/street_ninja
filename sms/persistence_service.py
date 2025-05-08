@@ -27,7 +27,7 @@ class PersistenceService:
 
     def __init__(self, sms_data: ResolvedSMS, inquiry_location: Location | None = None):
         self.sms_data = sms_data
-        # self.location = location
+        self.sms_data.data.msg = self.sms_data.data.msg[:256]   # truncate to 256 for DB
         self.inquiry_location = inquiry_location
         self.now = now()
         logger.info(f"{self.__class__.__name__}.now stringified: `{self.now.strftime('%Y-%m-%d %H:%M:%S')}`")
@@ -36,7 +36,6 @@ class PersistenceService:
         self.conversation = conversation
         self.new_session = created
         self.instance : None | SMSInquiry | SMSFollowUpInquiry | UnresolvedSMSInquiry = None
-
 
     def _phone_number(self, phone_number: str) -> PhoneNumber:
         phone, created = PhoneNumber.objects.get_or_create(number=phone_number, defaults={"last_active": self.now})
@@ -51,11 +50,9 @@ class PersistenceService:
             logger.info(f"found active Conversation with id `{convo.id}`")
         return convo, created
 
-
     def _save_inquiry_sms(self) -> SMSInquiry:
         return SMSInquiry.objects.save_inquiry_sms(
             conversation=self.conversation,
-            # location=self.location,
             sms_data=self.sms_data.data,
             inquiry_location=self.inquiry_location,
         )
@@ -71,18 +68,6 @@ class PersistenceService:
             conversation=self.conversation,
             message=self.sms_data.data.msg,
         )
-
-
-    # def save_inquiry_response(self, response_data: SMSInquiryResponseData) -> SMSInquiryResponse:
-    #     response = SMSInquiryResponse.objects.create(
-    #         conversation=self.instance.conversation,
-    #         sms_inquiry=self.instance,
-    #         resource_ids=response_data.ids,
-    #     )
-    #     logger.info(f"Successfully created {response.__class__.__name__} `{response.id}`")
-    #     return response
-
-
 
     def save_sms(self):
         """

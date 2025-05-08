@@ -1,4 +1,4 @@
-from sms.tests.resolvers.test_schemas import InquirySample
+from sms.tests.test_schemas import InquirySample
 from sms.enums import SMSKeywordEnum
 from common.enums import LanguageEnum, LocationType
 from sms.resolvers.location import ResolvedLocation

@@ -1,9 +1,9 @@
 import pytest
 from sms.enums import ResolvedSMSType
 from sms.resolvers import SMSResolver
-from .testdata.inquiries.testdata_all_inquiries import ALL_INQUIRIES
-from .testdata.follow_up import FOLLOWUP_INQUIRIES
-from .testdata.unresolved import UNRESOLVED_INQUIRIES
+from ..testdata.inquiries.testdata_all_inquiries import ALL_INQUIRIES
+from ..testdata.follow_up import FOLLOWUP_INQUIRIES
+from ..testdata.unresolved import UNRESOLVED_INQUIRIES
 
 
 def create_registry() -> list[tuple[str, ResolvedSMSType]]:
