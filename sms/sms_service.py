@@ -65,20 +65,17 @@ class SMSService:
         return location
 
     def _set_persistence_service(
-            self, sms_data: ResolvedSMS, 
-            location: Point | None, 
+            self, sms_data: ResolvedSMS,
             inquiry_location: Location | None
     ):
         self.persistence_service =  PersistenceService(
-            sms_data=sms_data, 
-            location=location, 
+            sms_data=sms_data,
             inquiry_location=inquiry_location
         )
 
-    def save_sms(self, sms_data: ResolvedSMS, location: Point | None, inquiry_location: Location | None) -> IncomingSMSMessageModel:
+    def save_sms(self, sms_data: ResolvedSMS, inquiry_location: Location | None) -> IncomingSMSMessageModel:
         self._set_persistence_service(
             sms_data=sms_data, 
-            location=location,
             inquiry_location=inquiry_location,
         )
         self.persistence_service.save_sms()
@@ -194,7 +191,7 @@ class SMSService:
 
         return self.save_sms(
             sms_data=self.sms_data, 
-            location=location.location if location is not None else None,
+            # location=location.location if location is not None else None,
             inquiry_location=location,
         )
 

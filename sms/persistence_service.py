@@ -25,9 +25,9 @@ logger = logging.getLogger(__name__)
 
 class PersistenceService:
 
-    def __init__(self, sms_data: ResolvedSMS, location: Point|None = None, inquiry_location: Location | None = None):
+    def __init__(self, sms_data: ResolvedSMS, inquiry_location: Location | None = None):
         self.sms_data = sms_data
-        self.location = location
+        # self.location = location
         self.inquiry_location = inquiry_location
         self.now = now()
         logger.info(f"{self.__class__.__name__}.now stringified: `{self.now.strftime('%Y-%m-%d %H:%M:%S')}`")
