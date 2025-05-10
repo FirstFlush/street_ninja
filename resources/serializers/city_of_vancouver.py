@@ -1,78 +1,11 @@
-from dataclasses import asdict
 from rest_framework import serializers
-from sms.enums import SMSKeywordEnum
+from .base_resource import ResourceSerializer, GeoPointSerializer
 from common.serializer_fields import YesNoBooleanField
-from .dataclasses import MapPoint, MapData
-
-
-class MapPointSerializer(serializers.Serializer):
-    longitude = serializers.FloatField()
-    latitude = serializers.FloatField()
-
-    def to_representation(self, instance: MapPoint):
-        """Convert MapPoint dataclass to JSON"""
-        return asdict(instance)
-
-
-class MapDataSerializer(serializers.Serializer):
-    data = serializers.DictField(
-        child=MapPointSerializer(many=True),
-    )
-
-    def validate_data(self, value):
-        """Ensure only allowed resource types exist in the dictionary."""
-        allowed_keys = set([value.lower() for value in SMSKeywordEnum.values])
-        invalid_keys = set(value.keys()) - allowed_keys
-        if invalid_keys:
-            raise serializers.ValidationError(f"Invalid resource types: {', '.join(invalid_keys)}")
-        return value
-
-    def to_representation(self, instance: MapData):
-        """Convert MapData dataclass to JSON"""
-        return asdict(instance)
-
-
-class DirectionsSerializer(serializers.Serializer):
-
-    instruction = serializers.CharField()
-    distance = serializers.FloatField()
-
-
-# ===================================================================================
-# ===================================================================================
-# ===================================================================================
-
-
-class ResourceSerializer(serializers.Serializer):
-    """Base class for all Resource model serializers. Primarly for type-hinting."""
-    ...
 
 
 class CityOfVancouverSerializer(ResourceSerializer):
     ...
 
-
-class WigleSerializer(ResourceSerializer):
-    
-    ssid = serializers.CharField(max_length=256)
-    trilat = serializers.FloatField()
-    trilong = serializers.FloatField()
-    type = serializers.CharField(max_length=20)
-
-
-class GeoPointSerializer(ResourceSerializer):
-    lon = serializers.FloatField()
-    lat = serializers.FloatField()
-
-    def validate_lon(self, value):
-        if not -180 <= value <= 180:
-            raise serializers.ValidationError("Longitude must be between -180 and 180.")
-        return value
-
-    def validate_lat(self, value):
-        if not -90 <= value <= 90:
-            raise serializers.ValidationError("Latitude must be between -90 and 90.")
-        return value
 
 class ShelterSerializer(CityOfVancouverSerializer):
     facility    = serializers.CharField(max_length=256)
