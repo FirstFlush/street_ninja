@@ -7,7 +7,8 @@ from cache.redis.clients import ResourceCacheClient, PhoneSessionCacheClient
 from geo.geospatial import GeospatialService
 from resources.abstract_models import ResourceModel
 from sms.models import SMSFollowUpInquiry, SMSInquiry
-from .redis.access_patterns import AccessPatternDB, PhoneSessionAccessPattern
+from .redis.access_patterns.base_access_patterns import AccessPatternDB
+from .redis.access_patterns.phone_session import PhoneSessionAccessPattern
 
 
 logger = logging.getLogger(__name__)

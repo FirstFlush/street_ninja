@@ -8,7 +8,7 @@ from django.db import transaction, IntegrityError
 
 from common.dataclasses import RequestData
 from common.enums import HttpMethodEnum
-from resources.serializers import ResourceSerializer
+from resources.serializers.base_resource import ResourceSerializer
 from resources.abstract_models.base_model import ResourceModel
 from .clients import BaseAPIClient
 from .clients.enums import EndpointsEnum

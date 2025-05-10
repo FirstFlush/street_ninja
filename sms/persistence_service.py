@@ -15,7 +15,7 @@ from sms.models import (
     SMSFollowUpResponse,
     # SMSUnresolvedResponse
 )
-from sms.response import SMSInquiryResponseData, SMSFollowUpResponseData
+from sms.response.response_service import SMSInquiryResponseData, SMSFollowUpResponseData
 from sms.resolvers import ResolvedSMS
 from sms.enums import ResolvedSMSType, SMSFollowUpKeywordEnum
 

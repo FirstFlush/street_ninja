@@ -1,6 +1,5 @@
 from django.urls import path
-from .views import *
-from django.conf import settings
+from .views import MapView
 
 urlpatterns = [
     path("map/", MapView.as_view(), name='map'),  # /api/resources

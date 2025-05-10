@@ -7,7 +7,7 @@ from sms.resolvers import (
     ResolvedSMS,
     SMSResolutionError
 )
-from sms.response import (
+from sms.response.response_service import (
     SMSInquiryResponseData, 
     SMSFollowUpResponseData,
     ResponseService,
@@ -186,9 +186,9 @@ class SMSService:
         and saves the inquiry and related metadata to the database.
 
         This method orchestrates the first half of the SMS processing flow:
-        - Parsing and resolving keyword, filters, and location text
-        - Looking up or geocoding the physical location
-        - Persisting the parsed SMS and location data
+            - Parsing and resolving keyword, filters, and location text
+            - Looking up or geocoding the physical location
+            - Persisting the parsed SMS and location data
         """
         self.sms_data = self._resolve()
         try:
@@ -211,9 +211,9 @@ class SMSService:
         generating and formatting the final response message.
 
         This method:
-        - Initializes the response service using the saved SMS instance
-        - Builds the response content based on the resolved SMS data
-        - Renders the final response string using the appropriate template
+            - Initializes the response service using the saved SMS instance
+            - Builds the response content based on the resolved SMS data
+            - Renders the final response string using the appropriate template
 
         If response generation fails, a default help message is returned.
         """

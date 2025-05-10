@@ -7,7 +7,7 @@ from sms.models import SMSInquiry
 from .base_redis_client import BaseRedisClient
 from cache.dataclasses import PhoneSessionData
 from ..enums import RedisStoreEnum
-from ..access_patterns import PhoneSessionAccessPattern
+from ..access_patterns.phone_session import PhoneSessionAccessPattern
 
 
 logger = logging.getLogger(__name__)

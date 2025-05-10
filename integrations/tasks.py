@@ -8,18 +8,18 @@ from resources.models import (
     DrinkingFountain,
     PublicWifi,
 )
-from resources.serializers import (
+from resources.serializers.city_of_vancouver import (
     ShelterSerializer,
     FoodProgramSerializer,
     PublicToiletSerializer,
     DrinkingFountainSerializer,
-    WigleSerializer,
 )
+# from resources.serializers.wigle import WigleSerializer
 from street_ninja_server.celery import app
 from .integration_service import IntegrationServiceParams
 from .resource_fetcher import ResourceFetcher
-from .clients import VancouverAPIClient, WigleAPIClient
-from .clients.enums import VancouverEndpointsEnum, WigleEndpointsEnum
+from .clients import VancouverAPIClient#, WigleAPIClient
+from .clients.enums import VancouverEndpointsEnum#, WigleEndpointsEnum
 
 
 logger = logging.getLogger(__name__)

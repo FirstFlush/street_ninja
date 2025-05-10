@@ -1,7 +1,7 @@
 import logging
 from .base_redis_client import BaseRedisClient
 from ..enums import RedisStoreEnum
-from ..access_patterns import LocationMapAccessPattern
+from ..access_patterns.location import LocationMapAccessPattern
 
 
 logger = logging.getLogger(__name__)

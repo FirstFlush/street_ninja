@@ -1,23 +1,14 @@
 import logging
-from django.contrib.gis.geos import Point
 from collections import defaultdict
-from sms.enums import SMSKeywordEnum
-from .abstract_models import ResourceModel
 from .dataclasses import MapData, MapPoint
-from .models import Shelter, FoodProgram, DrinkingFountain, Toilet, PublicWifi
-
+from street_ninja_server.global_mappings import SMS_KEYWORD_ENUM_TO_RESOURCE_MODEL
 
 logger = logging.getLogger(__name__)
 
 
 class ResourceService:
-    RESOURCE_MODELS: dict[SMSKeywordEnum, ResourceModel] = {
-        SMSKeywordEnum.FOOD: FoodProgram,
-        SMSKeywordEnum.SHELTER: Shelter,
-        SMSKeywordEnum.WATER: DrinkingFountain,
-        SMSKeywordEnum.WIFI: PublicWifi,
-        SMSKeywordEnum.TOILET: Toilet,
-    }
+
+    RESOURCE_MODELS = SMS_KEYWORD_ENUM_TO_RESOURCE_MODEL
 
     def build_map_data(self) -> MapData | None:
         """  

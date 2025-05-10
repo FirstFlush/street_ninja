@@ -1,5 +1,5 @@
 from django.contrib.sessions.backends.base import SessionBase
-from cache.redis.access_patterns import WebSessionAccessPattern
+from cache.redis.access_patterns.web_session import WebSessionAccessPattern
 from cache.redis.clients.web_session_client import WebSessionCacheClient
 from .dataclasses import WebServiceData
 

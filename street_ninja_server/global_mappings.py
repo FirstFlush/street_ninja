@@ -40,23 +40,21 @@ from sms.response.response_templates.info_templates import (
     WifiInfoTemplate,
 )
 
-
-# SMS_KEYWORD_ENUM_TO_RESOURCE_MODEL = {
-#     SMSKeywordEnum.SHELTER: Shelter,
-#     SMSKeywordEnum.FOOD: FoodProgram,
-#     SMSKeywordEnum.TOILET: Toilet,
-#     SMSKeywordEnum.WATER: DrinkingFountain,
-#     SMSKeywordEnum.WIFI: PublicWifi,
-# }
-
+SMS_KEYWORD_ENUM_TO_RESOURCE_MODEL: dict[SMSKeywordEnum, ResourceModel] = {
+    SMSKeywordEnum.SHELTER: Shelter,
+    SMSKeywordEnum.FOOD: FoodProgram,
+    SMSKeywordEnum.TOILET: Toilet,
+    SMSKeywordEnum.WATER: DrinkingFountain,
+    SMSKeywordEnum.WIFI: PublicWifi,
+}
 
 ACCESS_PATTERN_TO_MODEL: dict[AccessPatternDB, ResourceModel] = {
-        FoodProgramAccessPattern: FoodProgram,
-        ShelterAccessPattern: Shelter,
-        DrinkingFountainAccessPattern: DrinkingFountain,
-        ToiletAccessPattern: Toilet,
-        PublicWifiAccessPattern: PublicWifi,
-    }
+    FoodProgramAccessPattern: FoodProgram,
+    ShelterAccessPattern: Shelter,
+    DrinkingFountainAccessPattern: DrinkingFountain,
+    ToiletAccessPattern: Toilet,
+    PublicWifiAccessPattern: PublicWifi,
+}
 
 SMS_KEYWORD_ENUM_TO_RESPONSE_TEMPLATE = {
     SMSKeywordEnum.SHELTER: ShelterResponseTemplate,
