@@ -4,7 +4,7 @@ from typing import Literal, Any
 
 @dataclass
 class MapPointData:
-    data: dict[str, Any]
+    info_template_data: str
 
 
 @dataclass

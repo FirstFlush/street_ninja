@@ -54,16 +54,6 @@ class ResourceModel(gis_models.Model):
             logger.error(msg, exc_info=True)
             raise
 
-    @property
-    def map_values(self) -> dict[str, Any]:
-        """
-        This property must be implemented in child classes.
-        Prepares data for the Street Ninja website's interactive map.
-        """
-        msg = f"{self.__class__.__name__} must implement map_values()"
-        logger.error(msg)
-        raise NotImplementedError(msg)
-
     @classmethod
     def get_location(cls, data:Any) -> Point:
         msg = f"{cls.__name__} must implement the `get_location` method."

@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.gis.db import models as gis_models
 from typing import Any
-from common.utils import convert_bool
 from sms.enums import SMSKeywordEnum
 from sms.resolvers.params.param_mappings.shelter import ShelterCategoryParamValue
 from .abstract_models import CityOfVancouverModel, WigleModel
@@ -27,15 +26,6 @@ class Shelter(CityOfVancouverModel):
     @property
     def resource_name(self) -> str:
         return self.facility
-
-    @property
-    def map_values(self) -> dict[str, Any]:
-        return {
-            "Facility": self.facility,
-            "Address": self.address,
-            "Category":self.category,
-            "Phone":self.phone,
-        }
 
     def __str__(self) -> str:
         return self.facility
@@ -76,13 +66,6 @@ class FoodProgram(CityOfVancouverModel):
     def resource_name(self) -> str:
         return self.program_name
     
-    @property
-    def map_values(self) -> dict[str, Any]:
-        return {
-            "Program": self.program_name,
-            "Organization": self.organization_name,
-            "Sign-up required": convert_bool(self.signup_required, abbreviated=False),
-        }
 
 class Toilet(CityOfVancouverModel):
 
@@ -110,15 +93,6 @@ class Toilet(CityOfVancouverModel):
     def resource_name(self) -> str:
         return self.name
 
-    @property
-    def map_values(self) -> dict[str, Any]:
-        return {
-            "Name": self.name,
-            "Address": self.address,
-            "Summer hours": self.summer_hours,
-            "Winter hours": self.winter_hours,
-        }
-
 
 class DrinkingFountain(CityOfVancouverModel):
 
@@ -136,13 +110,6 @@ class DrinkingFountain(CityOfVancouverModel):
     @property
     def resource_name(self) -> str:
         return self.name
-    
-    @property
-    def map_values(self) -> dict[str, Any]:
-        return {
-            "Name": self.name,
-            "In operation": self.in_operation,
-        }
 
     def __str__(self) -> str:
         return self.name
@@ -162,9 +129,3 @@ class PublicWifi(WigleModel):
     @property
     def resource_name(self) -> str:
         return self.ssid
-
-    @property
-    def map_values(self) -> dict[str, Any]:
-        return {
-            "Network": self.ssid,
-        }
