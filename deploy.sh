@@ -50,4 +50,8 @@ docker compose --env-file $ENV_FILE build --no-cache
 echo "[5/6] Starting containers..."
 docker compose --env-file $ENV_FILE up -d
 
-echo "Deployment complete. Reload Nginx server by running the command 'sudo systemctl reload nginx'"
+echo "[6/6] Cleaning up build cache..."
+docker builder prune --all --force
+
+echo "[SUCCESS] Deployment complete."
+echo "Reload Nginx server by running the command 'sudo systemctl reload nginx'"
