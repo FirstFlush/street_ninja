@@ -4,6 +4,11 @@ from sms.enums import SMSKeywordEnum
 from dataclasses import asdict
 
 
+class MapPinSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    resourceType = serializers.ChoiceField(choices=[s.lower() for s in SMSKeywordEnum.values])
+
+
 class MapPointSerializer(serializers.Serializer):
     longitude = serializers.FloatField()
     latitude = serializers.FloatField()

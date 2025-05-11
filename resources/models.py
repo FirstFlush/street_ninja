@@ -34,7 +34,7 @@ class Shelter(CityOfVancouverModel):
             "Facility": self.facility,
             "Address": self.address,
             "Category":self.category,
-            # "Phone":self.phone,
+            "Phone":self.phone,
         }
 
     def __str__(self) -> str:

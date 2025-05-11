@@ -3,11 +3,15 @@ from typing import Literal, Any
 
 
 @dataclass
+class MapPointData:
+    data: dict[str, Any]
+
+
+@dataclass
 class MapPoint:
     longitude: float
     latitude: float
-    key:int
-    data: dict[str, Any]
+    id: int
 
 
 @dataclass
