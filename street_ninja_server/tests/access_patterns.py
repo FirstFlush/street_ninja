@@ -7,3 +7,10 @@ class LocationMapAccessPatternTest(BaseRedisAccessPattern):
     redis_store_enum = RedisStoreEnum.TESTS
     redis_key_enum = TestKeyEnum.MAPPING
     key_ttl_enum = RedisKeyTTL.DAY
+
+
+class PhoneSessionAccessPatternTest(BaseRedisAccessPattern):
+
+    redis_store_enum = RedisStoreEnum.TESTS
+    redis_key_enum = TestKeyEnum.PHONE_SESSION
+    key_ttl_enum = RedisKeyTTL.HOUR

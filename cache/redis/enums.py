@@ -34,11 +34,12 @@ class LocationKeyEnum(RedisKeyEnum):
 
 class TestKeyEnum(RedisKeyEnum):
     MAPPING = "tests:location_mapping:all"
-    SHELTER = "shelter:all"
-    FOOD = "food:all"
-    WATER = "water:all"
-    TOILET = "toilet:all"
-    WIFI = "wifi:all"
+    SHELTER = "tests:shelter:all"
+    FOOD = "tests:food:all"
+    WATER = "tests:water:all"
+    TOILET = "tests:toilet:all"
+    WIFI = "tests:wifi:all"
+    PHONE_SESSION = "tests:phone_session"
 
 
 
