@@ -13,6 +13,7 @@ from .token_navigator import TokenNavigator
 from ..base_resolver import BaseKeywordResolver
 from .location_data import JUNK_WORDS
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -43,12 +44,16 @@ class LocationResolver(BaseKeywordResolver):
 
     @classmethod
     def resolve_location(cls, msg:str) -> ResolvedLocation:
-        instance = cls(msg=msg)
+        location_resolver = cls(msg=msg)
         try:
-            return instance._resolve_location()
+            resolved_location = location_resolver._resolve_location()
         except Exception as e:
             logger.error(f"LocationResolutionError for msg: `{msg}` from: {e}")
             raise LocationResolutionError(f"Could not resolve location for msg: `{msg}`") from e
+        else:
+            if resolved_location is None:
+                raise LocationResolutionError(f"Could not resolve location for msg: `{msg}`")
+            return resolved_location
 
     def __init__(self, msg:str):
         self.msg = msg
@@ -76,22 +81,34 @@ class LocationResolver(BaseKeywordResolver):
         expander = self.LOCATION_TYPE_TO_EXPANDER[location_type_enum]
         return expander(token_navigator=token_navigator)
 
-    def _resolve_location(self) -> ResolvedLocation:
+
+    def _resolve_location(self) -> ResolvedLocation | None:
         resolved_location = self._try_rules_priority()
-        if not resolved_location:
+        if resolved_location:
+            resolved_location.location = self._strip_junk_words(resolved_location.location)
+        else:
             self._try_rules_common()
             hot_token, location_type_enum = self._analyze_scoreboard()
-            expander = self._get_expander(
-                location_type_enum=location_type_enum,
-                token_navigator=self.token_navigator,
-            )
-            location = expander.expand_outward(token_index=hot_token)
-            resolved_location = ResolvedLocation(
-                location=location,
-                location_type=location_type_enum
-            )
-        resolved_location.location = self._strip_junk_words(resolved_location.location)
+            if location_type_enum is not None:
+                try:
+                    expander = self._get_expander(
+                        location_type_enum=location_type_enum,
+                        token_navigator=self.token_navigator,
+                    )
+                except Exception as e:
+                    logger.error(f"Failed to create expander for enum: `{location_type_enum}`")
+                    resolved_location = None
+                else:
+                    location = expander.expand_outward(token_index=hot_token)
+                    resolved_location = ResolvedLocation(
+                        location=location,
+                        location_type=location_type_enum
+                    )
+            else:
+                logger.warning("Could not determine LocationType enum. resolved_location is None")
+                resolved_location = None    
         return resolved_location
+
 
     def _analyze_scoreboard(self) -> tuple[int, LocationType]:
         """

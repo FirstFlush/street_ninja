@@ -1,11 +1,11 @@
 from .base_enum import StreetNinjaEnum
 
 
-
 class LocationType(StreetNinjaEnum):
     ADDRESS = "address"
     INTERSECTION = "intersection"
     LANDMARK = "landmark"
+    # NEIGHBORHOOD = "neighborhood"
 
 
 class LanguageEnum(StreetNinjaEnum):

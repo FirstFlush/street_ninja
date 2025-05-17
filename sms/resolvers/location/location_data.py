@@ -23,7 +23,7 @@ BAD_ADDRESS_TOKENS = {
     "shelter", "beds", "housing", "pet", "pets", "sleep", "takeout", "delivery", "deliver", "delivered",
     "bathroom", "toilet", "washroom", "restroom", "shit", "help", "wtf", "ok", "lol", "hurry",
     "piss", "poo", "pee", "hygiene", "hygene", "fuck", "cats",
-    "wifi", "internet", "connect", "pets", "animals", "dogs"
+    "wifi", "internet", "connect", "pets", "animals", "dogs", "soon",
     "shower", "hygiene", "drink", "hydration", "carts", "shopping", "shoppingcart", "shoppingcarts"
 }
 

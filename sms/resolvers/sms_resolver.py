@@ -73,7 +73,6 @@ class SMSResolver:
             resolved_sms = self._resolve_follow_up_sms()
             if resolved_sms is None:
                 resolved_sms = self._unresolved_sms()
-
         else:
             resolved_location = self._resolve_location()
             if resolved_location is None:

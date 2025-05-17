@@ -3,7 +3,6 @@ from datetime import datetime
 import json
 import logging
 from typing import Any, Type
-from sms.models import SMSInquiry
 from .base_redis_client import BaseRedisClient
 from cache.dataclasses import PhoneSessionData
 from ..enums import RedisStoreEnum
