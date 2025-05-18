@@ -34,6 +34,8 @@ class BaseModelCacheClient(BaseRedisClient):
             raise RedisClientException(f"Error unpickling binary data of size `{len(data)}` bytes.") from e
 
     def _to_list(self, qs) -> list:
+        if isinstance(qs, list):
+            return qs
         if hasattr(qs, "__iter__"):
             return list(qs)
         msg = f"{self.__class__.__name__} received invalid queryset type: {type(qs)}"

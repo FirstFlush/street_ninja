@@ -2,7 +2,6 @@ import logging
 from geo.models import Neighborhood
 from .base_redis_client import BaseRedisClient
 from .base_model_client import BaseModelCacheClient
-from ..enums import RedisStoreEnum
 from ..access_patterns.geo import LocationMapAccessPattern, NeighborhoodAccessPattern
 
 logger = logging.getLogger(__name__)

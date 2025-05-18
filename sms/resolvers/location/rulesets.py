@@ -1,6 +1,7 @@
 from abc import ABC
 import re
 from common.enums import LocationType
+from cache.redis.clients.geo_client import NeighborhoodCacheClient
 from sms.enums import SMSKeywordEnum
 from .location_data import (
     STREET_SUFFIXES, 
@@ -36,8 +37,18 @@ class PriorityRuleset(BaseLocationRuleset):
 
 
     @staticmethod
-    def detect_neighborhood(msg: str) -> tuple[str, LocationType] | None:
-        ...
+    def detect_neighborhood_with_keyword(msg: str) -> tuple[str, LocationType] | None:
+        """
+        Hits if the message is only "food Shaugnessy", but will fail on "food Shaughnessy St"
+        """
+        cache_client = NeighborhoodCacheClient()
+        hoods = cache_client.get_neighborhoods()
+        for hood in hoods:
+            if hood.name.lower() in msg.lower():
+                remainder = msg.replace(hood.name.lower(), "").strip()
+                for keyword in [keyword.lower() for keyword in SMSKeywordEnum.values]:
+                    if keyword == remainder:
+                        return hood.name, LocationType.NEIGHBORHOOD
 
 
     @staticmethod

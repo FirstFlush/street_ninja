@@ -16,4 +16,4 @@ class NeighborhoodAccessPattern(AccessPatternDB):
     redis_key_enum = GeoKeyEnum.NEIGHBORHOODS
     key_ttl_enum = RedisKeyTTL.DAY
     model_cls = Neighborhood
-    query = Neighborhood.objects.filter
+    query = Neighborhood.objects.cache_data

@@ -14,6 +14,7 @@ from sms.response.response_service import (
 )
 from sms.persistence_service import PersistenceService
 from sms.enums import ResolvedSMSType
+from common.enums import LocationType
 from geo.geocoding.geocoding_service import GeocodingService
 from geo.geocoding.exc import AllGeocodersFailed
 from geo.location_service import LocationService
@@ -69,6 +70,11 @@ class SMSService:
     def _geocode(self) -> Point | None:
         match self.sms_data.resolved_sms_type:
             case ResolvedSMSType.INQUIRY:
+                if self.sms_data.data.location_data.location_type == LocationType.NEIGHBORHOOD:
+                    #TODO cached Neighborhood data should be mapping of names and centroids 
+                    ...
+
+
                 location = self._get_geocoded_location(location_str=self.sms_data.data.location_data.location)
             case ResolvedSMSType.FOLLOW_UP | ResolvedSMSType.UNRESOLVED | _:
                 location = None

@@ -37,7 +37,7 @@ class LocationResolver(BaseKeywordResolver):
         PriorityRuleset.detect_full_address,
         PriorityRuleset.detect_full_intersection,
         PriorityRuleset.detect_landmark,
-        PriorityRuleset.detect_neighborhood,
+        PriorityRuleset.detect_neighborhood_with_keyword,
     ]
     LOCATION_TYPE_TO_EXPANDER: dict[LocationType, BaseExpander] = {
         LocationType.ADDRESS : AddressExpander,
@@ -56,6 +56,7 @@ class LocationResolver(BaseKeywordResolver):
         else:
             if resolved_location is None:
                 raise LocationResolutionError(f"Could not resolve location for msg: `{msg}`")
+            logger.info(f"Resolved location: {resolved_location.location_type}, {resolved_location.location}")
             return resolved_location
 
     def __init__(self, msg:str):
