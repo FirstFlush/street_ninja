@@ -10,21 +10,6 @@ class TestView(APIView):
         return Response({"ping":"pong"})
 
 
-class TestNeighborhoodView(APIView):
-
-    def get(self, request: Request, *args, **kwargs):
-
-        from integrations.neighborhood_service import NeighborhoodService
-
-
-        ns = NeighborhoodService()
-        neighborhoods = ns.get_neighborhoods()
-        ns.save_neighborhoods(neighborhoods)
-
-        return Response({"bleh":1})
-
-
-
 # class HomeView(APIView):
 
 
