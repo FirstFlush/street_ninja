@@ -1,14 +1,39 @@
 import logging
 from geo.models import Neighborhood
+from integrations.neighborhood_service import NeighborhoodService
+from integrations.exc import NeighborhoodServiceError
 from street_ninja_server.base_commands import StreetNinjaCommand
-
 
 logger = logging.getLogger(__name__)
 
 
 class Command(StreetNinjaCommand):
 
-    help = "Fetch and load neighborhood GIS data (Kitsilano, Dunbar, etc) from Vancouver OpenData API"
+    help = "Populate the Neighborhood table with GIS data from Vancouver OpenData API"
 
     def handle(self, *args, **kwargs):
-        logger.info("Derrrrp")
+        if Neighborhood.objects.exists():
+            count = Neighborhood.objects.count()
+            msg = f"Neighborhoods already exist (count: {count}). Skipping fetch."
+            logger.warning(msg)
+            return
+
+        ns = NeighborhoodService()
+
+        try:
+            neighborhoods = ns.get_neighborhoods()
+        except NeighborhoodServiceError:
+            msg = "Could not fetch neighborhood data! Neighborhood table has not been populated!"
+            logger.critical(msg)
+            return
+
+        try:
+            ns.save_neighborhoods(neighborhoods)
+        except NeighborhoodServiceError:
+            msg = "Could not save neighborhood data! Neighborhood table has not been populated!"
+            logger.critical(msg)
+            return
+
+        count = Neighborhood.objects.count()
+        msg = f"Neighborhood table populated successfully with {count} neighborhoods."
+        logger.info(msg)
