@@ -14,8 +14,6 @@ logger = logging.getLogger(__name__)
 
 class PhoneSessionCacheClient(BaseRedisClient):
 
-    redis_store_enum = RedisStoreEnum.PHONE_SESSION
-
     def __init__(
             self,
             redis_key: str,

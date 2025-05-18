@@ -26,7 +26,8 @@ define or use an existing access pattern.
 
 from abc import ABC
 from dataclasses import dataclass
-from typing import Callable, Optional
+from django.db.models import Model
+from typing import Callable, Optional, Type
 from ..enums import RedisKeyEnum, RedisStoreEnum, RedisKeyTTL
 
 
@@ -39,6 +40,7 @@ class BaseRedisAccessPattern(ABC):
 @dataclass
 class AccessPatternDB(BaseRedisAccessPattern):
     redis_key_enum: RedisKeyEnum
+    model_cls: Type[Model]
     query: Optional[Callable] = None
 
 

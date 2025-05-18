@@ -29,7 +29,6 @@ class BaseCacheService(ABC):
         self.session_access_pattern = session_access_pattern
         self.resource_cache_client = ResourceCacheClient(access_pattern=self.resource_access_pattern)
 
-
     @staticmethod
     def _get_session_cache_client(
             convo_id: int, 

@@ -48,13 +48,3 @@ class FollowUpCachingService(BaseCacheService):
         self._set_phone_session(session_data=session_data)
         return session_data  
 
-
-
-    def directions(self):
-        ...
-
-    def info(self):
-        ...
-
-    def more(self, current_session: PhoneSessionData):
-        ...

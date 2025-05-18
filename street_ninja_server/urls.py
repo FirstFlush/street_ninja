@@ -17,4 +17,5 @@ urlpatterns = [
     path('ping/', PingView.as_view(), name="ping"),
     path('resources/', include('resources.urls')),
     path('sms/', include('sms.urls')),
+    path('scratch/', ScratchView.as_view(), name="scratch"),     # route used for quick testing
 ]

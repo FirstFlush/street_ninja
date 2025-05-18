@@ -28,7 +28,7 @@ class NeighborhoodService:
     Raises NeighborhoodServiceError if it fails for any reason.
     """
 
-    _serializer_class = NeighborhoodSerializer
+    _serializer_cls = NeighborhoodSerializer
     api_client = VancouverAPIClient(api_key=settings.VANCOUVER_OPEN_DATA_API_KEY)
     
     def get_neighborhoods(self) -> list[NeighborhoodData]:
@@ -39,9 +39,9 @@ class NeighborhoodService:
             logger.error(msg, exc_info=True)
             raise NeighborhoodServiceError(msg) from e
         try:
-            parsed_data = self._parse_neighborhood_data(data=api_data)
+            parsed_data = self._shape_neighborhood_data(data=api_data)
         except Exception as e:
-            msg = "Failed to parse neighborhood data from Vancouver OpenData API"
+            msg = "Failed to shape neighborhood data from Vancouver OpenData API"
             logger.error(msg, exc_info=True)
             raise NeighborhoodServiceError(msg) from e
         try:
@@ -65,7 +65,7 @@ class NeighborhoodService:
             logger.error(msg, exc_info=True)
             raise NeighborhoodServiceError(msg) from e
 
-    def _parse_neighborhood_data(self, data: dict[str, Any]) -> list[dict[str, Any]]:
+    def _shape_neighborhood_data(self, data: dict[str, Any]) -> list[dict[str, Any]]:
         hoods = []
         for d in data["results"]:
             coordinates = d["geom"]["geometry"]["coordinates"][0]
@@ -94,12 +94,12 @@ class NeighborhoodService:
         )
 
     def _validate_neighborhood_data(self, neighborhood_data: list[dict[str, Any]]) -> list[NeighborhoodData]:
-        serializer = self._serializer_class(data=neighborhood_data, many=True)
+        serializer = self._serializer_cls(data=neighborhood_data, many=True)
         if serializer.is_valid():
             return [self._create_neighborhood_data(d) for d in serializer.validated_data]
         else:
-            logger.error(f"`{self._serializer_class.__name__}` failed due to the following errors: {serializer.errors}")
+            logger.error(f"`{self._serializer_cls.__name__}` failed due to the following errors: {serializer.errors}")
             raise ValidationError({
-                "message": f"{self._serializer_class.__name__} failed validation",
+                "message": f"{self._serializer_cls.__name__} failed validation",
                 "errors": serializer.errors,
             })

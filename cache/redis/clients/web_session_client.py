@@ -11,8 +11,6 @@ logger = logging.getLogger(__name__)
 
 class WebSessionCacheClient(BaseRedisClient):
 
-    redis_store_enum = RedisStoreEnum.SESSION
-
     def __init__(
             self, 
             access_pattern: WebSessionAccessPattern,

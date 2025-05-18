@@ -1,5 +1,7 @@
 import logging
+from geo.models import Neighborhood
 from .base_redis_client import BaseRedisClient
+from .base_model_client import BaseModelCacheClient
 from ..enums import RedisStoreEnum
 from ..access_patterns.geo import LocationMapAccessPattern, NeighborhoodAccessPattern
 
@@ -8,7 +10,6 @@ logger = logging.getLogger(__name__)
 
 class LocationCacheClient(BaseRedisClient):
 
-    redis_store_enum = RedisStoreEnum.GEO
     access_pattern: LocationMapAccessPattern
     
     def __init__(self, access_pattern: LocationMapAccessPattern):
@@ -24,18 +25,13 @@ class LocationCacheClient(BaseRedisClient):
             timeout=self.access_pattern.key_ttl_enum.value
         )
 
-class NeighborhoodCacheClient(BaseRedisClient):
+class NeighborhoodCacheClient(BaseModelCacheClient):
 
-    redis_store_enum = RedisStoreEnum.GEO
-    access_pattern: NeighborhoodAccessPattern
+    def __init__(self):
+        super().__init__(access_pattern=NeighborhoodAccessPattern)
 
-    def __init__(self, access_pattern: NeighborhoodAccessPattern):
-        super().__init__(access_pattern=access_pattern)
-
-    def get_neighborhoods(self):
-        self._get_cached_data(redis_key=self.access_pattern.redis_key_enum)
-        #TODO
-
-    def set_neighborhoods(self):
-        #TODO
-        ...
+    def get_neighborhoods(self) -> list[Neighborhood]:
+        return self.get_or_set_db()
+        
+    def set_neighborhoods(self) -> list[Neighborhood]:
+        return self.set_cache_from_db()

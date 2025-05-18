@@ -17,19 +17,19 @@ class BaseRedisClient(ABC):
 
     def __init__(self, access_pattern:BaseRedisAccessPattern):
         self.access_pattern = access_pattern
-        self.redis_store_enum = self.access_pattern.redis_store_enum
+        # self.redis_store_enum = self.access_pattern.redis_store_enum
         self.redis_store = self._redis_store()
 
 
     def _redis_store(self) -> BaseCache:
         try:
-            return caches[self.__class__.redis_store_enum.value]
+            return caches[self.access_pattern.redis_store_enum.value]
         except KeyError as e:
             logger.error(
-                f"Invalid Redis store: `{self.redis_store_enum}`. Available stores: {list(caches)}",
+                f"Invalid Redis store: `{self.access_pattern.redis_store_enum}`. Available stores: {list(caches)}",
                 exc_info=True
             )
-            raise RedisClientException(f"Invalid Redis store: `{self.redis_store_enum}`") from e
+            raise RedisClientException(f"Invalid Redis store: `{self.access_pattern.redis_store_enum}`") from e
 
 
     def _get_cached_data(self, redis_key: RedisKeyEnum | str, raise_error: bool= False) -> Any | None:
