@@ -18,6 +18,7 @@ class VancouverEndpointsEnum(EndpointsEnum):
     DRINKING_FOUNTAINS = "api/explore/v2.1/catalog/datasets/drinking-fountains/records"
     PUBLIC_WASHROOM = "/api/explore/v2.1/catalog/datasets/public-washrooms/records"
     PARK_WASHROOM = "/api/explore/v2.1/catalog/datasets/parks-washrooms/records"
+    NEIGHBORHOODS = "/api/explore/v2.1/catalog/datasets/local-area-boundary/records"
 
 
 class WigleEndpointsEnum(EndpointsEnum):

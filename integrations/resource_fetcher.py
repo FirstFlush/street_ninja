@@ -29,9 +29,9 @@ class ResourceFetcher:
     def _logger_msg(self, e: Exception):
         return f"`{e.__class__.__name__}` while attempting to fetch data from `{self.params.url}`"
 
-    def run(self, email_on_error: bool=True):
+    def run(self, email_on_error: bool=True, no_save: bool=False):
         try:
-            self.integration_service.fetch_and_save()
+            self.integration_service.fetch_and_save(no_save=no_save)
         except Exception as e:
             if email_on_error:
                 trace = traceback.format_exc()

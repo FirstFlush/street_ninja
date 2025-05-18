@@ -21,4 +21,7 @@ urlpatterns = [
     path('contact/', include('contacts.urls')),
     path('resources/', include('resources.urls')),
     path('sms/', include('sms.urls')),
+
+    path('hoods', TestNeighborhoodView.as_view(), name="test_neighborhood"),
+
 ]

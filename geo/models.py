@@ -15,8 +15,10 @@ class Location(gis_models.Model):
         return f"{self.location_text}, {LocationType(self.location_type)}"
 
 
-# class InquiryCount(models.Model):
+class Neighborhood(gis_models.Model):
 
-#     location = models.ForeignKey(to=Location, on_delete=models.CASCADE)
-#     timestamp = models.DateTimeField(auto_now_add=True)
-
+    name = models.CharField(max_length=256)
+    boundary = gis_models.PolygonField(srid=4326)
+    centroid = gis_models.PointField(srid=4326)
+    date_updated = models.DateTimeField(auto_now=True)
+    date_created = models.DateTimeField(auto_now_add=True)

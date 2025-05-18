@@ -76,7 +76,7 @@ class ResourceModel(gis_models.Model):
         application level, rather than causing database-level errors.
         """
         if not hasattr(cls, cls._unique_key):
-            raise AttributeError(f"Model {cls.__name__} must define a valid _unique_key.")
+            raise AttributeError(f"Resource Model {cls.__name__} must define a valid _unique_key.")
 
     @staticmethod
     def get_point(lon:float, lat:float) -> Point:

@@ -23,13 +23,11 @@ class GeospatialService:
             logger.error(msg)
             raise AttributeError(msg)
 
-
     def _sort(self) -> list[ResourceModel]:
         """Sorts resources by distance and adds a `.distance` attribute to each."""
         for obj in self.resources:
             obj.distance = round(distance((self.location.y, self.location.x), (obj.location.y, obj.location.x)).km, 1) 
         return sorted(self.resources, key=lambda obj: obj.distance)
-
 
     @classmethod
     def sort_by_distance(cls, resources: list[ResourceModel], location: Point) -> list[ResourceModel]:

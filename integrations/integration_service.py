@@ -36,7 +36,7 @@ class IntegrationServiceParams:
 
 class IntegrationService:
     """
-    Orchestrates the fetching, processing, and saving of external data from various API integrations.
+    Orchestrates the fetching, processing, and saving of resource data from various API integrations.
 
     This service is responsible for:
     - Fetching data from the specified APIClient at the specified endpoint, identified by an `EndpointsEnum` value.
@@ -100,6 +100,11 @@ class IntegrationService:
             raise IntegrationServiceError(msg)
         return deserializer.validated_data
 
+    def save_data(self, data: list[dict, str, Any]):
+        """
+        Used when performing fetch/deserialize/save flow outside of self.fetch_and_save()
+        """
+        self._save_data(data=data)
 
     def fetch_and_save(self, no_save:bool=False):
         """
