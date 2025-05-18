@@ -246,7 +246,7 @@ CACHES = {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         },
     },
-    'location': {
+    'geo': {
         'BACKEND': 'django_redis.cache.RedisCache',
         'LOCATION': os.environ.get('CACHE_LOCATION_LOCATION'),
         'OPTIONS': {

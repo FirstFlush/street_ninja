@@ -5,5 +5,5 @@ from cache.redis.enums import RedisStoreEnum, RedisKeyTTL, TestKeyEnum
 class LocationMapAccessPatternTest(BaseRedisAccessPattern):
 
     redis_store_enum = RedisStoreEnum.TESTS
-    redis_key_enum = TestKeyEnum.MAPPING
+    redis_key_enum = TestKeyEnum.LOCATION_MAPPING
     key_ttl_enum = RedisKeyTTL.DAY

@@ -13,13 +13,8 @@ if admin_route is None:
 
 urlpatterns = [
     path(admin_route, admin.site.urls),
-    # path('', HomeView.as_view(), name='home'),
-    # path('keywords/', KeywordTestView.as_view(), name='keyword_test'),
-    # path('redis/', RedisTestView.as_view(), name='redis_test'),
-    # path('directions/', DirectionsView.as_view(), name='directions'),
-    path('ping/', TestView.as_view(), name="test"),
     path('contact/', include('contacts.urls')),
+    path('ping/', PingView.as_view(), name="ping"),
     path('resources/', include('resources.urls')),
     path('sms/', include('sms.urls')),
-
 ]

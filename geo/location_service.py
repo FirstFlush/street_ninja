@@ -1,5 +1,5 @@
-from cache.redis.clients.location_client import LocationCacheClient
-from cache.redis.access_patterns.location import LocationMapAccessPattern
+from cache.redis.clients.geo_client import LocationCacheClient
+from cache.redis.access_patterns.geo import LocationMapAccessPattern
 import logging
 from geo.models import Location
 from django.contrib.gis.geos import Point

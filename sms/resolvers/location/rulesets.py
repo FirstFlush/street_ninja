@@ -36,6 +36,11 @@ class PriorityRuleset(BaseLocationRuleset):
 
 
     @staticmethod
+    def detect_neighborhood(msg: str) -> tuple[str, LocationType] | None:
+        ...
+
+
+    @staticmethod
     def detect_landmark(msg: str) -> tuple[str, LocationType] | None:
         normalized_msg = re.sub(RegexLibrary.normalize_string, "", msg).lower().replace(" ", "")
         for landmark in VANCOUVER_LANDMARKS:
@@ -335,3 +340,13 @@ class IntersectionRuleset(BaseLocationRuleset):
 class LandmarkRuleset(BaseLocationRuleset):
 
     location_type_enum = LocationType.LANDMARK
+
+
+class NeighborhoodRuleset(BaseLocationRuleset):
+
+    location_type_enum = LocationType.NEIGHBORHOOD
+
+    @classmethod
+    def is_potential_neighborhood(cls, token_index: int, tokens: list[str]):
+        s = " ".join(tokens)
+        

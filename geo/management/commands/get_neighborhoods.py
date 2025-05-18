@@ -43,5 +43,5 @@ class Command(StreetNinjaCommand):
             return
 
         count = Neighborhood.objects.count()
-        msg = f"Neighborhood table populated successfully with {count} neighborhoods."
+        msg = f"Neighborhood table populated successfully with `{count}` neighborhoods."
         logger.info(msg)

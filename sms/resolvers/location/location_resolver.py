@@ -5,7 +5,8 @@ from .rulesets import (
     AddressRuleset, 
     IntersectionRuleset, 
     LandmarkRuleset,
-    PriorityRuleset
+    PriorityRuleset,
+    NeighborhoodRuleset
 )
 from ..exc import LocationResolutionError
 from .expanders import BaseExpander, AddressExpander, IntersectionExpander, LandmarkExpander
@@ -30,11 +31,13 @@ class LocationResolver(BaseKeywordResolver):
         AddressRuleset.has_street_direction_nearby,
         AddressRuleset.has_street_suffix_nearby,
         IntersectionRuleset.is_potential_intersection,
+        # NeighborhoodRuleset.is_potential_neighborhood,
     ]
     RULES_PRIORITY = [
         PriorityRuleset.detect_full_address,
         PriorityRuleset.detect_full_intersection,
         PriorityRuleset.detect_landmark,
+        PriorityRuleset.detect_neighborhood,
     ]
     LOCATION_TYPE_TO_EXPANDER: dict[LocationType, BaseExpander] = {
         LocationType.ADDRESS : AddressExpander,
@@ -170,7 +173,8 @@ class LocationResolver(BaseKeywordResolver):
             token_index: {
                 LocationType.ADDRESS: 0,
                 LocationType.INTERSECTION: 0,
-                LocationType.LANDMARK: 0
+                LocationType.LANDMARK: 0,
+                # LocationType.NEIGHBORHOOD: 0,
             }
             for token_index in range(len(self.tokens))
         }

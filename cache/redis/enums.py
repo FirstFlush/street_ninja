@@ -7,7 +7,7 @@ class RedisStoreEnum(StreetNinjaEnum):
     PHONE_SESSION = "phone_session"
     RESOURCES = "resources"
     CELERY = "celery"
-    LOCATION = "location"
+    GEO = "geo"
     TESTS = "tests"
 
 
@@ -28,12 +28,13 @@ class WebSessionKeyEnum(RedisKeyEnum):
     PHONE = "phone"
 
 
-class LocationKeyEnum(RedisKeyEnum):
-    MAPPING = "location_mapping:all"
+class GeoKeyEnum(RedisKeyEnum):
+    LOCATION_MAPPING = "location_mapping:all"
+    NEIGHBORHOODS = "neighborhoods:all"
 
 
 class TestKeyEnum(RedisKeyEnum):
-    MAPPING = "tests:location_mapping:all"
+    LOCATION_MAPPING = "tests:location_mapping:all"
     SHELTER = "tests:shelter:all"
     FOOD = "tests:food:all"
     WATER = "tests:water:all"

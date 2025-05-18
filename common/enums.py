@@ -5,7 +5,7 @@ class LocationType(StreetNinjaEnum):
     ADDRESS = "address"
     INTERSECTION = "intersection"
     LANDMARK = "landmark"
-    # NEIGHBORHOOD = "neighborhood"
+    NEIGHBORHOOD = "neighborhood"
 
 
 class LanguageEnum(StreetNinjaEnum):
