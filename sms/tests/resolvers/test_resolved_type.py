@@ -14,6 +14,7 @@ def create_registry() -> list[tuple[str, ResolvedSMSType]]:
     return registry
 
 
+@pytest.mark.django_db
 @pytest.mark.parametrize("sample", create_registry())
 def test_resolved_sms_enum_type(sample: tuple[str, ResolvedSMSType]):
     sms_resolver = SMSResolver(msg=sample[0])

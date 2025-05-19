@@ -1,5 +1,6 @@
 import pytest
 from geo.location_service import LocationService
+from geo.neighborhoods.neighborhood_service import NeighborhoodService
 from django.core.cache import caches
 from cache.redis.enums import RedisStoreEnum
 from .access_patterns import LocationMapAccessPatternTest
@@ -10,6 +11,12 @@ def flush_redis():
     redis_cache.clear()
     yield
     redis_cache.clear()
+
+
+@pytest.fixture
+def neighborhood_service(flush_redis):
+    return NeighborhoodService()
+
 
 @pytest.fixture
 def location_service(flush_redis):

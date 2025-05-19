@@ -9,6 +9,9 @@ from .testdata_food_params import FOOD_PARAMS_INQUIRIES
 from .testdata_water_params import WATER_PARAMS_INQUIRIES
 from .testdata_toilet_params import TOILET_PARAMS_INQUIRIES
 
+from .testdata_neighborhoods import NEIGHBORHOOD_INQUIRIES_SIMPLE
+
+
 ALL_INQUIRIES = (
     FOOD_INQUIRIES +
     SHELTER_INQUIRIES +
@@ -19,5 +22,7 @@ ALL_INQUIRIES = (
     SHELTER_PARAMS_INQUIRIES +
     FOOD_PARAMS_INQUIRIES +
     WATER_PARAMS_INQUIRIES +
-    TOILET_PARAMS_INQUIRIES
+    TOILET_PARAMS_INQUIRIES +
+    
+    NEIGHBORHOOD_INQUIRIES_SIMPLE
 )
