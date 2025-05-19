@@ -24,7 +24,7 @@ class BaseModelCacheClient(BaseRedisClient):
             return pickle.dumps(data)
         except Exception as e:
             logger.error(f"Error pickling data: {e}", exc_info=True)
-            raise RedisClientException(f"Error pickling `{self.access_pattern.model_cls.__name__}`") from e
+            raise RedisClientException(f"Error pickling `{self.access_pattern.expected_type.__name__}`") from e
 
     def _unpickle(self, data: bytes) -> list:
         try:
@@ -42,7 +42,7 @@ class BaseModelCacheClient(BaseRedisClient):
         raise RedisClientException(msg)
 
 
-    def set_cache_from_db(self) -> list[Model]:
+    def set_cache_from_db(self) -> list[Model] | list[Any]:
         try:
             db_data = self.access_pattern.query(**self.QUERY_PARAMS)
             list_data = self._to_list(db_data)
@@ -52,19 +52,22 @@ class BaseModelCacheClient(BaseRedisClient):
                 value=pickled_data,
                 timeout=self.access_pattern.key_ttl_enum.value,
             )
-            return list_data
         except Exception as e:
             logger.error(f"Failed to query/cache: {e}", exc_info=True)
             raise RedisClientException("DB fallback failed.") from e
+        else:
+            return list_data
 
 
-    def get_or_set_db(self) -> list[Model] | list[Any]:
+    def get_or_set_db(self) -> list[Model]:
         cached_data = self._get_cached_data(redis_key=self.access_pattern.redis_key_enum)
         if cached_data:
             result = self._unpickle(cached_data)
-            if isinstance(result, list) and all(isinstance(i, self.access_pattern.model_cls) for i in result):
+            if isinstance(result, list) and all(isinstance(i, self.access_pattern.expected_type) for i in result):
+                logger.debug(f"cached data found with access pattern `{self.access_pattern}` ")
                 return result
             logger.warning("Unpickled data structure/type mismatch. Refetching from DB...")
 
-        # Fallback to DB
+        else:
+            logger.warning("No cached data found. Falling back to DB...")
         return self.set_cache_from_db()

@@ -40,7 +40,7 @@ class BaseRedisAccessPattern(ABC):
 @dataclass
 class AccessPatternDB(BaseRedisAccessPattern):
     redis_key_enum: RedisKeyEnum
-    model_cls: Type[Model]
+    expected_type: Type[object]
     query: Optional[Callable] = None
 
 

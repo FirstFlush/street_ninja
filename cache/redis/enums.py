@@ -41,6 +41,7 @@ class TestKeyEnum(RedisKeyEnum):
     TOILET = "tests:toilet:all"
     WIFI = "tests:wifi:all"
     PHONE_SESSION = "tests:phone_session"
+    NEIGHBORHOODS = "tests:neighborhoods:all"
 
 
 

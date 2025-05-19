@@ -58,7 +58,7 @@ class LocationService:
         mapping = self._get_mapping()
         id = mapping.get(self._normalize_text(location_text))
         if id is not None:
-            logger.info(f"Found location in cache mapping: {location_text} => Location ID #{id}")
+            logger.info(f"Found location in location-cache mapping: {location_text} => Location ID #{id}")
         return id
 
     def get_location(self, id: int) -> Location:

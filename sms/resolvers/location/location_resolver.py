@@ -31,7 +31,6 @@ class LocationResolver(BaseKeywordResolver):
         AddressRuleset.has_street_direction_nearby,
         AddressRuleset.has_street_suffix_nearby,
         IntersectionRuleset.is_potential_intersection,
-        # NeighborhoodRuleset.is_potential_neighborhood,
     ]
     RULES_PRIORITY = [
         PriorityRuleset.detect_full_address,

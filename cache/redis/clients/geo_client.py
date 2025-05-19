@@ -27,11 +27,16 @@ class LocationCacheClient(BaseRedisClient):
 
 class NeighborhoodCacheClient(BaseModelCacheClient):
 
-    def __init__(self):
-        super().__init__(access_pattern=NeighborhoodAccessPattern)
+    def __init__(self, access_pattern=NeighborhoodAccessPattern):
+        super().__init__(access_pattern=access_pattern)
 
     def get_neighborhoods(self) -> list[NeighborhoodCacheData]:
-        return self.get_or_set_db()
-        
-    def set_neighborhoods(self) -> list[Neighborhood]:
-        return self.set_cache_from_db()
+        neighborhoods = self.get_or_set_db()
+        if not neighborhoods:
+            self.set_cache_from_db()
+        neighborhoods = self.get_or_set_db()
+        return neighborhoods
+
+
+    def set_neighborhoods(self):
+        self.set_cache_from_db()

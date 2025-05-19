@@ -3,7 +3,6 @@ from django.contrib.gis.db import models as gis_models
 from common.enums import LocationType
 from .neighborhoods.dataclasses import NeighborhoodCacheData
 from sms.resolvers.text_normalizer import TextNormalizer
-from typing import Any
 
 
 class Location(gis_models.Model):
@@ -51,3 +50,6 @@ class Neighborhood(gis_models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     objects:NeighborhoodManager = NeighborhoodManager()
+
+    def __str__(self) -> str:
+        return self.name

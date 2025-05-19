@@ -36,7 +36,6 @@ class PriorityRuleset(BaseLocationRuleset):
     #     if matches:
     #         return next(iter(matches)), LocationType.LANDMARK
 
-
     @staticmethod
     def detect_neighborhood_with_keyword(msg: str) -> tuple[str, LocationType] | None:
         """
@@ -51,7 +50,6 @@ class PriorityRuleset(BaseLocationRuleset):
                 for keyword in [keyword.lower() for keyword in SMSKeywordEnum.values]:
                     if keyword == remainder:
                         return hood.name, LocationType.NEIGHBORHOOD
-
 
     @staticmethod
     def detect_landmark(msg: str) -> tuple[str, LocationType] | None:
@@ -68,8 +66,6 @@ class PriorityRuleset(BaseLocationRuleset):
         match = compiled_regex.search(msg)
         if match:
             return match.group(0), LocationType.ADDRESS
-
-
 
     @staticmethod
     def detect_full_intersection(msg: str) -> tuple[str, LocationType] | None:

@@ -2,13 +2,13 @@ from django.contrib.gis.geos import Point
 from django.db import transaction
 from rest_framework.exceptions import ValidationError
 from geo.models import Neighborhood
-from ...integrations.dataclasses import NeighborhoodData
-from ...integrations.exc import NeighborhoodServiceError
+from .dataclasses import IncomingNeighborhoodData
+from .exc import NeighborhoodServiceError
 from common.dataclasses import RequestData
 from common.enums import HttpMethodEnum
 from geo.serializers import NeighborhoodSerializer
-from ...integrations.clients.vancouver import VancouverAPIClient
-from ...integrations.clients.enums import VancouverEndpointsEnum
+from integrations.clients.vancouver import VancouverAPIClient
+from integrations.clients.enums import VancouverEndpointsEnum
 from django.conf import settings
 from typing import Any
 from geo.geospatial.polygon_service import PolygonService
@@ -31,13 +31,14 @@ class NeighborhoodService:
     _serializer_cls = NeighborhoodSerializer
     api_client = VancouverAPIClient(api_key=settings.VANCOUVER_OPEN_DATA_API_KEY)
     
-    def get_neighborhoods(self) -> list[NeighborhoodData]:
+    def get_neighborhoods(self) -> list[IncomingNeighborhoodData]:
         try:
             api_data = self._fetch_neighborhood_data()
         except Exception as e:
             msg = "Failed to fetch neighborhood data from Vancouver OpenData API"
             logger.error(msg, exc_info=True)
             raise NeighborhoodServiceError(msg) from e
+
         try:
             parsed_data = self._shape_neighborhood_data(data=api_data)
         except Exception as e:
@@ -51,7 +52,7 @@ class NeighborhoodService:
             logger.error(msg, exc_info=True)
             raise NeighborhoodServiceError(msg) from e
 
-    def save_neighborhoods(self, neighborhood_data: list[NeighborhoodData]):
+    def save_neighborhoods(self, neighborhood_data: list[IncomingNeighborhoodData]):
         try:
             with transaction.atomic():
                 for neighborhood in neighborhood_data:
@@ -86,14 +87,14 @@ class NeighborhoodService:
         )
         return self.api_client.make_request(request_data=request_data)
     
-    def _create_neighborhood_data(self, data: dict[str, Any]) -> NeighborhoodData:
-        return NeighborhoodData(
+    def _create_neighborhood_data(self, data: dict[str, Any]) -> IncomingNeighborhoodData:
+        return IncomingNeighborhoodData(
             name = data["name"],
             coordinates = [Point(x=x, y=y) for x, y in  data["coordinates"]],
             centroid = PolygonService.get_centroid(boundary_coordinates=data["coordinates"])
         )
 
-    def _validate_neighborhood_data(self, neighborhood_data: list[dict[str, Any]]) -> list[NeighborhoodData]:
+    def _validate_neighborhood_data(self, neighborhood_data: list[dict[str, Any]]) -> list[IncomingNeighborhoodData]:
         serializer = self._serializer_cls(data=neighborhood_data, many=True)
         if serializer.is_valid():
             return [self._create_neighborhood_data(d) for d in serializer.validated_data]
