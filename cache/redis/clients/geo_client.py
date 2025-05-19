@@ -1,4 +1,5 @@
 import logging
+from geo.neighborhoods.dataclasses import NeighborhoodCacheData
 from geo.models import Neighborhood
 from .base_redis_client import BaseRedisClient
 from .base_model_client import BaseModelCacheClient
@@ -29,7 +30,7 @@ class NeighborhoodCacheClient(BaseModelCacheClient):
     def __init__(self):
         super().__init__(access_pattern=NeighborhoodAccessPattern)
 
-    def get_neighborhoods(self) -> list[Neighborhood]:
+    def get_neighborhoods(self) -> list[NeighborhoodCacheData]:
         return self.get_or_set_db()
         
     def set_neighborhoods(self) -> list[Neighborhood]:

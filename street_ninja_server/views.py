@@ -15,6 +15,8 @@ class ScratchView(APIView):
 
         cache_client = NeighborhoodCacheClient()
         hoods = cache_client.get_or_set_db()
-
+        print(hoods)
+        print("="*50)
+        print(hoods[0])
 
         return Response({"bleh":1}, status=status.HTTP_200_OK)

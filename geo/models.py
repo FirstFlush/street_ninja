@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.gis.db import models as gis_models
 from common.enums import LocationType
+from .neighborhoods.dataclasses import NeighborhoodCacheData
+from sms.resolvers.text_normalizer import TextNormalizer
 from typing import Any
 
 
@@ -18,21 +20,27 @@ class Location(gis_models.Model):
 
 class NeighborhoodManager(models.Manager):
 
-    def cache_data(self) -> list[dict[str, Any]]:
+    def cache_data(self) -> list[NeighborhoodCacheData]:
         """
-        Returns Neighborhood objects as a list of dicts with only relevant information
+        Returns Neighborhood objects as a list of dicts with only relevant information.
 
-        Example:
-        [
-          {
-            "name": "Kitsilano",
-            "centroid": Point(),
-          }, 
-          ...etc
-        ]
+        Each entry includes:
+          - name
+          - name_normalized
+          - centroid
         """
-        return list(self.get_queryset().all().values("name", "centroid"))
+        normalizer = TextNormalizer()
+        raw_data = self.get_queryset().values("name", "centroid")
 
+        result = []
+        for d in raw_data:
+            name_normalized = normalizer.normalize_text(text=d["name"], strip_spaces=True)
+            result.append(NeighborhoodCacheData(**{
+                **d,
+                "name_normalized": name_normalized,
+            }))
+
+        return result
 
 class Neighborhood(gis_models.Model):
 

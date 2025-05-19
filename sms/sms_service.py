@@ -2,11 +2,9 @@ import logging
 import string
 from django.contrib.gis.geos import Point
 from django.contrib.sessions.backends.base import SessionBase
-from sms.resolvers import (
-    SMSResolver, 
-    ResolvedSMS,
-    SMSResolutionError
-)
+from sms.resolvers.exc import SMSResolutionError
+from sms.resolvers.sms_resolver import SMSResolver
+from sms.resolvers.dataclasses import ResolvedSMS
 from sms.response.response_service import (
     SMSInquiryResponseData, 
     SMSFollowUpResponseData,

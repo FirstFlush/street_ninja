@@ -1,5 +1,6 @@
 import pytest
-from sms.resolvers import ParamResolver, ParamDict
+from sms.resolvers.dataclasses import ParamDict
+from sms.resolvers.params.param_resolver import ParamResolver
 from sms.tests.test_schemas import InquirySample
 from ..testdata.inquiries import ALL_INQUIRIES
 

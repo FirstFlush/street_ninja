@@ -2,13 +2,13 @@ from django.contrib.gis.geos import Point
 from django.db import transaction
 from rest_framework.exceptions import ValidationError
 from geo.models import Neighborhood
-from .dataclasses import NeighborhoodData
-from .exc import NeighborhoodServiceError
+from ...integrations.dataclasses import NeighborhoodData
+from ...integrations.exc import NeighborhoodServiceError
 from common.dataclasses import RequestData
 from common.enums import HttpMethodEnum
 from geo.serializers import NeighborhoodSerializer
-from .clients.vancouver import VancouverAPIClient
-from .clients.enums import VancouverEndpointsEnum
+from ...integrations.clients.vancouver import VancouverAPIClient
+from ...integrations.clients.enums import VancouverEndpointsEnum
 from django.conf import settings
 from typing import Any
 from geo.geospatial.polygon_service import PolygonService

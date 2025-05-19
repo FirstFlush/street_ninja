@@ -10,7 +10,11 @@ class TextNormalizer:
     Handles normalization of data received in text messages,
     and enforces the same rules on param mappings.
     """
-    def __init__(self, keep_ampersand: bool = False, keep_dash: bool = False):
+    def __init__(
+            self, 
+            keep_ampersand: bool = False, 
+            keep_dash: bool = False,
+    ):
         """
         - keep_ampersand: preserves '&' for intersection detection (e.g. "Main & Hastings")
         - keep_dash: preserves or replaces dashes (e.g. "11-132 Hastings")
@@ -23,14 +27,21 @@ class TextNormalizer:
         return r"[^a-zA-Z0-9\u4e00-\u9fff\u0a00-\u0a7f\s&'#/]" if self.keep_ampersand \
             else r"[^a-zA-Z0-9\u4e00-\u9fff\u0a00-\u0a7f\s'#/]"
 
-    def tokenize_text(self, text: str) -> list[str]:
+
+    def normalize_text(self, text: str, strip_spaces: bool = False) -> str:
         if isinstance(text, str):
-            cleaned = self._strip_special_chars(text)
-            return cleaned.lower().split()
+            cleaned = self._strip_special_chars(text).lower().strip()
+            if strip_spaces:
+                return cleaned.replace(" ","")
+            else:
+                return cleaned
         else:
             msg = f"`text` must be of type str or str. Value recieve `{text}`"
             logger.error(msg)
             raise TypeError(msg)
+
+    def tokenize_text(self, text: str) -> list[str]:
+        return self.normalize_text(text).split()
         
     def tokenize_list(self, untokenized_list: list[str]) -> list[str]:
         if isinstance(untokenized_list, list) and all(isinstance(i, str) for i in untokenized_list):

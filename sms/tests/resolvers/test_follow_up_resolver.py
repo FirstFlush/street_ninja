@@ -1,7 +1,7 @@
 
 import pytest
 from sms.enums import FollowUpParams
-from sms.resolvers import SMSResolver
+from sms.resolvers.sms_resolver import SMSResolver
 from ..testdata.follow_up import FOLLOWUP_INQUIRIES
 from sms.tests.test_schemas import FollowUpSample
 

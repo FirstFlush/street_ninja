@@ -1,5 +1,5 @@
 import pytest
-from sms.resolvers import SMSResolver
+from sms.resolvers.sms_resolver import SMSResolver
 from ..testdata.unresolved import UNRESOLVED_INQUIRIES
 from sms.tests.test_schemas import UnresolvedSample
 

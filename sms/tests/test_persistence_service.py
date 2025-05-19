@@ -2,7 +2,8 @@ from faker import Faker
 import pytest
 from django.contrib.gis.geos import Point
 from geo.models import Location
-from sms.resolvers import ResolvedSMS, ResolvedSMSInquiry, ResolvedSMSFollowUp, UnresolvedSMS
+from sms.resolvers.dataclasses import ResolvedSMS
+from sms.resolvers.sms_resolver import ResolvedSMSInquiry, ResolvedSMSFollowUp, UnresolvedSMS
 from sms.enums import ResolvedSMSType
 from sms.models import SMSInquiry, SMSFollowUpInquiry, UnresolvedSMSInquiry, Conversation, PhoneNumber
 from sms.persistence_service import PersistenceService

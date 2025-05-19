@@ -3,6 +3,7 @@ import re
 from common.enums import LocationType
 from cache.redis.clients.geo_client import NeighborhoodCacheClient
 from sms.enums import SMSKeywordEnum
+from sms.resolvers.text_normalizer import TextNormalizer
 from .location_data import (
     STREET_SUFFIXES, 
     STREET_DIRECTIONS, 
@@ -43,9 +44,10 @@ class PriorityRuleset(BaseLocationRuleset):
         """
         cache_client = NeighborhoodCacheClient()
         hoods = cache_client.get_neighborhoods()
+        normalized_msg = TextNormalizer().normalize_text(msg, strip_spaces=True)
         for hood in hoods:
-            if hood.name.lower() in msg.lower():
-                remainder = msg.replace(hood.name.lower(), "").strip()
+            if hood.name_normalized in normalized_msg or hood.name_normalized.replace(" ","") in normalized_msg.replace(" ",""):
+                remainder = normalized_msg.replace(hood.name_normalized.lower(), "").strip()
                 for keyword in [keyword.lower() for keyword in SMSKeywordEnum.values]:
                     if keyword == remainder:
                         return hood.name, LocationType.NEIGHBORHOOD

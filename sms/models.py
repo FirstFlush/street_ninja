@@ -11,7 +11,8 @@ from common.enums import (
 )
 from geo.models import Location
 from sms.enums import ConversationStatus, SMSFollowUpKeywordEnum, SMSKeywordEnum
-from sms.resolvers import ResolvedSMSFollowUp, ResolvedSMSInquiry
+from sms.resolvers.follow_up_resolver import ResolvedSMSFollowUp
+from sms.resolvers.dataclasses import ResolvedSMSInquiry
 from .abstract_models import IncomingSMSMessageModel, ResponseSMSMessageModel
 
 

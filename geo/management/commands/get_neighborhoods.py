@@ -1,6 +1,6 @@
 import logging
 from geo.models import Neighborhood
-from integrations.neighborhood_service import NeighborhoodService
+from geo.neighborhoods.neighborhood_service import NeighborhoodService
 from integrations.exc import NeighborhoodServiceError
 from street_ninja_server.base_commands import StreetNinjaCommand
 

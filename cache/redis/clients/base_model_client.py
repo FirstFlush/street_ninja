@@ -58,7 +58,7 @@ class BaseModelCacheClient(BaseRedisClient):
             raise RedisClientException("DB fallback failed.") from e
 
 
-    def get_or_set_db(self) -> list[Model]:
+    def get_or_set_db(self) -> list[Model] | list[Any]:
         cached_data = self._get_cached_data(redis_key=self.access_pattern.redis_key_enum)
         if cached_data:
             result = self._unpickle(cached_data)
