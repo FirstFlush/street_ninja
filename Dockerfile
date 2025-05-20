@@ -31,4 +31,5 @@ ENV PYTHONUNBUFFERED=1 \
 EXPOSE 8000
 
 # 9. Set entrypoint to start Gunicorn
+ENTRYPOINT ["/app/entrypoint.sh"]
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "street_ninja_server.wsgi:application"]
