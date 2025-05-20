@@ -55,3 +55,26 @@ NEIGHBORHOOD_INQUIRIES_SIMPLE = [
         location=ResolvedLocation("Victoria-Fraserview", LocationType.NEIGHBORHOOD),
     ),
 ]
+
+NEIGHBORHOOD_INQUIRIES_INVALID = [
+    InquirySample(
+        message="42 marpole ave water",
+        keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.WATER, LanguageEnum.ENGLISH),
+        location=ResolvedLocation("42 marpole ave", LocationType.ADDRESS),
+    ),
+    InquirySample(
+        message="141 Shaughnessy food",
+        keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.FOOD, LanguageEnum.ENGLISH),
+        location=ResolvedLocation("141 Shaughnessy", LocationType.ADDRESS),
+    ),
+    InquirySample(
+        message="food Dunbar and Davie",
+        keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.FOOD, LanguageEnum.ENGLISH),
+        location=ResolvedLocation("Dunbar and Davie", LocationType.INTERSECTION),
+    ),
+    InquirySample(
+        message="toilet 107 hastings",
+        keyword_and_language=ResolvedKeywordAndLanguage(SMSKeywordEnum.TOILET, LanguageEnum.ENGLISH),
+        location=ResolvedLocation("107 hastings", LocationType.ADDRESS),
+    ),
+]
