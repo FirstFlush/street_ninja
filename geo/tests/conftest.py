@@ -3,7 +3,7 @@ from geo.location_service import LocationService
 from geo.neighborhoods.neighborhood_service import NeighborhoodService
 from django.core.cache import caches
 from cache.redis.enums import RedisStoreEnum
-from .access_patterns import LocationMapAccessPatternTest
+from .location.access_patterns import LocationMapAccessPatternTest
 
 @pytest.fixture
 def flush_redis():

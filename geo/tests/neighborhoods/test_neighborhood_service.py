@@ -26,11 +26,11 @@ def test_get_neighborhoods(monkeypatch: MonkeyPatch):
     assert hoods[-1].name == "Victoria-Fraserview"
 
 
-@pytest.mark.django_db
+@pytest.mark.django_db(transaction=True)
 def test_set_neighborhoods(monkeypatch: MonkeyPatch):
 
     monkeypatch.setattr(NeighborhoodService, "_fetch_neighborhood_data", _fetch_neighborhood_data_monkeypatch)
-
+    Neighborhood.objects.all().delete()
     ns = NeighborhoodService()
     hoods = ns.get_neighborhoods()
     ns.save_neighborhoods(hoods)

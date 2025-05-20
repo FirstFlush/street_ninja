@@ -25,18 +25,17 @@ class LocationCacheClient(BaseRedisClient):
             timeout=self.access_pattern.key_ttl_enum.value
         )
 
+
 class NeighborhoodCacheClient(BaseModelCacheClient):
 
-    def __init__(self, access_pattern=NeighborhoodAccessPattern):
-        super().__init__(access_pattern=access_pattern)
+    def __init__(self):
+        super().__init__(access_pattern=NeighborhoodAccessPattern)
 
     def get_neighborhoods(self) -> list[NeighborhoodCacheData]:
         neighborhoods = self.get_or_set_db()
         if not neighborhoods:
-            self.set_cache_from_db()
-        neighborhoods = self.get_or_set_db()
+            neighborhoods = self.set_cache_from_db()
         return neighborhoods
 
-
-    def set_neighborhoods(self):
-        self.set_cache_from_db()
+    def set_neighborhoods(self) -> list[NeighborhoodCacheData]:
+        return self.set_cache_from_db()

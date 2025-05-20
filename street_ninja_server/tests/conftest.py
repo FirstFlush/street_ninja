@@ -7,7 +7,6 @@ from django.core.cache import caches
 from cache.redis.enums import RedisStoreEnum
 
 
-
 @pytest.fixture
 def flush_redis():
     redis_cache = caches[RedisStoreEnum.TESTS.value]
