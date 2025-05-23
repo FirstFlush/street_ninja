@@ -45,6 +45,7 @@ class FollowUpCachingService(BaseCacheService):
         if ids is not None:
             session_data.ids.extend(ids)
         session_data.last_updated = now()
+        # setattr(session_data, "last_updated", now())
         self._set_phone_session(session_data=session_data)
         return session_data  
 

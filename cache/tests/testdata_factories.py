@@ -1,8 +1,8 @@
 import random
+from datetime import timezone
 from faker import Faker
 from cache.dataclasses import PhoneSessionData
 from sms.enums import SMSKeywordEnum
-from sms.models import SMSInquiry
 from dataclasses import dataclass, field
 
 fake = Faker()
@@ -22,7 +22,7 @@ class TestSMSInquiry:
 
 def generate_fake_phone_session_data() -> PhoneSessionData:
     return PhoneSessionData(
-        last_updated=fake.date_time_between(start_date="-1h", end_date="now"),
+        last_updated=fake.date_time_between(start_date="-1h", end_date="now", tzinfo=timezone.utc),
         keyword=random.choice(SMSKeywordEnum.values),
         inquiry_id=random.randint(1, 10000),
         ids=random.sample(range(0, 200), k=random.randint(0, 100)),
@@ -37,6 +37,13 @@ def generate_fake_sms_inquiry() -> TestSMSInquiry:
         keyword=random.choice(SMSKeywordEnum.values),
         message="".join([fake.random_lowercase_letter() for _ in range(random.randint(8, 25))]),
     )
-    
-def generate_id_list() -> list[int]:
-    return [random.randint(1, 200) for _ in range (random.randint(3, 15))]
+
+
+
+# class SMSFollowUpInquiry(IncomingSMSMessageModel):
+#     conversation = models.ForeignKey(to=Conversation, on_delete=models.CASCADE)
+#     keyword = models.CharField(max_length=20, choices=SMSFollowUpKeywordEnum.choices)
+#     message = models.CharField(max_length=256)
+#     directions_text = models.TextField(null=True)
+#     params = models.JSONField(default=dict)
+#     date_created = models.DateTimeField(auto_now_add=True)

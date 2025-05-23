@@ -5,6 +5,7 @@ from cache.redis.clients import PhoneSessionCacheClient
 from street_ninja_server.tests.access_patterns import PhoneSessionAccessPatternTest
 from cache.inquiry_caching_service import InquiryCachingService
 
+
 @pytest.fixture
 def flush_redis():
     redis_cache = caches[RedisStoreEnum.TESTS.value]
