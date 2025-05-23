@@ -21,8 +21,10 @@ def phone_session_cache_client(flush_redis):
     )
 
 
-@pytest.fixture
-def inquiry_cacing_service(flush_redis):
-    return InquiryCachingService(
+# @pytest.fixture
+# def inquiry_cacing_service(flush_redis):
+#     return InquiryCachingService(
         
-    )
+        
+#         phone_session_cache_client
+#     )

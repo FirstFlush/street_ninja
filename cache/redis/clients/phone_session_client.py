@@ -21,8 +21,7 @@ class PhoneSessionCacheClient(BaseRedisClient):
     ):
         super().__init__(access_pattern=access_pattern)
         self.redis_key = redis_key
-        self.redis_store = self._redis_store()
-        self.access_pattern: Type[PhoneSessionAccessPattern]
+        # self.access_pattern: Type[PhoneSessionAccessPattern]
 
 
     @staticmethod

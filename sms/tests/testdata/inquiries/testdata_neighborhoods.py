@@ -56,6 +56,7 @@ NEIGHBORHOOD_INQUIRIES_SIMPLE = [
     ),
 ]
 
+
 NEIGHBORHOOD_INQUIRIES_INVALID = [
     InquirySample(
         message="42 marpole ave water",
