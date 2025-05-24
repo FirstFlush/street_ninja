@@ -64,6 +64,15 @@ GEOCODER_CONFIG = {
 PRIMARY_GEOCODER = ""
 
 
+# PERMISSIONS
+# =======================================
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
+    ],
+}
+
+
 # PHONE SESSION
 # =======================================
 TTL_PHONE_SESSION = 3600
@@ -73,6 +82,8 @@ TTL_PHONE_SESSION = 3600
 # =======================================
 ROUTE_ADMIN = ""
 ROUTE_SMS_GATEWAY = ""
+
+
 
 
 # Twilio
