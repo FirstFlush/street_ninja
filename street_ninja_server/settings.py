@@ -21,6 +21,7 @@ LOGGING = LOGGING
 LOGGING['handlers']['file']['filename'] = f"{LOG_DIR}/street_ninja.log"
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+CI = False
 DEBUG = True if os.environ.get("DEBUG").lower() == "true" else False
 
 if DEBUG:
