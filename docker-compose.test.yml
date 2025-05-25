@@ -1,0 +1,9 @@
+services:
+  test-runner:
+    build: .
+    depends_on:
+      - db
+      - redis
+    command: ["pytest"]
+    volumes:
+      - .:/app
