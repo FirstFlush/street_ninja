@@ -21,17 +21,19 @@ logger = logging.getLogger(__name__)
 
 class NeighborhoodService:
     """
-    This class handles fetching/validating/saving neighborhood data
-    get_neighborhoods and save_neighborhoods are the two main public methods.
-    the custom manage.py command `get_neighborhoods` calls this class to
-    populate the Neighborhood table.
-
-    Raises NeighborhoodServiceError if it fails for any reason.
+    Service layer for managing City of Vancouver neighborhood data.
+    Used by the custom manage.py command get_neighborhoods to populate the Neighborhood table.
+    If the OpenData API is unavailable or fails validation, the system can fall back to loading a static local JSON file.
+    
+    -Raises NeighborhoodFileError if there is an issue loading JSON data from file
+    -Raises NeighborhoodServiceError if it fails for any other reason.
     """
 
     _serializer_cls = NeighborhoodSerializer
-    api_client = VancouverAPIClient(api_key=settings.VANCOUVER_OPEN_DATA_API_KEY)
-    json_data_file_path = f"{settings.BASE_DIR}/street_ninja_server/tests/testdata/model_dumps/neighborhoods.json"
+
+    def __init__(self):
+        self.api_client = VancouverAPIClient(api_key=settings.VANCOUVER_OPEN_DATA_API_KEY)
+        self.json_data_file_path = f"{settings.BASE_DIR}/street_ninja_server/tests/testdata/model_dumps/neighborhoods.json"
 
     def load_neighborhoods_from_file(self):
         try:
