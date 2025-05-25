@@ -1,29 +1,30 @@
+import os
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "dzl2wt+uxvg16wk=64$s1l#nhjtvld#1q-z945i#16+$=xhlt9"
-CI = True
-DEBUG = False
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+CI = True if os.environ.get("CI").lower() == "true" else False
+DEBUG = False if os.environ.get("DEBUG").lower() == "false" else True
 ALLOWED_HOSTS = ["*"]
 
-SMS_CHAR_LIMIT = 300
+SMS_CHAR_LIMIT = os.environ.get("SMS_CHAR_LIMIT")
 
-STREET_NINJA_WEBSITE_DOMAIN="streetninja.ca"
-STREET_NINJA_API_DOMAIN="api.streetninja.ca"
+STREET_NINJA_WEBSITE_DOMAIN = os.environ.get("STREET_NINJA_WEBSITE_DOMAIN")
+STREET_NINJA_API_DOMAIN = os.environ.get("STREET_NINJA_API_DOMAIN")
 
-CACHE_DEFAULT_LOCATION="redis://street_ninja_redis:6379/0"
-CACHE_SESSION_LOCATION="redis://street_ninja_redis:6379/1"
-CACHE_PHONE_SESSION_LOCATION="redis://street_ninja_redis:6379/2"
-CACHE_RESOURCES_LOCATION="redis://street_ninja_redis:6379/3"
-CACHE_CELERY_LOCATION="redis://street_ninja_redis:6379/4"
-CACHE_LOCATION_LOCATION="redis://street_ninja_redis:6379/5"
-CACHE_TESTS_LOCATION="redis://street_ninja_redis:6379/6"
+CACHE_DEFAULT_LOCATION = os.environ.get("CACHE_DEFAULT_LOCATION")
+CACHE_SESSION_LOCATION = os.environ.get("CACHE_SESSION_LOCATION")
+CACHE_PHONE_SESSION_LOCATION = os.environ.get("CACHE_PHONE_SESSION_LOCATION")
+CACHE_RESOURCES_LOCATION = os.environ.get("CACHE_RESOURCES_LOCATION")
+CACHE_CELERY_LOCATION = os.environ.get("CACHE_CELERY_LOCATION")
+CACHE_LOCATION_LOCATION = os.environ.get("CACHE_LOCATION_LOCATION")
+CACHE_TESTS_LOCATION = os.environ.get("CACHE_TESTS_LOCATION")
 
-DB_NAME="test_db"
-DB_USER="postgres"
-DB_PASS="postgres"
-DB_HOST="postgres"
-DB_PORT="5432"
+DB_NAME = os.environ.get("DB_NAME")
+DB_USER = os.environ.get("DB_USER")
+DB_PASS = os.environ.get("DB_PASS")
+DB_HOST = os.environ.get("DB_HOST")
+DB_PORT = int(os.environ.get("DB_PORT"))
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
@@ -33,28 +34,28 @@ USE_TZ = True
 
 # API Keys
 # =======================================
-GRAPH_HOPPER_API_KEY = "FAKE_GRAPH_HOPPER_API_KEY"
-NGROK_AUTH_TOKEN = "FAKE_NGROK_AUTH_TOKEN"
-NOMINATIM_USER_AGENT = "FAKE_NOMINATUM_USER_AGENT"
-OPENCAGE_API_KEY = "FAKE_OPENCAGE_API_KEY"
-OPEN_ROUTE_SERVICE_TOKEN = "FAKE_OPEN_ROUTE_SERVICE_TOKEN"
-VANCOUVER_OPEN_DATA_API_KEY = "FAKE_VANCOUVER_OPEN_DATA_API_KEY"
-WIGLE_API_KEY = "FAKE_WIGLE_API_KEY"
+GRAPH_HOPPER_API_KEY = os.environ.get("GRAPH_HOPPER_API_KEY")
+NGROK_AUTH_TOKEN = os.environ.get("NGROK_AUTH_TOKEN")
+NOMINATIM_USER_AGENT = os.environ.get("NOMINATIM_USER_AGENT")
+OPENCAGE_API_KEY = os.environ.get("OPENCAGE_API_KEY")
+OPEN_ROUTE_SERVICE_TOKEN = os.environ.get("OPEN_ROUTE_SERVICE_TOKEN")
+VANCOUVER_OPEN_DATA_API_KEY = os.environ.get("VANCOUVER_OPEN_DATA_API_KEY")
+WIGLE_API_KEY = os.environ.get("WIGLE_API_KEY")
 
 
 # Email
 # =======================================
-EMAIL_HOST_USER = "fake@streetninja.ca"
-EMAIL_HOST_PASSWORD = "FAKE_EMAIL_PASSWORD"
-EMAIL_HOST = "FAKE_EMAIL_HOST.ca"
-EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT"))
 EMAIL_USE_TLS = True
 
-EMAIL_ROUTE_CELERY = "celery-fake"
-EMAIL_ROUTE_DIRECTIONS = "directions-fake"
-EMAIL_ROUTE_LOCATION_PARSING = "location-parsing-fake"
-EMAIL_ROUTE_LOGGING = "logging-fake"
-EMAIL_ROUTE_SENTRY = "sentry-fake"
+EMAIL_ROUTE_CELERY = os.environ.get("EMAIL_ROUTE_CELERY")
+EMAIL_ROUTE_DIRECTIONS = os.environ.get("EMAIL_ROUTE_DIRECTIONS")
+EMAIL_ROUTE_LOCATION_PARSING = os.environ.get("EMAIL_ROUTE_LOCATION_PARSING")
+EMAIL_ROUTE_LOGGING = os.environ.get("EMAIL_ROUTE_LOGGING")
+EMAIL_ROUTE_SENTRY = os.environ.get("EMAIL_ROUTE_SENTRY")
 
 
 # Celery
@@ -91,20 +92,20 @@ REST_FRAMEWORK = {
 
 # PHONE SESSION
 # =======================================
-TTL_PHONE_SESSION = 3600
+TTL_PHONE_SESSION = os.environ.get("TTL_PHONE_SESSION")
 
 
 # Routes
 # =======================================
-ROUTE_ADMIN="admin-fake/"
-ROUTE_SMS_GATEWAY="sms-gateway-fake/"
+ROUTE_ADMIN = os.environ.get("ROUTE_ADMIN")
+ROUTE_SMS_GATEWAY = os.environ.get("ROUTE_SMS_GATEWAY")
 
 
 # Twilio
 # =======================================
-TWILIO_PHONE_NUMBER="FAKE_TWILIO_PHONE_NUMBER"
-TWILIO_ACCOUNT_SID="FAKE_TWILIO_ACCOUNT_SID"
-TWILIO_AUTH_TOKEN="FAKE_TWILIO_AUTH_TOKEN"
+TWILIO_PHONE_NUMBER = os.environ.get("TWILIO_PHONE_NUMBER")
+TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID")
+TWILIO_AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN")
 
 
 INSTALLED_APPS = [
