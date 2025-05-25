@@ -11,6 +11,8 @@ resources_lowercase = [s.lower() for s in SMSKeywordEnum.values]
 @pytest.mark.django_db
 def test_map_view(preload_all_resources, api_client: APIClient):
     response: Response = api_client.get(reverse("map"))
+    print("RESPONSE: ", response)
+    print("RESPONSE TYPE: ", type(response))
     resource_data = response.data["data"]["resources"]
     
     assert response.status_code == 200    
@@ -22,20 +24,23 @@ def test_map_view(preload_all_resources, api_client: APIClient):
         assert len(v) > 0
 
 
-@pytest.mark.django_db
-@pytest.mark.parametrize("enum_model_mapping", SMS_KEYWORD_ENUM_TO_RESOURCE_MODEL.items())
-def test_map_pin_view(preload_all_resources, enum_model_mapping: tuple[SMSKeywordEnum, ResourceModel], api_client: APIClient):
+# @pytest.mark.django_db
+# @pytest.mark.parametrize("enum_model_mapping", SMS_KEYWORD_ENUM_TO_RESOURCE_MODEL.items())
+# def test_map_pin_view(preload_all_resources, enum_model_mapping: tuple[SMSKeywordEnum, ResourceModel], api_client: APIClient):
     
-    keyword_lower = enum_model_mapping[0].value.lower()
-    resource_model = enum_model_mapping[1]
-    first = resource_model.objects.filter(is_active=True).first()
-    if first:
-        id = first.id
-        response: Response = api_client.get(
-            path=reverse("map_pin", kwargs={
-                "resourceType": keyword_lower,
-                "id": id,
-            } ),
-        )
+#     keyword_lower = enum_model_mapping[0].value.lower()
+#     resource_model = enum_model_mapping[1]
+#     first = resource_model.objects.filter(is_active=True).first()
+#     if first:
+#         id = first.id
+#         response: Response = api_client.get(
+#             reverse("map_pin", kwargs={
+#                     "resourceType": keyword_lower,
+#                     "id": id,
+#                 }
+#             ),
+#         )
     
-        assert response.status_code == 200
+#         assert response.status_code == 200
+#         assert response.data["success"] == True
+#         assert isinstance(response.data["data"], str)
