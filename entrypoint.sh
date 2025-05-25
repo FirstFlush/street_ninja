@@ -1,18 +1,29 @@
 #!/bin/sh
 #
 # Entrypoint script for the Django container.
+# - Waits for Postgres
 # - Applies database migrations
-# - Runs the get_neighborhoods management command to populate Neighborhood table
-# - Starts the main server process (e.g., Gunicorn)
+# - Loads neighborhoods
+# - Starts Gunicorn
 #
 # This script is executed as the Dockerfile's ENTRYPOINT.
 set -e
 
-echo "Applying database migrations..."
-python manage.py migrate
+if [ "$CI" != "True" ]; then
+    echo "Waiting for Postgres..."
+    until pg_isready -h db -p 5432; do
+    sleep 1
+    done
+    sleep 2
 
-echo "Running get_locations..."
-python manage.py get_neighborhoods
+    echo "Applying database migrations..."
+    python manage.py migrate
+
+    echo "Running get_locations..."
+    python manage.py get_neighborhoods
+else
+    echo "CI environment detected, skipping entrypoint.sh setup logic..."
+fi
 
 echo "Starting server..."
 exec "$@"

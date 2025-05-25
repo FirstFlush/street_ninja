@@ -1,19 +1,15 @@
 services:
-  web:
-    user: "1000:1000"
-    ports:
-    - "127.0.0.1:8000:8000"
+
+  test-runner:
     build: .
-    container_name: street_ninja_web
     depends_on:
       - db
       - redis
     env_file:
-      - .env.ci
+    - .env.ci
+    command: ["sh", "-c", "until pg_isready -h db -p 5432; do sleep 1; done; sleep 2; python manage.py migrate && python manage.py get_neighborhoods && pytest"]
     volumes:
       - .:/app
-    command: ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "4", "--timeout", "120", "street_ninja_server.wsgi:application"]
-    restart: always
 
   db:
     image: postgis/postgis:15-3.3
@@ -21,6 +17,10 @@ services:
     restart: always
     env_file:
       - .env.ci
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
     ports:
       - "127.0.0.1:5433:5432"  # Binding 5433 externally. So we don't conflict with local postgres installation.
 
@@ -30,42 +30,3 @@ services:
     restart: always
     ports:
       - "127.0.0.1:6380:6379"  # Binding 6380 externally
-
-  celery-worker:
-    user: "1000:1000"
-    build: .
-    container_name: street_ninja_celery_worker
-    restart: always
-    depends_on:
-      - redis
-      - db
-    env_file:
-      - .env.ci
-    command: ["celery", "-A", "street_ninja_server", "worker", "--loglevel=info"]
-    volumes:
-      - ./log:/app/log
-
-  celery-beat:
-    user: "1000:1000"
-    build: .
-    container_name: street_ninja_celery_beat
-    restart: always
-    depends_on:
-      - redis
-      - db
-    env_file:
-      - .env.ci
-    command: ["celery", "-A", "street_ninja_server", "beat", "--loglevel=info"]
-    volumes:
-      - ./log:/app/log
-
-  test-runner:
-    build: .
-    depends_on:
-      - db
-      - redis
-    env_file:
-    - .env.ci
-    command: ["sh", "-c", "echo 'Waiting for Postgres...'; until pg_isready -h db -p 5432; do sleep 1; done; echo 'Postgres is ready'; sleep 3; pytest"]  # wait loop to make sure postgres is accepting connections
-    volumes:
-      - .:/app
