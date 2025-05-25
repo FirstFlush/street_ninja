@@ -23,5 +23,9 @@ jobs:
       - name: Run tests
         run: docker compose --env-file .env.ci -f docker-compose.ci.yml run --rm test-runner
 
+      - name: Show DB logs  # Show DB logs if setup fails since It's usually a DB problem
+        if: failure()
+        run: docker compose --env-file .env.ci -f docker-compose.ci.yml logs db
+
       - name: Tear down
         run: docker compose --env-file .env.ci -f docker-compose.ci.yml down
