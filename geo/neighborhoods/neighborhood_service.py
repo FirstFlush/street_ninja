@@ -3,16 +3,17 @@ from django.db import transaction
 from rest_framework.exceptions import ValidationError
 from geo.models import Neighborhood
 from .dataclasses import IncomingNeighborhoodData
-from .exc import NeighborhoodServiceError
+from .exc import NeighborhoodServiceError, NeighborhoodFileError
 from common.dataclasses import RequestData
 from common.enums import HttpMethodEnum
 from geo.serializers import NeighborhoodSerializer
 from integrations.clients.vancouver import VancouverAPIClient
 from integrations.clients.enums import VancouverEndpointsEnum
-from django.conf import settings
 from typing import Any
 from geo.geospatial.polygon_service import PolygonService
 import logging
+from django.conf import settings
+from django.core.management import call_command
 
 
 logger = logging.getLogger(__name__)
@@ -30,7 +31,16 @@ class NeighborhoodService:
 
     _serializer_cls = NeighborhoodSerializer
     api_client = VancouverAPIClient(api_key=settings.VANCOUVER_OPEN_DATA_API_KEY)
-    
+    json_data_file_path = f"{settings.BASE_DIR}/street_ninja_server/tests/testdata/model_dumps/neighborhoods.json"
+
+    def load_neighborhoods_from_file(self):
+        try:
+            call_command("loaddata", self.json_data_file_path)
+        except Exception as e:
+            msg = f"Neighborhood model data at file path `{self.json_data_file_path}` could not be loaded into DB due to an unexpected `{e.__class__.__name__}`"
+            logger.critical(msg, exc_info=True)
+            raise NeighborhoodFileError(msg) from e
+
     def get_neighborhoods(self) -> list[IncomingNeighborhoodData]:
         try:
             api_data = self._fetch_neighborhood_data()
@@ -38,7 +48,6 @@ class NeighborhoodService:
             msg = "Failed to fetch neighborhood data from Vancouver OpenData API"
             logger.error(msg, exc_info=True)
             raise NeighborhoodServiceError(msg) from e
-
         try:
             parsed_data = self._shape_neighborhood_data(data=api_data)
         except Exception as e:
