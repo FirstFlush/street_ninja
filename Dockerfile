@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     binutils \
     libproj-dev \
     gdal-bin \
+    postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
 # 4. Copy only the requirements file first (leverages Docker caching)
