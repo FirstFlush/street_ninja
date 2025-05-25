@@ -1,6 +1,15 @@
-version: '3.8'
-
 services:
+  test-runner:
+    build: .
+    depends_on:
+      - db
+      - redis
+    env_file:
+    - .env.ci
+    command: ["pytest"]
+    volumes:
+      - .:/app
+
   web:
     user: "1000:1000"
     ports:
@@ -11,7 +20,7 @@ services:
       - db
       - redis
     env_file:
-      - .env.prod
+      - .env.ci
     volumes:
       - .:/app
     command: ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "4", "--timeout", "120", "street_ninja_server.wsgi:application"]
@@ -22,15 +31,13 @@ services:
     container_name: street_ninja_db
     restart: always
     env_file:
-      - .env.prod
+      - .env.ci
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_DB: ${DB_NAME}
     ports:
       - "127.0.0.1:5433:5432"  # Binding 5433 externally. So we don't conflict with local postgres installation.
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
 
   redis:
     image: redis:alpine
@@ -48,7 +55,7 @@ services:
       - redis
       - db
     env_file:
-      - .env.prod
+      - .env.ci
     command: ["celery", "-A", "street_ninja_server", "worker", "--loglevel=info"]
     volumes:
       - ./log:/app/log
@@ -62,10 +69,7 @@ services:
       - redis
       - db
     env_file:
-      - .env.prod
+      - .env.ci
     command: ["celery", "-A", "street_ninja_server", "beat", "--loglevel=info"]
     volumes:
       - ./log:/app/log
-
-volumes:
-  postgres_data:
