@@ -61,8 +61,6 @@ services:
     depends_on:
       - redis
       - db
-    env_file:
-      - .env.prod
     command: ["celery", "-A", "street_ninja_server", "beat", "--loglevel=info"]
     volumes:
       - ./log:/app/log
