@@ -1,15 +1,4 @@
 services:
-  test-runner:
-    build: .
-    depends_on:
-      - db
-      - redis
-    env_file:
-    - .env.ci
-    command: ["sh", "-c", "until pg_isready -h db -p 5432; do sleep 1; done && pytest"]   # wait loop to make sure postgres is accepting connections
-    volumes:
-      - .:/app
-
   web:
     user: "1000:1000"
     ports:
@@ -73,3 +62,14 @@ services:
     command: ["celery", "-A", "street_ninja_server", "beat", "--loglevel=info"]
     volumes:
       - ./log:/app/log
+
+  test-runner:
+    build: .
+    depends_on:
+      - db
+      - redis
+    env_file:
+    - .env.ci
+    command: ["sh", "-c", "echo 'Waiting for Postgres...'; until pg_isready -h db -p 5432; do sleep 1; done; echo 'Postgres is ready'; sleep 3; pytest"]  # wait loop to make sure postgres is accepting connections
+    volumes:
+      - .:/app
