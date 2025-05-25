@@ -23,9 +23,29 @@ jobs:
       - name: Run tests
         run: docker compose --env-file .env.ci -f docker-compose.ci.yml run --rm test-runner
 
-      - name: Show DB logs  # Show DB logs if setup fails since It's usually a DB problem
+      - name: Show web logs
+        if: failure()
+        run: docker compose --env-file .env.ci -f docker-compose.ci.yml logs web
+
+      - name: Show DB logs
         if: failure()
         run: docker compose --env-file .env.ci -f docker-compose.ci.yml logs db
+
+      - name: Show redis logs
+        if: failure()
+        run: docker compose --env-file .env.ci -f docker-compose.ci.yml logs redis
+
+      - name: Show celery-worker logs
+        if: failure()
+        run: docker compose --env-file .env.ci -f docker-compose.ci.yml logs celery-worker
+
+      - name: Show celery-beat logs
+        if: failure()
+        run: docker compose --env-file .env.ci -f docker-compose.ci.yml logs celery-beat
+
+      - name: Show test-runner logs
+        if: failure()
+        run: docker compose --env-file .env.ci -f docker-compose.ci.yml logs test-runner
 
       - name: Tear down
         run: docker compose --env-file .env.ci -f docker-compose.ci.yml down
