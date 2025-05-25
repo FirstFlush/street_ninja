@@ -16,10 +16,10 @@ jobs:
         run: docker compose version
 
       - name: Build Docker images
-        run: docker-compose -f docker-compose.yml -f docker-compose.test.yml build
+        run: docker compose -f docker-compose.yml -f docker-compose.test.yml build
 
       - name: Run tests
-        run: docker-compose -f docker-compose.yml -f docker-compose.test.yml run --rm test-runner
+        run: docker compose -f docker-compose.yml -f docker-compose.test.yml run --rm test-runner
 
       - name: Tear down
-        run: docker-compose -f docker-compose.yml -f docker-compose.test.yml down
+        run: docker compose -f docker-compose.yml -f docker-compose.test.yml down
