@@ -6,7 +6,7 @@ services:
       - redis
     env_file:
     - .env.ci
-    command: ["pytest"]
+    command: ["sh", "-c", "until pg_isready -h db -p 5432; do sleep 1; done && pytest"] # wait loop to make sure postgres is accepting connections
     volumes:
       - .:/app
 
