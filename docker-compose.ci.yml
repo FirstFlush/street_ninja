@@ -30,3 +30,12 @@ services:
     restart: always
     ports:
       - "127.0.0.1:6380:6379"  # Binding 6380 externally
+
+  bootstrap:
+    build: .
+    depends_on:
+      - db
+      - redis
+    env_file:
+      - .env.ci
+    command: [python manage.py migrate && python manage.py get_neighborhoods"]
