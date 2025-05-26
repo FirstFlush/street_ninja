@@ -74,7 +74,7 @@ services:
       - redis
     env_file:
       - .env.prod
-    command: ["sh", "-c", "python manage.py migrate && python manage.py get_neighborhoods"]
+    command: ["sh", "-c", "python manage.py makemigrations --noinput && python manage.py migrate && python manage.py get_neighborhoods"]
 
 volumes:
   postgres_data:

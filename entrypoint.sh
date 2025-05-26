@@ -6,7 +6,7 @@
 set -e
 
 echo "Waiting for Postgres..."
-until pg_isready -h db -p 5432; do
+until pg_isready -h $DB_HOST -p 5432; do
 sleep 1
 done
 sleep 2
