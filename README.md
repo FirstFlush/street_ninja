@@ -2,72 +2,111 @@
 
 # Street Ninja [![LIVE](https://img.shields.io/badge/status-LIVE-brightgreen)](https://streetninja.ca)
 
-**⚠️ This project is currently in active development. Features and documentation are subject to change as we continue to test and improve the system.**
+**🚧 Street Ninja is live and improving.**  
+We continue to refine the system and welcome feedback to help it better serve people on the street.
 
-Street Ninja is an SMS-based app designed to help homeless individuals in the city of Vancouver access critical resources like food, shelter, drinking fountains, toilets, and free WiFi. Built with simplicity and practicality in mind, it provides real-time, location-based assistance to users via text messages. Check out the website and try it out at [streetninja.ca](https://streetninja.ca).
+Street Ninja is an SMS-based app that helps homeless people in Vancouver access critical resources like **food**, **shelter**, **drinking fountains**, **toilets**, and **free WiFi**. It’s fast, practical, and works from any phone that can send a text—no app, no data, no hassle.
+
+Try it: [streetninja.ca](https://streetninja.ca/try-it-out)
+
 
 ## How It Works
 
-1. **User Interaction**:
-   - A user sends an SMS to the Street Ninja number (powered by Twilio).
-   - Example: `"FOOD pender st"` or `"SHELTER Main & Hastings"` or `"WIFI oppenheimer park"` 
+1. **Send a text**  
+   Example:  
+   - `FOOD 222 main st`  
+   - `SHELTER main & hastings`  
+   - `kitsilano toilet`
 
-2. **Processing Requests**:
-   - The system parses the message and determines the requested resource.
-   - It queries databases (e.g., OpenData API, WiGLE, internal sources) for relevant results.
+2. **Street Ninja parses your message**  
+   - It figures out what resource you need and where you are.
+   - Handles typos, slang, and weird phrasing with a custom rule-based parser.
 
-3. **Response**:
-   - Street Ninja sends a formatted SMS with the requested information.
-   - Example: `"Closest meal: UGM, 601 Hastings, free lunch 11:30-1:30."`
+3. **You get a list of results, ordered by what's closest to you**  
+   Street Ninja replies with the closest options and what they offer.  
+
+   Example response for inquiry `food 222 main st`:  
+   ```
+   FOOD PROGRAMS
+   1) 0km Food on the Corner: meals (Free) 
+
+   2) 0.1km La Boussole - Foodbank: hampers (Free) 
+
+   3) 0.1km Salvation Army - Harbour Light, Meal Program: meals (Free) 
+
+   4) 0.2km Muslim Care Centre - Meal Program: meals (Free), takeout 
+
+   More? 'MORE' | Help? 'HELP'
+   Details? '# INFO' | Maps? '# DIRECTIONS'
+   ```
+
+4. **Follow-up if needed**  
+   - Reply `INFO` to get more details  
+   - Reply `MORE` to see more options  
+   - Reply `DIRECTIONS` to get walking directions
+
+   Users can reply with `MORE` to see more results, or ask for `INFO` or `DIRECTIONS` about a specific one (e.g., `3 INFO` for more information about the Salvation Army's Harbour Light meal program).
+
+
+## Technical Overview
+
+Street Ninja is a full-stack system designed for speed, fault tolerance, and real-world usage. Key components:
+
+- **Backend**: Django REST Framework with PostGIS for geospatial filtering
+- **Location Parsing**: Custom rule engine to extract locations from freeform text
+- **SMS Gateway**: Twilio integration with webhook authentication
+- **Session Cache**: Redis to support multi-step conversations via follow-ups (`INFO`, `MORE`, etc.)
+- **Containerized**: Docker setup with PostgreSQL + Redis + Gunicorn
+- **CI/CD**: GitHub Actions to run tests using pytest
+
 
 ## Why SMS?
 
-Many homeless individuals are more likely to have access to a basic phone that can send text messages rather than a smartphone with mobile data. Instead of requiring users to download an app, Street Ninja works instantly—just text the number when you need help. No installation or internet connection required.
-
-## Goals
-
-- **Immediate Usefulness**: Provide fast, actionable information with no judgment or complexity.
-- **Local Impact**: Focus on serving Vancouver’s Downtown Eastside community initially.
-- **Scalability**: Build a framework that can expand to other cities over time.
+Most street folks don’t have reliable access to data plans or app stores. But many have basic phones with texting capabilities. Street Ninja is built around that reality:  
+- No app to download  
+- No login or tracking  
+- No judgment—just help
 
 
 ## Philosophy
 
 - Street Ninja belongs to the street people. It is built with the understanding that being homeless is like having a full-time job—always on the go, always needing to navigate immediate challenges. This app isn’t about deciding what’s “best” for its users; it’s about meeting them where they are and giving them the tools they need.
 
-- Our guiding principle is **immediate usefulness**. Street Ninja focuses on providing quick, actionable information that users can rely on in the moment. There’s no judgment, no lectures—just practical help. Whether it’s finding a meal, a bed, or something else that helps them get through the day, Street Ninja is their tool.
+- The guiding principle is **immediate usefulness**. Street Ninja focuses on providing quick, actionable information that users can rely on in the moment.
 
 
-## Current Challenges
+## Service Area
 
-1. **Data Collection**:
-   - Ensuring up-to-date info on free food, shelters, washrooms, drinking fountains, public WiFi.
-2. **Funding**:
-   - Covering SMS costs via grants, sponsorships, and partnerships.
-3. **Technical Setup**:
-   - Scaling APIs and handling concurrent user requests.
+Right now, Street Ninja operates in **Vancouver, BC**—especially around the Downtown Eastside.  
+I'm hoping to expand the program to other cities once it proves effective in Vancouver.
 
 
-## Roadmap
+## What’s Ahead
 
-1. Launch MVP.
-2. Partner with local nonprofits for accurate resource data.
-3. Expand features to include hygiene access and job listings.
-4. Test and refine SMS workflows based on user feedback.
+- **Expanding Resource Types**:  
+  We want to go beyond food and shelter—to include medical care, legal help, clothing programs, hygiene access, and more. The goal is to make Street Ninja a true pocket guide to anyone who's down and out.
+
+- **Building Data Partnerships**:  
+  We're looking to connect with organizations that have reliable info on essential services—especially medical clinics, legal help, clothing programs, and hygiene resources. The more accurate and deep the data, the more useful Street Ninja becomes.
+
+- **Securing Sustainable Funding**:  
+  We’re exploring ways to cover SMS and hosting costs long-term—whether through grants, sponsorships, or community support. The system is lean and already live; the right support can help it grow.
 
 
 ## How to Contribute
 
-- **Developers**: Check out [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines and information.
-- **Nonprofits**: Partner with us to provide up-to-date resource information.
-- **Supporters**: Help cover SMS costs by sponsoring or donating.
+- **Developers**: See [CONTRIBUTING.md](CONTRIBUTING.md)  
+- **Nonprofit Folks**: I’m a dev, not a nonprofit person. If you know the nonprofit industry and can help with navigating issues like funding or outreach, I'd really like to hear from you.
 
 
 ## License
 
-Street Ninja is licensed under the MIT License. See `LICENSE` for more information.
+Street Ninja is open source under the Apache License 2.0.  
+See [`LICENSE`](LICENSE) for full details.
 
 
-## Contact
+---
 
-For inquiries, partnerships, or contributions, contact Michael Pearce at michaelpearce@streetninja.ca
+
+Built by [Michael Pearce](mailto:michaelpearce@streetninja.ca) • Founder & Lead Developer
+Website: [streetninja.ca](https://streetninja.ca)
