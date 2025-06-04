@@ -53,7 +53,7 @@ Try it: [streetninja.ca](https://streetninja.ca/try-it-out)
 Street Ninja is a full-stack system designed for speed, fault tolerance, and real-world usage. Key components:
 
 - **Backend**: Django REST Framework with PostGIS for geospatial filtering
-- **Frontend**: [Next.js + Tailwind CSS](https://github.com/firstflush/website-street-ninja) — responsive site for trying out the SMS experience
+- **Frontend**: [Next.js + Tailwind CSS](https://github.com/firstflush/website_street_ninja) — responsive site for trying out the SMS experience
 - **Location Parsing**: Custom rule engine to extract locations from freeform text
 - **SMS Gateway**: Twilio integration with webhook authentication
 - **Session Cache**: Redis to support multi-step conversations via follow-ups (`INFO`, `MORE`, etc.)
