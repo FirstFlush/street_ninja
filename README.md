@@ -40,7 +40,7 @@ Try it: [streetninja.ca](https://streetninja.ca/try-it-out)
    Details? '# INFO' | Maps? '# DIRECTIONS'
    ```
 
-4. **Follow-up if needed**  
+4. **Follow-up inquiries**  
    - Reply `INFO` to get more details  
    - Reply `MORE` to see more options  
    - Reply `DIRECTIONS` to get walking directions
@@ -53,11 +53,26 @@ Try it: [streetninja.ca](https://streetninja.ca/try-it-out)
 Street Ninja is a full-stack system designed for speed, fault tolerance, and real-world usage. Key components:
 
 - **Backend**: Django REST Framework with PostGIS for geospatial filtering
+- **Frontend**: [Next.js + Tailwind CSS](https://github.com/firstflush/website-street-ninja) — responsive site for trying out the SMS experience
 - **Location Parsing**: Custom rule engine to extract locations from freeform text
 - **SMS Gateway**: Twilio integration with webhook authentication
 - **Session Cache**: Redis to support multi-step conversations via follow-ups (`INFO`, `MORE`, etc.)
+- **Task Queue**: Celery + Celery Beat for async tasks and scheduled jobs (e.g., periodic resource sync)
 - **Containerized**: Docker setup with PostgreSQL + Redis + Gunicorn
-- **CI/CD**: GitHub Actions to run tests using pytest
+- **CI/CD**: CI pipeline with GitHub Actions to run tests using pytest
+
+
+## Hire Me
+
+I'm currently looking for remote developer roles: full-time, contract, or part-time.
+
+I took Street Ninja from idea to productionm including system architecture, branding, logo concept, infrastructure, testing, and deployment. This project reflects not just my code, but my judgment, initiative, and follow-through.
+
+If you're looking for someone who can design, build, and ship real software for real users, I'm available and would love the opportunity to work. Street Ninja is live, and I’m proud of what it represents: practical tools that solve real problems. 
+
+✉️ [Email](mailto:michaelpearce@streetninja.ca)
+🔗 [LinkedIn](https://www.linkedin.com/in/michael-pearce-340279286/)
+🌐 [Portfolio](https://michaelpearce.tech)
 
 
 ## Why SMS?
