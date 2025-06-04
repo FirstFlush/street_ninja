@@ -66,7 +66,7 @@ Street Ninja is a full-stack system designed for speed, fault tolerance, and rea
 
 I'm currently looking for remote developer roles: full-time, contract, or part-time.
 
-I took Street Ninja from idea to productionm including system architecture, branding, logo concept, infrastructure, testing, and deployment. This project reflects not just my code, but my judgment, initiative, and follow-through.
+I took Street Ninja from idea to production, including system architecture, branding, logo concept, infrastructure, testing, and deployment. This project reflects not just my code, but my judgment, initiative, and follow-through.
 
 If you're looking for someone who can design, build, and ship real software for real users, I'm available and would love the opportunity to work. Street Ninja is live, and I’m proud of what it represents: practical tools that solve real problems. 
 
