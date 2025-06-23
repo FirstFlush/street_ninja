@@ -22,7 +22,7 @@ LOGGING['handlers']['file']['filename'] = f"{LOG_DIR}/street_ninja.log"
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 CI = False
-DEBUG = True if os.environ.get("DEBUG").lower() == "true" else False
+DEBUG = True if os.environ.get("DEBUG", "").lower() == "true" else False
 
 if DEBUG:
     ALLOWED_HOSTS = ['*']
@@ -60,7 +60,7 @@ STREET_NINJA_API_DOMAIN = os.environ.get("STREET_NINJA_API_DOMAIN")
 # EMAIL CONFIG
 # =======================================
 EMAIL_HOST = os.environ.get("EMAIL_HOST")
-EMAIL_PORT = int(os.environ.get("EMAIL_PORT"))
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT", ""))
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True  # always, no need for env var
