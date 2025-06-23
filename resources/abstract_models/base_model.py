@@ -1,5 +1,5 @@
 import logging
-from typing import Any
+from typing import Any, TYPE_CHECKING
 from django.contrib.gis.db import models as gis_models
 from django.contrib.gis.geos import Point
 from django.contrib.gis.db.models.functions import Distance
@@ -37,6 +37,10 @@ class ResourceModel(gis_models.Model):
     _unique_key = "location"
     _keyword_enum = None
 
+    location: gis_models.PointField # set this and int just to satisfy Pylance type checker in strict mode.
+    id: int
+    
+    
     class Meta:
         abstract = True
 

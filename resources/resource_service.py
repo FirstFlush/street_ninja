@@ -1,5 +1,7 @@
+from django.contrib.gis.geos import Point
 import logging
 from collections import defaultdict
+from typing import Type
 from sms.enums import SMSKeywordEnum
 from sms.response.response_templates.info_templates import InfoTemplate
 from .dataclasses import MapData, MapPoint, MapPointData
@@ -54,14 +56,14 @@ class ResourceService:
             logger.error(f"Invalid id `{id}`for model class `{model}`")
             return None
 
-    def _get_info_template(self, model: ResourceModel) -> InfoTemplate:
+    def _get_info_template(self, model: ResourceModel) -> Type[InfoTemplate]:
         try:
             return self.INFO_TEMPLATES[model.keyword_enum]
         except KeyError as e:
             logger.error(f"InfoTemplate not found for model object: {model}")
             raise
 
-    def _build_point_data(self, template: InfoTemplate, model: ResourceModel) -> MapPointData:
+    def _build_point_data(self, template: Type[InfoTemplate], model: ResourceModel) -> MapPointData:
         return MapPointData(info_template_data=template(model).display_info())
 
 
@@ -80,7 +82,7 @@ class ResourceService:
         for keyword_enum, model_class in resource_service.RESOURCE_MODELS.items():
             qs = model_class.objects.filter(is_active=True)
             for model_instance in qs:
-                if model_instance.location:
+                if model_instance.location and isinstance(model_instance.location, Point):
                     map_point = MapPoint(
                         longitude=model_instance.location.x,
                         latitude=model_instance.location.y,

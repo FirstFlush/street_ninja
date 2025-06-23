@@ -5,6 +5,7 @@ This file centralizes mappings that connect keywords, services, response templat
 If something needs to be linked across the app (like a new resource type), this is
 probably where it goes. 
 """
+from typing import Type
 from cache.redis.access_patterns.resources import (
     ShelterAccessPattern,
     FoodProgramAccessPattern,
@@ -40,7 +41,7 @@ from sms.response.response_templates.info_templates import (
     WifiInfoTemplate,
 )
 
-SMS_KEYWORD_ENUM_TO_RESOURCE_MODEL: dict[SMSKeywordEnum, ResourceModel] = {
+SMS_KEYWORD_ENUM_TO_RESOURCE_MODEL: dict[SMSKeywordEnum, Type[ResourceModel]] = {
     SMSKeywordEnum.SHELTER: Shelter,
     SMSKeywordEnum.FOOD: FoodProgram,
     SMSKeywordEnum.TOILET: Toilet,
@@ -48,7 +49,7 @@ SMS_KEYWORD_ENUM_TO_RESOURCE_MODEL: dict[SMSKeywordEnum, ResourceModel] = {
     SMSKeywordEnum.WIFI: PublicWifi,
 }
 
-ACCESS_PATTERN_TO_MODEL: dict[AccessPatternDB, ResourceModel] = {
+ACCESS_PATTERN_TO_MODEL: dict[Type[AccessPatternDB], Type[ResourceModel]] = {
     FoodProgramAccessPattern: FoodProgram,
     ShelterAccessPattern: Shelter,
     DrinkingFountainAccessPattern: DrinkingFountain,
@@ -79,7 +80,7 @@ GEOCODER_ENUM_TO_GEOCODER = {
 }
 
 
-SMS_KEYWORD_ENUM_TO_INFO_TEMPLATE: dict[SMSKeywordEnum, InfoTemplate] = {
+SMS_KEYWORD_ENUM_TO_INFO_TEMPLATE: dict[SMSKeywordEnum, Type[InfoTemplate]] = {
     SMSKeywordEnum.SHELTER : ShelterInfoTemplate,
     SMSKeywordEnum.FOOD : FoodInfoTemplate,
     SMSKeywordEnum.WATER : WaterInfoTemplate,

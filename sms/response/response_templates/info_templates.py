@@ -14,7 +14,7 @@ T = TypeVar('T', bound=ResourceModel)
 
 class InfoTemplate(GeneralResponseTemplate, Generic[T]):
 
-    def __init__(self, instance: T) -> str:
+    def __init__(self, instance: T):
         self.instance = instance
 
     @abstractmethod
@@ -116,13 +116,17 @@ Organized by
 
 class WaterInfoTemplate(InfoTemplate[DrinkingFountain]):
 
+    def _pet_friendly(self) -> str:
+        if self.instance.pet_friendly is not None:
+            return f"\nPet-friendly: {self._convert_bool(self.instance.pet_friendly, allow_null=True)}"
+        return ""
+
     def display_info(self) -> str:
         return f"""
 {self.instance.name}
 
 In operation: {self.instance.in_operation}
-
-Pet friendly: {self._convert_bool(self.instance.pet_friendly, allow_null=True)}
+{self._pet_friendly()}
 """
 
 
@@ -162,11 +166,23 @@ Wheelchair accessible: {self._convert_bool(self.instance.is_wheelchair)}
 
 class WifiInfoTemplate(InfoTemplate[PublicWifi]):
 
+    def _name(self) -> str:
+        if self.instance.name:
+            return f"{self.instance.name}\n"
+        return ""
+
+    def _address(self) -> str:
+        if self.instance.address:
+            return f"{self.instance.address}\n"
+        return ""
+
     def display_info(self) -> str:
-        f"""
+
+        return f"""
+{self._name()}
+{self._address()}
 SSID: {self.instance.ssid}
 
-No additional informatino for Wifi hotspots at this time.
 """
 
 

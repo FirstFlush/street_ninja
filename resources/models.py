@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.gis.db import models as gis_models
+from django.contrib.gis.geos import Point
 from typing import Any
 from sms.enums import SMSKeywordEnum
 from sms.resolvers.params.param_mappings.shelter import ShelterCategoryParamValue
@@ -120,12 +121,26 @@ class PublicWifi(WigleModel):
     _keyword_enum = SMSKeywordEnum.WIFI
     _unique_key = "location"
     
+    name = models.CharField(max_length=256, default="", blank=True)
+    address = models.CharField(max_length=256, default="", blank=True)
     ssid = models.CharField(max_length=256)
     location = gis_models.PointField(srid=4326)
     is_active = models.BooleanField(default=True)
     last_fetched = models.DateTimeField(null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["ssid", "location", "name", "address"],
+                name="unique_ssid_location_name_address",
+            )
+        ]
+
     @property
     def resource_name(self) -> str:
         return self.ssid
+
+    def __str__(self) -> str:
+        location: Point = self.location # becuase pylance is not recognizing self.location as Point object! 
+        return f"{self.ssid}: {location.x}, {location.y}"
