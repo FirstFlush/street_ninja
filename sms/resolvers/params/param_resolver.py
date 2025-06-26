@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 import logging
-from typing import Any
+from typing import Any, Optional
 from common.base_enum import StreetNinjaEnum
 from sms.enums import SMSKeywordEnum
 from .enums import (
@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class ParamDict:
-    params: dict[ParamKeyEnum, ParamValueEnum] = field(default=None)
+    params: Optional[dict[ParamKeyEnum, ParamValueEnum]] = field(default=None)
 
     def to_dict(self) -> dict[str, Any]:
         if not self.params:
