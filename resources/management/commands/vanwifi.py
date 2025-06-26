@@ -12,7 +12,7 @@ from street_ninja_server.base_commands import StreetNinjaCommand
 from resources.models import PublicWifi
 
 
-logger = logging.getLogger(__file__)
+logger = logging.getLogger(__name__)
 
 
 class ValidSSID(StreetNinjaEnum):
@@ -39,7 +39,7 @@ class Command(StreetNinjaCommand):
             VanWifiCsvHandler.handle()
         except Exception as e:
             logger.error(f"{e.__class__.__name__}: {e}", exc_info=True)
-
+            logger.error("Could not process vanwifi.csv file. Check error logs for details.")
 
 class VanWifiCsvHandler:
 
@@ -101,7 +101,7 @@ class VanWifiCsvHandler:
                 try:
                     point = self._get_point(row)
                 except Exception as e:
-                    logger.error(f"Skipping row due to unexpected {e.__class__.__name__}: {e}")
+                    logger.warning(f"Skipping row due to unexpected {e.__class__.__name__}: {e}")
                     self.skipped_rows += 1
                     continue
                 data = WifiData(

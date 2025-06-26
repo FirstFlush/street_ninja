@@ -3,8 +3,8 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
-CI = True if os.environ.get("CI").lower() == "true" else False
-DEBUG = False if os.environ.get("DEBUG").lower() == "false" else True
+CI = True if os.environ.get("CI", "True").lower() == "true" else False
+DEBUG = False if os.environ.get("DEBUG", "False").lower() == "false" else True
 ALLOWED_HOSTS = ["*"]
 
 SMS_CHAR_LIMIT = os.environ.get("SMS_CHAR_LIMIT")
@@ -24,7 +24,7 @@ DB_NAME = os.environ.get("DB_NAME")
 DB_USER = os.environ.get("DB_USER")
 DB_PASS = os.environ.get("DB_PASS")
 DB_HOST = os.environ.get("DB_HOST")
-DB_PORT = int(os.environ.get("DB_PORT"))
+DB_PORT = int(os.environ.get("DB_PORT", "5432"))
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
@@ -48,7 +48,7 @@ WIGLE_API_KEY = os.environ.get("WIGLE_API_KEY")
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_HOST = os.environ.get("EMAIL_HOST")
-EMAIL_PORT = int(os.environ.get("EMAIL_PORT"))
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT", "587"))
 EMAIL_USE_TLS = True
 
 EMAIL_ROUTE_CELERY = os.environ.get("EMAIL_ROUTE_CELERY")
