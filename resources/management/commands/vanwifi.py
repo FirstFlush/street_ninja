@@ -1,4 +1,4 @@
-from enum import Enum
+from common.base_enum import StreetNinjaEnum
 import csv
 from dataclasses import dataclass, asdict, field
 import logging
@@ -15,7 +15,7 @@ from resources.models import PublicWifi
 logger = logging.getLogger(__file__)
 
 
-class ValidSSID(Enum):
+class ValidSSID(StreetNinjaEnum):
     COV_PUBLIC = "CoV_Public"
     VAN_WIFI = "#VanWiFi"
     VPL = "VPL"

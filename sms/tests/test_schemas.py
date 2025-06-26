@@ -26,4 +26,4 @@ class FollowUpSample:
 class UnresolvedSample:
     message: str
     location: None
-    sms_type: ResolvedSMSType.UNRESOLVED
+    sms_type: ResolvedSMSType = ResolvedSMSType.UNRESOLVED

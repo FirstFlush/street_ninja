@@ -11,8 +11,6 @@ resources_lowercase = [s.lower() for s in SMSKeywordEnum.values]
 @pytest.mark.django_db
 def test_map_view(preload_all_resources, api_client: APIClient):
     response: Response = api_client.get(reverse("map"))
-    print("RESPONSE: ", response)
-    print("RESPONSE TYPE: ", type(response))
     resource_data = response.data["data"]["resources"]
     
     assert response.status_code == 200    
