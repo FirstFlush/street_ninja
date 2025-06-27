@@ -137,5 +137,5 @@ If you’d like to support the project, [buy me a coffee](https://www.buymeacoff
 ---
 
 
-Built by [Michael Pearce](mailto:michaelpearce@streetninja.ca) • Founder & Lead Developer
-Website: [michaelpearce.tech](https://michaelpearce.tech)
+Built by [Michael Pearce](mailto:michaelpearce@streetninja.ca) • Founder & Lead Developer  
+[michaelpearce.tech](https://michaelpearce.tech)
