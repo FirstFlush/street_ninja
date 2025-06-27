@@ -114,14 +114,28 @@ I'm hoping to expand the program to other cities once it proves effective in Van
 - **Nonprofit Folks**: I’m a dev, not a nonprofit person. If you know the nonprofit industry and can help with navigating issues like funding or outreach, I'd really like to hear from you.
 
 
+## 🕸 Street Ninja Ecosystem
+
+- [Streetlight API](https://github.com/FirstFlush/streetlight-api) — Public API for homelessness resources (UNDER CONSTRUCTION)
+- [Ninja Crawl](https://github.com/FirstFlush/ninja_crawl) — Python-based scraping engine (HTML/PDF → JSON)
+- [Street Ninja SMS App (you are here)](https://github.com/FirstFlush/street_ninja) — SMS assistant for accessing resources by text
+- [Street Ninja Website](https://github.com/FirstFlush/website_street_ninja) — Try out the SMS assistant and explore the project
+
+
 ## License
 
 Street Ninja is open source under the Apache License 2.0.  
 See [`LICENSE`](LICENSE) for full details.
 
 
+## ☕ Support Street Ninja
+
+Street Ninja is fully self-hosted and independently maintained.
+If you’d like to support the project, [buy me a coffee](https://www.buymeacoffee.com/firstflush).
+
+
 ---
 
 
 Built by [Michael Pearce](mailto:michaelpearce@streetninja.ca) • Founder & Lead Developer
-Website: [streetninja.ca](https://streetninja.ca)
+Website: [michaelpearce.tech](https://michaelpearce.tech)
