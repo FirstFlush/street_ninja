@@ -77,7 +77,7 @@ class Toilet(CityOfVancouverModel):
     _keyword_enum = SMSKeywordEnum.TOILET
     
 
-    name = models.CharField(max_length=256)
+    name = models.CharField(max_length=256, null=True)
     address = models.CharField(max_length=256, null=True)
     dataset = models.CharField(max_length=256, choices=DATASET_CHOICES)
     description = models.CharField(max_length=256, null=True)

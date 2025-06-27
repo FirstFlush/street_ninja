@@ -63,8 +63,8 @@ class DrinkingFountainSerializer(CityOfVancouverSerializer):
 
 class PublicToiletSerializer(CityOfVancouverSerializer):
 
-    name = serializers.CharField(max_length=256)
-    address = serializers.CharField(max_length=256)
+    name = serializers.CharField(max_length=256, allow_null=True, required=False)
+    address = serializers.CharField(max_length=256, allow_null=True, required=False)
     location = serializers.CharField(max_length=256, allow_null=True, required=False)
     summer_hours = serializers.CharField()
     winter_hours = serializers.CharField()
