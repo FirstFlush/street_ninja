@@ -102,10 +102,12 @@ class DrinkingFountainAdmin(BaseGISAdmin):
 class PublicWifiAdmin(BaseGISAdmin):
     list_display = (
         'ssid',
+        'name',
+        'address',
         'last_fetched',
         'date_created',
     )
-    search_fields = ('ssid',)
+    search_fields = ('ssid', 'address',)
     ordering = ('-last_fetched',)
 
     map_template = 'gis/admin/openlayers.html'
